@@ -48,7 +48,7 @@
     },
     {
       "id": "residence",
-      "text": "{gender, select, female {היא גרה} other {הוא גר}} ב{locality}, {district}."
+      "text": "{gender, select, female {היא גרה} other {הוא גר}} ב{locality}."
     },
     {
       "id": "family",
@@ -164,7 +164,7 @@
           "none"
         ]
       },
-      "text": "הכנסת משק הבית {gender, select, female {שלה} other {שלו}} עומדת על כ-{household_income_amount, number} ₪ ברוטו בחודש, יותר משל {household_income_percentile, number, ::precision-integer}% מהאזרחים הבוגרים, {home_ownership__id, select, yes {והדירה שבה הם גרים בבעלותם} other {והדירה שבה הם גרים אינה בבעלותם}}."
+      "text": "הכנסת משק הבית {gender, select, female {שלה} other {שלו}} עומדת על כ-{household_income_amount, number} ₪ ברוטו בחודש, יותר משל {household_income_percentile, number, ::precision-integer}% מהאזרחים הבוגרים, {home_ownership__id, select, yes {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}} other {והדירה שבה הם גרים בבעלותם}}} other {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}} other {והדירה שבה הם גרים אינה בבעלותם}}}}."
     },
     {
       "id": "household_none",
@@ -173,7 +173,7 @@
           "none"
         ]
       },
-      "text": "משק הבית {gender, select, female {שלה} other {שלו}} מדווח שאין לו הכנסה, {home_ownership__id, select, yes {והדירה שבה הם גרים בבעלותם} other {והדירה שבה הם גרים אינה בבעלותם}}."
+      "text": "משק הבית {gender, select, female {שלה} other {שלו}} מדווח שאין לו הכנסה, {home_ownership__id, select, yes {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}} other {והדירה שבה הם גרים בבעלותם}}} other {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}} other {והדירה שבה הם גרים אינה בבעלותם}}}}."
     },
     {
       "id": "health",
@@ -300,7 +300,7 @@
     },
     {
       "id": "literacy",
-      "text": "לפי המודל, מיומנות הקריאה {gender, select, female {שלה} other {שלו}} בסולם מיומנויות הבוגרים של ה-OECD נמצאת {literacy_level__at} (ציון {literacy_score, number, ::precision-integer} מתוך 500), גבוהה משל {literacy_percentile, number, ::precision-integer}% מהאזרחים הבוגרים."
+      "text": "מיומנות הקריאה {gender, select, female {שלה} other {שלו}} בסולם מיומנויות הבוגרים של ה-OECD נמצאת {literacy_level__at} (ציון {literacy_score, number, ::precision-integer} מתוך 500), גבוהה משל {literacy_percentile, number, ::precision-integer}% מהאזרחים הבוגרים."
     }
   ],
   "lists": {

@@ -1,4 +1,4 @@
-# The popsim model: a Bayesian network of conditional probability tables.
+# The model: a Bayesian network of conditional probability tables.
 #
 # Nodes are listed in sampling order; every parent must appear above its child.
 # Labels: en, he (masculine/neutral) and he_f (feminine, when different).

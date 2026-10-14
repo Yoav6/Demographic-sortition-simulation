@@ -4,7 +4,7 @@
 **בקצרה:** המודל הוא רשת בייסיאנית — שרשרת של טבלאות הסתברות מותנית. בבסיס עומדת "מסגרת אוכלוסייה": מספר האזרחים בני 18+ המתגוררים בישראל, לפי יישוב, קבוצת אוכלוסייה, מין וקבוצת גיל (על בסיס נתוני הלמ"ס לסוף 2024, בניכוי תושבי קבע שאינם אזרחים במזרח ירושלים ובגולן). כל מאפיין נוסף (דתיות, שם, השכלה, הצבעה...) נדגם מטבלה המותנית במאפיינים שכבר נקבעו. כל טבלה נבנית מנתונים מפורסמים (הלמ"ס, ועדת הבחירות, הסקר הלאומי של הבחירות ועוד), מכוילת לסיכומים הרשמיים ומתועדת בנפרד. הדגימה דטרמיניסטית: אותו זרע מפיק תמיד את אותם אנשים.
 <!-- /he-summary -->
 
-This page explains how popsim turns public statistics into 150 synthetic members of a
+This page explains how the model turns public statistics into 150 synthetic members of a
 citizens' assembly. Every attribute has its own page (see the list on the left, or
 `docs/methodology/`) with its sources, estimation steps, assumptions, validation results and
 known limitations. Every source is listed, with checksums, in [SOURCES.md](SOURCES.md).

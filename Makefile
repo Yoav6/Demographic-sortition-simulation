@@ -1,4 +1,4 @@
-# popsim — every step of the pipeline, in order. `make all` rebuilds everything from the
+# Every step of the pipeline, in order. `make all` rebuilds everything from the
 # pinned sources; `make check` runs what CI runs. Run `make help` for the list.
 
 PY := uv run

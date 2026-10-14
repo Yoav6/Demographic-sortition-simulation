@@ -48,7 +48,7 @@
     },
     {
       "id": "residence",
-      "text": "{gender, select, female {She} other {He}} lives in {locality}, {district}."
+      "text": "{gender, select, female {She} other {He}} lives in {locality}."
     },
     {
       "id": "family",
@@ -300,7 +300,7 @@
     },
     {
       "id": "literacy",
-      "text": "On the OECD adult-skills scale, {gender, select, female {her} other {his}} modelled literacy is {literacy_level__at} (score {literacy_score, number, ::precision-integer} of 500), higher than {literacy_percentile, number, ::precision-integer}% of adult citizens."
+      "text": "On the OECD adult-skills scale, {gender, select, female {her} other {his}} literacy is {literacy_level__at} (score {literacy_score, number, ::precision-integer} of 500), higher than {literacy_percentile, number, ::precision-integer}% of adult citizens."
     }
   ],
   "lists": {

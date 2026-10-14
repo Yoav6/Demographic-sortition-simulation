@@ -1,4 +1,4 @@
-# Source registry for popsim.
+# Source registry for the model.
 #
 # Every number in the model traces back to an entry here. `popsim fetch` downloads
 # tier A/M files into data/raw/<id>/ and pins their sha256 in sources.lock.json.

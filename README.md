@@ -1,16 +1,16 @@
-# popsim — a citizens' assembly by lot, simulated
+# A citizens' assembly by lot, simulated
 
 **אספה אזרחית בהגרלה:** 150 אזרחיות ואזרחי ישראל שנבחרו באקראי — סימולציה מבוססת נתונים.
 
 What would a citizens' assembly look like if its 150 members were drawn by lot from all Israeli
-citizens? popsim builds a statistical model of the eligible population — **Israeli citizens aged
+citizens? This project builds a statistical model of the eligible population — **Israeli citizens aged
 18 and over living in Israel (6.45 million people)** — from public data, draws 150 synthetic
 members from it, and describes each of them in Hebrew and English:
 
 > *Gefen is a 29-year-old Jewish woman who describes herself as traditional-religious. She is a
-> third-generation Israeli, of Mizrahi or Sephardi descent. She lives in Hadera, Haifa District.
-> She is single and has no children. She has a bachelor's degree. She served in the IDF. She is
-> unemployed and looking for work…* — member #1 of the published assembly
+> third-generation Israeli, of Mizrahi or Sephardi descent. She lives in Hadera. She is
+> single and has no children. She has a bachelor's degree in humanities and arts. She served in
+> the IDF. She is unemployed and looking for work…* — member #1 of the published assembly
 
 Every member has 53 attributes: place of residence, population group, sex, age, religiosity,
 first name, origin and ancestry, marital status and children, education and current studies (with fields of study), military or national

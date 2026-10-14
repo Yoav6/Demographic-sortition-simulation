@@ -21,7 +21,7 @@ published means and validated against published distributions instead.
 ## Consequences
 
 * The indicator reflects schooling, language and practice as much as ability; the methodology
-  page says so, and the site's labels read "modelled literacy".
+  page says so, and the member card's label reads "Literacy (modelled)".
 * Ages over 65 (outside PIAAC) are extrapolated.
 * If the public-use file is obtained later (free registration at the OECD), the model can be
   re-estimated from microdata through the restricted-data path.

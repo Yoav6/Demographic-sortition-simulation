@@ -1,1 +1,1 @@
-"""popsim: data pipeline for simulating a sortition assembly of Israeli citizens."""
+"""Data pipeline for simulating a sortition assembly of Israeli citizens."""
