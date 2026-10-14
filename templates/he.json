@@ -56,7 +56,16 @@
     },
     {
       "id": "education",
-      "text": "{gender, select, female {היא} other {הוא}} {education__has}."
+      "text": "{gender, select, female {היא} other {הוא}} {education__has}{degree_field__id, select, none {} other { {degree_field__in}}}."
+    },
+    {
+      "id": "studying",
+      "unless": {
+        "studying": [
+          "none"
+        ]
+      },
+      "text": "{gender, select, female {היא} other {הוא}} {studying}{study_field__id, select, none {} other { {study_field__in}}}."
     },
     {
       "id": "service_now_idf",

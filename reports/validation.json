@@ -428,6 +428,112 @@
    "max_excess": 0.0
   },
   {
+   "name": "Currently studying, Jews by religiosity and sex (20+)",
+   "nodes": [
+    "studying"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00943,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "study": "no",
+     "model": 0.8899,
+     "survey": 0.8904,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "study": "yes",
+     "model": 0.1101,
+     "survey": 0.1096,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "study": "no",
+     "model": 0.9093,
+     "survey": 0.9044,
+     "respondents": 255
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "study": "yes",
+     "model": 0.0907,
+     "survey": 0.0956,
+     "respondents": 255
+    },
+    {
+     "religiosity": "haredi",
+     "sex": "female",
+     "study": "no",
+     "model": 0.8841,
+     "survey": 0.8846,
+     "respondents": 374
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Currently studying, Arabs by religion and sex (20+)",
+   "nodes": [
+    "studying"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.0108,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "study": "no",
+     "model": 0.906,
+     "survey": 0.9132,
+     "respondents": 46
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "study": "yes",
+     "model": 0.094,
+     "survey": 0.0868,
+     "respondents": 46
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "study": "no",
+     "model": 0.9434,
+     "survey": 0.9542,
+     "respondents": 32
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "study": "yes",
+     "model": 0.0566,
+     "survey": 0.0458,
+     "respondents": 32
+    },
+    {
+     "religion": "druze",
+     "sex": "female",
+     "study": "no",
+     "model": 0.9104,
+     "survey": 0.9155,
+     "respondents": 42
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
    "name": "Labour-force status of Jews by religiosity and sex (20+)",
    "nodes": [
     "labour_status"
@@ -1512,6 +1618,174 @@
    ]
   },
   {
+   "name": "Students by kind of study, age, sex and population group vs published counts (relative difference)",
+   "nodes": [
+    "studying"
+   ],
+   "source": "cbs_abstract_education",
+   "tolerance": 0.12,
+   "max_abs_error": 0.10234,
+   "passed": true,
+   "detail": [
+    {
+     "count": "yeshiva or kollel (men), ages 20-24",
+     "model": 43140,
+     "published": 48059
+    },
+    {
+     "count": "first degree, ages Up to 19",
+     "model": 12042,
+     "published": 12054
+    },
+    {
+     "count": "first degree, ages 20-24",
+     "model": 105800,
+     "published": 105904
+    },
+    {
+     "count": "post-secondary, ages Up to 24",
+     "model": 45170,
+     "published": 45213
+    }
+   ]
+  },
+  {
+   "name": "Field of the highest degree by occupation and sex (20+)",
+   "nodes": [
+    "degree_field"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00962,
+   "passed": true,
+   "detail": [
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "field": "agriculture",
+     "model": 0.0,
+     "survey": 0.0,
+     "respondents": 40
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "field": "biological_sciences",
+     "model": 0.0192,
+     "survey": 0.0201,
+     "respondents": 40
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "field": "business",
+     "model": 0.3359,
+     "survey": 0.3337,
+     "respondents": 40
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "field": "education",
+     "model": 0.1131,
+     "survey": 0.1107,
+     "respondents": 40
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "field": "engineering",
+     "model": 0.0551,
+     "survey": 0.0558,
+     "respondents": 40
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Field of the highest degree of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "degree_field"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.11554,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "field": "agriculture",
+     "model": 0.0051,
+     "survey": 0.0055,
+     "respondents": 138
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "field": "biological_sciences",
+     "model": 0.0491,
+     "survey": 0.0511,
+     "respondents": 138
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "field": "business",
+     "model": 0.0915,
+     "survey": 0.0873,
+     "respondents": 138
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "field": "education",
+     "model": 0.3207,
+     "survey": 0.3128,
+     "respondents": 138
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "field": "engineering",
+     "model": 0.0769,
+     "survey": 0.0838,
+     "respondents": 138
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Field of current studies by degree and sex vs the Council for Higher Education",
+   "nodes": [
+    "study_field"
+   ],
+   "source": "che_fields_2024",
+   "tolerance": 0.01,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "degree": "first_degree",
+     "sex": "female",
+     "field": "engineering",
+     "difference": 0.0
+    },
+    {
+     "degree": "first_degree",
+     "sex": "male",
+     "field": "paramedical",
+     "difference": 0.0
+    },
+    {
+     "degree": "graduate",
+     "sex": "male",
+     "field": "business",
+     "difference": 0.0
+    }
+   ]
+  },
+  {
    "name": "Literacy: national distribution over proficiency levels (18-64)",
    "nodes": [
     "literacy_level"
@@ -1987,7 +2261,12 @@
     "military_service",
     "in_service",
     "labour_status",
+    "studying",
     "occupation",
+    "media_age",
+    "media_sector",
+    "degree_field",
+    "study_field",
     "industry",
     "work_status",
     "income",
@@ -2004,8 +2283,6 @@
     "online",
     "vote_bloc",
     "news_frequency",
-    "media_age",
-    "media_sector",
     "news_tv",
     "news_radio",
     "news_print",
@@ -2026,8 +2303,8 @@
    "passed": true,
    "detail": [
     {
-     "tests": 1766,
-     "smallest_adjusted_p": 0.919
+     "tests": 1841,
+     "smallest_adjusted_p": 0.9581
     },
     {
      "node": "news_networks",
@@ -2415,6 +2692,86 @@
    "nodes": [
     "news_print",
     "newspaper"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people in compulsory service are not counted as students",
+   "nodes": [
+    "labour_status",
+    "studying"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: graduate students already hold an academic degree",
+   "nodes": [
+    "studying",
+    "education"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: yeshiva, kollel and midrasha students are Jewish",
+   "nodes": [
+    "studying",
+    "group"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: a field of degree exactly for holders of an academic degree",
+   "nodes": [
+    "education",
+    "degree_field"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: a field of current studies exactly for students of an academic degree",
+   "nodes": [
+    "studying",
+    "study_field"
    ],
    "source": "model/constraints.yaml",
    "tolerance": 0.0,

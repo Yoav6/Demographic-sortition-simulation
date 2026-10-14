@@ -1,0 +1,7 @@
+{
+ "description": "currently studying by labour-force status, religiosity, sex and age - Jews",
+ "year": 2024,
+ "rows": [1694, 571, 577],
+ "cols": [1831, 6808],
+ "filters": [{"var": 6752, "values": [1]}, {"var": 1629, "values": [1]}]
+}

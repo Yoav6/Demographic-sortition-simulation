@@ -41,6 +41,8 @@ children:       P(children | group, religiosity, sex, age band, marital status)
 education:      P(diploma | group, religiosity, sex, age band, continent of birth)
 service:        P(IDF / national / none | group, religiosity, sex, age band, continent of birth)
 labour status:  P(status | in service, group, religiosity, sex, age band, education)
+studies:        P(not studying / degree / yeshiva / post-secondary / other | group, religiosity, sex, age band, labour status, education)
+fields:         P(field of degree | diploma, sex, occupation, age group, religiosity group); P(field of studies | studies, sex, field of degree)
 occupation:     P(occupation | labour status, group, religiosity, sex, education)
 industry, status at work, earnings, household income, home ownership
 health:         P(self-rated health | group, religiosity, sex, age band, education) → chronic illness → disability

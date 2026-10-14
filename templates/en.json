@@ -56,7 +56,16 @@
     },
     {
       "id": "education",
-      "text": "{gender, select, female {She} other {He}} has {education__has}."
+      "text": "{gender, select, female {She} other {He}} has {education__has}{degree_field__id, select, none {} other { in {degree_field__in}}}."
+    },
+    {
+      "id": "studying",
+      "unless": {
+        "studying": [
+          "none"
+        ]
+      },
+      "text": "{gender, select, female {She} other {He}} is {studying}{study_field__id, select, none {} other { in {study_field__in}}}."
     },
     {
       "id": "service_now_idf",

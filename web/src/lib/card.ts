@@ -103,7 +103,14 @@ export const SECTIONS: Section[] = [
     id: "education",
     label: { he: "השכלה", en: "Education" },
     lines: [
-      plain("education"),
+      {
+        doc: "education",
+        value: (p, lang) => (val(p, "degree_field") && val(p, "degree_field") !== "none" ? `${lab(p, lang, "education")} — ${lab(p, lang, "degree_field")}` : lab(p, lang, "education")),
+      },
+      {
+        doc: "studying",
+        value: (p, lang) => (val(p, "study_field") && val(p, "study_field") !== "none" ? `${lab(p, lang, "studying")} — ${lab(p, lang, "study_field")}` : lab(p, lang, "studying")),
+      },
       {
         doc: "literacy_level",
         label: { he: "מיומנות קריאה (משוערת)", en: "Literacy (modelled)" },

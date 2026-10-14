@@ -51,6 +51,8 @@ VARS = {
     7000: "disability",
     2169: "internet",
     2341: "social_networks",
+    1831: "study",
+    1905: "field",
     2: "birth_continent",
 }
 
@@ -85,6 +87,12 @@ CODES = {
     "disability": {"1": "yes", "2": "no"},
     "internet": {"1": "yes", "2": "no"},
     "social_networks": {"1": "yes", "2": "no", "3": "no_internet"},
+    "study": {"1": "no", "2": "yes", "3": "no"},
+    # field of the highest academic degree, in the Council for Higher Education's groups (14,
+    # "special and miscellaneous programmes", about 1%, is dropped)
+    "field": {"0": "humanities", "1": "humanities", "3": "humanities", "2": "education", "4": "social_sciences",
+              "5": "business", "6": "law", "7": "medicine", "8": "paramedical", "9": "math_cs", "10": "physical_sciences",
+              "11": "biological_sciences", "12": "agriculture", "13": "engineering"},  # studied in the past / studies now (incl. vacation) / never
     "birth_continent": {"1": "israel", "2": "europe_america", "3": "asia", "4": "africa"},
 }
 
@@ -101,16 +109,17 @@ assert set(AGE_BAND_TO_SURVEY) == set(AGE_BAND_IDS)
 FULL_DOMAINS = {"age_s": sorted(set(AGE_BAND_TO_SURVEY.values())), "sex": ["female", "male"]}
 
 
-def load(name: str) -> pd.DataFrame:
+def load(name: str, codes: dict[str, dict[str, str]] | None = None) -> pd.DataFrame:
     """A generator table with logical column names and our category ids.
-    Rows with unknown/not-relevant categories (codes 88/99 or unmapped) are dropped."""
+    Rows with unknown/not-relevant categories (codes 88/99 or unmapped) are dropped.
+    codes: extra codes per variable for this table (e.g. occupation 99 = not employed)."""
     raw = pd.read_csv(SS_DIR / f"{name}.csv", dtype=str)
     out = pd.DataFrame({"count": pd.to_numeric(raw["count"], errors="coerce").fillna(0.0), "rse": pd.to_numeric(raw["rse"], errors="coerce")})
     for col in raw.columns:
         if col.endswith("_code"):
             var = int(col[: -len("_code")])
             name_ = VARS[var]
-            out[name_] = raw[col].astype(str).str.replace(r"\.0$", "", regex=True).map(CODES[name_])
+            out[name_] = raw[col].astype(str).str.replace(r"\.0$", "", regex=True).map(CODES[name_] | (codes or {}).get(name_, {}))
     keep = out.drop(columns=["count", "rse"]).notna().all(axis=1)
     return out[keep].reset_index(drop=True)
 

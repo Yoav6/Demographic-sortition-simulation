@@ -431,6 +431,22 @@ nodes:
       - {id: retired, label: {en: retired, he: פנסיונר, he_f: פנסיונרית}}
       - {id: compulsory_service, label: {en: in compulsory military or national service, he: בשירות חובה צבאי או לאומי}}
 
+  - id: studying
+    type: table
+    parents: [group, religiosity, sex, age_band, labour_status, education]
+    backoff: [religiosity]
+    label: {en: Current studies, he: לימודים כיום}
+    file: cpts/studying.csv
+    doc: docs/methodology/studies.md
+    sources: [cbs_social_survey_2024, cbs_abstract_education, che_arab_students_2024, idi_haredi_report_2025]
+    values:
+      - {id: none, label: {en: not studying, he: אינו לומד, he_f: אינה לומדת}}
+      - {id: first_degree, label: {en: studying for a bachelor's degree, he: לומד לתואר ראשון, he_f: לומדת לתואר ראשון}}
+      - {id: graduate, label: {en: studying for a master's degree or doctorate, he: לומד לתואר שני או שלישי, he_f: לומדת לתואר שני או שלישי}}
+      - {id: yeshiva, label: {en: studying at a yeshiva or kollel, en_f: studying at a midrasha (a women's college of Torah study), he: לומד בישיבה או בכולל, he_f: לומדת במדרשה}}
+      - {id: post_secondary, label: {en: "studying at a post-secondary institution (such as practical engineering or a teachers' seminary)", he: "לומד במוסד על-תיכוני (כגון הנדסאות או סמינר)", he_f: "לומדת במוסד על-תיכוני (כגון הנדסאות או סמינר)"}}
+      - {id: other, label: {en: taking other courses, he: לומד בקורסים או במסגרות אחרות, he_f: לומדת בקורסים או במסגרות אחרות}}
+
   - id: occupation
     type: table
     parents: [labour_status, group, religiosity, sex, education]
@@ -483,6 +499,83 @@ nodes:
         label: {en: none, he: אין}
         attrs:
           as: {en: "", he: ""}
+
+  - id: media_age
+    type: lookup
+    parent: age
+    hidden: true
+    label: {en: Age group (media surveys), he: קבוצת גיל (סקרי תקשורת)}
+    file: lookups/media_age.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024]
+    values:
+      - {id: "18_24", label: {en: 18-24, he: 18-24}}
+      - {id: "25_29", label: {en: 25-29, he: 25-29}}
+      - {id: "30_39", label: {en: 30-39, he: 30-39}}
+      - {id: "40_49", label: {en: 40-49, he: 40-49}}
+      - {id: "50_64", label: {en: 50-64, he: 50-64}}
+      - {id: 65_plus, label: {en: 65+, he: 65+}}
+
+  - id: media_sector
+    type: lookup
+    parent: religiosity
+    hidden: true
+    label: {en: Population group (media surveys), he: מגזר (סקרי תקשורת)}
+    file: lookups/media_sector.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024]
+    values:
+      - {id: secular, label: {en: secular Jewish or other, he: יהודי חילוני או אחר}}
+      - {id: traditional, label: {en: traditional Jewish, he: יהודי מסורתי}}
+      - {id: religious, label: {en: religious Jewish, he: יהודי דתי}}
+      - {id: haredi, label: {en: Haredi, he: חרדי}}
+      - {id: arab, label: {en: Arab or Druze, he: ערבי או דרוזי}}
+
+  - id: degree_field
+    type: table
+    parents: [education, sex, occupation, media_age, media_sector]
+    backoff: [media_sector, media_age, occupation, sex]
+    label: {en: Field of the highest academic degree, he: תחום הלימוד של התואר האקדמי הגבוה ביותר}
+    file: cpts/degree_field.csv
+    doc: docs/methodology/fields.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: humanities, label: {en: "humanities and arts", he: "מדעי הרוח והאמנויות"}, attrs: {in: {en: "humanities and arts", he: "במדעי הרוח והאמנויות"}}}
+      - {id: education, label: {en: "education and teaching", he: "חינוך והוראה"}, attrs: {in: {en: "education and teaching", he: "בחינוך ובהוראה"}}}
+      - {id: social_sciences, label: {en: "social sciences", he: "מדעי החברה"}, attrs: {in: {en: "the social sciences", he: "במדעי החברה"}}}
+      - {id: business, label: {en: "business and management", he: "מנהל עסקים וניהול"}, attrs: {in: {en: "business and management", he: "במנהל עסקים ובניהול"}}}
+      - {id: law, label: {en: "law", he: "משפטים"}, attrs: {in: {en: "law", he: "במשפטים"}}}
+      - {id: medicine, label: {en: "medicine", he: "רפואה"}, attrs: {in: {en: "medicine", he: "ברפואה"}}}
+      - {id: paramedical, label: {en: "paramedical professions (such as nursing or therapy)", he: "מקצועות עזר רפואיים (כגון סיעוד או טיפול)"}, attrs: {in: {en: "a paramedical profession (such as nursing or therapy)", he: "במקצועות עזר רפואיים (כגון סיעוד או טיפול)"}}}
+      - {id: math_cs, label: {en: "mathematics, statistics and computer science", he: "מתמטיקה, סטטיסטיקה ומדעי המחשב"}, attrs: {in: {en: "mathematics, statistics or computer science", he: "במתמטיקה, בסטטיסטיקה או במדעי המחשב"}}}
+      - {id: physical_sciences, label: {en: "physical sciences", he: "המדעים הפיזיקליים"}, attrs: {in: {en: "the physical sciences", he: "במדעים הפיזיקליים"}}}
+      - {id: biological_sciences, label: {en: "biological sciences", he: "המדעים הביולוגיים"}, attrs: {in: {en: "the biological sciences", he: "במדעים הביולוגיים"}}}
+      - {id: agriculture, label: {en: "agriculture", he: "חקלאות"}, attrs: {in: {en: "agriculture", he: "בחקלאות"}}}
+      - {id: engineering, label: {en: "engineering and architecture", he: "הנדסה ואדריכלות"}, attrs: {in: {en: "engineering or architecture", he: "בהנדסה או באדריכלות"}}}
+      - {id: none, label: {en: none, he: אין}, attrs: {in: {en: "", he: ""}}}
+
+  - id: study_field
+    type: table
+    parents: [studying, sex, degree_field]
+    backoff: [degree_field, sex]
+    label: {en: Field of current academic studies, he: תחום הלימודים האקדמיים כיום}
+    file: cpts/study_field.csv
+    doc: docs/methodology/fields.md
+    sources: [che_fields_2024]
+    values:
+      - {id: humanities, label: {en: "humanities and arts", he: "מדעי הרוח והאמנויות"}, attrs: {in: {en: "humanities and arts", he: "במדעי הרוח והאמנויות"}}}
+      - {id: education, label: {en: "education and teaching", he: "חינוך והוראה"}, attrs: {in: {en: "education and teaching", he: "בחינוך ובהוראה"}}}
+      - {id: social_sciences, label: {en: "social sciences", he: "מדעי החברה"}, attrs: {in: {en: "the social sciences", he: "במדעי החברה"}}}
+      - {id: business, label: {en: "business and management", he: "מנהל עסקים וניהול"}, attrs: {in: {en: "business and management", he: "במנהל עסקים ובניהול"}}}
+      - {id: law, label: {en: "law", he: "משפטים"}, attrs: {in: {en: "law", he: "במשפטים"}}}
+      - {id: medicine, label: {en: "medicine", he: "רפואה"}, attrs: {in: {en: "medicine", he: "ברפואה"}}}
+      - {id: paramedical, label: {en: "paramedical professions (such as nursing or therapy)", he: "מקצועות עזר רפואיים (כגון סיעוד או טיפול)"}, attrs: {in: {en: "a paramedical profession (such as nursing or therapy)", he: "במקצועות עזר רפואיים (כגון סיעוד או טיפול)"}}}
+      - {id: math_cs, label: {en: "mathematics, statistics and computer science", he: "מתמטיקה, סטטיסטיקה ומדעי המחשב"}, attrs: {in: {en: "mathematics, statistics or computer science", he: "במתמטיקה, בסטטיסטיקה או במדעי המחשב"}}}
+      - {id: physical_sciences, label: {en: "physical sciences", he: "המדעים הפיזיקליים"}, attrs: {in: {en: "the physical sciences", he: "במדעים הפיזיקליים"}}}
+      - {id: biological_sciences, label: {en: "biological sciences", he: "המדעים הביולוגיים"}, attrs: {in: {en: "the biological sciences", he: "במדעים הביולוגיים"}}}
+      - {id: agriculture, label: {en: "agriculture", he: "חקלאות"}, attrs: {in: {en: "agriculture", he: "בחקלאות"}}}
+      - {id: engineering, label: {en: "engineering and architecture", he: "הנדסה ואדריכלות"}, attrs: {in: {en: "engineering or architecture", he: "בהנדסה או באדריכלות"}}}
+      - {id: none, label: {en: none, he: אין}, attrs: {in: {en: "", he: ""}}}
 
   - id: industry
     type: table
@@ -906,37 +999,6 @@ nodes:
       - {id: few_times_week, label: {en: two or three times a week, he: פעמיים-שלוש בשבוע}}
       - {id: weekly, label: {en: about once a week, he: בערך פעם בשבוע}}
       - {id: never, label: {en: hardly ever, he: כמעט אף פעם}}
-
-  - id: media_age
-    type: lookup
-    parent: age
-    hidden: true
-    label: {en: Age group (media surveys), he: קבוצת גיל (סקרי תקשורת)}
-    file: lookups/media_age.csv
-    doc: docs/methodology/media.md
-    sources: [isoc_media_survey_2024]
-    values:
-      - {id: "18_24", label: {en: 18-24, he: 18-24}}
-      - {id: "25_29", label: {en: 25-29, he: 25-29}}
-      - {id: "30_39", label: {en: 30-39, he: 30-39}}
-      - {id: "40_49", label: {en: 40-49, he: 40-49}}
-      - {id: "50_64", label: {en: 50-64, he: 50-64}}
-      - {id: 65_plus, label: {en: 65+, he: 65+}}
-
-  - id: media_sector
-    type: lookup
-    parent: religiosity
-    hidden: true
-    label: {en: Population group (media surveys), he: מגזר (סקרי תקשורת)}
-    file: lookups/media_sector.csv
-    doc: docs/methodology/media.md
-    sources: [isoc_media_survey_2024]
-    values:
-      - {id: secular, label: {en: secular Jewish or other, he: יהודי חילוני או אחר}}
-      - {id: traditional, label: {en: traditional Jewish, he: יהודי מסורתי}}
-      - {id: religious, label: {en: religious Jewish, he: יהודי דתי}}
-      - {id: haredi, label: {en: Haredi, he: חרדי}}
-      - {id: arab, label: {en: Arab or Druze, he: ערבי או דרוזי}}
 
   - id: news_tv
     type: table

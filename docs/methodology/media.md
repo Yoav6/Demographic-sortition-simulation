@@ -246,6 +246,55 @@ several papers, while the model gives each reader one main paper.
 
 ### Model summary (generated)
 
+#### `media_age` — Age group (media surveys) / קבוצת גיל (סקרי תקשורת)
+
+- **type:** `lookup` · hidden helper
+- **parents:** `age`
+- **distribution file:** `model/lookups/media_age.csv`
+
+| id | English | עברית (m) | עברית (f) |
+|---|---|---|---|
+| `18_24` | 18-24 | 18-24 |  |
+| `25_29` | 25-29 | 25-29 |  |
+| `30_39` | 30-39 | 30-39 |  |
+| `40_49` | 40-49 | 40-49 |  |
+| `50_64` | 50-64 | 50-64 |  |
+| `65_plus` | 65+ | 65+ |  |
+
+Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
+
+Validation:
+
+| Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
+|---|---|---|---|---|---|
+| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+
+#### `media_sector` — Population group (media surveys) / מגזר (סקרי תקשורת)
+
+- **type:** `lookup` · hidden helper
+- **parents:** `religiosity`
+- **distribution file:** `model/lookups/media_sector.csv`
+
+| id | English | עברית (m) | עברית (f) |
+|---|---|---|---|
+| `secular` | secular Jewish or other | יהודי חילוני או אחר |  |
+| `traditional` | traditional Jewish | יהודי מסורתי |  |
+| `religious` | religious Jewish | יהודי דתי |  |
+| `haredi` | Haredi | חרדי |  |
+| `arab` | Arab or Druze | ערבי או דרוזי |  |
+
+Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
+
+Validation:
+
+| Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
+|---|---|---|---|---|---|
+| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+
 #### `online` — Internet and social networks / אינטרנט ורשתות חברתיות
 
 - **type:** `table`
@@ -312,55 +361,6 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `never` | hardly ever | כמעט אף פעם |  |
 
 Sources: `ines_2022` (Israel National Election Studies, Tel Aviv University)
-
-Validation:
-
-| Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
-|---|---|---|---|---|---|
-| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
-
-Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
-
-#### `media_age` — Age group (media surveys) / קבוצת גיל (סקרי תקשורת)
-
-- **type:** `lookup` · hidden helper
-- **parents:** `age`
-- **distribution file:** `model/lookups/media_age.csv`
-
-| id | English | עברית (m) | עברית (f) |
-|---|---|---|---|
-| `18_24` | 18-24 | 18-24 |  |
-| `25_29` | 25-29 | 25-29 |  |
-| `30_39` | 30-39 | 30-39 |  |
-| `40_49` | 40-49 | 40-49 |  |
-| `50_64` | 50-64 | 50-64 |  |
-| `65_plus` | 65+ | 65+ |  |
-
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
-
-Validation:
-
-| Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
-|---|---|---|---|---|---|
-| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
-
-Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
-
-#### `media_sector` — Population group (media surveys) / מגזר (סקרי תקשורת)
-
-- **type:** `lookup` · hidden helper
-- **parents:** `religiosity`
-- **distribution file:** `model/lookups/media_sector.csv`
-
-| id | English | עברית (m) | עברית (f) |
-|---|---|---|---|
-| `secular` | secular Jewish or other | יהודי חילוני או אחר |  |
-| `traditional` | traditional Jewish | יהודי מסורתי |  |
-| `religious` | religious Jewish | יהודי דתי |  |
-| `haredi` | Haredi | חרדי |  |
-| `arab` | Arab or Druze | ערבי או דרוזי |  |
-
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
 
 Validation:
 

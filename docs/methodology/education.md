@@ -110,6 +110,8 @@ Validation:
 | Highest diploma of Jews by continent of birth and sex (20+) | `cbs_social_survey_2024` | 0.0208 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | Constraint: no academic or post-secondary diploma at 18-19 | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
+| Constraint: graduate students already hold an academic degree | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
+| Constraint: a field of degree exactly for holders of an academic degree | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 

@@ -174,6 +174,61 @@ One row per local authority (municipalities, local councils, regional councils):
 
 Thousands, 2024 average. Single years of age by sex for Arabs and for Jews and others; 5-year groups by sex for Jews, Muslims, Christians, Arab Christians, Druze and those not classified by religion. st02_07 gives Jews and others by continent of origin and birth.
 
+## Statistical Abstract of Israel 2024 and 2025, ch. 4 - students in higher education, yeshivas and post-secondary education
+
+*שנתון סטטיסטי לישראל 2024 ו-2025, פרק 4 - סטודנטים בהשכלה גבוהה, תלמידי ישיבות ותלמידים בחינוך העל-תיכוני*
+
+- **id:** `cbs_abstract_education` · **tier:** A · **publisher:** Central Bureau of Statistics (CBS)
+- **page:** <https://www.cbs.gov.il/he/publications/pages/2025/%D7%A9%D7%A0%D7%AA%D7%95%D7%9F-%D7%A1%D7%98%D7%98%D7%99%D7%A1%D7%98%D7%99-%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C-2025-%D7%9E%D7%A1%D7%A4%D7%A8-76.aspx>
+- **data as of:** 2022/23-2024/25
+- **terms:** CBS publication; reuse with attribution
+- **used by:** `studying`
+- file `st04_70_2024.xlsx`: <https://www.cbs.gov.il/he/publications/doclib/2024/4.ShnatonEducation/st04_70.xlsx> — sha256 `4c49a3e28fb8cd35…`, retrieved 2026-10-14
+- file `st04_73_2024.xlsx`: <https://www.cbs.gov.il/he/publications/doclib/2024/4.ShnatonEducation/st04_73.xlsx> — sha256 `3efaa563475dcd8c…`, retrieved 2026-10-14
+- file `st04_17_2025.xlsx`: <https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_17.xlsx> — sha256 `fd055978476ebcda…`, retrieved 2026-10-14
+- file `st04_27_2025.xlsx`: <https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_27.xlsx> — sha256 `0b71ea6df976ff45…`, retrieved 2026-10-14
+- file `st04_31_2025.xlsx`: <https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_31.xlsx> — sha256 `b1285c4878c59397…`, retrieved 2026-10-14
+
+2024 tables 4.70 (students as a share of the population aged 18-39 by degree, sex, age and population group, 2022/23) and 4.73 (students by degree, sex, age, population group and district, 2022/23); 2025 tables 4.17 (yeshiva and kollel students by type, age and citizenship, 2023/24), 4.27 (post-secondary students by field, sex and age, 2023/24) and 4.31 (students by degree, to 2024/25).
+
+## Council for Higher Education - Arab students in institutions of higher education by degree, type of institution and sex, 2023/24 (table 15)
+
+*המועצה להשכלה גבוהה - סטודנטים ערבים במוסדות להשכלה גבוהה לפי תואר, סוג מוסד ומין, תשפ"ד (לוח 15)*
+
+- **id:** `che_arab_students_2024` · **tier:** A · **publisher:** Council for Higher Education (CHE), Planning and Budgeting Committee
+- **page:** <https://che.org.il/en/statistical-data/>
+- **data as of:** 2023/24
+- **terms:** Published statistical tables, cited with attribution
+- **used by:** `studying`
+- file `che_table15.xlsx`: <https://che.org.il/wp-content/uploads/2025/11/%D7%9C%D7%95%D7%97-15-%D7%AA%D7%A9%D7%A4%D7%94.xlsx> — sha256 `897bcf4d87e2557a…`, retrieved 2026-10-14
+
+## Council for Higher Education - students in institutions of higher education by field of study, degree, type of institution and sex, 2023/24 (table 14)
+
+*המועצה להשכלה גבוהה - סטודנטים במוסדות להשכלה גבוהה לפי תחום לימוד, תואר, סוג מוסד ומין, תשפ"ד (לוח 14)*
+
+- **id:** `che_fields_2024` · **tier:** A · **publisher:** Council for Higher Education (CHE), Planning and Budgeting Committee
+- **page:** <https://che.org.il/en/statistical-data/>
+- **data as of:** 2023/24
+- **terms:** Published statistical tables, cited with attribution
+- **used by:** `study_field`
+- file `che_table14.xlsx`: <https://che.org.il/wp-content/uploads/2026/02/%D7%9C%D7%95%D7%97-14-%D7%AA%D7%A9%D7%A4%D7%94.xlsx> — sha256 `ca910ab87ff56b4b…`, retrieved 2026-10-14
+
+Universities, academic colleges and academic colleges of education (not the Open University); twelve field groups.
+
+## Israel Democracy Institute - Statistical Report on Ultra-Orthodox Society in Israel 2025 (executive summary)
+
+*המכון הישראלי לדמוקרטיה - שנתון החברה החרדית בישראל 2025 (תקציר)*
+
+- **id:** `idi_haredi_report_2025` · **tier:** M · **publisher:** Israel Democracy Institute (Lee Cahaner, Gilad Malach)
+- **page:** <https://en.idi.org.il/media/30207/final-final-haredi-shnaton-2025-pdf.pdf>
+- **data as of:** 2024/25
+- **terms:** IDI publication; cited with attribution
+- **used by:** `studying`
+- file `idi_haredi_report_2025.pdf`: <https://en.idi.org.il/media/30207/final-final-haredi-shnaton-2025-pdf.pdf> — sha256 `4e39bf6e6423afc1…`, retrieved 2026-10-14
+- manual data: `data/manual/students/`
+
+Haredi students in higher education, 2024/25 (chart "Ultra-Orthodox students in higher education"): 15,812 bachelor's and 3,141 postgraduate; transcribed into data/manual/students/haredi_students.csv.
+
 ## Statistical Abstract of Israel 2025, ch. 2 - persons marrying, by sex, age, previous marital status and religion (table 2.24, 2023)
 
 *שנתון סטטיסטי לישראל 2025, פרק 2 - נישאים, לפי מין, גיל, מצב משפחתי קודם ודת (לוח 2.24, 2023)*
@@ -260,7 +315,7 @@ Figure 2b gives mean scores of non-Haredi Jews, Arabs and Haredim (computed by t
 - **page:** <https://boardsgenerator.cbs.gov.il/pages/Seker/wizardpage.aspx>
 - **data as of:** 2024
 - **terms:** CBS publication (online table generator); reuse with attribution
-- **used by:** `religiosity`, `marital_status`, `children`, `education`, `military_service`, `in_service`, `labour_status`, `occupation`, `industry`, `work_status`, `income`, `household_income`, `income_amount`, `income_percentile`, `household_income_amount`, `household_income_percentile`, `home_ownership`, `health`, `chronic`, `disability`, `online`
+- **used by:** `religiosity`, `marital_status`, `children`, `education`, `military_service`, `in_service`, `labour_status`, `studying`, `occupation`, `degree_field`, `industry`, `work_status`, `income`, `household_income`, `income_amount`, `income_percentile`, `household_income_amount`, `household_income_percentile`, `home_ownership`, `health`, `chronic`, `disability`, `online`
 - **planned for:** `internet`
 - manual data: `data/manual/cbs_ss/`
 

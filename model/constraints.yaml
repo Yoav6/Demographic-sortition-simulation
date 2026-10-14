@@ -113,3 +113,33 @@ constraints:
     nodes: [news_print, newspaper]
     when: {news_print: [often, sometimes, rarely]}
     forbid: {newspaper: [none]}
+
+  - id: no_studies_in_service
+    description: people in compulsory service are not counted as students
+    nodes: [labour_status, studying]
+    when: {labour_status: [compulsory_service]}
+    require: {studying: [none]}
+
+  - id: graduate_after_degree
+    description: graduate students already hold an academic degree
+    nodes: [studying, education]
+    when: {studying: [graduate]}
+    require: {education: [ba, ma, phd]}
+
+  - id: yeshiva_only_jewish
+    description: yeshiva, kollel and midrasha students are Jewish
+    nodes: [studying, group]
+    when: {studying: [yeshiva]}
+    require: {group: [jewish]}
+
+  - id: degree_field_only_degrees
+    description: a field of degree exactly for holders of an academic degree
+    nodes: [education, degree_field]
+    when: {education: [no_diploma, primary, secondary, bagrut, post_secondary, other_diploma]}
+    require: {degree_field: [none]}
+
+  - id: study_field_only_students
+    description: a field of current studies exactly for students of an academic degree
+    nodes: [studying, study_field]
+    when: {studying: [none, yeshiva, post_secondary, other]}
+    require: {study_field: [none]}

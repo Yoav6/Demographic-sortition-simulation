@@ -96,6 +96,7 @@ Validation:
 | Constraint: an occupation only for the employed and retirees | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: every employed person has an occupation | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: earnings exactly for the employed | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
+| Constraint: people in compulsory service are not counted as students | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 

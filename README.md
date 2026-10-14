@@ -12,8 +12,8 @@ members from it, and describes each of them in Hebrew and English:
 > She is single and has no children. She has a bachelor's degree. She served in the IDF. She is
 > unemployed and looking for work…* — member #1 of the published assembly
 
-Every member has 50 attributes: place of residence, population group, sex, age, religiosity,
-first name, origin and ancestry, marital status and children, education, military or national
+Every member has 53 attributes: place of residence, population group, sex, age, religiosity,
+first name, origin and ancestry, marital status and children, education and current studies (with fields of study), military or national
 service, work (status, occupation, industry), earnings and household income (with percentiles),
 home ownership, health, disability, the 2022 vote, media habits (how often they get news from
 TV, radio, printed newspapers, news sites, social media, search engines and podcasts; the
@@ -36,9 +36,10 @@ model's structure.
   and so on. The root is a joint table of locality × population group × sex × age band. The
   structure is in [`model/dag.yaml`](model/dag.yaml); each table is a CSV file in `model/cpts/`.
 * **Built only from public data.** Sources include the CBS (population, localities, Statistical
-  Abstract, first names, 56 Social Survey cross-tabulations queried from the official table
+  Abstract, first names, 66 Social Survey cross-tabulations queried from the official table
   generator), the Central Elections Committee (2022 results by polling station), the Israel
-  National Election Studies, the OECD and Bank of Israel (adult skills), the Israel Internet
+  National Election Studies, the Council for Higher Education and the Israel Democracy Institute
+  (students), the OECD and Bank of Israel (adult skills), the Israel Internet
   Association and the Technion and the Agam Institute (media), TGI readership figures and the Knesset Research and
   Information Center (newspapers), Wikidata (name transliteration) and IGRA (registry names). All are listed with
   checksums in [SOURCES.md](SOURCES.md).

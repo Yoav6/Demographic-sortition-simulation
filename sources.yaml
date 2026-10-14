@@ -244,6 +244,84 @@ sources:
       5-year groups by sex for Jews, Muslims, Christians, Arab Christians, Druze and those not
       classified by religion. st02_07 gives Jews and others by continent of origin and birth.
 
+  - id: cbs_abstract_education
+    title:
+      en: Statistical Abstract of Israel 2024 and 2025, ch. 4 - students in higher education, yeshivas and post-secondary education
+      he: שנתון סטטיסטי לישראל 2024 ו-2025, פרק 4 - סטודנטים בהשכלה גבוהה, תלמידי ישיבות ותלמידים בחינוך העל-תיכוני
+    publisher: Central Bureau of Statistics (CBS)
+    tier: A
+    url: https://www.cbs.gov.il/he/publications/pages/2025/%D7%A9%D7%A0%D7%AA%D7%95%D7%9F-%D7%A1%D7%98%D7%98%D7%99%D7%A1%D7%98%D7%99-%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C-2025-%D7%9E%D7%A1%D7%A4%D7%A8-76.aspx
+    license: CBS publication; reuse with attribution
+    as_of: 2022/23-2024/25
+    used_by: []
+    files:
+      - url: https://www.cbs.gov.il/he/publications/doclib/2024/4.ShnatonEducation/st04_70.xlsx
+        path: st04_70_2024.xlsx
+      - url: https://www.cbs.gov.il/he/publications/doclib/2024/4.ShnatonEducation/st04_73.xlsx
+        path: st04_73_2024.xlsx
+      - url: https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_17.xlsx
+        path: st04_17_2025.xlsx
+      - url: https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_27.xlsx
+        path: st04_27_2025.xlsx
+      - url: https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_31.xlsx
+        path: st04_31_2025.xlsx
+    notes: >
+      2024 tables 4.70 (students as a share of the population aged 18-39 by degree, sex, age and
+      population group, 2022/23) and 4.73 (students by degree, sex, age, population group and
+      district, 2022/23); 2025 tables 4.17 (yeshiva and kollel students by type, age and
+      citizenship, 2023/24), 4.27 (post-secondary students by field, sex and age, 2023/24) and
+      4.31 (students by degree, to 2024/25).
+
+  - id: che_arab_students_2024
+    title:
+      en: Council for Higher Education - Arab students in institutions of higher education by degree, type of institution and sex, 2023/24 (table 15)
+      he: המועצה להשכלה גבוהה - סטודנטים ערבים במוסדות להשכלה גבוהה לפי תואר, סוג מוסד ומין, תשפ"ד (לוח 15)
+    publisher: Council for Higher Education (CHE), Planning and Budgeting Committee
+    tier: A
+    url: https://che.org.il/en/statistical-data/
+    license: Published statistical tables, cited with attribution
+    as_of: 2023/24
+    used_by: []
+    files:
+      - url: https://che.org.il/wp-content/uploads/2025/11/%D7%9C%D7%95%D7%97-15-%D7%AA%D7%A9%D7%A4%D7%94.xlsx
+        path: che_table15.xlsx
+
+  - id: che_fields_2024
+    title:
+      en: Council for Higher Education - students in institutions of higher education by field of study, degree, type of institution and sex, 2023/24 (table 14)
+      he: המועצה להשכלה גבוהה - סטודנטים במוסדות להשכלה גבוהה לפי תחום לימוד, תואר, סוג מוסד ומין, תשפ"ד (לוח 14)
+    publisher: Council for Higher Education (CHE), Planning and Budgeting Committee
+    tier: A
+    url: https://che.org.il/en/statistical-data/
+    license: Published statistical tables, cited with attribution
+    as_of: 2023/24
+    used_by: []
+    files:
+      - url: https://che.org.il/wp-content/uploads/2026/02/%D7%9C%D7%95%D7%97-14-%D7%AA%D7%A9%D7%A4%D7%94.xlsx
+        path: che_table14.xlsx
+    notes: >
+      Universities, academic colleges and academic colleges of education (not the Open
+      University); twelve field groups.
+
+  - id: idi_haredi_report_2025
+    title:
+      en: Israel Democracy Institute - Statistical Report on Ultra-Orthodox Society in Israel 2025 (executive summary)
+      he: המכון הישראלי לדמוקרטיה - שנתון החברה החרדית בישראל 2025 (תקציר)
+    publisher: Israel Democracy Institute (Lee Cahaner, Gilad Malach)
+    tier: M
+    url: https://en.idi.org.il/media/30207/final-final-haredi-shnaton-2025-pdf.pdf
+    license: IDI publication; cited with attribution
+    as_of: 2024/25
+    used_by: []
+    files:
+      - url: https://en.idi.org.il/media/30207/final-final-haredi-shnaton-2025-pdf.pdf
+        path: idi_haredi_report_2025.pdf
+    manual: [students/]
+    notes: >
+      Haredi students in higher education, 2024/25 (chart "Ultra-Orthodox students in higher
+      education"): 15,812 bachelor's and 3,141 postgraduate; transcribed into
+      data/manual/students/haredi_students.csv.
+
   - id: cbs_abstract_2025_marriages
     title:
       en: Statistical Abstract of Israel 2025, ch. 2 - persons marrying, by sex, age, previous marital status and religion (table 2.24, 2023)

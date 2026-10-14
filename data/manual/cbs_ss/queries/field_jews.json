@@ -1,0 +1,7 @@
+{
+ "description": "field of the highest academic degree by religiosity and sex - Jews",
+ "year": 2024,
+ "rows": [1694, 571],
+ "cols": [1905],
+ "filters": [{"var": 6752, "values": [1]}, {"var": 1629, "values": [1]}]
+}

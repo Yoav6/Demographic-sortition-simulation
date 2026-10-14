@@ -65,6 +65,38 @@
       "url": "https://www.cbs.gov.il/he/publications/doclib/2025/2.shnatonpopulation/st02_07.xlsx"
     }
   },
+  "cbs_abstract_education": {
+    "st04_17_2025.xlsx": {
+      "sha256": "fd055978476ebcdaf1baf95da2023f078bffe979f3535c262c2a3f2dc9358ed7",
+      "size": 38283,
+      "retrieved": "2026-10-14",
+      "url": "https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_17.xlsx"
+    },
+    "st04_27_2025.xlsx": {
+      "sha256": "0b71ea6df976ff45a4a3128edcc532e1c2eb3905a2d94767a50fb6a988f07e49",
+      "size": 29974,
+      "retrieved": "2026-10-14",
+      "url": "https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_27.xlsx"
+    },
+    "st04_31_2025.xlsx": {
+      "sha256": "b1285c4878c593979ff8747d357321af66c57432fbec075eca4a90cc0fd84523",
+      "size": 29899,
+      "retrieved": "2026-10-14",
+      "url": "https://www.cbs.gov.il/he/publications/DocLib/2025/4.ShnatonEducation/st04_31.xlsx"
+    },
+    "st04_70_2024.xlsx": {
+      "sha256": "4c49a3e28fb8cd3520150d5e67da16bb2a58964c9a33aff8e91adbf96efe86f8",
+      "size": 35970,
+      "retrieved": "2026-10-14",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2024/4.ShnatonEducation/st04_70.xlsx"
+    },
+    "st04_73_2024.xlsx": {
+      "sha256": "3efaa563475dcd8c7be26512c1de8eb1df7e9f6443bc22b9b71f438065517991",
+      "size": 37125,
+      "retrieved": "2026-10-14",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2024/4.ShnatonEducation/st04_73.xlsx"
+    }
+  },
   "cbs_local_authorities_2024": {
     "p_libud_24.xlsx": {
       "sha256": "2593d2adf8f2aca70533ca398a92cead08950e292b3dcf3aee6feba2437ff1b1",
@@ -101,6 +133,30 @@
       "size": 154331,
       "retrieved": "2026-10-13",
       "url": "https://media25.bechirot.gov.il/files/expc.csv"
+    }
+  },
+  "che_arab_students_2024": {
+    "che_table15.xlsx": {
+      "sha256": "897bcf4d87e2557acf33db9df727a556f0d97f1375962cb70130a77b1081a733",
+      "size": 17652,
+      "retrieved": "2026-10-14",
+      "url": "https://che.org.il/wp-content/uploads/2025/11/%D7%9C%D7%95%D7%97-15-%D7%AA%D7%A9%D7%A4%D7%94.xlsx"
+    }
+  },
+  "che_fields_2024": {
+    "che_table14.xlsx": {
+      "sha256": "ca910ab87ff56b4b8daa583caeaad519c8a1de510e1d0f3f4c97e6acd85efb69",
+      "size": 22880,
+      "retrieved": "2026-10-14",
+      "url": "https://che.org.il/wp-content/uploads/2026/02/%D7%9C%D7%95%D7%97-14-%D7%AA%D7%A9%D7%A4%D7%94.xlsx"
+    }
+  },
+  "idi_haredi_report_2025": {
+    "idi_haredi_report_2025.pdf": {
+      "sha256": "4e39bf6e6423afc13fec81527120c9e26ea4c4091f9a559114ec1fefefce9f9e",
+      "size": 250701,
+      "retrieved": "2026-10-14",
+      "url": "https://en.idi.org.il/media/30207/final-final-haredi-shnaton-2025-pdf.pdf"
     }
   },
   "igra_registry_names": {

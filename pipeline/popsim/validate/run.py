@@ -144,6 +144,71 @@ def _labour_to_survey(m: pd.DataFrame, col: str) -> pd.DataFrame:
     return m
 
 
+def _study_to_survey(m: pd.DataFrame, col: str) -> pd.DataFrame:
+    m = m.copy()
+    m[col] = np.where(m[col] == "none", "no", "yes")
+    return m
+
+
+def students_check() -> Check:
+    """Students by kind of study, age, sex and population group vs the published counts the
+    split was fitted to (CBS, CHE, IDI). The CBS count of yeshiva students "up to 19" includes
+    17-year-olds, who are outside the model, and is not judged."""
+    from ..estimate.students import TYPES, constraints, counts
+
+    J = joint(["studying", "group", "religiosity", "sex", "age_band"])
+    cells = J.pivot_table(index=["group", "religiosity", "sex", "age_band"], columns="studying", values="w", aggfunc="sum").fillna(0.0)
+    X = cells.reindex(columns=TYPES).fillna(0.0).to_numpy()
+    c = Check("Students by kind of study, age, sex and population group vs published counts (relative difference)",
+              ["studying"], "cbs_abstract_education", 0.12)
+    rows = []
+    for name, mask, idx, target in constraints(cells.reset_index(), counts()):
+        model = float(X[np.ix_(mask, idx)].sum())
+        rows.append((abs(model / target - 1), name, model, target))
+    judged = [r for r in rows if "Up to 19" not in r[1] or "yeshiva" not in r[1]]
+    judged.sort(reverse=True)
+    c.max_abs_error = judged[0][0]
+    c.detail = [{"count": n, "model": round(m), "published": round(t)} for _, n, m, t in judged[:4]]
+    c.passed = c.max_abs_error <= c.tolerance
+    return c
+
+
+def fields_checks() -> list[Check]:
+    """Field of the highest degree vs the Social Survey (by occupation and sex; by religiosity
+    and sex for Jews), and field of current studies vs the CHE (by degree and sex)."""
+    from ..estimate.fields import FIELDS, che_fields
+
+    degrees = {"education": ["ba", "ma", "phd"]}
+    out = []
+    for name, keep, where, table, by in (
+        ("Field of the highest degree by occupation and sex (20+)", ["occupation", "sex"], degrees, "field_by_occupation", ["occupation", "sex"]),
+        ("Field of the highest degree of Jews by religiosity and sex (20+)", ["religiosity", "sex"], {**degrees, "group": ["jewish"]}, "field_jews", ["religiosity", "sex"]),
+    ):
+        m = _model(keep + ["degree_field"], where).rename(columns={"degree_field": "field"})
+        t = load(table, codes={"occupation": {"99": "none"}})
+        c = Check(name, ["degree_field"], "cbs_social_survey_2024", 0.03)
+        c.max_abs_error, c.max_excess, c.detail = compare(m, t, by, "field", standardize=None)
+        c.passed = c.max_excess <= c.tolerance
+        out.append(c)
+
+    J = joint(["studying", "sex", "study_field"], where={"studying": ["first_degree", "graduate"]})
+    che = che_fields()
+    c = Check("Field of current studies by degree and sex vs the Council for Higher Education", ["study_field"], "che_fields_2024", 0.01)
+    worst = []
+    for deg, key in (("first_degree", "first"), ("graduate", "graduate")):
+        for sex in ("female", "male"):
+            m = J[(J["studying"] == deg) & (J["sex"] == sex)].set_index("study_field")["w"].reindex(FIELDS).fillna(0.0)
+            t = che[key][che[key]["sex"] == sex].set_index("field")["students"].reindex(FIELDS).fillna(0.0)
+            d = (m / m.sum() - t / t.sum()).abs()
+            worst.append((float(d.max()), deg, sex, d.idxmax()))
+    worst.sort(reverse=True)
+    c.max_abs_error = worst[0][0]
+    c.detail = [{"degree": d, "sex": s_, "field": f, "difference": round(e, 4)} for e, d, s_, f in worst[:3]]
+    c.passed = c.max_abs_error <= c.tolerance
+    out.append(c)
+    return out
+
+
 def survey_checks() -> list[Check]:
     specs = [
         # (name, nodes, table, model var, survey var, population, by, tolerance, extra kwargs)
@@ -155,6 +220,8 @@ def survey_checks() -> list[Check]:
         ("Highest diploma of Arabs by religion and sex (20+)", ["education"], "diploma_arabs", "education", "diploma", "arabs", ["religion", "sex"], 0.04, {}),
         ("Military/national service of Jews by religiosity and sex (20+)", ["military_service"], "service_jews", "military_service", "service", "jews", ["religiosity", "sex"], 0.03, {"loader": service_table}),
         ("Military/national service of Arabs by religion and sex (20+)", ["military_service"], "service_arabs", "military_service", "service", "arabs", ["religion", "sex"], 0.04, {"loader": service_table}),
+        ("Currently studying, Jews by religiosity and sex (20+)", ["studying"], "studying_jews", "studying", "study", "jews", ["religiosity", "sex"], 0.03, {"mapper": _study_to_survey}),
+        ("Currently studying, Arabs by religion and sex (20+)", ["studying"], "studying_arabs", "studying", "study", "arabs", ["religion", "sex"], 0.04, {"mapper": _study_to_survey}),
         ("Labour-force status of Jews by religiosity and sex (20+)", ["labour_status"], "employment_jews", "labour_status", "employment", "jews", ["religiosity", "sex"], 0.03, {"mapper": _labour_to_survey}),
         ("Labour-force status of Arabs by religion and sex (20+)", ["labour_status"], "employment_arabs", "labour_status", "employment", "arabs", ["religion", "sex"], 0.04, {"mapper": _labour_to_survey}),
         ("Self-rated health of Jews by religiosity and sex (20+)", ["health"], "health_jews", "health", "health", "jews", ["religiosity", "sex"], 0.03, {}),
@@ -601,6 +668,8 @@ def validate(n: int = 200_000, seed: int = 1, log=print) -> bool:
     spec = load_spec()
     checks = survey_checks()
     checks.append(vote_check())
+    checks.append(students_check())
+    checks += fields_checks()
     checks += literacy_checks()
     sample = draw_sample(n, seed)
     checks += media_checks(sample)
