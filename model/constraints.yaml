@@ -77,3 +77,39 @@ constraints:
     nodes: [vote_2022]
     when: {age_band: ["18-19"]}
     require: {vote_2022: [too_young]}
+
+  - id: offline_no_online_news
+    description: people who do not use the internet get no news from websites, social media, search engines or podcasts
+    nodes: [online, news_sites, news_social, news_search, news_podcasts]
+    when: {online: [offline]}
+    require: {news_sites: [never], news_social: [never], news_search: [never], news_podcasts: [never]}
+
+  - id: no_networks_no_social_news
+    description: people who use the internet but not social networks use at most WhatsApp and Telegram and get no news from social media
+    nodes: [online, social_networks, news_social]
+    when: {online: [internet_only]}
+    require: {social_networks: ["", whatsapp, telegram, "whatsapp;telegram"], news_social: [never]}
+
+  - id: offline_no_networks
+    description: people who do not use the internet use no network or messaging app
+    nodes: [online, social_networks]
+    when: {online: [offline]}
+    require: {social_networks: [""]}
+
+  - id: tv_channels_only_viewers
+    description: people who never watch TV news watch no channel regularly
+    nodes: [news_tv, tv_channels]
+    when: {news_tv: [never]}
+    require: {tv_channels: [""]}
+
+  - id: newspaper_only_readers
+    description: no main newspaper for people who never read printed newspapers
+    nodes: [news_print, newspaper]
+    when: {news_print: [never]}
+    require: {newspaper: [none]}
+
+  - id: readers_have_newspaper
+    description: people who read printed newspapers have a main newspaper
+    nodes: [news_print, newspaper]
+    when: {news_print: [often, sometimes, rarely]}
+    forbid: {newspaper: [none]}

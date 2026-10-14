@@ -45,7 +45,9 @@ occupation:     P(occupation | labour status, group, religiosity, sex, education
 industry, status at work, earnings, household income, home ownership
 health:         P(self-rated health | group, religiosity, sex, age band, education) → chronic illness → disability
 vote (2022):    P(list or abstention | electoral area, religiosity, age, education, origin group)
-media:          internet use; news frequency; news on social networks; favourite TV news (by vote bloc)
+media:          internet use; political-news frequency (by vote bloc) → how often each of seven media
+                (by age, group, sex, education) → networks used, news on them; TV channels
+                (by vote bloc, age); main printed newspaper (by group, age)
 literacy:       P(proficiency level | group, religiosity, sex, age band, education) → score → percentile
 ```
 
@@ -63,7 +65,8 @@ row per parent combination and value. The whole model compiles into a single JSO
 | Several partial tables (e.g. religiosity by sex, and by age, and in total) | **iterative proportional fitting (IPF)**: start from a seed table and rescale alternately to each known margin until all match |
 | Survey cross-tabs with thin cells (CBS Social Survey) | **shrinkage toward a main-effects fit**, with the number of respondents behind each cell taken from the published standard errors |
 | Two survey tables conditioning on different variables (employment by religiosity, and by education) | **combining over the model's own population**: IPF over the model's joint counts of the two conditioning variables |
-| Survey microdata (INES) | weighted cross-tabs, with thin cells shrunk toward broader groups (pseudo-counts) |
+| Survey microdata (INES, ISOC-IL) | weighted logits with a ridge penalty, or cross-tabs with thin cells shrunk toward broader groups (pseudo-counts) |
+| Two surveys that each measure part of what is needed (media use by demographics in one, its link to political news in the other) | **fusion by IPF**: in each cell, a table fitted to both surveys' margins, starting from the association the second survey shows |
 | A locality-level quantity with no direct source (religiosity mix) | **ecological inference** from election results (see the religiosity page) |
 | Model output vs. official totals | **calibration**: CPTs are raked until the model's implied totals match the official ones |
 
@@ -102,6 +105,14 @@ imply the same totals. It starts from the naive-Bayes product W(a,b)·P(t|a)·P(
 and b interact only as much as the data require (the maximum-entropy solution). A test in the
 pipeline checks that it recovers a known logit-additive truth exactly.
 
+**Fusing two surveys** (media). ISOC-IL measures how often people use each medium, by age,
+group, sex and education, but not how closely they follow politics; INES 2025 measures both
+political-news frequency and the media used for it. In each demographic cell, the table of
+political-news frequency × medium frequency is fitted by IPF to the model's distribution of
+political-news frequency and to the ISOC distribution of the medium, starting from INES's
+probability of using the medium at each political-news frequency. The cell keeps the ISOC
+distribution exactly and takes its association with politics from INES (see the media page).
+
 ## 4. Citizenship and other adjustments
 
 * **East Jerusalem.** CBS counts all of Jerusalem's ~401,000 Arab residents. Only those who are
@@ -127,6 +138,10 @@ pipeline checks that it recovers a known logit-additive truth exactly.
   a Python twin checked against shared test vectors). Person #i is therefore identical whether
   1 or 150 people are drawn, and changing one node's table never reshuffles another node's
   random numbers.
+* **Set-valued attributes** (social networks, TV channels) include each item with its own
+  probability given the parents. A set nested in another (the networks someone reads news on,
+  within the networks they use) can include an item only if the person has it in the
+  enclosing set; its probabilities are conditional on that.
 * The **published assembly** uses a seed taken from the [drand](https://drand.love) public
   randomness beacon at a time fixed in advance (2026-10-13 00:00 UTC, round 6,547,286):
   seed = the first 8 hex digits of the beacon's output. Anyone can verify the round at
@@ -148,10 +163,14 @@ page shows the checks that cover it.
    shares are age-standardised to the survey's age mix within each cell, so the check tests the
    estimated conditionals; the age composition itself is checked separately. A check passes when
    no cell differs by more than its tolerance beyond two standard errors of the survey share
-   (computed from the respondents behind the cell, as if the model were right).
-2. **Sampler.** A sample of 200,000 people drawn by the TypeScript sampler — the code the website
-   runs — must reproduce the exact model share of every categorical variable within five
-   standard errors.
+   (computed from the respondents behind the cell, as if the model were right). For survey
+   microdata (ISOC-IL, INES 2025) each respondent gets the model's prediction for their own
+   cell, so the comparison is standardised to the respondents' mix, and cells with fewer than
+   30 respondents are not judged.
+2. **Sampler.** A sample of 1,000,000 people drawn by the TypeScript sampler — the code the
+   website runs — must reproduce every table given its parents: a chi-square test for each node
+   and each of its most common parent combinations (each item, for set-valued nodes), passing
+   when the smallest Bonferroni-adjusted p-value is above 0.001.
 3. **Constraints.** The sample must contain no combination forbidden in
    [`model/constraints.yaml`](model/constraints.yaml) (no degree at 18–19, no retiree under 65,
    household income at least the person's own earnings, …).

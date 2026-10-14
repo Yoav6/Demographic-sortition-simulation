@@ -104,10 +104,10 @@ Validation:
 |---|---|---|---|---|---|
 | Earnings bracket of the employed by occupation and sex (20+) - Jews and others | `cbs_social_survey_2024` | 0.0095 | 0.0000 | 0.03 | ✅ pass |
 | Earnings bracket of the employed by occupation and sex (20+) - Arabs | `cbs_social_survey_2024` | 0.0196 | 0.0000 | 0.04 | ✅ pass |
-| Sampler reproduces every table given its parents (n = 200,000; tolerance: adjusted p-value) | `model` | 0.0296 | — | 0.001 | ✅ pass |
+| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | Constraint: earnings exactly for the employed | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 #### `income_amount` — Gross monthly earnings from work (₪) / הכנסה חודשית ברוטו מעבודה (ש"ח)
 
@@ -124,7 +124,7 @@ Validation:
 |---|---|---|---|---|---|
 | Constraint: household income is at least the person's own earnings | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 #### `income_percentile` — Earnings percentile among employed citizens / אחוזון ההכנסה מעבודה בקרב המועסקים
 
@@ -138,8 +138,8 @@ Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Percentile is uniform among employed citizens (n = 127,636) | `model` | 0.0065 | — | 0.01 | ✅ pass |
+| Percentile is uniform among employed citizens (n = 638,050) | `model` | 0.0061 | — | 0.01 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 <!-- END GENERATED -->

@@ -233,7 +233,34 @@
     },
     {
       "id": "news",
-      "text": "{news_frequency__id, select, never {{gender, select, female {היא כמעט אינה עוקבת} other {הוא כמעט אינו עוקב}} אחר חדשות פוליטיות} other {{gender, select, female {היא עוקבת} other {הוא עוקב}} אחר חדשות ומידע פוליטי {news_frequency}}}{favorite_news__id, select, none {, ואין {gender, select, female {לה} other {לו}} מהדורת חדשות אהובה} not_measured {} other {; מהדורת החדשות האהובה {gender, select, female {עליה} other {עליו}}: {favorite_news}}}."
+      "text": "{news_frequency__id, select, never {{gender, select, female {היא כמעט אינה עוקבת} other {הוא כמעט אינו עוקב}} אחר חדשות פוליטיות} other {{gender, select, female {היא עוקבת} other {הוא עוקב}} אחר חדשות ומידע פוליטי {news_frequency}}}."
+    },
+    {
+      "id": "media",
+      "unless": {
+        "media__n": [
+          "0"
+        ]
+      },
+      "text": "{gender, select, female {היא מתעדכנת} other {הוא מתעדכן}} בחדשות {media}{media__never_n, plural, =0 {} other {, אך אף פעם לא {media__never}}}."
+    },
+    {
+      "id": "media_none",
+      "when": {
+        "media__n": [
+          "0"
+        ]
+      },
+      "text": "{gender, select, female {היא אינה מתעדכנת} other {הוא אינו מתעדכן}} בחדשות בטלוויזיה, ברדיו, בעיתונים, באתרים, ברשתות החברתיות, במנועי חיפוש או בפודקאסטים."
+    },
+    {
+      "id": "media_preferred",
+      "unless": {
+        "preferred_source": [
+          "none"
+        ]
+      },
+      "text": "מקור החדשות המועדף {gender, select, female {עליה} other {עליו}}: {preferred_source}."
     },
     {
       "id": "online_social",
@@ -242,7 +269,7 @@
           "social"
         ]
       },
-      "text": "{gender, select, female {היא משתמשת} other {הוא משתמש}} ברשתות חברתיות{social_news__id, select, never {, אך כמעט אינ{gender, select, female {ה} other {ו}} קורא{gender, select, female {ת} other {}} בהן חדשות פוליטיות} other {, וקורא{gender, select, female {ת} other {}} בהן חדשות ומידע פוליטי {social_news}}}."
+      "text": "{gender, select, female {היא משתמשת} other {הוא משתמש}} {social_networks__count, plural, =0 {ברשתות חברתיות} other {{social_networks__b}}}{news_networks__count, plural, =0 {} other {, {gender, select, female {ומתעדכנת} other {ומתעדכן}} בחדשות {news_networks__b}}}."
     },
     {
       "id": "online_internet",
@@ -251,7 +278,7 @@
           "internet_only"
         ]
       },
-      "text": "{gender, select, female {היא משתמשת} other {הוא משתמש}} באינטרנט אך לא ברשתות חברתיות."
+      "text": "{gender, select, female {היא משתמשת} other {הוא משתמש}} באינטרנט{social_networks__count, plural, =0 {} other { ו{social_networks__b}}} אך לא ברשתות חברתיות{news_networks__count, plural, =0 {} other {, {gender, select, female {ומתעדכנת} other {ומתעדכן}} בחדשות {news_networks__b}}}."
     },
     {
       "id": "online_none",
@@ -266,5 +293,24 @@
       "id": "literacy",
       "text": "לפי המודל, מיומנות הקריאה {gender, select, female {שלה} other {שלו}} בסולם מיומנויות הבוגרים של ה-OECD נמצאת {literacy_level__at} (ציון {literacy_score, number, ::precision-integer} מתוך 500), גבוהה משל {literacy_percentile, number, ::precision-integer}% מהאזרחים הבוגרים."
     }
-  ]
+  ],
+  "lists": {
+    "media": {
+      "items": {
+        "news_tv": "בטלוויזיה{tv_channels__count, plural, =0 {} other { ({tv_channels})}}",
+        "news_sites": "באתרי חדשות{news_websites__count, plural, =0 {} other { ({news_websites})}}",
+        "news_social": "ברשתות החברתיות",
+        "news_radio": "ברדיו",
+        "news_print": "בעיתונים מודפסים{newspaper__id, select, none {} other { ({newspaper})}}",
+        "news_search": "במנועי חיפוש",
+        "news_podcasts": "בפודקאסטים"
+      },
+      "groups": {
+        "often": "לעיתים קרובות {list}",
+        "sometimes": "מדי פעם {list}",
+        "rarely": "לעיתים רחוקות {list}"
+      },
+      "separate": "never"
+    }
+  }
 }

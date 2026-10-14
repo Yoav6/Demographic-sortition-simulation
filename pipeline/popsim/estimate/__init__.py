@@ -12,6 +12,8 @@ import time
 STEPS: list[tuple[str, str, str]] = [
     ("extract_population", "popsim.extract.cbs_abstract", "extract"),
     ("extract_ines", "popsim.extract.ines", "extract"),
+    ("extract_ines_2025", "popsim.extract.ines", "extract_2025"),
+    ("extract_isoc", "popsim.extract.isoc", "extract"),
     ("extract_cec", "popsim.extract.cec", "extract"),
     ("extract_origin", "popsim.extract.cbs_origin", "extract"),
     ("frame", "popsim.estimate.frame", "build"),
@@ -41,7 +43,13 @@ STEPS: list[tuple[str, str, str]] = [
     ("online", "popsim.estimate.media", "build_online"),
     ("vote_bloc", "popsim.estimate.media", "build_vote_bloc"),
     ("news", "popsim.estimate.media", "build_news"),
-    ("favorite_news", "popsim.estimate.media", "build_favorite_news"),
+    ("media_helpers", "popsim.estimate.media", "build_media_helpers"),
+    ("media_frequency", "popsim.estimate.media", "build_media_frequency"),
+    ("social_networks", "popsim.estimate.media", "build_social_networks"),
+    ("tv_channels", "popsim.estimate.media", "build_tv_channels"),
+    ("news_websites", "popsim.estimate.media", "build_news_websites"),
+    ("newspaper", "popsim.estimate.media", "build_newspaper"),
+    ("preferred_source", "popsim.estimate.media", "build_preferred_source"),
     ("literacy", "popsim.estimate.skills", "build"),
 ]
 

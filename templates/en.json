@@ -233,7 +233,34 @@
     },
     {
       "id": "news",
-      "text": "{gender, select, female {She} other {He}} {news_frequency__id, select, never {hardly ever follows political news} other {follows political news {news_frequency}}}{favorite_news__id, select, none {, and has no favourite TV news broadcast} not_measured {} other {; {gender, select, female {her} other {his}} favourite TV news broadcast is {favorite_news}}}."
+      "text": "{gender, select, female {She} other {He}} {news_frequency__id, select, never {hardly ever follows political news} other {follows political news {news_frequency}}}."
+    },
+    {
+      "id": "media",
+      "unless": {
+        "media__n": [
+          "0"
+        ]
+      },
+      "text": "{gender, select, female {She} other {He}} gets news {media}{media__never_n, plural, =0 {} other {, but never from {media__never}}}."
+    },
+    {
+      "id": "media_none",
+      "when": {
+        "media__n": [
+          "0"
+        ]
+      },
+      "text": "{gender, select, female {She} other {He}} does not get news from TV, the radio, newspapers, websites, social media, search engines or podcasts."
+    },
+    {
+      "id": "media_preferred",
+      "unless": {
+        "preferred_source": [
+          "none"
+        ]
+      },
+      "text": "{gender, select, female {Her} other {His}} preferred news source is {preferred_source}."
     },
     {
       "id": "online_social",
@@ -242,7 +269,7 @@
           "social"
         ]
       },
-      "text": "{gender, select, female {She} other {He}} uses social networks{social_news__id, select, never {, but hardly ever for political news} other {, and reads political news there {social_news}}}."
+      "text": "{gender, select, female {She} other {He}} uses {social_networks__count, plural, =0 {social networks} other {{social_networks}}}{news_networks__count, plural, =0 {} other {, and follows the news on {news_networks}}}."
     },
     {
       "id": "online_internet",
@@ -251,7 +278,7 @@
           "internet_only"
         ]
       },
-      "text": "{gender, select, female {She} other {He}} uses the internet but not social networks."
+      "text": "{gender, select, female {She} other {He}} uses the internet{social_networks__count, plural, =0 {} other { and {social_networks}}} but not social networks{news_networks__count, plural, =0 {} other {, and follows the news on {news_networks}}}."
     },
     {
       "id": "online_none",
@@ -266,5 +293,24 @@
       "id": "literacy",
       "text": "On the OECD adult-skills scale, {gender, select, female {her} other {his}} modelled literacy is {literacy_level__at} (score {literacy_score, number, ::precision-integer} of 500), higher than {literacy_percentile, number, ::precision-integer}% of adult citizens."
     }
-  ]
+  ],
+  "lists": {
+    "media": {
+      "items": {
+        "news_tv": "TV{tv_channels__count, plural, =0 {} other { ({tv_channels})}}",
+        "news_sites": "news websites{news_websites__count, plural, =0 {} other { ({news_websites})}}",
+        "news_social": "social media",
+        "news_radio": "the radio",
+        "news_print": "printed newspapers{newspaper__id, select, none {} other { ({newspaper})}}",
+        "news_search": "search engines",
+        "news_podcasts": "podcasts"
+      },
+      "groups": {
+        "often": "often from {list}",
+        "sometimes": "sometimes from {list}",
+        "rarely": "rarely from {list}"
+      },
+      "separate": "never"
+    }
+  }
 }

@@ -107,7 +107,7 @@ sources:
     url: https://agamlabs.com/
     license: Published report; figures cited with attribution
     as_of: 2024-11
-    used_by: [media]
+    used_by: []
     files:
       - url: https://agamlabs.com/wp-content/uploads/2025/03/12-compressed.pdf
         path: agam_media_index_2024.pdf
@@ -116,6 +116,72 @@ sources:
       iPanel online sample, 1,201 citizens aged 18+ (325 Arab respondents), 15-20 Nov 2024,
       weighted by sector, sex, age, origin, region, religion, religiosity and 2022 turnout.
       Values exist only as charts; they are hand-transcribed into data/manual/agam/ with page numbers.
+      Used for named news websites (pages 14-15) only; TV channels come from INES 2025
+      respondent data (docs/decisions/0006-media-sources.md).
+
+  - id: isoc_media_survey_2024
+    title:
+      en: Israel Internet Association (ISOC-IL) and the Technion - Media Consumption and Disinformation Survey (October 2024), respondent-level data
+      he: איגוד האינטרנט הישראלי והטכניון - סקר צריכת חדשות ודיסאינפורמציה (אוקטובר 2024), נתוני משיבים
+    publisher: Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology
+    tier: A
+    url: https://www.isoc.org.il/sts-data/media-and-disinformation-survey-il
+    license: >
+      Publication and citation permitted with credit to the Israel Internet Association and a
+      link to https://www.isoc.org.il/sts-data/media-and-disinformation-survey-il
+    as_of: 2024-10
+    used_by: []
+    files:
+      - url: https://drive.usercontent.google.com/download?id=1C_K2YvnTeRWqYs0EEaMOCG4XM3-j_505&export=download&confirm=t
+        path: jewish.csv
+      - url: https://drive.usercontent.google.com/download?id=1NfAzq9GgrZa-5sJ04mJ444kJmyTp2W8_&export=download&confirm=t
+        path: arab.csv
+      - url: https://drive.usercontent.google.com/download?id=1WdA_DBrRw1d2-zPNj2Kb95YDFnUzLIY3&export=download&confirm=t
+        path: questionnaire.docx
+      - url: https://drive.usercontent.google.com/download?id=1UqGTgxMWpKjn0Vi21SyMEHLGsSdevoA5&export=download&confirm=t
+        path: about.txt
+    notes: >
+      Online panel (iPanel), October 2024: 1,005 internet users aged 18+, 805 Jewish (Haredim
+      over-sampled) and 200 Arab respondents; no weights are supplied. The files are shared from
+      the survey's Google Drive folder, linked from the page. The first data row of each CSV
+      holds the question wording.
+
+  - id: tgi_readership
+    title:
+      en: TGI Israel - newspaper readership (average-issue exposure), as published in press reports
+      he: סקר TGI - שיעורי החשיפה לעיתונים, כפי שפורסמו בתקשורת
+    publisher: TGI Israel; figures reported by Arutz Sheva (22 July 2026) and ice.co.il (22 March 2018)
+    tier: M
+    url: https://www.inn.co.il/news/702128
+    license: Published survey figures, cited with attribution
+    as_of: 2025-07/2026-06
+    used_by: []
+    manual: [tgi/]
+    notes: >
+      General TGI: representative sample of Jewish adults aged 18+ (about 5,000 respondents);
+      weekday and weekend exposure by title, July 2025 - June 2026
+      (https://www.inn.co.il/news/702128). Haredi TGI (a separate, smaller survey of the Haredi
+      sector), 2017, the latest release found online
+      (https://www.ice.co.il/media/news/article/738702). Transcribed into data/manual/tgi/.
+
+  - id: knesset_rc_newspapers_2018
+    title:
+      en: Knesset Research and Information Center - change in advertising expenditure and the age distribution of newspaper readers (7 November 2018)
+      he: מרכז המחקר והמידע של הכנסת - השינוי בהוצאה לפרסום והתפלגות קוראי עיתונות כתובה לפי גיל (7 בנובמבר 2018)
+    publisher: Knesset Research and Information Center
+    tier: M
+    url: https://fs.knesset.gov.il/globaldocs/MMM/f1176d84-d2d2-e811-80e7-00155d0aeea3/2_f1176d84-d2d2-e811-80e7-00155d0aeea3_11_13572.pdf
+    license: Knesset publication, cited with attribution
+    as_of: 2018-H1
+    used_by: []
+    files:
+      - url: https://fs.knesset.gov.il/globaldocs/MMM/f1176d84-d2d2-e811-80e7-00155d0aeea3/2_f1176d84-d2d2-e811-80e7-00155d0aeea3_11_13572.pdf
+        path: newspapers_by_age_2018.pdf
+    manual: [tgi/]
+    notes: >
+      Tables 2 and 4: weekday exposure to newspapers overall and to each title by age group
+      (18-34, 35-54, 55+), from TGI for the first half of 2018; transcribed into
+      data/manual/tgi/age_profile_2018.csv.
 
   - id: igra_registry_names
     title:

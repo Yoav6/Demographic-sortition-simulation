@@ -7,6 +7,9 @@
  *   {x__attr}    a label-valued attribute of the value (e.g. occupation__phrase)
  *   {x__id}      the raw value id (useful in `select`)
  *   numeric variables are passed as numbers ({age}, {income, number})
+ *   set-valued variables: {x} the items joined into a list, {x__count}, {x__attr} the list
+ *   of the items' attribute labels
+ *   lists declared in the templates file ({name}, {name__n}, ...; see ListSpec)
  * Sentences may carry `when: {var: [allowed ids]}` and are skipped otherwise.
  */
 
@@ -23,9 +26,24 @@ export interface Sentence {
   unless?: Record<string, string[]>;
 }
 
+/**
+ * A sentence fragment that groups several variables by their value, e.g. media by how often the
+ * person uses them: "often from TV and news sites, sometimes from social media". `items` maps
+ * each variable to its phrase (an ICU message, formatted with the person's context); `groups`
+ * maps a value id to the fragment for the variables with that value ({list}), in output order.
+ * {name} joins the fragments, {name__n} counts them. The variables with the `separate` value
+ * are listed apart as {name__<value>} ("or" list) with the count {name__<value>_n}.
+ */
+export interface ListSpec {
+  items: Record<string, string>;
+  groups: Record<string, string>;
+  separate?: string;
+}
+
 export interface Templates {
   lang: Lang;
   sentences: Sentence[];
+  lists?: Record<string, ListSpec>;
 }
 
 export function labelFor(label: Label, lang: Lang, female: boolean): string {
@@ -45,10 +63,19 @@ export function buildContext(model: CompiledModel, values: PersonValues, lang: L
     const x = values[k];
     if (info.multi) {
       const chosen = info.values!.filter((_, j) => (x & (1 << j)) !== 0);
-      const names = chosen.map((v) => labelFor(v.label, lang, female));
-      ctx[info.id] = new Intl.ListFormat(lang, { style: "long", type: "conjunction" }).format(names);
+      const list = new Intl.ListFormat(lang, { style: "long", type: "conjunction" });
+      ctx[info.id] = list.format(chosen.map((v) => labelFor(v.label, lang, female)));
       ctx[`${info.id}__count`] = chosen.length;
       ctx[`${info.id}__id`] = chosen.map((v) => v.id).join(",") || "none";
+      const attrs = new Set(info.values!.flatMap((v) => Object.keys(v.attrs ?? {})));
+      for (const attr of attrs) {
+        ctx[`${info.id}__${attr}`] = list.format(
+          chosen.map((v) => {
+            const a = v.attrs?.[attr];
+            return isLabel(a) ? labelFor(a, lang, female) : labelFor(v.label, lang, female);
+          }),
+        );
+      }
     } else if (info.values && !info.numeric) {
       const v = info.values[x];
       ctx[info.id] = labelFor(v.label, lang, female);
@@ -144,24 +171,58 @@ export function presentPerson(
 
 const cache = new Map<string, IntlMessageFormat>();
 
+function message(lang: Lang, text: string): IntlMessageFormat {
+  const key = `${lang}:${text}`;
+  let fmt = cache.get(key);
+  if (!fmt) {
+    fmt = new IntlMessageFormat(text, lang);
+    cache.set(key, fmt);
+  }
+  return fmt;
+}
+
+function format(lang: Lang, text: string, ctx: Record<string, unknown>): string {
+  return String(message(lang, text).format(ctx as Record<string, string | number>)).trim();
+}
+
+/** Adds the templates' lists (see ListSpec) to the context. */
+export function addLists(ctx: Record<string, unknown>, templates: Templates): void {
+  const lang = templates.lang;
+  const and = new Intl.ListFormat(lang, { style: "long", type: "conjunction" });
+  const or = new Intl.ListFormat(lang, { style: "long", type: "disjunction" });
+  for (const [name, spec] of Object.entries(templates.lists ?? {})) {
+    const byValue = new Map<string, string[]>();
+    for (const [varId, phrase] of Object.entries(spec.items)) {
+      const v = String(ctx[`${varId}__id`]);
+      if (!byValue.has(v)) byValue.set(v, []);
+      byValue.get(v)!.push(format(lang, phrase, ctx));
+    }
+    const parts = Object.entries(spec.groups)
+      .filter(([v]) => byValue.has(v))
+      .map(([v, t]) => format(lang, t, { ...ctx, list: and.format(byValue.get(v)!) }));
+    ctx[name] = and.format(parts);
+    ctx[`${name}__n`] = parts.length;
+    if (spec.separate) {
+      const apart = byValue.get(spec.separate) ?? [];
+      ctx[`${name}__${spec.separate}`] = or.format(apart);
+      ctx[`${name}__${spec.separate}_n`] = apart.length;
+    }
+  }
+}
+
 export function describe(
   model: CompiledModel,
   values: PersonValues,
   templates: Templates,
   extra: Record<string, unknown> = {},
 ): string[] {
-  const ctx = { ...buildContext(model, values, templates.lang), ...extra };
+  const ctx: Record<string, unknown> = { ...buildContext(model, values, templates.lang), ...extra };
+  addLists(ctx, templates);
   const out: string[] = [];
   for (const s of templates.sentences) {
     if (!applies(s, ctx)) continue;
-    const key = `${templates.lang}:${s.id}:${s.text}`;
-    let fmt = cache.get(key);
-    if (!fmt) {
-      fmt = new IntlMessageFormat(s.text, templates.lang);
-      cache.set(key, fmt);
-    }
-    const text = String(fmt.format(ctx as Record<string, string | number>));
-    if (text.trim()) out.push(text.trim());
+    const text = format(templates.lang, s.text, ctx);
+    if (text) out.push(text);
   }
   return out;
 }

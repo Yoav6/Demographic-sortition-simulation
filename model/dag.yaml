@@ -907,40 +907,250 @@ nodes:
       - {id: weekly, label: {en: about once a week, he: בערך פעם בשבוע}}
       - {id: never, label: {en: hardly ever, he: כמעט אף פעם}}
 
-  - id: social_news
-    type: table
-    parents: [online, news_frequency, vote_age]
-    backoff: [news_frequency, vote_age]
-    label: {en: Political news on social networks, he: חדשות ומידע פוליטי ברשתות החברתיות}
-    file: cpts/social_news.csv
+  - id: media_age
+    type: lookup
+    parent: age
+    hidden: true
+    label: {en: Age group (media surveys), he: קבוצת גיל (סקרי תקשורת)}
+    file: lookups/media_age.csv
     doc: docs/methodology/media.md
-    sources: [ines_2022, cbs_social_survey_2024]
+    sources: [isoc_media_survey_2024]
     values:
-      - {id: several_daily, label: {en: more than once a day, he: יותר מפעם ביום}}
-      - {id: daily, label: {en: almost every day, he: כמעט כל יום}}
-      - {id: few_times_week, label: {en: two or three times a week, he: פעמיים-שלוש בשבוע}}
-      - {id: weekly, label: {en: about once a week, he: בערך פעם בשבוע}}
-      - {id: never, label: {en: hardly ever, he: כמעט אף פעם}}
-      - {id: no_social_media, label: {en: does not use social networks, he: אינו משתמש ברשתות חברתיות, he_f: אינה משתמשת ברשתות חברתיות}}
+      - {id: "18_24", label: {en: 18-24, he: 18-24}}
+      - {id: "25_29", label: {en: 25-29, he: 25-29}}
+      - {id: "30_39", label: {en: 30-39, he: 30-39}}
+      - {id: "40_49", label: {en: 40-49, he: 40-49}}
+      - {id: "50_64", label: {en: 50-64, he: 50-64}}
+      - {id: 65_plus, label: {en: 65+, he: 65+}}
 
-  - id: favorite_news
+  - id: media_sector
+    type: lookup
+    parent: religiosity
+    hidden: true
+    label: {en: Population group (media surveys), he: מגזר (סקרי תקשורת)}
+    file: lookups/media_sector.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024]
+    values:
+      - {id: secular, label: {en: secular Jewish or other, he: יהודי חילוני או אחר}}
+      - {id: traditional, label: {en: traditional Jewish, he: יהודי מסורתי}}
+      - {id: religious, label: {en: religious Jewish, he: יהודי דתי}}
+      - {id: haredi, label: {en: Haredi, he: חרדי}}
+      - {id: arab, label: {en: Arab or Druze, he: ערבי או דרוזי}}
+
+  - id: news_tv
     type: table
-    parents: [group, vote_bloc]
-    backoff: [vote_bloc, group]
-    label: {en: Favourite TV news broadcast, he: מהדורת החדשות האהובה}
-    file: cpts/favorite_news.csv
+    parents: [news_frequency, media_age, media_sector, sex, vote_education, online]
+    label: {en: "News on TV", he: "חדשות בטלוויזיה"}
+    file: cpts/news_tv.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024, ines_2025]
+    values:
+      - {id: often, label: {en: often, he: לעיתים קרובות}}
+      - {id: sometimes, label: {en: sometimes, he: מדי פעם}}
+      - {id: rarely, label: {en: rarely, he: לעיתים רחוקות}}
+      - {id: never, label: {en: never, he: אף פעם}}
+
+  - id: news_radio
+    type: table
+    parents: [news_frequency, media_age, media_sector, sex, vote_education, online]
+    label: {en: "News on the radio", he: "חדשות ברדיו"}
+    file: cpts/news_radio.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024, ines_2025]
+    values:
+      - {id: often, label: {en: often, he: לעיתים קרובות}}
+      - {id: sometimes, label: {en: sometimes, he: מדי פעם}}
+      - {id: rarely, label: {en: rarely, he: לעיתים רחוקות}}
+      - {id: never, label: {en: never, he: אף פעם}}
+
+  - id: news_print
+    type: table
+    parents: [news_frequency, media_age, media_sector, sex, vote_education, online]
+    label: {en: "Printed newspapers", he: "עיתונים מודפסים"}
+    file: cpts/news_print.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024, ines_2025]
+    values:
+      - {id: often, label: {en: often, he: לעיתים קרובות}}
+      - {id: sometimes, label: {en: sometimes, he: מדי פעם}}
+      - {id: rarely, label: {en: rarely, he: לעיתים רחוקות}}
+      - {id: never, label: {en: never, he: אף פעם}}
+
+  - id: news_sites
+    type: table
+    parents: [online, news_frequency, media_age, media_sector, sex, vote_education]
+    backoff: [news_frequency, media_age, media_sector, sex, vote_education]
+    label: {en: "News websites and apps", he: "אתרי חדשות ואפליקציות"}
+    file: cpts/news_sites.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024, ines_2025]
+    values:
+      - {id: often, label: {en: often, he: לעיתים קרובות}}
+      - {id: sometimes, label: {en: sometimes, he: מדי פעם}}
+      - {id: rarely, label: {en: rarely, he: לעיתים רחוקות}}
+      - {id: never, label: {en: never, he: אף פעם}}
+
+  - id: news_social
+    type: table
+    parents: [online, news_frequency, media_age, media_sector, sex, vote_education]
+    backoff: [news_frequency, media_age, media_sector, sex, vote_education]
+    label: {en: "News on social media", he: "חדשות ברשתות החברתיות"}
+    file: cpts/news_social.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024, ines_2025]
+    values:
+      - {id: often, label: {en: often, he: לעיתים קרובות}}
+      - {id: sometimes, label: {en: sometimes, he: מדי פעם}}
+      - {id: rarely, label: {en: rarely, he: לעיתים רחוקות}}
+      - {id: never, label: {en: never, he: אף פעם}}
+
+  - id: news_search
+    type: table
+    parents: [online, news_frequency, media_age, media_sector, sex, vote_education]
+    backoff: [news_frequency, media_age, media_sector, sex, vote_education]
+    label: {en: "News through search engines", he: "חדשות דרך מנועי חיפוש"}
+    file: cpts/news_search.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024, ines_2025]
+    values:
+      - {id: often, label: {en: often, he: לעיתים קרובות}}
+      - {id: sometimes, label: {en: sometimes, he: מדי פעם}}
+      - {id: rarely, label: {en: rarely, he: לעיתים רחוקות}}
+      - {id: never, label: {en: never, he: אף פעם}}
+
+  - id: news_podcasts
+    type: table
+    parents: [online, news_frequency, media_age, media_sector, sex, vote_education]
+    backoff: [news_frequency, media_age, media_sector, sex, vote_education]
+    label: {en: "News podcasts", he: "פודקאסטים"}
+    file: cpts/news_podcasts.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024, ines_2025]
+    values:
+      - {id: often, label: {en: often, he: לעיתים קרובות}}
+      - {id: sometimes, label: {en: sometimes, he: מדי פעם}}
+      - {id: rarely, label: {en: rarely, he: לעיתים רחוקות}}
+      - {id: never, label: {en: never, he: אף פעם}}
+
+  - id: social_networks
+    type: multi
+    parents: [online, media_age, media_sector, sex, vote_education]
+    backoff: [media_age, media_sector, sex, vote_education]
+    label: {en: Social networks and messaging apps used, he: רשתות חברתיות ואפליקציות מסרים}
+    file: cpts/social_networks.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024]
+    values:
+      - {id: whatsapp, label: {en: "WhatsApp", he: "וואטסאפ"}, attrs: {b: {en: "WhatsApp", he: "בוואטסאפ"}}}
+      - {id: facebook, label: {en: "Facebook", he: "פייסבוק"}, attrs: {b: {en: "Facebook", he: "בפייסבוק"}}}
+      - {id: youtube, label: {en: "YouTube", he: "יוטיוב"}, attrs: {b: {en: "YouTube", he: "ביוטיוב"}}}
+      - {id: instagram, label: {en: "Instagram", he: "אינסטגרם"}, attrs: {b: {en: "Instagram", he: "באינסטגרם"}}}
+      - {id: telegram, label: {en: "Telegram", he: "טלגרם"}, attrs: {b: {en: "Telegram", he: "בטלגרם"}}}
+      - {id: tiktok, label: {en: "TikTok", he: "טיקטוק"}, attrs: {b: {en: "TikTok", he: "בטיקטוק"}}}
+      - {id: linkedin, label: {en: "LinkedIn", he: "לינקדאין"}, attrs: {b: {en: "LinkedIn", he: "בלינקדאין"}}}
+      - {id: pinterest, label: {en: "Pinterest", he: "פינטרסט"}, attrs: {b: {en: "Pinterest", he: "בפינטרסט"}}}
+      - {id: x, label: {en: "X (Twitter)", he: "X (טוויטר)"}, attrs: {b: {en: "X (Twitter)", he: "ב-X (טוויטר)"}}}
+      - {id: snapchat, label: {en: "Snapchat", he: "סנאפצ'ט"}, attrs: {b: {en: "Snapchat", he: "בסנאפצ'ט"}}}
+
+  - id: news_networks
+    type: multi
+    parents: [news_social, media_age, media_sector]
+    subset_of: social_networks
+    label: {en: Networks where they regularly follow news, he: רשתות שבהן מתעדכן בחדשות באופן קבוע}
+    file: cpts/news_networks.csv
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024]
+    values:
+      - {id: whatsapp, label: {en: "WhatsApp", he: "וואטסאפ"}, attrs: {b: {en: "WhatsApp", he: "בוואטסאפ"}}}
+      - {id: facebook, label: {en: "Facebook", he: "פייסבוק"}, attrs: {b: {en: "Facebook", he: "בפייסבוק"}}}
+      - {id: youtube, label: {en: "YouTube", he: "יוטיוב"}, attrs: {b: {en: "YouTube", he: "ביוטיוב"}}}
+      - {id: instagram, label: {en: "Instagram", he: "אינסטגרם"}, attrs: {b: {en: "Instagram", he: "באינסטגרם"}}}
+      - {id: telegram, label: {en: "Telegram", he: "טלגרם"}, attrs: {b: {en: "Telegram", he: "בטלגרם"}}}
+      - {id: tiktok, label: {en: "TikTok", he: "טיקטוק"}, attrs: {b: {en: "TikTok", he: "בטיקטוק"}}}
+      - {id: linkedin, label: {en: "LinkedIn", he: "לינקדאין"}, attrs: {b: {en: "LinkedIn", he: "בלינקדאין"}}}
+      - {id: pinterest, label: {en: "Pinterest", he: "פינטרסט"}, attrs: {b: {en: "Pinterest", he: "בפינטרסט"}}}
+      - {id: x, label: {en: "X (Twitter)", he: "X (טוויטר)"}, attrs: {b: {en: "X (Twitter)", he: "ב-X (טוויטר)"}}}
+      - {id: snapchat, label: {en: "Snapchat", he: "סנאפצ'ט"}, attrs: {b: {en: "Snapchat", he: "בסנאפצ'ט"}}}
+
+  - id: tv_channels
+    type: multi
+    parents: [news_tv, media_sector, vote_bloc, media_age]
+    backoff: [vote_bloc, media_age, media_sector]
+    label: {en: TV news channels watched regularly, he: ערוצי חדשות שבהם צופה באופן קבוע}
+    file: cpts/tv_channels.csv
+    doc: docs/methodology/media.md
+    sources: [ines_2025]
+    values:
+      - {id: news12, label: {en: Channel 12, he: ערוץ 12}}
+      - {id: kan11, label: {en: Kan 11, he: כאן 11}}
+      - {id: news13, label: {en: Channel 13, he: ערוץ 13}}
+      - {id: channel14, label: {en: Channel 14, he: ערוץ 14}}
+      - {id: al_jazeera, label: {en: Al Jazeera, he: אל-ג'זירה}}
+      - {id: makan33, label: {en: Makan 33, he: מכאן 33}}
+      - {id: other, label: {en: another channel, he: ערוץ אחר}}
+
+  - id: news_websites
+    type: multi
+    parents: [news_sites, media_sector, vote_bloc]
+    backoff: [vote_bloc, media_sector]
+    label: {en: News websites visited at least weekly, he: אתרי חדשות שבהם מבקר לפחות פעם בשבוע}
+    file: cpts/news_websites.csv
     doc: docs/methodology/media.md
     sources: [agam_media_index_2024]
     values:
-      - {id: news12, label: {en: Channel 12 News, he: חדשות 12}}
-      - {id: channel14, label: {en: Channel 14, he: עכשיו 14}}
-      - {id: kan11, label: {en: Kan 11 News, he: כאן חדשות}}
-      - {id: news13, label: {en: Channel 13 News, he: חדשות 13}}
-      - {id: i24, label: {en: i24NEWS, he: i24NEWS}}
-      - {id: channel9, label: {en: Channel 9, he: ערוץ 9}}
-      - {id: other, label: {en: another broadcast, he: מהדורה אחרת}}
-      - {id: none, label: {en: none, he: אף אחת}}
-      - {id: not_measured, label: {en: not measured (Arabic-language media were not surveyed), he: לא נמדד (התקשורת בערבית לא נסקרה)}}
+      - {id: ynet, label: {en: ynet, he: ynet}}
+      - {id: n12, label: {en: N12, he: N12}}
+      - {id: mako, label: {en: Mako, he: mako}}
+      - {id: walla, label: {en: Walla, he: וואלה}}
+      - {id: kan, label: {en: Kan, he: כאן}}
+      - {id: haaretz, label: {en: Haaretz, he: הארץ}}
+      - {id: rotter, label: {en: Rotter, he: רוטר}}
+      - {id: kikar, label: {en: Kikar HaShabbat, he: כיכר השבת}}
+      - {id: bhol, label: {en: Behadrei Haredim, he: בחדרי חרדים}}
+
+  - id: newspaper
+    type: table
+    parents: [news_print, media_sector, media_age, vote_bloc]
+    backoff: [vote_bloc, media_age, media_sector]
+    label: {en: Main printed newspaper, he: העיתון המודפס העיקרי}
+    file: cpts/newspaper.csv
+    doc: docs/methodology/media.md
+    sources: [tgi_readership, knesset_rc_newspapers_2018, agam_media_index_2024]
+    values:
+      - {id: israel_hayom, label: {en: Israel Hayom, he: ישראל היום}}
+      - {id: yedioth, label: {en: Yedioth Ahronoth, he: ידיעות אחרונות}}
+      - {id: haaretz, label: {en: Haaretz, he: הארץ}}
+      - {id: maariv, label: {en: Maariv, he: מעריב}}
+      - {id: globes, label: {en: Globes, he: גלובס}}
+      - {id: makor_rishon, label: {en: Makor Rishon, he: מקור ראשון}}
+      - {id: besheva, label: {en: Besheva, he: בשבע}}
+      - {id: hamodia, label: {en: Hamodia, he: המודיע}}
+      - {id: yated_neeman, label: {en: "Yated Ne'eman", he: יתד נאמן}}
+      - {id: hamevaser, label: {en: Hamevaser, he: המבשר}}
+      - {id: hapeles, label: {en: HaPeles, he: הפלס}}
+      - {id: mishpacha, label: {en: Mishpacha, he: משפחה}}
+      - {id: bakehila, label: {en: Bakehila, he: בקהילה}}
+      - {id: yom_leyom, label: {en: Yom LeYom, he: יום ליום}}
+      - {id: arabic, label: {en: an Arabic-language newspaper, he: עיתון בערבית}}
+      - {id: none, label: {en: none (does not read printed newspapers), he: אין (אינו קורא עיתונים מודפסים), he_f: אין (אינה קוראת עיתונים מודפסים)}}
+
+  - id: preferred_source
+    type: logit
+    parents: [news_tv, news_radio, news_print, news_sites, news_social, news_search, news_podcasts, media_age, media_sector]
+    label: {en: Preferred news source, he: מקור החדשות המועדף}
+    file: cpts/preferred_source.json
+    doc: docs/methodology/media.md
+    sources: [isoc_media_survey_2024]
+    values:
+      - {id: tv, label: {en: TV, he: טלוויזיה}}
+      - {id: radio, label: {en: the radio, he: רדיו}}
+      - {id: print, label: {en: printed newspapers, he: עיתונים מודפסים}}
+      - {id: sites, label: {en: news websites, he: אתרי חדשות}}
+      - {id: social, label: {en: social media, he: רשתות חברתיות}}
+      - {id: search, label: {en: search engines, he: מנועי חיפוש}}
+      - {id: podcasts, label: {en: podcasts, he: פודקאסטים}}
+      - {id: none, label: {en: none, he: אין}}
 
   - id: literacy_level
     type: table
@@ -952,23 +1162,23 @@ nodes:
     sources: [oecd_piaac_2023_tables, boi_piaac_note_2024]
     values:
       - id: below1
-        label: {en: below level 1, he: מתחת לרמה 1}
+        label: {en: below OECD level 1, he: מתחת לרמת OECD 1}
         attrs:
           at: {en: below level 1, he: מתחת לרמה 1}
       - id: level1
-        label: {en: level 1, he: רמה 1}
+        label: {en: OECD level 1, he: "רמת OECD 1"}
         attrs:
           at: {en: at level 1, he: ברמה 1}
       - id: level2
-        label: {en: level 2, he: רמה 2}
+        label: {en: OECD level 2, he: "רמת OECD 2"}
         attrs:
           at: {en: at level 2, he: ברמה 2}
       - id: level3
-        label: {en: level 3, he: רמה 3}
+        label: {en: OECD level 3, he: "רמת OECD 3"}
         attrs:
           at: {en: at level 3, he: ברמה 3}
       - id: level4_5
-        label: {en: level 4 or 5, he: רמה 4 או 5}
+        label: {en: OECD level 4 or 5, he: "רמת OECD 4 או 5"}
         attrs:
           at: {en: at level 4 or 5, he: ברמה 4 או 5}
 

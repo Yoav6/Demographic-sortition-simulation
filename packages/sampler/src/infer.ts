@@ -292,8 +292,13 @@ function drawNode(
     case "multi": {
       const probs = lookupRow<Float64Array>(model.tables.get(node.id)!, values);
       const required = prep.allowed.get(vi);
+      const within = node.subset_of ? values[model.varIndex.get(node.subset_of)!] : -1;
       let mask = 0;
       for (let k = 0; k < node.items.length; k++) {
+        if (!(within & (1 << k))) {
+          if (required && required.has(k)) return 0; // required item outside the enclosing set
+          continue;
+        }
         if (required && required.has(k)) {
           mask |= 1 << k;
           w *= probs[k] / PROB_SCALE;

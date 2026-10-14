@@ -91,9 +91,9 @@ Validation:
 |---|---|---|---|---|---|
 | Children of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0065 | 0.0000 | 0.03 | ✅ pass |
 | Children of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0307 | 0.0000 | 0.04 | ✅ pass |
-| Sampler reproduces every table given its parents (n = 200,000; tolerance: adjusted p-value) | `model` | 0.0296 | — | 0.001 | ✅ pass |
+| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | Constraint: at most one child at 18-19 | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 <!-- END GENERATED -->

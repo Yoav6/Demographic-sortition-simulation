@@ -96,3 +96,36 @@ def extract() -> pd.DataFrame:
         out[w] = pd.to_numeric(df[w], errors="coerce")
     out.to_csv(paths.interim_path("ines_2022"), index=False)
     return out
+
+
+# INES 2025 (off-cycle study, March-April 2025): media questions v612-v614
+SOURCES_2025 = {1: "sites", 2: "tv", 3: "radio", 4: "print", 5: "facebook", 6: "instagram", 7: "tiktok", 8: "whatsapp", 9: "telegram", 10: "x"}
+CHANNELS_2025 = {1: "kan11", 2: "news12", 3: "news13", 4: "channel14", 5: "al_jazeera", 6: "makan33", 7: "none", 8: "other"}
+
+
+def extract_2025() -> pd.DataFrame:
+    """Output data/interim/ines_2025.csv: sector, sex, age group, education, religiosity (as for
+    2022), 2022 vote (recalled, v706), political news frequency (v612), the sources used in the
+    past week (v613: src_<source>, 0/1) and the TV channels watched regularly (v614: ch_<channel>,
+    0/1). Sources and channels were asked only of people who follow the news at all."""
+    src = load_sources()["ines_2025"]
+    df, _meta = pyreadstat.read_sav(src.raw_path(next(f for f in src.files if f.path.endswith(".sav"))))
+    out = pd.DataFrame({"id": df["resp_id"]})
+    out["sector"] = df["sector"].map({1: "jewish", 2: "arab"})
+    out["sex"] = df["gender"].map({1: "male", 2: "female"})
+    out["age"] = pd.to_numeric(df["age"], errors="coerce")
+    out["age_group"] = df["agegroup5"].map({1: "18-29", 2: "30-39", 3: "40-49", 4: "50-59", 5: "60+"})
+    out["education"] = df["educ"].map(EDUCATION)
+    rel = df["religiosity"]
+    out["religiosity"] = np.where(out["sector"] == "jewish", rel.map(RELIGIOSITY_JEWS), rel.map(RELIGIOSITY_ARABS))
+    out["vote_2022"] = df["v706"].map({**VOTE_2022, 30: "other_party", 94: "did_not_vote", 95: "too_young"})
+    out["news_freq"] = df["v612"].map(FREQ)
+    asked = out["news_freq"].isin(["weekly", "few_times_week", "daily", "several_daily"])
+    for k, name in SOURCES_2025.items():
+        out[f"src_{name}"] = np.where(asked, df[f"v613_{k}"].notna().astype(int), np.where(out["news_freq"] == "never", 0, np.nan))
+    for k, name in CHANNELS_2025.items():
+        out[f"ch_{name}"] = np.where(asked, df[f"v614_{k}"].notna().astype(int), np.nan)
+    out["mode"] = df["SURVEY_MODE"].map({1: "online", 2: "phone"})
+    out["w"] = pd.to_numeric(df["w_sample"], errors="coerce")
+    out.to_csv(paths.interim_path("ines_2025"), index=False)
+    return out

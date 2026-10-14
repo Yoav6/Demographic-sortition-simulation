@@ -138,6 +138,8 @@ def _multi(spec: ModelSpec, n: Node) -> dict:
     d.update(type="multi", parents=n.parents, items=_vals(n.values), rows=rows)
     if n.raw.get("backoff"):
         d["backoff"] = n.raw["backoff"]
+    if n.raw.get("subset_of"):
+        d["subset_of"] = n.raw["subset_of"]
     return d
 
 

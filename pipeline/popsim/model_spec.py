@@ -154,7 +154,11 @@ def load_spec(path: Path = paths.DAG_YAML) -> ModelSpec:
 def _check_order(spec: ModelSpec) -> None:
     seen: set[str] = set()
     for n in spec.nodes:
-        for p in n.parents + [n.raw[k] for k in ("cap_by", "floor_by") if n.raw.get(k)]:
+        for p in n.parents + [n.raw[k] for k in ("cap_by", "floor_by", "subset_of") if n.raw.get(k)]:
             if p not in seen:
                 raise ValueError(f"{n.id}: parent {p} must be defined earlier in dag.yaml")
+        if n.raw.get("subset_of"):
+            outer = spec.node(n.raw["subset_of"])
+            if n.type != "multi" or outer.type != "multi" or outer.value_ids() != n.value_ids():
+                raise ValueError(f"{n.id}: subset_of needs two multi nodes with the same items, in the same order")
         seen.update(v.id for v in n.vars) if n.type == "frame" else seen.add(n.id)

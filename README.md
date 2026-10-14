@@ -12,10 +12,14 @@ members from it, and describes each of them in Hebrew and English:
 > She is single and has no children. She has a bachelor's degree. She served in the IDF. She is
 > unemployed and looking for work…* — member #1 of the published assembly
 
-Every member has 39 attributes: place of residence, population group, sex, age, religiosity,
+Every member has 50 attributes: place of residence, population group, sex, age, religiosity,
 first name, origin and ancestry, marital status and children, education, military or national
 service, work (status, occupation, industry), earnings and household income (with percentiles),
-home ownership, health, disability, the 2022 vote, media habits, and a modelled literacy score.
+home ownership, health, disability, the 2022 vote, media habits (how often they get news from
+TV, radio, printed newspapers, news sites, social media, search engines and podcasts; the
+social networks they use and read news on; the TV channels and news websites they follow; their
+main newspaper; their preferred news source),
+and a modelled literacy score.
 
 The website shows the assembly as a 150-seat hemicycle, coloured by an attribute of your choice
 and compared with the population, and as a map of the members' localities. It also draws random
@@ -34,12 +38,13 @@ model's structure.
 * **Built only from public data.** Sources include the CBS (population, localities, Statistical
   Abstract, first names, 56 Social Survey cross-tabulations queried from the official table
   generator), the Central Elections Committee (2022 results by polling station), the Israel
-  National Election Studies, the OECD and Bank of Israel (adult skills), the Agam Institute
-  (media), Wikidata (name transliteration) and IGRA (registry names). All are listed with
+  National Election Studies, the OECD and Bank of Israel (adult skills), the Israel Internet
+  Association and the Technion and the Agam Institute (media), TGI readership figures and the Knesset Research and
+  Information Center (newspapers), Wikidata (name transliteration) and IGRA (registry names). All are listed with
   checksums in [SOURCES.md](SOURCES.md).
 * **Calibrated and validated.** Tables are combined with iterative proportional fitting over the
   model's own population and calibrated to official totals. For example, national 2022 vote
-  shares match the official result within 0.1 points. `popsim validate` runs 49 checks against
+  shares match the official result within 0.1 points. `popsim validate` runs 59 checks against
   published figures, tests the sampler, and audits impossible combinations; results are in
   [reports/validation.json](reports/validation.json) and on each attribute's methodology page.
 * **Deterministic.** Every random number is a hash of (seed, person, attribute), so the same seed

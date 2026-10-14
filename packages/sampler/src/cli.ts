@@ -8,6 +8,7 @@
  */
 
 import { createWriteStream, readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { compile, type Bundle } from "./model.ts";
 import { samplePerson, toRecord } from "./sample.ts";
 import { describe, presentPerson, visibleVars, type Templates } from "./describe.ts";
@@ -35,9 +36,15 @@ function csvCell(x: unknown): string {
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
+// `pnpm sample` runs this script from packages/sampler; relative paths are meant from the
+// directory pnpm was invoked in (INIT_CWD).
+const base = process.env.npm_lifecycle_event === "cli" && process.env.INIT_CWD ? process.env.INIT_CWD : process.cwd();
+const path = (p: string) => resolve(base, p);
+
 async function main() {
   const a = args(process.argv.slice(2));
-  const modelPath = a.model ?? "model/build/model.json";
+  for (const k of ["model", "out", "templates"]) if (a[k]) a[k] = path(a[k]);
+  const modelPath = a.model ?? path("model/build/model.json");
   const seed = Number(a.seed ?? "0");
   const n = Number(a.n ?? "150");
   const start = Number(a.start ?? "0");
@@ -62,7 +69,7 @@ async function main() {
 
   if (format === "text") {
     const lang = (a.lang ?? "he") as "he" | "en";
-    const templates = JSON.parse(readFileSync(a.templates ?? `templates/${lang}.json`, "utf8")) as Templates;
+    const templates = JSON.parse(readFileSync(a.templates ?? path(`templates/${lang}.json`), "utf8")) as Templates;
     const text = people.map((p, k) => `#${start + k}\n` + describe(model, p, templates).join(" ")).join("\n\n");
     if (a.out) writeFileSync(a.out, text + "\n");
     else console.log(text);
@@ -71,7 +78,7 @@ async function main() {
 
   let payload: unknown;
   if (format === "assembly") {
-    const dir = a.templates ?? "templates";
+    const dir = a.templates ?? path("templates");
     const templates = {
       he: JSON.parse(readFileSync(`${dir}/he.json`, "utf8")) as Templates,
       en: JSON.parse(readFileSync(`${dir}/en.json`, "utf8")) as Templates,

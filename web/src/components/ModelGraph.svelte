@@ -44,7 +44,7 @@
         }
       }
     }
-    const width = Math.max(...rows.map((r) => r.length)) * 150;
+    const width = (Math.max(...rows.map((r) => r.length)) + 1) * 150; // spacing = width / (n + 1) > box width
     return { pos, edges, height: rows.length * ROW + 24, width: Math.max(W, width) };
   });
 

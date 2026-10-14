@@ -19,3 +19,20 @@ renormalised to 100% in the model.
 
 The report does not cover Arabic-language media, so these figures are used only for Jewish and
 "other" citizens.
+
+## news_sites.csv
+
+"How often do you visit each of these news sites?" — page 14, all respondents, in percent:
+several times a day, daily, several times a week, once a week, once a month, never. All values
+are printed on the chart (the smallest without a % sign). The chart is titled "top
+10" but shows nine sites.
+
+## news_sites_by_camp.csv
+
+Mean visit frequency on the same scale (1 = never … 6 = several times a day) — page 15, a line
+chart without value labels, read from the axis (±0.03): all Israelis, Jews, Arabs, right-wing
+voters and liberal voters (Agam's "מצביעי ימין" and "מצביעים ליברליים", by current voting
+intention). Check: the means implied by page 14 (ynet 3.28, Haaretz 1.64, Rotter 1.60) agree
+with the "all" line.
+
+`favorite_news.csv` (pages 11-12) is kept for reference; the model takes TV channels from INES 2025.

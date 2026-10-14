@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PresentedPerson, VarMeta } from "@popsim/sampler";
+  import { SECTIONS } from "../lib/card.ts";
   import { t, type Lang } from "../lib/i18n.ts";
 
   let {
@@ -11,7 +12,16 @@
   }: { person: PresentedPerson; vars: VarMeta[]; lang: Lang; seedInfo?: string; onclose?: () => void } = $props();
 
   const docAnchor = (doc?: string) => (doc ? `#/method/${doc.replace(/^.*\//, "").replace(/\.md$/, "")}` : "#/method");
-  const varLabel = (v: VarMeta) => (lang === "he" ? v.label.he : v.label.en);
+  const meta = $derived(new Map(vars.map((v) => [v.id, v])));
+  const sections = $derived(
+    SECTIONS.map((s) => ({
+      ...s,
+      rows: s.lines
+        .filter((l) => meta.has(l.doc))
+        .map((l) => ({ label: (l.label ?? meta.get(l.doc)!.label)[lang], value: l.value(person, lang), doc: meta.get(l.doc)!.doc }))
+        .filter((r) => r.value !== null && r.value !== undefined && r.value !== ""),
+    })),
+  );
 </script>
 
 <article class="card person" aria-label={t("person", lang)}>
@@ -22,22 +32,20 @@
     {/if}
   </header>
   <p class="bio">{person.text[lang].join(" ")}</p>
-  <table>
-    <thead>
-      <tr><th>{t("attribute", lang)}</th><th>{t("value", lang)}</th><th></th></tr>
-    </thead>
-    <tbody>
-      {#each vars as v}
-        {#if person.labels[lang][v.id] !== undefined && v.id !== "first_name"}
+  {#each sections as s (s.id)}
+    <h3>{s.label[lang]}</h3>
+    <table>
+      <tbody>
+        {#each s.rows as r}
           <tr>
-            <td class="secondary">{varLabel(v)}</td>
-            <td>{person.labels[lang][v.id]}</td>
-            <td class="how"><a href={docAnchor(v.doc)} title={t("how_estimated", lang)} aria-label={t("how_estimated", lang)}>?</a></td>
+            <td class="secondary">{r.label}</td>
+            <td>{r.value}</td>
+            <td class="how"><a href={docAnchor(r.doc)} title={t("how_estimated", lang)} aria-label={t("how_estimated", lang)}>?</a></td>
           </tr>
-        {/if}
-      {/each}
-    </tbody>
-  </table>
+        {/each}
+      </tbody>
+    </table>
+  {/each}
   {#if seedInfo}
     <p class="muted small">{seedInfo}</p>
   {/if}
@@ -52,6 +60,16 @@
   h2 {
     margin: 0;
     font-size: 1.5rem;
+  }
+  h3 {
+    margin: 1.25rem 0 0.25rem;
+    font-size: 1rem;
+  }
+  table {
+    width: 100%;
+  }
+  td.secondary {
+    width: 40%;
   }
   .bio {
     font-size: 1.08rem;

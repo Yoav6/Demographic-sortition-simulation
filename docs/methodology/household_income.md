@@ -105,9 +105,9 @@ Validation:
 |---|---|---|---|---|---|
 | Household income bracket by labour-force status (20+) - Jews and others | `cbs_social_survey_2024` | 0.0332 | 0.0058 | 0.03 | ✅ pass |
 | Household income bracket by labour-force status (20+) - Arabs | `cbs_social_survey_2024` | 0.0297 | 0.0094 | 0.04 | ✅ pass |
-| Sampler reproduces every table given its parents (n = 200,000; tolerance: adjusted p-value) | `model` | 0.0296 | — | 0.001 | ✅ pass |
+| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 #### `household_income_amount` — Household gross monthly income (₪) / הכנסה חודשית ברוטו של משק הבית (ש"ח)
 
@@ -124,7 +124,7 @@ Validation:
 |---|---|---|---|---|---|
 | Constraint: household income is at least the person's own earnings | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 #### `household_income_percentile` — Household income percentile among adult citizens / אחוזון הכנסת משק הבית בקרב האזרחים הבוגרים
 
@@ -138,9 +138,9 @@ Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Percentile is uniform among adult citizens (n = 200,000) | `model` | 0.0032 | — | 0.01 | ✅ pass |
+| Percentile is uniform among adult citizens (n = 1,000,000) | `model` | 0.0035 | — | 0.01 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 #### `home_ownership` — Home ownership (household) / בעלות על הדירה (משק הבית)
 
@@ -161,8 +161,8 @@ Validation:
 |---|---|---|---|---|---|
 | Home ownership by household income bracket (20+) - Jews and others | `cbs_social_survey_2024` | 0.0442 | 0.0000 | 0.03 | ✅ pass |
 | Home ownership by household income bracket (20+) - Arabs | `cbs_social_survey_2024` | 0.0158 | 0.0000 | 0.04 | ✅ pass |
-| Sampler reproduces every table given its parents (n = 200,000; tolerance: adjusted p-value) | `model` | 0.0296 | — | 0.001 | ✅ pass |
+| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 <!-- END GENERATED -->

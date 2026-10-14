@@ -99,11 +99,11 @@ performers by age group, education and gender is within 2 points in every group 
 
 | id | English | עברית (m) | עברית (f) |
 |---|---|---|---|
-| `below1` | below level 1 | מתחת לרמה 1 |  |
-| `level1` | level 1 | רמה 1 |  |
-| `level2` | level 2 | רמה 2 |  |
-| `level3` | level 3 | רמה 3 |  |
-| `level4_5` | level 4 or 5 | רמה 4 או 5 |  |
+| `below1` | below OECD level 1 | מתחת לרמת OECD 1 |  |
+| `level1` | OECD level 1 | רמת OECD 1 |  |
+| `level2` | OECD level 2 | רמת OECD 2 |  |
+| `level3` | OECD level 3 | רמת OECD 3 |  |
+| `level4_5` | OECD level 4 or 5 | רמת OECD 4 או 5 |  |
 
 Sources: `oecd_piaac_2023_tables` (OECD); `boi_piaac_note_2024` (Bank of Israel (Sefi Bahar and Elad DeMalach))
 
@@ -115,9 +115,9 @@ Validation:
 | Literacy: share of low performers (level 1 or below) by age group | `oecd_piaac_2023_tables` | 0.0171 | — | 0.06 | ✅ pass |
 | Literacy: share of low performers (level 1 or below) by education (25-65) | `oecd_piaac_2023_tables` | 0.0159 | — | 0.06 | ✅ pass |
 | Literacy: share of low performers (level 1 or below) by gender | `oecd_piaac_2023_tables` | 0.0182 | — | 0.06 | ✅ pass |
-| Sampler reproduces every table given its parents (n = 200,000; tolerance: adjusted p-value) | `model` | 0.0296 | — | 0.001 | ✅ pass |
+| Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 #### `literacy_score` — Literacy score (modelled; 0-500 scale) / ציון אוריינות קריאה (משוער; סולם 0-500)
 
@@ -143,8 +143,8 @@ Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Percentile is uniform among adult citizens (n = 200,000) | `model` | 0.0018 | — | 0.01 | ✅ pass |
+| Percentile is uniform among adult citizens (n = 1,000,000) | `model` | 0.0023 | — | 0.01 | ✅ pass |
 
-Sample: 200,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
+Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
 <!-- END GENERATED -->

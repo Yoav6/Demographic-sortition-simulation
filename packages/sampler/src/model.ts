@@ -99,13 +99,16 @@ export interface PercentileNode extends NodeCommon {
   breakpoints: number[];
 }
 
-/** Set-valued node: each item is included independently with a probability (x 1e9). */
+/** Set-valued node: each item is included independently with a probability (x 1e9). With
+ *  subset_of, an item can only be chosen if the person has it in that earlier multi node (same
+ *  items), and its probability is conditional on having it. */
 export interface MultiNode extends NodeCommon {
   type: "multi";
   parents: string[];
   items: ValueDef[];
   rows: Record<string, number[]>;
   backoff?: string[];
+  subset_of?: string;
 }
 
 export type ModelNode =

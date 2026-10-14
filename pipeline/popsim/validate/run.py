@@ -279,6 +279,155 @@ def literacy_checks() -> list[Check]:
 # ---------------------------------------------------------------------------
 # sampler and constraints
 
+# ---------------------------------------------------------------------------
+# media: the ISOC-IL respondents (internet users) and INES 2025
+
+def _cells(df: pd.DataFrame, by: list[str], model_col: str, obs_col: str, weight: str | None = None) -> tuple[float, float, list[dict]]:
+    """Respondent-level model predictions vs answers, averaged within `by` cells (so the model
+    is standardised to the respondents' own mix of the finer cells). Returns (max abs difference
+    and max difference beyond 2 s.e., both over cells with MIN_RESPONDENTS+ respondents - with
+    a few hundred respondents per survey, smaller cells are too noisy to judge - and the worst
+    of those cells)."""
+    w = df[weight] if weight else pd.Series(1.0, index=df.index)
+    g = df.assign(_w=w, _m=df[model_col] * w, _o=df[obs_col].astype(float) * w).groupby(by)
+    x = pd.DataFrame({"model": g["_m"].sum() / g["_w"].sum(), "survey": g["_o"].sum() / g["_w"].sum(), "n": g.size()}).reset_index()
+    x["err"] = (x["model"] - x["survey"]).abs()
+    se = np.sqrt(np.clip(x["model"] * (1 - x["model"]), 0.0025, None) / x["n"])
+    x["excess"] = (x["err"] - 2 * se).clip(lower=0)
+    big = x[x["n"] >= MIN_RESPONDENTS]
+    worst = big.sort_values(["excess", "err"], ascending=False).head(3)
+    detail = [{**{k: r[k] for k in by}, "model": round(r["model"], 4), "survey": round(r["survey"], 4), "respondents": int(r["n"])}
+              for _, r in worst.iterrows()]
+    if big.empty:
+        return float("nan"), 0.0, detail
+    return float(big["err"].max()), float(big["excess"].max()), detail
+
+
+def _multi_table(node) -> pd.DataFrame:
+    df = pd.read_csv(node.file, dtype=str, keep_default_na=False).rename(columns={"item": "value"})
+    df["p"] = df["p"].astype(float)
+    return df
+
+
+def _worst(results: list[tuple[str, tuple[float, float, list[dict]]]], c: Check) -> Check:
+    c.max_abs_error = max(r[1][0] for r in results)
+    c.max_excess = max(r[1][1] for r in results)
+    ranked = sorted(results, key=lambda r: (-r[1][1], -r[1][0]))[:3]
+    c.detail = [{"item": name, **d} for name, (_, _, det) in ranked for d in det[:2]]
+    c.passed = c.max_excess <= c.tolerance
+    return c
+
+
+def media_checks(sample: pd.DataFrame) -> list[Check]:
+    """How often each medium is used, networks used and news on them (ISOC-IL respondents, by
+    population group x age group; respondents who use no social network are compared with the
+    model's "internet but not social networks"); TV channels watched regularly (INES 2025, by
+    2022 vote bloc for Jewish and other viewers, and for Arab viewers)."""
+    from ..estimate.joint import _read_table, resolve
+    from ..estimate.media import BLOC_OF_PARTY, CHANNELS, LEVELS, MEDIA, NETWORKS, ines25, isoc
+
+    spec = load_spec()
+    d = isoc().rename(columns={"sector": "media_sector", "education": "vote_education"})
+    keys = ["media_age", "media_sector", "sex", "vote_education", "online"]
+    by = ["media_sector", "media_age"]
+    W = joint(["news_frequency"] + keys, where={"online": ["social", "internet_only"]})
+    W["pnf"] = W["w"] / W.groupby(keys)["w"].transform("sum")
+    out = []
+
+    results = []
+    for m in MEDIA:
+        node = spec.node(f"news_{m}")
+        rows = resolve(_read_table(node), node.parents, node.raw.get("backoff", []), W, node.id)
+        pred = W.merge(rows, on=node.parents).assign(x=lambda f: f["pnf"] * f["p"])
+        cell = pred.pivot_table(index=keys, columns="value", values="x", aggfunc="sum").reindex(columns=LEVELS).fillna(0.0).reset_index()
+        r = d[d["online"].isin(["social"] if m == "social" else ["social", "internet_only"])].dropna(subset=[f"freq_{m}"])
+        r = r.merge(cell, on=keys, how="left")
+        for lv in LEVELS:
+            results.append((f"{m}: {lv}", _cells(r.assign(obs=r[f"freq_{m}"] == lv), by, lv, "obs")))
+    out.append(_worst(results, Check("Media: how often each medium is used, by population group and age (internet users)",
+                                     [f"news_{m}" for m in MEDIA], "isoc_media_survey_2024", 0.03)))
+
+    users = d[d["online"] == "social"]
+    node = spec.node("social_networks")
+    rows = resolve(_multi_table(node), node.parents, node.raw.get("backoff", []), users, node.id)
+    results = []
+    for net in NETWORKS:
+        r = users.merge(rows[rows["value"] == net].drop(columns="value"), on=node.parents, how="left")
+        results.append((net, _cells(r, by, "p", f"uses_{net}")))
+    out.append(_worst(results, Check("Media: social networks used, by population group and age (social-network users)",
+                                     ["social_networks"], "isoc_media_survey_2024", 0.03)))
+
+    node = spec.node("news_networks")
+    results = []
+    for net in NETWORKS:
+        u = users[users[f"uses_{net}"] == 1].assign(news_social=lambda f: f["freq_social"])
+        rows = resolve(_multi_table(node), node.parents, node.raw.get("backoff", []), u, node.id)
+        r = u.merge(rows[rows["value"] == net].drop(columns="value"), on=node.parents, how="left")
+        results.append((net, _cells(r, ["media_sector"], "p", f"news_{net}")))
+    out.append(_worst(results, Check("Media: news on each network among its users, by population group",
+                                     ["news_networks"], "isoc_media_survey_2024", 0.03)))
+
+    # TV channels: the model's people who watch TV news often or sometimes vs INES 2025
+    # respondents who watched TV news in the past week (weighted)
+    s = sample[sample["news_tv"].isin(["often", "sometimes"])].copy()
+    s["bloc"] = s["vote_2022"].map(BLOC_OF_PARTY)
+    s["who"] = np.where(s["media_sector"] == "arab", "arab", s["bloc"])
+    i = ines25()
+    i = i[i["src_tv"] == 1].copy()
+    i["who"] = np.where(i["media_sector"] == "arab", "arab", i["bloc"])
+    results = []
+    for ch in CHANNELS:
+        m = s.assign(x=s["tv_channels"].str.split(";").apply(lambda v, ch=ch: ch in v)).groupby("who")["x"].mean().rename("model")
+        t = i.assign(x=i[f"ch_{ch}"].fillna(0)).dropna(subset=["who"])
+        t = t.merge(m, left_on="who", right_index=True)
+        results.append((ch, _cells(t, ["who"], "model", "x", weight="w")))
+    out.append(_worst(results, Check("Media: TV news channels watched regularly, by 2022 vote bloc (Jewish and other viewers) and for Arab viewers",
+                                     ["tv_channels"], "ines_2025", 0.05)))
+
+    # news websites: weekly visitors among internet users, by camp, vs Agam (pages 14-15;
+    # Agam publishes no counts, so the tolerance is on the difference itself)
+    from ..estimate.media import SITES, _camp, agam_site_regular
+    reg = agam_site_regular()
+    o = sample[sample["online"] != "offline"].copy()
+    o["camp"] = [_camp(sec, b) for sec, b in zip(o["media_sector"], o["vote_2022"].map(BLOC_OF_PARTY))]
+    sites = o["news_websites"].str.split(";")
+    c = Check("Media: news websites visited at least weekly by internet users, nationally and by camp", ["news_websites"], "agam_media_index_2024", 0.03)
+    diffs = []
+    for site in SITES:
+        has = sites.apply(lambda v, site=site: site in v)
+        for camp in reg.columns:
+            if pd.isna(reg.loc[site, camp]):
+                continue
+            sel = o["camp"] != "" if camp == "all" else (o["camp"] == camp if camp != "jews" else o["media_sector"] != "arab")
+            diffs.append((abs(float(has[sel].mean()) - reg.loc[site, camp]), site, camp, float(has[sel].mean()), reg.loc[site, camp]))
+    diffs.sort(reverse=True)
+    c.max_abs_error = diffs[0][0]
+    c.detail = [{"site": st, "camp": cp, "model": round(m, 4), "agam": round(a, 4)} for _, st, cp, m, a in diffs[:4]]
+    c.passed = c.max_abs_error <= c.tolerance
+    out.append(c)
+
+    # preferred source: the model's choice probabilities for each respondent who answered
+    model = json.loads((paths.CPTS / "preferred_source.json").read_text(encoding="utf-8"))
+    media = list(MEDIA)
+    r = d.dropna(subset=["preferred"])
+    r = r[r["preferred"] != "other"].copy()
+    u = np.tile([model["intercept"][m] for m in media], (len(r), 1))
+    for k, m in enumerate(media):
+        u[:, k] += r[f"freq_{m}"].map(lambda lv, m=m: model["coef"][f"news_{m}"][lv].get(m, 0.0)).to_numpy()
+        u[:, k] += r["media_age"].map(lambda a, m=m: model["coef"]["media_age"][a].get(m, 0.0)).to_numpy()
+        u[:, k] += r["media_sector"].map(lambda x, m=m: model["coef"]["media_sector"][x].get(m, 0.0)).to_numpy()
+    pr = np.exp(u - u.max(axis=1, keepdims=True))
+    pr /= pr.sum(axis=1, keepdims=True)
+    results = []
+    for k, m in enumerate(media):
+        x = r.assign(pred=pr[:, k], obs=r["preferred"] == m)
+        results.append((f"{m} by group", _cells(x, ["media_sector"], "pred", "obs")))
+        results.append((f"{m} by age", _cells(x, ["media_age"], "pred", "obs")))
+    out.append(_worst(results, Check("Media: preferred news source, by population group and by age (respondents who use a medium often)",
+                                     ["preferred_source"], "isoc_media_survey_2024", 0.03)))
+    return out
+
+
 def draw_sample(n: int, seed: int) -> pd.DataFrame:
     model = paths.BUILD / "model.json"
     with tempfile.TemporaryDirectory() as tmp:
@@ -357,6 +506,38 @@ def sampler_check(sample: pd.DataFrame, min_n: int = 2000, combos: int = 25) -> 
             e, o = exact.reindex(idx).fillna(0.0), obs.reindex(idx).fillna(0.0)
             tests.append((_chi2_p(o.to_numpy(), e.to_numpy() * cnt), float((o / cnt - e).abs().max()), node.id, " / ".join(map(str, key))))
         c.nodes.append(node.id)
+    # set-valued nodes: each item's inclusion against its probability (within the enclosing
+    # set for subset_of nodes)
+    for node in spec.nodes:
+        if node.type != "multi":
+            continue
+        cpt = _multi_table(node)
+        counts = sample.groupby(node.parents, dropna=False).size().sort_values(ascending=False)
+        counts = counts[counts >= min_n].head(combos)
+        rows = resolve(cpt, node.parents, node.raw.get("backoff", []), counts.index.to_frame(index=False), node.id)
+        chosen = sample[node.id].str.split(";")
+        outer = sample[node.raw["subset_of"]].str.split(";") if node.raw.get("subset_of") else None
+        has = {it: chosen.apply(lambda x, it=it: it in x).to_numpy() for it in node.value_ids()}
+        within_outer = {it: outer.apply(lambda x, it=it: it in x).to_numpy() for it in node.value_ids()} if outer is not None else {}
+        for key in counts.index:
+            key = key if isinstance(key, tuple) else (key,)
+            sel = np.ones(n, dtype=bool)
+            r = rows
+            for p_, v in zip(node.parents, key):
+                sel &= (sample[p_] == v).to_numpy()
+                r = r[r[p_] == v]
+            for item, p in zip(r["value"], r["p"]):
+                within = sel & within_outer[item] if outer is not None else sel
+                cnt = int(within.sum())
+                if cnt == 0:
+                    continue
+                k = int((has[item] & within).sum())
+                tests.append((_chi2_p(np.array([k, cnt - k], dtype=float), np.array([p, 1 - p]) * cnt),
+                              abs(k / cnt - p), node.id, " / ".join(map(str, key)) + f" : {item}"))
+        if outer is not None:
+            bad = int(sum(not set(filter(None, a)) <= set(filter(None, b)) for a, b in zip(chosen, outer)))
+            tests.append((0.0 if bad else 1.0, bad / n, node.id, f"{bad} people with items outside {node.raw['subset_of']}"))
+        c.nodes.append(node.id)
     tests.sort()
     adjusted = min(1.0, tests[0][0] * len(tests))
     c.max_abs_error = max(t[1] for t in tests)
@@ -422,6 +603,7 @@ def validate(n: int = 200_000, seed: int = 1, log=print) -> bool:
     checks.append(vote_check())
     checks += literacy_checks()
     sample = draw_sample(n, seed)
+    checks += media_checks(sample)
     checks.append(sampler_check(sample))
     checks += percentile_checks(sample)
     checks += constraint_checks(sample)

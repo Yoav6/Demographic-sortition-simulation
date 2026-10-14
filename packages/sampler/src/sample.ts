@@ -182,8 +182,10 @@ export function samplePerson(model: CompiledModel, seed: number, index: number):
         break;
       case "multi": {
         const probs = lookupRow<Float64Array>(model.tables.get(node.id)!, values);
+        const within = node.subset_of ? values[model.varIndex.get(node.subset_of)!] : -1;
         let mask = 0;
         for (let k = 0; k < node.items.length; k++) {
+          if (!(within & (1 << k))) continue;
           if (Math.floor(uniform(seed, index, stream, k) * PROB_SCALE) < probs[k]) mask |= 1 << k;
         }
         values[model.varIndex.get(node.id)!] = mask;

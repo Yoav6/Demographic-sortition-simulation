@@ -54,7 +54,7 @@ expc = results by locality, expb = results by polling station. Columns: committe
 - **page:** <https://socsci4.tau.ac.il/mu2/ines/data/our-data/>
 - **data as of:** 2022-11
 - **terms:** Free for research use with citation (see INES "How to cite")
-- **used by:** `locality_profile`, `religiosity`, `origin`, `ancestry`, `vote_age`, `vote_education`, `vote_origin`, `vote_2022`, `news_frequency`, `social_news`
+- **used by:** `locality_profile`, `religiosity`, `origin`, `ancestry`, `vote_age`, `vote_education`, `vote_origin`, `vote_2022`, `news_frequency`
 - **planned for:** `vote`
 - file `2022_SPSS.sav`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2023/06/2022_SPSS.sav> — sha256 `30e0a5c1f1ba44f0…`, retrieved 2026-10-13
 - file `2022_Questionnaire_Eng.pdf`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2023/06/2022_Questionnaire_Eng.pdf> — sha256 `47e28ba8933cd56c…`, retrieved 2026-10-13
@@ -68,6 +68,7 @@ expc = results by locality, expb = results by polling station. Columns: committe
 - **page:** <https://socsci4.tau.ac.il/mu2/ines/data/our-data/>
 - **data as of:** 2025
 - **terms:** Free for research use with citation (see INES "How to cite")
+- **used by:** `news_tv`, `news_radio`, `news_print`, `news_sites`, `news_social`, `news_search`, `news_podcasts`, `tv_channels`
 - **planned for:** `vote_2026`
 - file `2025_SPSS.sav`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2025/09/2025_SPSS.sav> — sha256 `a29d1dc241f07708…`, retrieved 2026-10-13
 - file `2025_Questionnaire_Eng.pdf`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2025/07/2025_Questionnaire_Eng.pdf> — sha256 `7ab3fd203212392e…`, retrieved 2026-10-13
@@ -80,12 +81,55 @@ expc = results by locality, expb = results by polling station. Columns: committe
 - **page:** <https://agamlabs.com/>
 - **data as of:** 2024-11
 - **terms:** Published report; figures cited with attribution
-- **used by:** `favorite_news`
-- **planned for:** `media`
+- **used by:** `news_websites`, `newspaper`
 - file `agam_media_index_2024.pdf`: <https://agamlabs.com/wp-content/uploads/2025/03/12-compressed.pdf> — sha256 `a5a7d1bd1fa685c3…`, retrieved 2026-10-13
 - manual data: `data/manual/agam/`
 
-iPanel online sample, 1,201 citizens aged 18+ (325 Arab respondents), 15-20 Nov 2024, weighted by sector, sex, age, origin, region, religion, religiosity and 2022 turnout. Values exist only as charts; they are hand-transcribed into data/manual/agam/ with page numbers.
+iPanel online sample, 1,201 citizens aged 18+ (325 Arab respondents), 15-20 Nov 2024, weighted by sector, sex, age, origin, region, religion, religiosity and 2022 turnout. Values exist only as charts; they are hand-transcribed into data/manual/agam/ with page numbers. Used for named news websites (pages 14-15) only; TV channels come from INES 2025 respondent data (docs/decisions/0006-media-sources.md).
+
+## Israel Internet Association (ISOC-IL) and the Technion - Media Consumption and Disinformation Survey (October 2024), respondent-level data
+
+*איגוד האינטרנט הישראלי והטכניון - סקר צריכת חדשות ודיסאינפורמציה (אוקטובר 2024), נתוני משיבים*
+
+- **id:** `isoc_media_survey_2024` · **tier:** A · **publisher:** Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology
+- **page:** <https://www.isoc.org.il/sts-data/media-and-disinformation-survey-il>
+- **data as of:** 2024-10
+- **terms:** Publication and citation permitted with credit to the Israel Internet Association and a link to https://www.isoc.org.il/sts-data/media-and-disinformation-survey-il
+
+- **used by:** `media_age`, `media_sector`, `news_tv`, `news_radio`, `news_print`, `news_sites`, `news_social`, `news_search`, `news_podcasts`, `social_networks`, `news_networks`, `preferred_source`
+- file `jewish.csv`: <https://drive.usercontent.google.com/download?id=1C_K2YvnTeRWqYs0EEaMOCG4XM3-j_505&export=download&confirm=t> — sha256 `6f27d07aca53bc34…`, retrieved 2026-10-14
+- file `arab.csv`: <https://drive.usercontent.google.com/download?id=1NfAzq9GgrZa-5sJ04mJ444kJmyTp2W8_&export=download&confirm=t> — sha256 `92f4c1689ba5a839…`, retrieved 2026-10-14
+- file `questionnaire.docx`: <https://drive.usercontent.google.com/download?id=1WdA_DBrRw1d2-zPNj2Kb95YDFnUzLIY3&export=download&confirm=t> — sha256 `494c2f0a7de1dcfa…`, retrieved 2026-10-14
+- file `about.txt`: <https://drive.usercontent.google.com/download?id=1UqGTgxMWpKjn0Vi21SyMEHLGsSdevoA5&export=download&confirm=t> — sha256 `d7e7ce532597a131…`, retrieved 2026-10-14
+
+Online panel (iPanel), October 2024: 1,005 internet users aged 18+, 805 Jewish (Haredim over-sampled) and 200 Arab respondents; no weights are supplied. The files are shared from the survey's Google Drive folder, linked from the page. The first data row of each CSV holds the question wording.
+
+## TGI Israel - newspaper readership (average-issue exposure), as published in press reports
+
+*סקר TGI - שיעורי החשיפה לעיתונים, כפי שפורסמו בתקשורת*
+
+- **id:** `tgi_readership` · **tier:** M · **publisher:** TGI Israel; figures reported by Arutz Sheva (22 July 2026) and ice.co.il (22 March 2018)
+- **page:** <https://www.inn.co.il/news/702128>
+- **data as of:** 2025-07/2026-06
+- **terms:** Published survey figures, cited with attribution
+- **used by:** `newspaper`
+- manual data: `data/manual/tgi/`
+
+General TGI: representative sample of Jewish adults aged 18+ (about 5,000 respondents); weekday and weekend exposure by title, July 2025 - June 2026 (https://www.inn.co.il/news/702128). Haredi TGI (a separate, smaller survey of the Haredi sector), 2017, the latest release found online (https://www.ice.co.il/media/news/article/738702). Transcribed into data/manual/tgi/.
+
+## Knesset Research and Information Center - change in advertising expenditure and the age distribution of newspaper readers (7 November 2018)
+
+*מרכז המחקר והמידע של הכנסת - השינוי בהוצאה לפרסום והתפלגות קוראי עיתונות כתובה לפי גיל (7 בנובמבר 2018)*
+
+- **id:** `knesset_rc_newspapers_2018` · **tier:** M · **publisher:** Knesset Research and Information Center
+- **page:** <https://fs.knesset.gov.il/globaldocs/MMM/f1176d84-d2d2-e811-80e7-00155d0aeea3/2_f1176d84-d2d2-e811-80e7-00155d0aeea3_11_13572.pdf>
+- **data as of:** 2018-H1
+- **terms:** Knesset publication, cited with attribution
+- **used by:** `newspaper`
+- file `newspapers_by_age_2018.pdf`: <https://fs.knesset.gov.il/globaldocs/MMM/f1176d84-d2d2-e811-80e7-00155d0aeea3/2_f1176d84-d2d2-e811-80e7-00155d0aeea3_11_13572.pdf> — sha256 `f051982f08636d64…`, retrieved 2026-10-14
+- manual data: `data/manual/tgi/`
+
+Tables 2 and 4: weekday exposure to newspapers overall and to each title by age group (18-34, 35-54, 55+), from TGI for the first half of 2018; transcribed into data/manual/tgi/age_profile_2018.csv.
 
 ## IGRA - given names in the Israel Population Registry, "Other" religion (Nov 2021 extract)
 
@@ -216,7 +260,7 @@ Figure 2b gives mean scores of non-Haredi Jews, Arabs and Haredim (computed by t
 - **page:** <https://boardsgenerator.cbs.gov.il/pages/Seker/wizardpage.aspx>
 - **data as of:** 2024
 - **terms:** CBS publication (online table generator); reuse with attribution
-- **used by:** `religiosity`, `marital_status`, `children`, `education`, `military_service`, `in_service`, `labour_status`, `occupation`, `industry`, `work_status`, `income`, `household_income`, `income_amount`, `income_percentile`, `household_income_amount`, `household_income_percentile`, `home_ownership`, `health`, `chronic`, `disability`, `online`, `social_news`
+- **used by:** `religiosity`, `marital_status`, `children`, `education`, `military_service`, `in_service`, `labour_status`, `occupation`, `industry`, `work_status`, `income`, `household_income`, `income_amount`, `income_percentile`, `household_income_amount`, `household_income_percentile`, `home_ownership`, `health`, `chronic`, `disability`, `online`
 - **planned for:** `internet`
 - manual data: `data/manual/cbs_ss/`
 

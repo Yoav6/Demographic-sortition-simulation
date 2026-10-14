@@ -151,6 +151,40 @@
       "url": "https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2025/09/2025_SPSS.sav"
     }
   },
+  "isoc_media_survey_2024": {
+    "about.txt": {
+      "sha256": "d7e7ce532597a1310f14a4d3a3b9fab4947a9e2e428c5ce3a2f375e89eb5b382",
+      "size": 1485,
+      "retrieved": "2026-10-14",
+      "url": "https://drive.usercontent.google.com/download?id=1UqGTgxMWpKjn0Vi21SyMEHLGsSdevoA5&export=download&confirm=t"
+    },
+    "arab.csv": {
+      "sha256": "92f4c1689ba5a839daaab2ea99a2a4e97704d83b9721b845a448fc53c063f5ee",
+      "size": 452145,
+      "retrieved": "2026-10-14",
+      "url": "https://drive.usercontent.google.com/download?id=1NfAzq9GgrZa-5sJ04mJ444kJmyTp2W8_&export=download&confirm=t"
+    },
+    "jewish.csv": {
+      "sha256": "6f27d07aca53bc346c899df01c5d0a62cede623c1c57bdb586d0da9a39b8575b",
+      "size": 1800008,
+      "retrieved": "2026-10-14",
+      "url": "https://drive.usercontent.google.com/download?id=1C_K2YvnTeRWqYs0EEaMOCG4XM3-j_505&export=download&confirm=t"
+    },
+    "questionnaire.docx": {
+      "sha256": "494c2f0a7de1dcfab7f75462aa2d172f71ae7d88cd6676bafb8f4f8e1cbf9e3a",
+      "size": 45442,
+      "retrieved": "2026-10-14",
+      "url": "https://drive.usercontent.google.com/download?id=1WdA_DBrRw1d2-zPNj2Kb95YDFnUzLIY3&export=download&confirm=t"
+    }
+  },
+  "knesset_rc_newspapers_2018": {
+    "newspapers_by_age_2018.pdf": {
+      "sha256": "f051982f08636d64fd1d6183e99fb297db09b9c1573b868aca082a8721df330f",
+      "size": 656825,
+      "retrieved": "2026-10-14",
+      "url": "https://fs.knesset.gov.il/globaldocs/MMM/f1176d84-d2d2-e811-80e7-00155d0aeea3/2_f1176d84-d2d2-e811-80e7-00155d0aeea3_11_13572.pdf"
+    }
+  },
   "oecd_piaac_2023_tables": {
     "piaac_2023_chapter2_tables.xlsx": {
       "sha256": "c12ccf3e3f6a0bd020788e67abec7835182f1f87602c547d3a6dc83e8aae8910",

@@ -1,6 +1,6 @@
 {
  "model_version": "2026.10.0",
- "sample_size": 200000,
+ "sample_size": 1000000,
  "seed": 1,
  "checks": [
   {
@@ -1635,7 +1635,336 @@
    ]
   },
   {
-   "name": "Sampler reproduces every table given its parents (n = 200,000; tolerance: adjusted p-value)",
+   "name": "Media: how often each medium is used, by population group and age (internet users)",
+   "nodes": [
+    "news_tv",
+    "news_radio",
+    "news_print",
+    "news_sites",
+    "news_social",
+    "news_search",
+    "news_podcasts"
+   ],
+   "source": "isoc_media_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.13235,
+   "passed": true,
+   "detail": [
+    {
+     "item": "print: rarely",
+     "media_sector": "arab",
+     "media_age": "50_64",
+     "model": 0.3001,
+     "survey": 0.4324,
+     "respondents": 37
+    },
+    {
+     "item": "print: rarely",
+     "media_sector": "arab",
+     "media_age": "25_29",
+     "model": 0.3627,
+     "survey": 0.2432,
+     "respondents": 37
+    },
+    {
+     "item": "sites: sometimes",
+     "media_sector": "arab",
+     "media_age": "40_49",
+     "model": 0.2443,
+     "survey": 0.3696,
+     "respondents": 46
+    },
+    {
+     "item": "sites: sometimes",
+     "media_sector": "arab",
+     "media_age": "30_39",
+     "model": 0.2951,
+     "survey": 0.2174,
+     "respondents": 46
+    },
+    {
+     "item": "podcasts: never",
+     "media_sector": "arab",
+     "media_age": "25_29",
+     "model": 0.5036,
+     "survey": 0.6216,
+     "respondents": 37
+    },
+    {
+     "item": "podcasts: never",
+     "media_sector": "arab",
+     "media_age": "40_49",
+     "model": 0.4645,
+     "survey": 0.3478,
+     "respondents": 46
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Media: social networks used, by population group and age (social-network users)",
+   "nodes": [
+    "social_networks"
+   ],
+   "source": "isoc_media_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.13901,
+   "passed": true,
+   "detail": [
+    {
+     "item": "instagram",
+     "media_sector": "arab",
+     "media_age": "25_29",
+     "model": 0.7501,
+     "survey": 0.6111,
+     "respondents": 36
+    },
+    {
+     "item": "instagram",
+     "media_sector": "secular",
+     "media_age": "25_29",
+     "model": 0.7313,
+     "survey": 0.814,
+     "respondents": 43
+    },
+    {
+     "item": "whatsapp",
+     "media_sector": "haredi",
+     "media_age": "18_24",
+     "model": 0.7423,
+     "survey": 0.6591,
+     "respondents": 44
+    },
+    {
+     "item": "whatsapp",
+     "media_sector": "arab",
+     "media_age": "40_49",
+     "model": 0.8293,
+     "survey": 0.8605,
+     "respondents": 43
+    },
+    {
+     "item": "pinterest",
+     "media_sector": "arab",
+     "media_age": "50_64",
+     "model": 0.0751,
+     "survey": 0.0,
+     "respondents": 30
+    },
+    {
+     "item": "pinterest",
+     "media_sector": "secular",
+     "media_age": "30_39",
+     "model": 0.1449,
+     "survey": 0.1,
+     "respondents": 70
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Media: news on each network among its users, by population group",
+   "nodes": [
+    "news_networks"
+   ],
+   "source": "isoc_media_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.03704,
+   "passed": true,
+   "detail": [
+    {
+     "item": "youtube",
+     "media_sector": "haredi",
+     "model": 0.2747,
+     "survey": 0.3117,
+     "respondents": 77
+    },
+    {
+     "item": "youtube",
+     "media_sector": "religious",
+     "model": 0.2982,
+     "survey": 0.3065,
+     "respondents": 62
+    },
+    {
+     "item": "whatsapp",
+     "media_sector": "haredi",
+     "model": 0.6626,
+     "survey": 0.6912,
+     "respondents": 68
+    },
+    {
+     "item": "whatsapp",
+     "media_sector": "arab",
+     "model": 0.4494,
+     "survey": 0.4342,
+     "respondents": 152
+    },
+    {
+     "item": "telegram",
+     "media_sector": "arab",
+     "model": 0.5982,
+     "survey": 0.575,
+     "respondents": 80
+    },
+    {
+     "item": "telegram",
+     "media_sector": "secular",
+     "model": 0.6982,
+     "survey": 0.6872,
+     "respondents": 195
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Media: TV news channels watched regularly, by 2022 vote bloc (Jewish and other viewers) and for Arab viewers",
+   "nodes": [
+    "tv_channels"
+   ],
+   "source": "ines_2025",
+   "tolerance": 0.05,
+   "max_abs_error": 0.05121,
+   "passed": true,
+   "detail": [
+    {
+     "item": "news12",
+     "who": "coalition",
+     "model": 0.5389,
+     "survey": 0.4876,
+     "respondents": 252
+    },
+    {
+     "item": "news12",
+     "who": "arab",
+     "model": 0.5585,
+     "survey": 0.5896,
+     "respondents": 150
+    },
+    {
+     "item": "channel14",
+     "who": "coalition",
+     "model": 0.5526,
+     "survey": 0.6006,
+     "respondents": 252
+    },
+    {
+     "item": "channel14",
+     "who": "arab",
+     "model": 0.128,
+     "survey": 0.1622,
+     "respondents": 150
+    },
+    {
+     "item": "kan11",
+     "who": "coalition",
+     "model": 0.3306,
+     "survey": 0.2859,
+     "respondents": 252
+    },
+    {
+     "item": "kan11",
+     "who": "opposition",
+     "model": 0.4673,
+     "survey": 0.4989,
+     "respondents": 367
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Media: news websites visited at least weekly by internet users, nationally and by camp",
+   "nodes": [
+    "news_websites"
+   ],
+   "source": "agam_media_index_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.01496,
+   "passed": true,
+   "detail": [
+    {
+     "site": "ynet",
+     "camp": "jews",
+     "model": 0.6241,
+     "agam": 0.6391
+    },
+    {
+     "site": "mako",
+     "camp": "all",
+     "model": 0.476,
+     "agam": 0.4646
+    },
+    {
+     "site": "rotter",
+     "camp": "all",
+     "model": 0.1499,
+     "agam": 0.16
+    },
+    {
+     "site": "kan",
+     "camp": "all",
+     "model": 0.3463,
+     "agam": 0.3366
+    }
+   ]
+  },
+  {
+   "name": "Media: preferred news source, by population group and by age (respondents who use a medium often)",
+   "nodes": [
+    "preferred_source"
+   ],
+   "source": "isoc_media_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.0124,
+   "passed": true,
+   "detail": [
+    {
+     "item": "tv by age",
+     "media_age": "18_24",
+     "model": 0.0593,
+     "survey": 0.0469,
+     "respondents": 128
+    },
+    {
+     "item": "tv by age",
+     "media_age": "65_plus",
+     "model": 0.4986,
+     "survey": 0.5059,
+     "respondents": 85
+    },
+    {
+     "item": "social by age",
+     "media_age": "65_plus",
+     "model": 0.0794,
+     "survey": 0.0706,
+     "respondents": 85
+    },
+    {
+     "item": "social by age",
+     "media_age": "18_24",
+     "model": 0.2899,
+     "survey": 0.2969,
+     "respondents": 128
+    },
+    {
+     "item": "tv by group",
+     "media_sector": "religious",
+     "model": 0.062,
+     "survey": 0.0549,
+     "respondents": 91
+    },
+    {
+     "item": "tv by group",
+     "media_sector": "haredi",
+     "model": 0.0188,
+     "survey": 0.0153,
+     "respondents": 131
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value)",
    "nodes": [
     "group",
     "sex",
@@ -1645,6 +1974,7 @@
     "locality_profile",
     "sector",
     "birth_cohort",
+    "religiosity",
     "first_name",
     "immigrant_bucket",
     "origin",
@@ -1655,6 +1985,7 @@
     "children",
     "education",
     "military_service",
+    "in_service",
     "labour_status",
     "occupation",
     "industry",
@@ -1669,128 +2000,141 @@
     "vote_education",
     "vote_origin",
     "vote_area",
+    "vote_2022",
     "online",
     "vote_bloc",
     "news_frequency",
-    "social_news",
-    "favorite_news",
-    "literacy_level"
+    "media_age",
+    "media_sector",
+    "news_tv",
+    "news_radio",
+    "news_print",
+    "news_sites",
+    "news_social",
+    "news_search",
+    "news_podcasts",
+    "newspaper",
+    "literacy_level",
+    "social_networks",
+    "news_networks",
+    "tv_channels",
+    "news_websites"
    ],
    "source": "model",
    "tolerance": 0.001,
-   "max_abs_error": 0.02963,
+   "max_abs_error": 0.04023,
    "passed": true,
    "detail": [
     {
-     "tests": 360,
-     "smallest_adjusted_p": 1.0
+     "tests": 1766,
+     "smallest_adjusted_p": 0.919
     },
     {
-     "node": "online",
-     "parents": "jewish / hiloni / female / 25-29",
-     "p_value": 0.005078,
-     "max_abs_diff": 0.00111
+     "node": "news_networks",
+     "parents": "often / 18_24 / secular : instagram",
+     "p_value": 0.00052,
+     "max_abs_diff": 0.01164
     },
     {
-     "node": "ancestry",
-     "parents": "israel_3gen / hiloni",
-     "p_value": 0.005462,
-     "max_abs_diff": 0.00653
-    },
-    {
-     "node": "home_ownership",
-     "parents": "jewish / h09 / 30-34 / married",
-     "p_value": 0.008083,
-     "max_abs_diff": 0.02853
+     "node": "income",
+     "parents": "employed / jewish / sales_services / female / 25-29",
+     "p_value": 0.000807,
+     "max_abs_diff": 0.01258
     },
     {
      "node": "marital_status",
-     "parents": "jewish / hiloni / male / 20-24",
-     "p_value": 0.011652,
-     "max_abs_diff": 0.00184
+     "parents": "jewish / hiloni / female / 60-64",
+     "p_value": 0.0009,
+     "max_abs_diff": 0.01481
     },
     {
-     "node": "education",
-     "parents": "jewish / hiloni / male / 40-44 / israel",
-     "p_value": 0.017191,
-     "max_abs_diff": 0.01168
+     "node": "literacy_level",
+     "parents": "jewish / hiloni / female / 40-44 / ma",
+     "p_value": 0.001012,
+     "max_abs_diff": 0.01471
+    },
+    {
+     "node": "social_networks",
+     "parents": "social / 18_24 / arab / male / mid : youtube",
+     "p_value": 0.001173,
+     "max_abs_diff": 0.01728
     }
    ]
   },
   {
-   "name": "Percentile is uniform among employed citizens (n = 127,636)",
+   "name": "Percentile is uniform among employed citizens (n = 638,050)",
    "nodes": [
     "income_percentile"
    ],
    "source": "model",
    "tolerance": 0.01,
-   "max_abs_error": 0.00645,
+   "max_abs_error": 0.00608,
    "passed": true,
    "detail": [
     {
      "decile_shares": [
-      0.0986,
-      0.1005,
-      0.0946,
-      0.1065,
-      0.1016,
-      0.096,
-      0.1009,
-      0.1009,
+      0.0984,
+      0.0998,
+      0.0952,
+      0.1061,
+      0.1001,
+      0.0969,
+      0.1014,
       0.1008,
-      0.0996
+      0.1009,
+      0.1005
      ]
     }
    ]
   },
   {
-   "name": "Percentile is uniform among adult citizens (n = 200,000)",
+   "name": "Percentile is uniform among adult citizens (n = 1,000,000)",
    "nodes": [
     "household_income_percentile"
    ],
    "source": "model",
    "tolerance": 0.01,
-   "max_abs_error": 0.00319,
+   "max_abs_error": 0.00354,
    "passed": true,
    "detail": [
     {
      "decile_shares": [
+      0.0989,
       0.0999,
-      0.0987,
       0.1016,
-      0.0968,
-      0.1018,
-      0.1011,
-      0.0992,
-      0.1008,
-      0.0994,
-      0.1008
+      0.0965,
+      0.1019,
+      0.1001,
+      0.1,
+      0.1001,
+      0.0999,
+      0.1011
      ]
     }
    ]
   },
   {
-   "name": "Percentile is uniform among adult citizens (n = 200,000)",
+   "name": "Percentile is uniform among adult citizens (n = 1,000,000)",
    "nodes": [
     "literacy_percentile"
    ],
    "source": "model",
    "tolerance": 0.01,
-   "max_abs_error": 0.00183,
+   "max_abs_error": 0.00226,
    "passed": true,
    "detail": [
     {
      "decile_shares": [
-      0.1003,
-      0.0983,
+      0.1011,
+      0.0977,
+      0.1,
+      0.1004,
+      0.1009,
+      0.0995,
       0.1001,
-      0.1008,
-      0.1015,
+      0.1001,
       0.0998,
-      0.1003,
-      0.1008,
-      0.0982,
-      0.0998
+      0.1004
      ]
     }
    ]
@@ -1971,6 +2315,106 @@
    "name": "Constraint: people under 18 in November 2022 did not vote then",
    "nodes": [
     "vote_2022"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts",
+   "nodes": [
+    "online",
+    "news_sites",
+    "news_social",
+    "news_search",
+    "news_podcasts"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people who use the internet but not social networks use at most WhatsApp and Telegram and get no news from social media",
+   "nodes": [
+    "online",
+    "social_networks",
+    "news_social"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people who do not use the internet use no network or messaging app",
+   "nodes": [
+    "online",
+    "social_networks"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people who never watch TV news watch no channel regularly",
+   "nodes": [
+    "news_tv",
+    "tv_channels"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: no main newspaper for people who never read printed newspapers",
+   "nodes": [
+    "news_print",
+    "newspaper"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people who read printed newspapers have a main newspaper",
+   "nodes": [
+    "news_print",
+    "newspaper"
    ],
    "source": "model/constraints.yaml",
    "tolerance": 0.0,
