@@ -1,0 +1,270 @@
+{
+  "lang": "he",
+  "sentences": [
+    {
+      "id": "intro",
+      "unless": {
+        "sector": [
+          "other"
+        ]
+      },
+      "text": "{first_name} {gender, select, female {היא אישה בת} other {הוא גבר בן}} {age}, {sector} {religiosity}."
+    },
+    {
+      "id": "intro_other",
+      "when": {
+        "sector": [
+          "other"
+        ]
+      },
+      "text": "{first_name} {gender, select, female {היא אישה בת} other {הוא גבר בן}} {age}, {gender, select, female {אינה רשומה כיהודייה או כערבייה ומגדירה את עצמה} other {אינו רשום כיהודי או כערבי ומגדיר את עצמו}} {religiosity}."
+    },
+    {
+      "id": "origin_immigrant",
+      "when": {
+        "generation": [
+          "immigrant"
+        ]
+      },
+      "text": "{gender, select, female {היא} other {הוא}} {origin}."
+    },
+    {
+      "id": "origin_second_gen",
+      "when": {
+        "generation": [
+          "second_gen"
+        ]
+      },
+      "text": "{gender, select, female {היא} other {הוא}} {origin}."
+    },
+    {
+      "id": "origin_third_gen",
+      "when": {
+        "generation": [
+          "third_gen"
+        ]
+      },
+      "text": "{gender, select, female {היא בת} other {הוא בן}} דור שלישי בישראל, {ancestry}."
+    },
+    {
+      "id": "residence",
+      "text": "{gender, select, female {היא גרה} other {הוא גר}} ב{locality}, {district}."
+    },
+    {
+      "id": "family",
+      "text": "{gender, select, female {היא} other {הוא}} {marital_status} {children__family}."
+    },
+    {
+      "id": "education",
+      "text": "{gender, select, female {היא} other {הוא}} {education__has}."
+    },
+    {
+      "id": "service_now_idf",
+      "when": {
+        "in_service": [
+          "idf"
+        ]
+      },
+      "text": "{gender, select, female {היא משרתת} other {הוא משרת}} כעת בשירות סדיר בצה\"ל."
+    },
+    {
+      "id": "service_now_national",
+      "when": {
+        "in_service": [
+          "national_service"
+        ]
+      },
+      "text": "{gender, select, female {היא עושה} other {הוא עושה}} כעת שירות לאומי."
+    },
+    {
+      "id": "service_past",
+      "when": {
+        "in_service": [
+          "no"
+        ],
+        "military_service": [
+          "idf",
+          "national_service"
+        ]
+      },
+      "text": "{gender, select, female {היא} other {הוא}} {military_service}."
+    },
+    {
+      "id": "service_none",
+      "when": {
+        "military_service": [
+          "none"
+        ],
+        "group": [
+          "jewish",
+          "druze",
+          "other"
+        ]
+      },
+      "text": "{gender, select, female {היא לא שירתה בצה\"ל ולא עשתה שירות לאומי} other {הוא לא שירת בצה\"ל ולא עשה שירות לאומי}}."
+    },
+    {
+      "id": "work",
+      "when": {
+        "labour_status": [
+          "employed"
+        ]
+      },
+      "text": "{work_status__id, select, self_employed {{gender, select, female {היא עצמאית ועובדת} other {הוא עצמאי ועובד}}} company_owner {{gender, select, female {היא מנהלת חברה בבעלותה ועובדת} other {הוא מנהל חברה בבעלותו ועובד}}} unpaid_family {{gender, select, female {היא עובדת ללא שכר בעסק משפחתי,} other {הוא עובד ללא שכר בעסק משפחתי,}}} other {{gender, select, female {היא עובדת} other {הוא עובד}}}} {occupation__as} {industry__in}."
+    },
+    {
+      "id": "work_retired",
+      "when": {
+        "labour_status": [
+          "retired"
+        ]
+      },
+      "text": "{gender, select, female {היא פנסיונרית, ובעבר עבדה} other {הוא פנסיונר, ובעבר עבד}} {occupation__as} {industry__in}."
+    },
+    {
+      "id": "work_unemployed",
+      "when": {
+        "labour_status": [
+          "unemployed"
+        ]
+      },
+      "text": "{gender, select, female {היא מובטלת ומחפשת עבודה} other {הוא מובטל ומחפש עבודה}}."
+    },
+    {
+      "id": "work_none",
+      "when": {
+        "labour_status": [
+          "not_in_labour_force"
+        ]
+      },
+      "text": "{gender, select, female {היא אינה עובדת ואינה מחפשת עבודה} other {הוא אינו עובד ואינו מחפש עבודה}}."
+    },
+    {
+      "id": "earnings",
+      "when": {
+        "labour_status": [
+          "employed"
+        ]
+      },
+      "text": "{gender, select, female {היא מרוויחה} other {הוא מרוויח}} כ-{income_amount, number} ₪ ברוטו בחודש, יותר מ-{income_percentile, number, ::precision-integer}% מהמועסקים."
+    },
+    {
+      "id": "household",
+      "unless": {
+        "household_income": [
+          "none"
+        ]
+      },
+      "text": "הכנסת משק הבית {gender, select, female {שלה} other {שלו}} עומדת על כ-{household_income_amount, number} ₪ ברוטו בחודש, יותר משל {household_income_percentile, number, ::precision-integer}% מהאזרחים הבוגרים, {home_ownership__id, select, yes {והדירה שבה הם גרים בבעלותם} other {והדירה שבה הם גרים אינה בבעלותם}}."
+    },
+    {
+      "id": "household_none",
+      "when": {
+        "household_income": [
+          "none"
+        ]
+      },
+      "text": "משק הבית {gender, select, female {שלה} other {שלו}} מדווח שאין לו הכנסה, {home_ownership__id, select, yes {והדירה שבה הם גרים בבעלותם} other {והדירה שבה הם גרים אינה בבעלותם}}."
+    },
+    {
+      "id": "health",
+      "text": "{gender, select, female {לדבריה, מצב בריאותה} other {לדבריו, מצב בריאותו}} {health}."
+    },
+    {
+      "id": "chronic",
+      "when": {
+        "chronic": [
+          "yes"
+        ]
+      },
+      "text": "{gender, select, female {יש לה} other {יש לו}} מחלה או בעיה בריאותית כרונית{disability__id, select, yes {, {gender, select, female {המגבילה אותה מאוד} other {המגבילה אותו מאוד}} בתפקוד היומיומי} other {}}."
+    },
+    {
+      "id": "disability_only",
+      "when": {
+        "chronic": [
+          "no"
+        ],
+        "disability": [
+          "yes"
+        ]
+      },
+      "text": "{gender, select, female {יש לה} other {יש לו}} מוגבלות תפקודית חמורה."
+    },
+    {
+      "id": "vote",
+      "when": {
+        "vote_2022": [
+          "likud",
+          "yesh_atid",
+          "religious_zionism",
+          "national_unity",
+          "shas",
+          "utj",
+          "yisrael_beiteinu",
+          "labor",
+          "meretz",
+          "jewish_home",
+          "raam",
+          "hadash_taal",
+          "balad",
+          "other_party"
+        ]
+      },
+      "text": "בבחירות לכנסת ב-2022 {gender, select, female {היא הצביעה} other {הוא הצביע}} {vote_2022__for}."
+    },
+    {
+      "id": "vote_none",
+      "when": {
+        "vote_2022": [
+          "did_not_vote"
+        ]
+      },
+      "text": "{gender, select, female {היא לא הצביעה} other {הוא לא הצביע}} בבחירות לכנסת ב-2022."
+    },
+    {
+      "id": "vote_young",
+      "when": {
+        "vote_2022": [
+          "too_young"
+        ]
+      },
+      "text": "{gender, select, female {היא הייתה צעירה מדי} other {הוא היה צעיר מדי}} להצביע בבחירות לכנסת ב-2022."
+    },
+    {
+      "id": "news",
+      "text": "{news_frequency__id, select, never {{gender, select, female {היא כמעט אינה עוקבת} other {הוא כמעט אינו עוקב}} אחר חדשות פוליטיות} other {{gender, select, female {היא עוקבת} other {הוא עוקב}} אחר חדשות ומידע פוליטי {news_frequency}}}{favorite_news__id, select, none {, ואין {gender, select, female {לה} other {לו}} מהדורת חדשות אהובה} not_measured {} other {; מהדורת החדשות האהובה {gender, select, female {עליה} other {עליו}}: {favorite_news}}}."
+    },
+    {
+      "id": "online_social",
+      "when": {
+        "online": [
+          "social"
+        ]
+      },
+      "text": "{gender, select, female {היא משתמשת} other {הוא משתמש}} ברשתות חברתיות{social_news__id, select, never {, אך כמעט אינ{gender, select, female {ה} other {ו}} קורא{gender, select, female {ת} other {}} בהן חדשות פוליטיות} other {, וקורא{gender, select, female {ת} other {}} בהן חדשות ומידע פוליטי {social_news}}}."
+    },
+    {
+      "id": "online_internet",
+      "when": {
+        "online": [
+          "internet_only"
+        ]
+      },
+      "text": "{gender, select, female {היא משתמשת} other {הוא משתמש}} באינטרנט אך לא ברשתות חברתיות."
+    },
+    {
+      "id": "online_none",
+      "when": {
+        "online": [
+          "offline"
+        ]
+      },
+      "text": "{gender, select, female {היא אינה משתמשת} other {הוא אינו משתמש}} באינטרנט."
+    },
+    {
+      "id": "literacy",
+      "text": "לפי המודל, מיומנות הקריאה {gender, select, female {שלה} other {שלו}} בסולם מיומנויות הבוגרים של ה-OECD נמצאת {literacy_level__at} (ציון {literacy_score, number, ::precision-integer} מתוך 500), גבוהה משל {literacy_percentile, number, ::precision-integer}% מהאזרחים הבוגרים."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# data that is reproducible from sources.yaml + sources.lock.json
+data/raw/
+data/interim/
+reports/tmp/
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# node
+node_modules/
+dist/
+.svelte-kit/
+# secrets for tier-C sources
+.env
+# derived artefacts, rebuilt deterministically (`popsim export`, `pnpm --filter popsim-web build`);
+# model/build/model.sha256 stays committed as the bundle's fingerprint
+model/build/*.json
+web/public/data/
+.claude/

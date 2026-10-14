@@ -1,0 +1,11 @@
+age,sex,military_service,value,p
+*,*,*,no,1.0
+18,male,idf,idf,1.0
+18,male,national_service,national_service,1.0
+18,female,idf,idf,1.0
+18,female,national_service,national_service,1.0
+19,male,idf,idf,1.0
+19,male,national_service,national_service,1.0
+19,female,idf,idf,1.0
+19,female,national_service,national_service,1.0
+20,male,idf,idf,1.0

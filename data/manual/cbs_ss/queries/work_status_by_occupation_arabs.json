@@ -1,0 +1,30 @@
+{
+ "description": "status at work by occupation and sex (employed persons) - Arabs outside the Jerusalem district",
+ "rows": [
+  4124,
+  571
+ ],
+ "cols": [
+  4251
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    2
+   ]
+  },
+  {
+   "var": 6702,
+   "values": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  }
+ ],
+ "year": 2024
+}

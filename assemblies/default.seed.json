@@ -1,0 +1,10 @@
+{
+  "beacon": "drand mainnet (beaconID: default)",
+  "chain_hash": "8990e7a9aaed2ffed73dbd7092123d6f289930540d7651336225dc172e51b2ce",
+  "time": "2026-10-13T00:00:00Z",
+  "round": 6547286,
+  "randomness": "755b7112c2a52bde8a5f03267cc783d73fecc8134c6445b2473db60abcf55663",
+  "derivation": "seed = int(randomness[:8], 16)",
+  "seed": 1968926994,
+  "verify": "https://api.drand.sh/public/6547286"
+}

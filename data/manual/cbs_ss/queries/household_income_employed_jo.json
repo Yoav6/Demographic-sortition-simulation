@@ -1,0 +1,20 @@
+{
+ "description": "household gross income by marital status, personal gross income and age (employed persons) - Jews and others",
+ "rows": [
+  101,
+  3115,
+  577
+ ],
+ "cols": [
+  3177
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  }
+ ],
+ "year": 2024
+}

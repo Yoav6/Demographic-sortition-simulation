@@ -1,0 +1,19 @@
+{
+ "description": "industry by occupation and sex (employed persons) - Jews and others",
+ "rows": [
+  4124,
+  571
+ ],
+ "cols": [
+  4097
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  }
+ ],
+ "year": 2024
+}

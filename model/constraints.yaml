@@ -1,0 +1,79 @@
+# Combinations that must never occur in a sampled person. `popsim validate` draws a large
+# sample with the TypeScript sampler and counts violations (any violation fails validation).
+#
+#   when:    the constraint applies to people with these values (all conditions must hold)
+#   forbid:  ...who must not have any of these values
+#   require: ...who must have one of these values
+#   expr:    a pandas expression that must be true (numbers; "not applicable" counts as true)
+
+constraints:
+  - id: no_degree_before_20
+    description: no academic or post-secondary diploma at 18-19
+    nodes: [education]
+    when: {age_band: ["18-19"]}
+    forbid: {education: [post_secondary, ba, ma, phd]}
+
+  - id: service_age
+    description: compulsory or national service only at ages 18-20
+    nodes: [in_service, labour_status]
+    when: {labour_status: [compulsory_service]}
+    expr: age <= 20
+
+  - id: serving_matches_service
+    description: people in service have the matching service history
+    nodes: [in_service, military_service]
+    when: {in_service: [idf]}
+    require: {military_service: [idf]}
+
+  - id: retired_age
+    description: retirees are 65 or older
+    nodes: [labour_status]
+    when: {labour_status: [retired]}
+    expr: age >= 65
+
+  - id: occupation_only_if_working
+    description: an occupation only for the employed and retirees
+    nodes: [occupation, labour_status]
+    when: {labour_status: [unemployed, not_in_labour_force, compulsory_service]}
+    require: {occupation: [none]}
+
+  - id: employed_have_occupation
+    description: every employed person has an occupation
+    nodes: [occupation, labour_status]
+    when: {labour_status: [employed, retired]}
+    forbid: {occupation: [none]}
+
+  - id: industry_follows_occupation
+    description: an industry exactly when there is an occupation
+    nodes: [industry, occupation]
+    when: {occupation: [none]}
+    require: {industry: [none]}
+
+  - id: earnings_only_if_employed
+    description: earnings exactly for the employed
+    nodes: [income, labour_status]
+    when: {labour_status: [unemployed, not_in_labour_force, retired, compulsory_service]}
+    require: {income: [not_employed]}
+
+  - id: household_at_least_earnings
+    description: household income is at least the person's own earnings
+    nodes: [household_income_amount, income_amount]
+    expr: household_income_amount >= income_amount
+
+  - id: young_parents
+    description: at most one child at 18-19
+    nodes: [children]
+    when: {age_band: ["18-19"]}
+    forbid: {children: ["2", "3", "4", "5", "6", "7"]}
+
+  - id: no_young_widows
+    description: no widowed 18-19-year-olds
+    nodes: [marital_status]
+    when: {age_band: ["18-19"]}
+    forbid: {marital_status: [widowed]}
+
+  - id: vote_eligibility
+    description: people under 18 in November 2022 did not vote then
+    nodes: [vote_2022]
+    when: {age_band: ["18-19"]}
+    require: {vote_2022: [too_young]}

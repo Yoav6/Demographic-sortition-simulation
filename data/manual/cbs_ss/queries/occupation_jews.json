@@ -1,0 +1,26 @@
+{
+ "description": "occupation by religiosity, sex and highest diploma - employed Jews",
+ "year": 2024,
+ "rows": [
+  1694,
+  571,
+  1881
+ ],
+ "cols": [
+  4124
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  },
+  {
+   "var": 1629,
+   "values": [
+    1
+   ]
+  }
+ ]
+}

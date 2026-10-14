@@ -1,0 +1,25 @@
+{
+  "name": "popsim-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "prepare-data": "node scripts/prepare-data.mjs",
+    "dev": "node scripts/prepare-data.mjs && vite",
+    "build": "node scripts/prepare-data.mjs && vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "dependencies": {
+    "@popsim/sampler": "workspace:*",
+    "marked": "^16.0.0"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tsconfig/svelte": "^5.0.8",
+    "svelte": "^5.57.2",
+    "svelte-check": "^4.7.6",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.4"
+  }
+}

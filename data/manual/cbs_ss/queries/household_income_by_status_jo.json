@@ -1,0 +1,20 @@
+{
+ "description": "household gross income by labour-force status, age and marital status - Jews and others",
+ "rows": [
+  6808,
+  577,
+  101
+ ],
+ "cols": [
+  3177
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  }
+ ],
+ "year": 2024
+}

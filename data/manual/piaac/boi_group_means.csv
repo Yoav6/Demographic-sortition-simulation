@@ -1,0 +1,10 @@
+group,domain,mean_score,page,figure
+non_haredi_jews,literacy,261,6,2b
+arabs,literacy,199,6,2b
+haredim,literacy,251,6,2b
+non_haredi_jews,numeracy,258,6,2b
+arabs,numeracy,215,6,2b
+haredim,numeracy,246,6,2b
+non_haredi_jews,adaptive_problem_solving,249,6,2b
+arabs,adaptive_problem_solving,206,6,2b
+haredim,adaptive_problem_solving,239,6,2b

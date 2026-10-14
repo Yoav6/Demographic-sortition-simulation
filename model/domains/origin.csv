@@ -1,0 +1,53 @@
+id,en,he,he_f,country,generation
+israel_3gen,third-generation Israeli,דור שלישי בישראל,,israel,third_gen
+fsu_immigrant,immigrant from the former USSR,עולה מברית המועצות לשעבר,,fsu,immigrant
+fsu_second_gen,"Israeli-born, of former-Soviet origin","יליד ישראל, ממוצא ברית המועצות לשעבר","ילידת ישראל, ממוצא ברית המועצות לשעבר",fsu,second_gen
+morocco_immigrant,immigrant from Morocco,עולה ממרוקו,,morocco,immigrant
+morocco_second_gen,"Israeli-born, of Moroccan origin","יליד ישראל, ממוצא מרוקאי","ילידת ישראל, ממוצא מרוקאי",morocco,second_gen
+iraq_immigrant,immigrant from Iraq,עולה מעיראק,,iraq,immigrant
+iraq_second_gen,"Israeli-born, of Iraqi origin","יליד ישראל, ממוצא עיראקי","ילידת ישראל, ממוצא עיראקי",iraq,second_gen
+iran_immigrant,immigrant from Iran,עולה מאיראן,,iran,immigrant
+iran_second_gen,"Israeli-born, of Iranian origin","יליד ישראל, ממוצא פרסי","ילידת ישראל, ממוצא פרסי",iran,second_gen
+yemen_immigrant,immigrant from Yemen,עולה מתימן,,yemen,immigrant
+yemen_second_gen,"Israeli-born, of Yemenite origin","יליד ישראל, ממוצא תימני","ילידת ישראל, ממוצא תימני",yemen,second_gen
+ethiopia_immigrant,immigrant from Ethiopia,עולה מאתיופיה,,ethiopia,immigrant
+ethiopia_second_gen,"Israeli-born, of Ethiopian origin","יליד ישראל, ממוצא אתיופי","ילידת ישראל, ממוצא אתיופי",ethiopia,second_gen
+algeria_tunisia_immigrant,immigrant from Tunisia or Algeria,עולה מתוניסיה או אלג'יריה,,algeria_tunisia,immigrant
+algeria_tunisia_second_gen,"Israeli-born, of Tunisian or Algerian origin","יליד ישראל, ממוצא תוניסאי-אלג'יראי","ילידת ישראל, ממוצא תוניסאי-אלג'יראי",algeria_tunisia,second_gen
+libya_immigrant,immigrant from Libya,עולה מלוב,,libya,immigrant
+libya_second_gen,"Israeli-born, of Libyan origin","יליד ישראל, ממוצא לובי","ילידת ישראל, ממוצא לובי",libya,second_gen
+egypt_immigrant,immigrant from Egypt,עולה ממצרים,,egypt,immigrant
+egypt_second_gen,"Israeli-born, of Egyptian origin","יליד ישראל, ממוצא מצרי","ילידת ישראל, ממוצא מצרי",egypt,second_gen
+turkey_immigrant,immigrant from Turkey,עולה מטורקיה,,turkey,immigrant
+turkey_second_gen,"Israeli-born, of Turkish origin","יליד ישראל, ממוצא טורקי","ילידת ישראל, ממוצא טורקי",turkey,second_gen
+india_immigrant,immigrant from India,עולה מהודו,,india,immigrant
+india_second_gen,"Israeli-born, of Indian origin","יליד ישראל, ממוצא הודי","ילידת ישראל, ממוצא הודי",india,second_gen
+syria_lebanon_immigrant,immigrant from Syria or Lebanon,עולה מסוריה או לבנון,,syria_lebanon,immigrant
+syria_lebanon_second_gen,"Israeli-born, of Syrian or Lebanese origin","יליד ישראל, ממוצא סורי-לבנוני","ילידת ישראל, ממוצא סורי-לבנוני",syria_lebanon,second_gen
+asia_other_immigrant,immigrant from another Asian country,עולה מארץ אחרת באסיה,,asia_other,immigrant
+asia_other_second_gen,"Israeli-born, of Asian origin","יליד ישראל, ממוצא אסייתי","ילידת ישראל, ממוצא אסייתי",asia_other,second_gen
+africa_other_immigrant,immigrant from another African country,עולה מארץ אחרת באפריקה,,africa_other,immigrant
+africa_other_second_gen,"Israeli-born, of African origin","יליד ישראל, ממוצא אפריקאי","ילידת ישראל, ממוצא אפריקאי",africa_other,second_gen
+poland_immigrant,immigrant from Poland,עולה מפולין,,poland,immigrant
+poland_second_gen,"Israeli-born, of Polish origin","יליד ישראל, ממוצא פולני","ילידת ישראל, ממוצא פולני",poland,second_gen
+romania_immigrant,immigrant from Romania,עולה מרומניה,,romania,immigrant
+romania_second_gen,"Israeli-born, of Romanian origin","יליד ישראל, ממוצא רומני","ילידת ישראל, ממוצא רומני",romania,second_gen
+bulgaria_greece_immigrant,immigrant from Bulgaria or Greece,עולה מבולגריה או יוון,,bulgaria_greece,immigrant
+bulgaria_greece_second_gen,"Israeli-born, of Bulgarian or Greek origin","יליד ישראל, ממוצא בולגרי-יווני","ילידת ישראל, ממוצא בולגרי-יווני",bulgaria_greece,second_gen
+germany_austria_immigrant,immigrant from Germany or Austria,עולה מגרמניה או אוסטריה,,germany_austria,immigrant
+germany_austria_second_gen,"Israeli-born, of German or Austrian origin","יליד ישראל, ממוצא גרמני-אוסטרי","ילידת ישראל, ממוצא גרמני-אוסטרי",germany_austria,second_gen
+czech_hungary_immigrant,"immigrant from Czechia, Slovakia or Hungary","עולה מצ'כיה, סלובקיה או הונגריה",,czech_hungary,immigrant
+czech_hungary_second_gen,"Israeli-born, of Central European origin","יליד ישראל, ממוצא מרכז-אירופי","ילידת ישראל, ממוצא מרכז-אירופי",czech_hungary,second_gen
+france_immigrant,immigrant from France,עולה מצרפת,,france,immigrant
+france_second_gen,"Israeli-born, of French origin","יליד ישראל, ממוצא צרפתי","ילידת ישראל, ממוצא צרפתי",france,second_gen
+uk_immigrant,immigrant from the UK,עולה מבריטניה,,uk,immigrant
+uk_second_gen,"Israeli-born, of British origin","יליד ישראל, ממוצא בריטי","ילידת ישראל, ממוצא בריטי",uk,second_gen
+europe_other_immigrant,immigrant from another European country,עולה מארץ אחרת באירופה,,europe_other,immigrant
+europe_other_second_gen,"Israeli-born, of European origin","יליד ישראל, ממוצא אירופי","ילידת ישראל, ממוצא אירופי",europe_other,second_gen
+north_america_immigrant,immigrant from North America,עולה מצפון אמריקה,,north_america,immigrant
+north_america_second_gen,"Israeli-born, of North American origin","יליד ישראל, ממוצא אמריקאי","ילידת ישראל, ממוצא אמריקאי",north_america,second_gen
+argentina_immigrant,immigrant from Argentina,עולה מארגנטינה,,argentina,immigrant
+argentina_second_gen,"Israeli-born, of Argentine origin","יליד ישראל, ממוצא ארגנטינאי","ילידת ישראל, ממוצא ארגנטינאי",argentina,second_gen
+latin_america_other_immigrant,immigrant from another Latin American country,עולה מארץ אחרת באמריקה הלטינית,,latin_america_other,immigrant
+latin_america_other_second_gen,"Israeli-born, of Latin American origin","יליד ישראל, ממוצא לטינו-אמריקאי","ילידת ישראל, ממוצא לטינו-אמריקאי",latin_america_other,second_gen
+native,not applicable,לא רלוונטי,,,native

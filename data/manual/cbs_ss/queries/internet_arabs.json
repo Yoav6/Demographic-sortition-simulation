@@ -1,0 +1,31 @@
+{
+ "description": "uses the internet by religion, sex and age - Arabs outside Jerusalem district",
+ "year": 2024,
+ "rows": [
+  1629,
+  571,
+  577
+ ],
+ "cols": [
+  2169
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    2
+   ]
+  },
+  {
+   "var": 6702,
+   "values": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  }
+ ]
+}

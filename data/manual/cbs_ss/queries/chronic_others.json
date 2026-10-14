@@ -1,0 +1,27 @@
+{
+ "description": "has a long-term health problem by sex and age - non-Arab non-Jews",
+ "year": 2024,
+ "rows": [
+  571,
+  577
+ ],
+ "cols": [
+  1376
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  },
+  {
+   "var": 1629,
+   "values": [
+    3,
+    5,
+    6
+   ]
+  }
+ ]
+}

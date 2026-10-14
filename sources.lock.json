@@ -1,0 +1,176 @@
+{
+  "agam_media_index_2024": {
+    "agam_media_index_2024.pdf": {
+      "sha256": "a5a7d1bd1fa685c3b9d7a8b9708bbe52900c48547012e73ca89eeb56680e8958",
+      "size": 5916430,
+      "retrieved": "2026-10-13",
+      "url": "https://agamlabs.com/wp-content/uploads/2025/03/12-compressed.pdf"
+    }
+  },
+  "boi_piaac_note_2024": {
+    "lm202403e.pdf": {
+      "sha256": "9e74cf12cd5f95adea50a516a698907d8a9d1bf0bf9a06bb1ced5b1fc4d2658f",
+      "size": 2653384,
+      "retrieved": "2026-10-14",
+      "url": "https://www.boi.org.il/media/1tgdsdvt/lm202403e.pdf"
+    }
+  },
+  "cbs_abstract_2021_origin": {
+    "st02_08.xls": {
+      "sha256": "4fc804bd9605b054ad651e028858efc26edb6f35ba56f891436306f0a9864489",
+      "size": 71680,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2021/2.shnatonpopulation/st02_08.xls"
+    }
+  },
+  "cbs_abstract_2025_attitudes": {
+    "st28_01x.xlsx": {
+      "sha256": "572c3569bd902e444816c8f1241c36d2cea0bea1118dc7640f26779db697ceab",
+      "size": 35277,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/DocLib/2025/28.ShnatonPublicAttitudesandPerceptions/st28_01x.xlsx"
+    },
+    "st28_04x.xlsx": {
+      "sha256": "66da1d4941592771f1df503128addee29c6a26be8c7649bf8aee948e3d79a89a",
+      "size": 32107,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/DocLib/2025/28.ShnatonPublicAttitudesandPerceptions/st28_04x.xlsx"
+    }
+  },
+  "cbs_abstract_2025_marriages": {
+    "st02_24.xlsx": {
+      "sha256": "d99aa59c54bf77889cce49993e21ab513c863b99cf0ede044d0de5665edbe928",
+      "size": 29063,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2025/2.shnatonpopulation/st02_24.xlsx"
+    }
+  },
+  "cbs_abstract_2025_population": {
+    "st02_03.xlsx": {
+      "sha256": "543caa013f490488d01ec4db8f3da347f29ce846af44f6ac03555d51391279d3",
+      "size": 67395,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2025/2.shnatonpopulation/st02_03.xlsx"
+    },
+    "st02_06_2024.xlsx": {
+      "sha256": "77c8d2338e347b80491216999f6b02e0d3b8dbdf4c5390788d57abdf6ae0be12",
+      "size": 36621,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2024/2.shnatonpopulation/st02_06.xlsx"
+    },
+    "st02_07.xlsx": {
+      "sha256": "e7d08c918aeb17d56d4b3ab9265c2bbd5b8839f91f8813f940807b31f846639b",
+      "size": 32241,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2025/2.shnatonpopulation/st02_07.xlsx"
+    }
+  },
+  "cbs_local_authorities_2024": {
+    "p_libud_24.xlsx": {
+      "sha256": "2593d2adf8f2aca70533ca398a92cead08950e292b3dcf3aee6feba2437ff1b1",
+      "size": 1129926,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/DocLib/2019/hamakomiot1999_2017/p_libud_24.xlsx"
+    }
+  },
+  "cbs_localities_2024": {
+    "bycode2024.xlsx": {
+      "sha256": "a021c6a151863ded624d2f674f9bbcf90ba9f3660c8d55aebe6526ff7f5d2ad0",
+      "size": 370654,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/publications/doclib/2019/ishuvim/bycode2024.xlsx"
+    }
+  },
+  "cbs_names": {
+    "11_25_391t1.xlsx": {
+      "sha256": "37b9783487d5de49be1bcb5f25e631c8ece4cab32c590c90e5a927459f06567b",
+      "size": 8107953,
+      "retrieved": "2026-10-13",
+      "url": "https://www.cbs.gov.il/he/mediarelease/DocLib/2025/391/11_25_391t1.xlsx"
+    }
+  },
+  "cec_knesset25": {
+    "expb.csv": {
+      "sha256": "07c71db1bf844d40cbc4d96c606550f2ada3c9f258287d08679180d0b9a413bc",
+      "size": 1746531,
+      "retrieved": "2026-10-13",
+      "url": "https://media25.bechirot.gov.il/files/expb.csv"
+    },
+    "expc.csv": {
+      "sha256": "412785ed46af1281af9f812402bb86c45822ebdccef9131750e922d2375f6103",
+      "size": 154331,
+      "retrieved": "2026-10-13",
+      "url": "https://media25.bechirot.gov.il/files/expc.csv"
+    }
+  },
+  "igra_registry_names": {
+    "other-female.json": {
+      "sha256": "fa2f2c53c6270324d026ff075ed5672cdfe6fe447396c516dbb9c3b654afc0df",
+      "size": 137975,
+      "retrieved": "2026-10-13",
+      "url": "https://genealogy.org.il/pop/other-female/"
+    },
+    "other-male.json": {
+      "sha256": "bd10254b801bfbc0014c2540df6ae65001d8880886728a50c769d9f5ab31031c",
+      "size": 125187,
+      "retrieved": "2026-10-13",
+      "url": "https://genealogy.org.il/pop/other-male/"
+    }
+  },
+  "ines_2022": {
+    "2022_Appendix.pdf": {
+      "sha256": "ab7503cc93216c103985fff7ebc1a328517a896a0995a8f9362c3f54096e169e",
+      "size": 115532,
+      "retrieved": "2026-10-13",
+      "url": "https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2023/06/2022_Appendix-1.pdf"
+    },
+    "2022_Questionnaire_Eng.pdf": {
+      "sha256": "47e28ba8933cd56c827ef6dcdd3f8d46458f53bbb62d55f99edbe0dccfa999ae",
+      "size": 440991,
+      "retrieved": "2026-10-13",
+      "url": "https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2023/06/2022_Questionnaire_Eng.pdf"
+    },
+    "2022_SPSS.sav": {
+      "sha256": "30e0a5c1f1ba44f0cf4c39f171f15df2fcd74f4bffcfc10e012dbbe227392e35",
+      "size": 441917,
+      "retrieved": "2026-10-13",
+      "url": "https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2023/06/2022_SPSS.sav"
+    }
+  },
+  "ines_2025": {
+    "2025_Questionnaire_Eng.pdf": {
+      "sha256": "7ab3fd203212392e8bf77db52642f972a99371c3c83d9d96b180cfed2bc20291",
+      "size": 264019,
+      "retrieved": "2026-10-13",
+      "url": "https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2025/07/2025_Questionnaire_Eng.pdf"
+    },
+    "2025_SPSS.sav": {
+      "sha256": "a29d1dc241f0770894d5d0985423068e4147d34b2c4c773fbe516998ba4b563a",
+      "size": 1004220,
+      "retrieved": "2026-10-13",
+      "url": "https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2025/09/2025_SPSS.sav"
+    }
+  },
+  "oecd_piaac_2023_tables": {
+    "piaac_2023_chapter2_tables.xlsx": {
+      "sha256": "c12ccf3e3f6a0bd020788e67abec7835182f1f87602c547d3a6dc83e8aae8910",
+      "size": 345166,
+      "retrieved": "2026-10-14",
+      "url": "https://stat.link/files/b263dc5d-en/eb8dxq.xlsx"
+    },
+    "piaac_2023_chapter3_tables.xlsx": {
+      "sha256": "9274f8cf17e19387498c682acf554c95c5333c44d1431ee84a12d95ef57fc973",
+      "size": 653037,
+      "retrieved": "2026-10-14",
+      "url": "https://stat.link/files/b263dc5d-en/owiypl.xlsx"
+    }
+  },
+  "wikidata_given_names": {
+    "given_names.json": {
+      "sha256": "7e9d9b23d737da6ac0bb7a2f6f4fcb087bfd41d65f92afbbc91d842e97f6ed1e",
+      "size": 149760,
+      "retrieved": "2026-10-13",
+      "url": "https://query.wikidata.org/sparql"
+    }
+  }
+}

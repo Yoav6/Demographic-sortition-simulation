@@ -1,0 +1,40 @@
+# Checks that run on every push and pull request (the same as `make check`).
+# Raw source files are not in the repository, so estimation (`popsim build`) and validation
+# (`popsim validate`) are not re-run here; CI verifies that the committed model compiles to the
+# recorded fingerprint and that the published assembly is reproduced byte for byte.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: uv sync --frozen
+      - run: pnpm install --frozen-lockfile
+      - name: Python tests
+        run: uv run pytest -q
+      - name: The committed model compiles to the recorded fingerprint
+        run: uv run popsim export --check && uv run popsim export
+      - name: Sampler tests (RNG test vectors, golden assembly, inference, descriptions)
+        run: pnpm --filter @popsim/sampler test
+      - name: The published assembly is reproduced exactly from its seed
+        run: uv run popsim assembly --check
+      - name: SOURCES.md and the methodology docs are up to date
+        run: uv run popsim docs --check
+      - name: The website type-checks and builds
+        run: |
+          pnpm --filter popsim-web check
+          pnpm --filter popsim-web build

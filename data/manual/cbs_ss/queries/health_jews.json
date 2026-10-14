@@ -1,0 +1,26 @@
+{
+ "description": "self-assessed health by religiosity, sex and age - Jews",
+ "year": 2024,
+ "rows": [
+  1694,
+  571,
+  577
+ ],
+ "cols": [
+  1350
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  },
+  {
+   "var": 1629,
+   "values": [
+    1
+   ]
+  }
+ ]
+}

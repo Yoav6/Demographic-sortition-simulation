@@ -1,0 +1,20 @@
+{
+ "description": "gross monthly income (employed persons) by occupation, sex and age - Jews and others",
+ "rows": [
+  4124,
+  571,
+  577
+ ],
+ "cols": [
+  3115
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  }
+ ],
+ "year": 2024
+}

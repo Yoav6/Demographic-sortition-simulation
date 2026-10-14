@@ -1,0 +1,1986 @@
+{
+ "model_version": "2026.10.0",
+ "sample_size": 200000,
+ "seed": 1,
+ "checks": [
+  {
+   "name": "Marital status of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "marital_status"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00579,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "marital": "divorced",
+     "model": 0.0594,
+     "survey": 0.0652,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "marital": "married",
+     "model": 0.7629,
+     "survey": 0.7574,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "marital": "never_married",
+     "model": 0.1283,
+     "survey": 0.1283,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "marital": "widowed",
+     "model": 0.0494,
+     "survey": 0.0491,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "marital": "divorced",
+     "model": 0.0363,
+     "survey": 0.0389,
+     "respondents": 264
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Marital status of Arabs by religion and sex (20+)",
+   "nodes": [
+    "marital_status"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.01309,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "marital": "divorced",
+     "model": 0.0021,
+     "survey": 0.0,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "marital": "married",
+     "model": 0.7233,
+     "survey": 0.7348,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "marital": "never_married",
+     "model": 0.1939,
+     "survey": 0.1808,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "marital": "widowed",
+     "model": 0.0807,
+     "survey": 0.0844,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "marital": "divorced",
+     "model": 0.0027,
+     "survey": 0.0,
+     "respondents": 32
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Children of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "children"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00645,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "children": "0",
+     "model": 0.176,
+     "survey": 0.1765,
+     "respondents": 275
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "children": "1",
+     "model": 0.0526,
+     "survey": 0.0534,
+     "respondents": 275
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "children": "2",
+     "model": 0.1173,
+     "survey": 0.112,
+     "respondents": 275
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "children": "3",
+     "model": 0.214,
+     "survey": 0.2194,
+     "respondents": 275
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "children": "4",
+     "model": 0.2031,
+     "survey": 0.2028,
+     "respondents": 275
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Children of Arabs by religion and sex (20+)",
+   "nodes": [
+    "children"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.03065,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "children": "0",
+     "model": 0.2632,
+     "survey": 0.2441,
+     "respondents": 35
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "children": "1",
+     "model": 0.0262,
+     "survey": 0.0222,
+     "respondents": 35
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "children": "2",
+     "model": 0.1819,
+     "survey": 0.1751,
+     "respondents": 35
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "children": "3",
+     "model": 0.3206,
+     "survey": 0.3512,
+     "respondents": 35
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "children": "4",
+     "model": 0.1447,
+     "survey": 0.1651,
+     "respondents": 35
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Highest diploma of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "education"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00557,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "diploma": "ba",
+     "model": 0.2565,
+     "survey": 0.2545,
+     "respondents": 297
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "diploma": "bagrut",
+     "model": 0.231,
+     "survey": 0.234,
+     "respondents": 297
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "diploma": "ma",
+     "model": 0.1701,
+     "survey": 0.1753,
+     "respondents": 297
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "diploma": "no_diploma",
+     "model": 0.0448,
+     "survey": 0.0423,
+     "respondents": 297
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "diploma": "other_diploma",
+     "model": 0.0429,
+     "survey": 0.0432,
+     "respondents": 297
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Highest diploma of Arabs by religion and sex (20+)",
+   "nodes": [
+    "education"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.01629,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "diploma": "ba",
+     "model": 0.329,
+     "survey": 0.3453,
+     "respondents": 36
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "diploma": "bagrut",
+     "model": 0.2665,
+     "survey": 0.2643,
+     "respondents": 36
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "diploma": "ma",
+     "model": 0.0767,
+     "survey": 0.077,
+     "respondents": 36
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "diploma": "no_diploma",
+     "model": 0.0022,
+     "survey": 0.0,
+     "respondents": 36
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "diploma": "other_diploma",
+     "model": 0.0339,
+     "survey": 0.0344,
+     "respondents": 36
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Military/national service of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "military_service"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.01609,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "service": "idf",
+     "model": 0.2132,
+     "survey": 0.2196,
+     "respondents": 312
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "service": "national_service",
+     "model": 0.3684,
+     "survey": 0.369,
+     "respondents": 312
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "service": "none",
+     "model": 0.4184,
+     "survey": 0.4115,
+     "respondents": 312
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "service": "idf",
+     "model": 0.8523,
+     "survey": 0.8563,
+     "respondents": 263
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "service": "national_service",
+     "model": 0.0116,
+     "survey": 0.011,
+     "respondents": 263
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Military/national service of Arabs by religion and sex (20+)",
+   "nodes": [
+    "military_service"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.04514,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "service": "idf",
+     "model": 0.0013,
+     "survey": 0.0,
+     "respondents": 49
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "service": "national_service",
+     "model": 0.15,
+     "survey": 0.1457,
+     "respondents": 49
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "service": "none",
+     "model": 0.8487,
+     "survey": 0.8543,
+     "respondents": 49
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "service": "idf",
+     "model": 0.0302,
+     "survey": 0.0302,
+     "respondents": 37
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "service": "national_service",
+     "model": 0.0355,
+     "survey": 0.0325,
+     "respondents": 37
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Labour-force status of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "labour_status"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.01087,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "employment": "employed",
+     "model": 0.6482,
+     "survey": 0.6539,
+     "respondents": 315
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "employment": "not_in_labour_force",
+     "model": 0.3338,
+     "survey": 0.3283,
+     "respondents": 315
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "employment": "unemployed",
+     "model": 0.018,
+     "survey": 0.0177,
+     "respondents": 315
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "employment": "employed",
+     "model": 0.6952,
+     "survey": 0.7051,
+     "respondents": 264
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "employment": "not_in_labour_force",
+     "model": 0.2778,
+     "survey": 0.2678,
+     "respondents": 264
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Labour-force status of Arabs by religion and sex (20+)",
+   "nodes": [
+    "labour_status"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.01454,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "employment": "employed",
+     "model": 0.6433,
+     "survey": 0.6519,
+     "respondents": 48
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "employment": "not_in_labour_force",
+     "model": 0.3366,
+     "survey": 0.326,
+     "respondents": 48
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "employment": "unemployed",
+     "model": 0.0201,
+     "survey": 0.0221,
+     "respondents": 48
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "employment": "employed",
+     "model": 0.6521,
+     "survey": 0.6599,
+     "respondents": 32
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "employment": "not_in_labour_force",
+     "model": 0.3172,
+     "survey": 0.3078,
+     "respondents": 32
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Self-rated health of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "health"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.01264,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "health": "good",
+     "model": 0.2969,
+     "survey": 0.2953,
+     "respondents": 303
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "health": "not_good",
+     "model": 0.0278,
+     "survey": 0.0281,
+     "respondents": 303
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "health": "not_so_good",
+     "model": 0.11,
+     "survey": 0.1081,
+     "respondents": 303
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "health": "very_good",
+     "model": 0.5653,
+     "survey": 0.5685,
+     "respondents": 303
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "health": "good",
+     "model": 0.2369,
+     "survey": 0.2303,
+     "respondents": 254
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Self-rated health of Arabs by religion and sex (20+)",
+   "nodes": [
+    "health"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.01235,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "health": "good",
+     "model": 0.2453,
+     "survey": 0.2559,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "health": "not_good",
+     "model": 0.1014,
+     "survey": 0.0994,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "health": "not_so_good",
+     "model": 0.0196,
+     "survey": 0.0134,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "health": "very_good",
+     "model": 0.6337,
+     "survey": 0.6313,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "health": "good",
+     "model": 0.2884,
+     "survey": 0.2908,
+     "respondents": 26
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Chronic illness of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "chronic"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00611,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "chronic": "no",
+     "model": 0.7079,
+     "survey": 0.7101,
+     "respondents": 313
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "chronic": "yes",
+     "model": 0.2921,
+     "survey": 0.2899,
+     "respondents": 313
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "chronic": "no",
+     "model": 0.7153,
+     "survey": 0.7214,
+     "respondents": 264
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "chronic": "yes",
+     "model": 0.2847,
+     "survey": 0.2786,
+     "respondents": 264
+    },
+    {
+     "religiosity": "haredi",
+     "sex": "female",
+     "chronic": "no",
+     "model": 0.8526,
+     "survey": 0.8502,
+     "respondents": 397
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Chronic illness of Arabs by religion and sex (20+)",
+   "nodes": [
+    "chronic"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.00645,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "chronic": "no",
+     "model": 0.6916,
+     "survey": 0.687,
+     "respondents": 51
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "chronic": "yes",
+     "model": 0.3084,
+     "survey": 0.313,
+     "respondents": 51
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "chronic": "no",
+     "model": 0.5787,
+     "survey": 0.5727,
+     "respondents": 28
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "chronic": "yes",
+     "model": 0.4213,
+     "survey": 0.4273,
+     "respondents": 28
+    },
+    {
+     "religion": "druze",
+     "sex": "female",
+     "chronic": "no",
+     "model": 0.6405,
+     "survey": 0.6413,
+     "respondents": 45
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Severe disability of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "disability"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00428,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "disability": "no",
+     "model": 0.8865,
+     "survey": 0.8904,
+     "respondents": 312
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "disability": "yes",
+     "model": 0.1135,
+     "survey": 0.1096,
+     "respondents": 312
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "disability": "no",
+     "model": 0.8515,
+     "survey": 0.8549,
+     "respondents": 265
+    },
+    {
+     "religiosity": "dati",
+     "sex": "male",
+     "disability": "yes",
+     "model": 0.1485,
+     "survey": 0.1451,
+     "respondents": 265
+    },
+    {
+     "religiosity": "haredi",
+     "sex": "female",
+     "disability": "no",
+     "model": 0.9234,
+     "survey": 0.9234,
+     "respondents": 420
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Severe disability of Arabs by religion and sex (20+)",
+   "nodes": [
+    "disability"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.01252,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "disability": "no",
+     "model": 0.8613,
+     "survey": 0.8662,
+     "respondents": 49
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "disability": "yes",
+     "model": 0.1387,
+     "survey": 0.1338,
+     "respondents": 49
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "disability": "no",
+     "model": 0.6291,
+     "survey": 0.6165,
+     "respondents": 32
+    },
+    {
+     "religion": "christian",
+     "sex": "male",
+     "disability": "yes",
+     "model": 0.3709,
+     "survey": 0.3835,
+     "respondents": 32
+    },
+    {
+     "religion": "druze",
+     "sex": "female",
+     "disability": "no",
+     "model": 0.7076,
+     "survey": 0.7111,
+     "respondents": 47
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Occupation of employed Jews by religiosity and sex (20+)",
+   "nodes": [
+    "occupation"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00985,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "occupation": "clerical",
+     "model": 0.0796,
+     "survey": 0.0794,
+     "respondents": 183
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "occupation": "managers",
+     "model": 0.0478,
+     "survey": 0.0481,
+     "respondents": 183
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "occupation": "professionals",
+     "model": 0.4363,
+     "survey": 0.4383,
+     "respondents": 183
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "occupation": "sales_services",
+     "model": 0.2268,
+     "survey": 0.226,
+     "respondents": 183
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "occupation": "skilled_workers",
+     "model": 0.0152,
+     "survey": 0.0139,
+     "respondents": 183
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Occupation of employed Arabs by religion and sex (20+)",
+   "nodes": [
+    "occupation"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.0042,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "occupation": "clerical",
+     "model": 0.1147,
+     "survey": 0.1359,
+     "respondents": 22
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "occupation": "managers",
+     "model": 0.0282,
+     "survey": 0.0442,
+     "respondents": 22
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "occupation": "professionals",
+     "model": 0.2722,
+     "survey": 0.2623,
+     "respondents": 22
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "occupation": "sales_services",
+     "model": 0.3276,
+     "survey": 0.3103,
+     "respondents": 22
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "occupation": "skilled_workers",
+     "model": 0.0157,
+     "survey": 0.0,
+     "respondents": 22
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Age composition of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "frame",
+    "religiosity"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.01878,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "age_s": "20-24",
+     "model": 0.1138,
+     "survey": 0.1097,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "age_s": "25-29",
+     "model": 0.0941,
+     "survey": 0.087,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "age_s": "30-34",
+     "model": 0.0947,
+     "survey": 0.0937,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "age_s": "35-39",
+     "model": 0.1275,
+     "survey": 0.1203,
+     "respondents": 301
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "age_s": "40-44",
+     "model": 0.1164,
+     "survey": 0.1264,
+     "respondents": 301
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Age composition of Arabs by religion and sex (20+)",
+   "nodes": [
+    "frame",
+    "religiosity"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.09009,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "druze",
+     "sex": "male",
+     "age_s": "55-59",
+     "model": 0.0712,
+     "survey": 0.1613,
+     "respondents": 38
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "age_s": "20-24",
+     "model": 0.083,
+     "survey": 0.0768,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "age_s": "25-29",
+     "model": 0.0896,
+     "survey": 0.116,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "age_s": "30-34",
+     "model": 0.0988,
+     "survey": 0.1659,
+     "respondents": 47
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "age_s": "40-44",
+     "model": 0.0808,
+     "survey": 0.127,
+     "respondents": 47
+    }
+   ],
+   "max_excess": 0.00747
+  },
+  {
+   "name": "Highest diploma of Jews by continent of birth and sex (20+)",
+   "nodes": [
+    "education",
+    "birth_region"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.02076,
+   "passed": true,
+   "detail": [
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "diploma": "ba",
+     "model": 0.0808,
+     "survey": 0.0731,
+     "respondents": 98
+    },
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "diploma": "bagrut",
+     "model": 0.1816,
+     "survey": 0.1876,
+     "respondents": 98
+    },
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "diploma": "ma",
+     "model": 0.0483,
+     "survey": 0.0472,
+     "respondents": 98
+    },
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "diploma": "no_diploma",
+     "model": 0.148,
+     "survey": 0.1544,
+     "respondents": 98
+    },
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "diploma": "other_diploma",
+     "model": 0.0122,
+     "survey": 0.0168,
+     "respondents": 98
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Military/national service of Jews by continent of birth and sex (20+)",
+   "nodes": [
+    "military_service",
+    "birth_region"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.03998,
+   "passed": true,
+   "detail": [
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "service": "idf",
+     "model": 0.2425,
+     "survey": 0.2025,
+     "respondents": 111
+    },
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "service": "national_service",
+     "model": 0.0969,
+     "survey": 0.0971,
+     "respondents": 111
+    },
+    {
+     "birth_region": "africa",
+     "sex": "female",
+     "service": "none",
+     "model": 0.6606,
+     "survey": 0.7004,
+     "respondents": 111
+    },
+    {
+     "birth_region": "africa",
+     "sex": "male",
+     "service": "idf",
+     "model": 0.8711,
+     "survey": 0.843,
+     "respondents": 103
+    },
+    {
+     "birth_region": "africa",
+     "sex": "male",
+     "service": "national_service",
+     "model": 0.0008,
+     "survey": 0.0,
+     "respondents": 103
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Earnings bracket of the employed by occupation and sex (20+) - Jews and others",
+   "nodes": [
+    "income"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00951,
+   "passed": true,
+   "detail": [
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b01",
+     "model": 0.0348,
+     "survey": 0.0349,
+     "respondents": 110
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b02",
+     "model": 0.0406,
+     "survey": 0.038,
+     "respondents": 110
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b03",
+     "model": 0.023,
+     "survey": 0.0211,
+     "respondents": 110
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b04",
+     "model": 0.0526,
+     "survey": 0.0504,
+     "respondents": 110
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b05",
+     "model": 0.0779,
+     "survey": 0.0753,
+     "respondents": 110
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Earnings bracket of the employed by occupation and sex (20+) - Arabs",
+   "nodes": [
+    "income"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.01962,
+   "passed": true,
+   "detail": [
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b01",
+     "model": 0.0083,
+     "survey": 0.0,
+     "respondents": 3
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b02",
+     "model": 0.0737,
+     "survey": 0.0897,
+     "respondents": 3
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b03",
+     "model": 0.0146,
+     "survey": 0.0,
+     "respondents": 3
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b04",
+     "model": 0.1553,
+     "survey": 0.1678,
+     "respondents": 3
+    },
+    {
+     "occupation": "clerical",
+     "sex": "female",
+     "income": "b05",
+     "model": 0.1446,
+     "survey": 0.1582,
+     "respondents": 3
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Household income bracket by labour-force status (20+) - Jews and others",
+   "nodes": [
+    "household_income"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.0332,
+   "passed": true,
+   "detail": [
+    {
+     "employment": "employed",
+     "hh_income": "none",
+     "model": 0.0,
+     "survey": 0.0077,
+     "respondents": 2794
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h01",
+     "model": 0.0025,
+     "survey": 0.0051,
+     "respondents": 2794
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h02",
+     "model": 0.0046,
+     "survey": 0.0059,
+     "respondents": 2794
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h04",
+     "model": 0.0151,
+     "survey": 0.0167,
+     "respondents": 2794
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h03",
+     "model": 0.0067,
+     "survey": 0.0086,
+     "respondents": 2794
+    }
+   ],
+   "max_excess": 0.00576
+  },
+  {
+   "name": "Household income bracket by labour-force status (20+) - Arabs",
+   "nodes": [
+    "household_income"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.02966,
+   "passed": true,
+   "detail": [
+    {
+     "employment": "employed",
+     "hh_income": "none",
+     "model": 0.0,
+     "survey": 0.0147,
+     "respondents": 365
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h03",
+     "model": 0.0136,
+     "survey": 0.0274,
+     "respondents": 365
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h01",
+     "model": 0.0053,
+     "survey": 0.0061,
+     "respondents": 365
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h04",
+     "model": 0.0403,
+     "survey": 0.0507,
+     "respondents": 365
+    },
+    {
+     "employment": "employed",
+     "hh_income": "h02",
+     "model": 0.0166,
+     "survey": 0.0217,
+     "respondents": 365
+    }
+   ],
+   "max_excess": 0.00944
+  },
+  {
+   "name": "Home ownership by household income bracket (20+) - Jews and others",
+   "nodes": [
+    "home_ownership"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.04416,
+   "passed": true,
+   "detail": [
+    {
+     "hh_income": "h01",
+     "owns_home": "no",
+     "model": 0.4871,
+     "survey": 0.5486,
+     "respondents": 24
+    },
+    {
+     "hh_income": "h01",
+     "owns_home": "yes",
+     "model": 0.5129,
+     "survey": 0.4514,
+     "respondents": 24
+    },
+    {
+     "hh_income": "h02",
+     "owns_home": "no",
+     "model": 0.4055,
+     "survey": 0.4497,
+     "respondents": 49
+    },
+    {
+     "hh_income": "h02",
+     "owns_home": "yes",
+     "model": 0.5945,
+     "survey": 0.5503,
+     "respondents": 49
+    },
+    {
+     "hh_income": "h03",
+     "owns_home": "no",
+     "model": 0.4385,
+     "survey": 0.4586,
+     "respondents": 95
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Home ownership by household income bracket (20+) - Arabs",
+   "nodes": [
+    "home_ownership"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.01578,
+   "passed": true,
+   "detail": [
+    {
+     "hh_income": "h01",
+     "owns_home": "no",
+     "model": 0.2778,
+     "survey": 0.3019,
+     "respondents": 17
+    },
+    {
+     "hh_income": "h01",
+     "owns_home": "yes",
+     "model": 0.7222,
+     "survey": 0.6981,
+     "respondents": 17
+    },
+    {
+     "hh_income": "h02",
+     "owns_home": "no",
+     "model": 0.2207,
+     "survey": 0.2232,
+     "respondents": 27
+    },
+    {
+     "hh_income": "h02",
+     "owns_home": "yes",
+     "model": 0.7793,
+     "survey": 0.7768,
+     "respondents": 27
+    },
+    {
+     "hh_income": "h03",
+     "owns_home": "no",
+     "model": 0.1575,
+     "survey": 0.1718,
+     "respondents": 24
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "2022 election: national vote shares",
+   "nodes": [
+    "vote_2022"
+   ],
+   "source": "cec_knesset25",
+   "tolerance": 0.005,
+   "max_abs_error": 0.00063,
+   "passed": true,
+   "detail": [
+    {
+     "party": "national_unity",
+     "model": 0.0914,
+     "official": 0.0908
+    },
+    {
+     "party": "meretz",
+     "model": 0.032,
+     "official": 0.0316
+    },
+    {
+     "party": "raam",
+     "model": 0.0403,
+     "official": 0.0407
+    },
+    {
+     "party": "religious_zionism",
+     "model": 0.1081,
+     "official": 0.1084
+    },
+    {
+     "party": "balad",
+     "model": 0.0293,
+     "official": 0.0291
+    },
+    {
+     "turnout_among_eligible_residents": 0.7746
+    }
+   ]
+  },
+  {
+   "name": "Literacy: national distribution over proficiency levels (18-64)",
+   "nodes": [
+    "literacy_level"
+   ],
+   "source": "oecd_piaac_2023_tables",
+   "tolerance": 0.04,
+   "max_abs_error": 0.02704,
+   "passed": true,
+   "detail": [
+    {
+     "level": "below1",
+     "model": 0.1308,
+     "published": 0.1379
+    },
+    {
+     "level": "level1",
+     "model": 0.241,
+     "published": 0.2241
+    },
+    {
+     "level": "level2",
+     "model": 0.3225,
+     "published": 0.3171
+    },
+    {
+     "level": "level3",
+     "model": 0.2214,
+     "published": 0.2484
+    },
+    {
+     "level": "level4_5",
+     "model": 0.0843,
+     "published": 0.0725
+    }
+   ]
+  },
+  {
+   "name": "Literacy: share of low performers (level 1 or below) by age group",
+   "nodes": [
+    "literacy_level"
+   ],
+   "source": "oecd_piaac_2023_tables",
+   "tolerance": 0.06,
+   "max_abs_error": 0.01713,
+   "passed": true,
+   "detail": [
+    {
+     "age5": "16-24",
+     "model": 0.3068,
+     "published": 0.2913
+    },
+    {
+     "age5": "25-34",
+     "model": 0.3073,
+     "published": 0.2902
+    },
+    {
+     "age5": "35-44",
+     "model": 0.3231,
+     "published": 0.3147
+    },
+    {
+     "age5": "45-54",
+     "model": 0.4317,
+     "published": 0.4435
+    },
+    {
+     "age5": "55-65",
+     "model": 0.5453,
+     "published": 0.5355
+    }
+   ]
+  },
+  {
+   "name": "Literacy: share of low performers (level 1 or below) by education (25-65)",
+   "nodes": [
+    "literacy_level"
+   ],
+   "source": "oecd_piaac_2023_tables",
+   "tolerance": 0.06,
+   "max_abs_error": 0.01591,
+   "passed": true,
+   "detail": [
+    {
+     "edu3": "below_upper_secondary",
+     "model": 0.7204,
+     "published": 0.7363
+    },
+    {
+     "edu3": "upper_secondary",
+     "model": 0.4991,
+     "published": 0.4913
+    },
+    {
+     "edu3": "tertiary",
+     "model": 0.246,
+     "published": 0.2311
+    }
+   ]
+  },
+  {
+   "name": "Literacy: share of low performers (level 1 or below) by gender",
+   "nodes": [
+    "literacy_level"
+   ],
+   "source": "oecd_piaac_2023_tables",
+   "tolerance": 0.06,
+   "max_abs_error": 0.01824,
+   "passed": true,
+   "detail": [
+    {
+     "sex": "male",
+     "model": 0.3902,
+     "published": 0.389
+    },
+    {
+     "sex": "female",
+     "model": 0.3533,
+     "published": 0.3351
+    }
+   ]
+  },
+  {
+   "name": "Sampler reproduces every table given its parents (n = 200,000; tolerance: adjusted p-value)",
+   "nodes": [
+    "group",
+    "sex",
+    "age_band",
+    "district",
+    "locality_type",
+    "locality_profile",
+    "sector",
+    "birth_cohort",
+    "first_name",
+    "immigrant_bucket",
+    "origin",
+    "generation",
+    "ancestry",
+    "birth_region",
+    "marital_status",
+    "children",
+    "education",
+    "military_service",
+    "labour_status",
+    "occupation",
+    "industry",
+    "work_status",
+    "income",
+    "household_income",
+    "home_ownership",
+    "health",
+    "chronic",
+    "disability",
+    "vote_age",
+    "vote_education",
+    "vote_origin",
+    "vote_area",
+    "online",
+    "vote_bloc",
+    "news_frequency",
+    "social_news",
+    "favorite_news",
+    "literacy_level"
+   ],
+   "source": "model",
+   "tolerance": 0.001,
+   "max_abs_error": 0.02963,
+   "passed": true,
+   "detail": [
+    {
+     "tests": 360,
+     "smallest_adjusted_p": 1.0
+    },
+    {
+     "node": "online",
+     "parents": "jewish / hiloni / female / 25-29",
+     "p_value": 0.005078,
+     "max_abs_diff": 0.00111
+    },
+    {
+     "node": "ancestry",
+     "parents": "israel_3gen / hiloni",
+     "p_value": 0.005462,
+     "max_abs_diff": 0.00653
+    },
+    {
+     "node": "home_ownership",
+     "parents": "jewish / h09 / 30-34 / married",
+     "p_value": 0.008083,
+     "max_abs_diff": 0.02853
+    },
+    {
+     "node": "marital_status",
+     "parents": "jewish / hiloni / male / 20-24",
+     "p_value": 0.011652,
+     "max_abs_diff": 0.00184
+    },
+    {
+     "node": "education",
+     "parents": "jewish / hiloni / male / 40-44 / israel",
+     "p_value": 0.017191,
+     "max_abs_diff": 0.01168
+    }
+   ]
+  },
+  {
+   "name": "Percentile is uniform among employed citizens (n = 127,636)",
+   "nodes": [
+    "income_percentile"
+   ],
+   "source": "model",
+   "tolerance": 0.01,
+   "max_abs_error": 0.00645,
+   "passed": true,
+   "detail": [
+    {
+     "decile_shares": [
+      0.0986,
+      0.1005,
+      0.0946,
+      0.1065,
+      0.1016,
+      0.096,
+      0.1009,
+      0.1009,
+      0.1008,
+      0.0996
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Percentile is uniform among adult citizens (n = 200,000)",
+   "nodes": [
+    "household_income_percentile"
+   ],
+   "source": "model",
+   "tolerance": 0.01,
+   "max_abs_error": 0.00319,
+   "passed": true,
+   "detail": [
+    {
+     "decile_shares": [
+      0.0999,
+      0.0987,
+      0.1016,
+      0.0968,
+      0.1018,
+      0.1011,
+      0.0992,
+      0.1008,
+      0.0994,
+      0.1008
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Percentile is uniform among adult citizens (n = 200,000)",
+   "nodes": [
+    "literacy_percentile"
+   ],
+   "source": "model",
+   "tolerance": 0.01,
+   "max_abs_error": 0.00183,
+   "passed": true,
+   "detail": [
+    {
+     "decile_shares": [
+      0.1003,
+      0.0983,
+      0.1001,
+      0.1008,
+      0.1015,
+      0.0998,
+      0.1003,
+      0.1008,
+      0.0982,
+      0.0998
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Constraint: no academic or post-secondary diploma at 18-19",
+   "nodes": [
+    "education"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: compulsory or national service only at ages 18-20",
+   "nodes": [
+    "in_service",
+    "labour_status"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people in service have the matching service history",
+   "nodes": [
+    "in_service",
+    "military_service"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: retirees are 65 or older",
+   "nodes": [
+    "labour_status"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: an occupation only for the employed and retirees",
+   "nodes": [
+    "occupation",
+    "labour_status"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: every employed person has an occupation",
+   "nodes": [
+    "occupation",
+    "labour_status"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: an industry exactly when there is an occupation",
+   "nodes": [
+    "industry",
+    "occupation"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: earnings exactly for the employed",
+   "nodes": [
+    "income",
+    "labour_status"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: household income is at least the person's own earnings",
+   "nodes": [
+    "household_income_amount",
+    "income_amount"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: at most one child at 18-19",
+   "nodes": [
+    "children"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: no widowed 18-19-year-olds",
+   "nodes": [
+    "marital_status"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  },
+  {
+   "name": "Constraint: people under 18 in November 2022 did not vote then",
+   "nodes": [
+    "vote_2022"
+   ],
+   "source": "model/constraints.yaml",
+   "tolerance": 0.0,
+   "max_abs_error": 0.0,
+   "passed": true,
+   "detail": [
+    {
+     "violations": 0
+    }
+   ]
+  }
+ ]
+}

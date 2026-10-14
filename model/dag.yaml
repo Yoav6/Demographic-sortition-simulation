@@ -1,0 +1,991 @@
+# The popsim model: a Bayesian network of conditional probability tables.
+#
+# Nodes are listed in sampling order; every parent must appear above its child.
+# Labels: en, he (masculine/neutral) and he_f (feminine, when different).
+# Each node's distribution file is written by `popsim build`; its methodology is
+# documented in docs/methodology/<doc>.md (checked by `popsim docs --check`).
+
+version: 2026.10.0
+reference_date: 2024-12-31
+population:
+  label:
+    en: Israeli citizens aged 18 and over living in Israel
+    he: אזרחי ישראל בני 18 ומעלה המתגוררים בישראל
+
+nodes:
+
+  - id: frame
+    type: frame
+    label: {en: Population frame, he: מסגרת האוכלוסייה}
+    file: frame.csv
+    doc: docs/methodology/frame.md
+    sources: [cbs_localities_2024, cbs_local_authorities_2024, cbs_abstract_2025_population, cec_knesset25]
+    vars:
+      - id: locality
+        label: {en: Place of residence, he: מקום מגורים}
+        domain_file: domains/locality.csv
+      - id: group
+        label: {en: Population group (registered religion), he: קבוצת אוכלוסייה (דת רשומה)}
+        values:
+          - id: jewish
+            label: {en: Jewish, he: יהודי, he_f: יהודייה}
+          - id: muslim
+            label: {en: Muslim, he: מוסלמי, he_f: מוסלמית}
+          - id: christian_arab
+            label: {en: Arab Christian, he: נוצרי ערבי, he_f: נוצרייה ערבייה}
+          - id: druze
+            label: {en: Druze, he: דרוזי, he_f: דרוזית}
+          - id: other
+            label: {en: Not registered as Jewish or Arab, he: לא רשום כיהודי או כערבי, he_f: לא רשומה כיהודייה או כערבייה}
+      - id: sex
+        label: {en: Sex, he: מין}
+        values:
+          - id: male
+            label: {en: Man, he: גבר}
+          - id: female
+            label: {en: Woman, he: אישה}
+      - id: age_band
+        label: {en: Age group, he: קבוצת גיל}
+        values:
+          - {id: 18-19, label: {en: 18-19, he: 18-19}}
+          - {id: 20-24, label: {en: 20-24, he: 20-24}}
+          - {id: 25-29, label: {en: 25-29, he: 25-29}}
+          - {id: 30-34, label: {en: 30-34, he: 30-34}}
+          - {id: 35-39, label: {en: 35-39, he: 35-39}}
+          - {id: 40-44, label: {en: 40-44, he: 40-44}}
+          - {id: 45-49, label: {en: 45-49, he: 45-49}}
+          - {id: 50-54, label: {en: 50-54, he: 50-54}}
+          - {id: 55-59, label: {en: 55-59, he: 55-59}}
+          - {id: 60-64, label: {en: 60-64, he: 60-64}}
+          - {id: 65-69, label: {en: 65-69, he: 65-69}}
+          - {id: 70-74, label: {en: 70-74, he: 70-74}}
+          - {id: 75-79, label: {en: 75-79, he: 75-79}}
+          - {id: 80-84, label: {en: 80-84, he: 80-84}}
+          - {id: 85+, label: {en: 85+, he: 85+}}
+
+  - id: district
+    type: lookup
+    parent: locality
+    label: {en: District, he: מחוז}
+    file: lookups/district.csv
+    doc: docs/methodology/frame.md
+    sources: [cbs_localities_2024]
+    values:
+      - {id: jerusalem, label: {en: Jerusalem District, he: מחוז ירושלים}}
+      - {id: north, label: {en: Northern District, he: מחוז הצפון}}
+      - {id: haifa, label: {en: Haifa District, he: מחוז חיפה}}
+      - {id: center, label: {en: Central District, he: מחוז המרכז}}
+      - {id: tel_aviv, label: {en: Tel Aviv District, he: מחוז תל אביב}}
+      - {id: south, label: {en: Southern District, he: מחוז הדרום}}
+      - {id: judea_samaria, label: {en: Judea and Samaria (West Bank), he: אזור יהודה ושומרון}}
+
+  - id: locality_type
+    type: lookup
+    parent: locality
+    label: {en: Type of locality, he: סוג יישוב}
+    file: lookups/locality_type.csv
+    doc: docs/methodology/frame.md
+    sources: [cbs_localities_2024]
+    values:
+      - {id: large_city, label: {en: "city of 100,000+", he: "עיר של 100,000 תושבים ומעלה"}}
+      - {id: city, label: {en: "city of 20,000-100,000", he: "עיר של 20,000-100,000 תושבים"}}
+      - {id: town, label: {en: small town, he: עיירה}}
+      - {id: arab_city, label: {en: Arab city, he: עיר ערבית}}
+      - {id: arab_town, label: {en: Arab town or village, he: יישוב ערבי}}
+      - {id: moshav, label: {en: moshav, he: מושב}}
+      - {id: kibbutz, label: {en: kibbutz, he: קיבוץ}}
+      - {id: community, label: {en: community settlement, he: יישוב קהילתי}}
+      - {id: bedouin_tribe, label: {en: Bedouin tribe (unrecognised or dispersed locality), he: שבט בדואי (פזורה)}}
+      - {id: rural_other, label: {en: other rural locality, he: יישוב כפרי אחר}}
+      - {id: other, label: {en: other, he: אחר}}
+
+  - id: locality_profile
+    type: lookup
+    parent: locality
+    hidden: true
+    label: {en: Religiosity profile of the locality, he: פרופיל דתיות של היישוב}
+    file: lookups/locality_profile.csv
+    domain_file: domains/locality_profile.csv
+    doc: docs/methodology/religiosity.md
+    sources: [cec_knesset25, ines_2022]
+
+  - id: sector
+    type: table
+    parents: [group, locality]
+    backoff: [locality]
+    label: {en: Sector, he: מגזר}
+    file: cpts/sector.csv
+    doc: docs/methodology/frame.md
+    sources: [cbs_localities_2024]
+    values:
+      - id: jewish
+        label: {en: Jewish, he: יהודי, he_f: יהודייה}
+        attrs:
+          noun: {en: Jewish, he: היהודי}
+      - id: arab_muslim
+        label: {en: Arab Muslim, he: ערבי מוסלמי, he_f: ערבייה מוסלמית}
+        attrs:
+          noun: {en: Arab Muslim, he: הערבי-מוסלמי}
+      - id: bedouin
+        label: {en: Bedouin, he: בדואי, he_f: בדואית}
+        attrs:
+          noun: {en: Bedouin, he: הבדואי}
+      - id: circassian
+        label: {en: Circassian, he: צ'רקסי, he_f: צ'רקסית}
+        attrs:
+          noun: {en: Circassian, he: הצ'רקסי}
+      - id: arab_christian
+        label: {en: Arab Christian, he: ערבי נוצרי, he_f: ערבייה נוצרייה}
+        attrs:
+          noun: {en: Arab Christian, he: הערבי-נוצרי}
+      - id: druze
+        label: {en: Druze, he: דרוזי, he_f: דרוזית}
+        attrs:
+          noun: {en: Druze, he: הדרוזי}
+      - id: other
+        label: {en: not registered as Jewish or Arab, he: לא רשום כיהודי או כערבי, he_f: לא רשומה כיהודייה או כערבייה}
+        attrs:
+          noun: {en: non-Jewish immigrant-family, he: של משפחות עולים שאינם רשומים כיהודים}
+
+  - id: age
+    type: table
+    numeric: true
+    parents: [group, sex, age_band]
+    label: {en: Age, he: גיל}
+    file: cpts/age.csv
+    doc: docs/methodology/frame.md
+    sources: [cbs_abstract_2025_population]
+    domain_file: domains/age.csv
+
+  - id: birth_cohort
+    type: lookup
+    parent: age
+    hidden: true
+    label: {en: Birth cohort, he: שנתון לידה}
+    file: lookups/birth_cohort.csv
+    domain_file: domains/birth_cohort.csv
+    doc: docs/methodology/first_name.md
+    sources: [cbs_names]
+
+  - id: religiosity
+    type: table
+    parents: [group, sex, age_band, locality_profile]
+    backoff: [locality_profile]
+    label: {en: Religiosity (self-defined), he: מידת דתיות (הגדרה עצמית)}
+    file: cpts/religiosity.csv
+    doc: docs/methodology/religiosity.md
+    sources: [cbs_abstract_2025_attitudes, cbs_social_survey_2024, ines_2022, cec_knesset25]
+    values:
+      - id: haredi
+        label: {en: Ultra-Orthodox (Haredi), he: חרדי, he_f: חרדית}
+        attrs:
+          self: {en: "ultra-Orthodox (Haredi)", he: ""}
+      - id: dati
+        label: {en: Religious (Dati), he: דתי, he_f: דתייה}
+        attrs:
+          self: {en: "religious (Dati)", he: ""}
+      - id: masorti_dati
+        label: {en: Traditional-religious, he: מסורתי-דתי, he_f: מסורתית-דתייה}
+        attrs:
+          self: {en: "traditional-religious", he: ""}
+      - id: masorti
+        label: {en: Traditional, he: מסורתי, he_f: מסורתית}
+        attrs:
+          self: {en: "traditional", he: ""}
+      - id: hiloni
+        label: {en: Secular, he: חילוני, he_f: חילונית}
+        attrs:
+          self: {en: "secular", he: ""}
+      - id: very_religious
+        label: {en: Very religious, he: דתי מאוד, he_f: דתייה מאוד}
+        attrs:
+          self: {en: "very religious", he: ""}
+      - id: religious
+        label: {en: Religious, he: דתי, he_f: דתייה}
+        attrs:
+          self: {en: "religious", he: ""}
+      - id: not_so_religious
+        label: {en: Not so religious, he: לא כל כך דתי, he_f: לא כל כך דתייה}
+        attrs:
+          self: {en: "not so religious", he: ""}
+      - id: not_religious
+        label: {en: Not religious, he: לא דתי, he_f: לא דתייה}
+        attrs:
+          self: {en: "not religious", he: ""}
+
+  - id: first_name
+    type: table
+    parents: [group, sex, birth_cohort]
+    label: {en: First name, he: שם פרטי}
+    file: cpts/first_name.csv
+    domain_file: domains/first_name.csv
+    doc: docs/methodology/first_name.md
+    sources: [cbs_names, igra_registry_names]
+
+  - id: immigrant_bucket
+    type: lookup
+    parent: locality
+    hidden: true
+    label: {en: Share of 1990+ immigrants in the locality, he: שיעור עולי 1990 ואילך ביישוב}
+    file: lookups/immigrant_bucket.csv
+    domain_file: domains/immigrant_bucket.csv
+    doc: docs/methodology/origin.md
+    sources: [cbs_local_authorities_2024]
+
+  - id: origin
+    type: table
+    parents: [group, age_band, religiosity, immigrant_bucket]
+    backoff: [immigrant_bucket, religiosity, age_band]
+    label: {en: Origin, he: מוצא}
+    file: cpts/origin.csv
+    domain_file: domains/origin.csv
+    doc: docs/methodology/origin.md
+    sources: [cbs_abstract_2021_origin, cbs_abstract_2025_population, ines_2022, cbs_local_authorities_2024]
+
+  - id: generation
+    type: lookup
+    parent: origin
+    label: {en: Generation in Israel, he: דור בישראל}
+    file: lookups/generation.csv
+    doc: docs/methodology/origin.md
+    sources: [cbs_abstract_2021_origin]
+    values:
+      - {id: immigrant, label: {en: Immigrant (born abroad), he: עולה (יליד חו"ל), he_f: עולה (ילידת חו"ל)}}
+      - {id: second_gen, label: {en: Second generation (Israeli-born to an immigrant father), he: דור שני בישראל}}
+      - {id: third_gen, label: {en: Third generation or more, he: דור שלישי ומעלה בישראל}}
+      - {id: native, label: {en: Native (Arab or Druze citizen), he: ילידי (אזרח ערבי או דרוזי), he_f: ילידית (אזרחית ערבייה או דרוזית)}}
+
+  - id: ancestry
+    type: table
+    parents: [origin, religiosity]
+    backoff: [religiosity, origin]
+    label: {en: "Ancestry (self-identified, third generation)", he: "מוצא עדתי (הגדרה עצמית, דור שלישי)"}
+    file: cpts/ancestry.csv
+    doc: docs/methodology/origin.md
+    sources: [ines_2022]
+    values:
+      - {id: ashkenazi, label: {en: of Ashkenazi descent, he: ממוצא אשכנזי}}
+      - {id: mizrahi, label: {en: of Mizrahi or Sephardi descent, he: ממוצא מזרחי או ספרדי}}
+      - {id: mixed, label: {en: of mixed Ashkenazi and Mizrahi descent, he: "ממוצא מעורב, אשכנזי ומזרחי"}}
+      - {id: israeli_only, label: {en: identifying simply as Israeli, he: המגדיר את עצמו פשוט ישראלי, he_f: המגדירה את עצמה פשוט ישראלית}}
+      - {id: not_applicable, label: {en: not applicable, he: לא רלוונטי}}
+
+  - id: birth_region
+    type: lookup
+    parent: origin
+    hidden: true
+    label: {en: Continent of birth, he: יבשת לידה}
+    file: lookups/birth_region.csv
+    doc: docs/methodology/origin.md
+    sources: [cbs_abstract_2021_origin]
+    values:
+      - {id: israel, label: {en: Israel, he: ישראל}}
+      - {id: europe_america, label: {en: Europe or the Americas, he: אירופה או אמריקה}}
+      - {id: asia, label: {en: Asia, he: אסיה}}
+      - {id: africa, label: {en: Africa, he: אפריקה}}
+
+  - id: marital_status
+    type: table
+    parents: [group, religiosity, sex, age_band]
+    backoff: [religiosity]
+    label: {en: Marital status, he: מצב משפחתי}
+    file: cpts/marital_status.csv
+    doc: docs/methodology/marital_status.md
+    sources: [cbs_social_survey_2024, cbs_abstract_2025_marriages, cbs_abstract_2025_population]
+    values:
+      - {id: married, label: {en: married, he: נשוי, he_f: נשואה}}
+      - {id: divorced, label: {en: divorced, he: גרוש, he_f: גרושה}}
+      - {id: widowed, label: {en: widowed, he: אלמן, he_f: אלמנה}}
+      - {id: never_married, label: {en: single, he: רווק, he_f: רווקה}}
+
+  - id: children
+    type: table
+    parents: [group, religiosity, sex, age_band, marital_status]
+    backoff: [religiosity]
+    label: {en: Number of children, he: מספר ילדים}
+    file: cpts/children.csv
+    doc: docs/methodology/children.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - id: "0"
+        label: {en: none, he: אין}
+        attrs:
+          family: {en: no children, he: ואין לו ילדים, he_f: ואין לה ילדים}
+      - id: "1"
+        label: {en: "1", he: "1"}
+        attrs:
+          family: {en: one child, he: ואב לילד אחד, he_f: ואם לילד אחד}
+      - id: "2"
+        label: {en: "2", he: "2"}
+        attrs:
+          family: {en: two children, he: ואב לשני ילדים, he_f: ואם לשני ילדים}
+      - id: "3"
+        label: {en: "3", he: "3"}
+        attrs:
+          family: {en: three children, he: ואב לשלושה ילדים, he_f: ואם לשלושה ילדים}
+      - id: "4"
+        label: {en: "4", he: "4"}
+        attrs:
+          family: {en: four children, he: ואב לארבעה ילדים, he_f: ואם לארבעה ילדים}
+      - id: "5"
+        label: {en: "5", he: "5"}
+        attrs:
+          family: {en: five children, he: ואב לחמישה ילדים, he_f: ואם לחמישה ילדים}
+      - id: "6"
+        label: {en: "6", he: "6"}
+        attrs:
+          family: {en: six children, he: ואב לשישה ילדים, he_f: ואם לשישה ילדים}
+      - id: "7"
+        label: {en: 7 or more, he: 7 ומעלה}
+        attrs:
+          family: {en: seven or more children, he: ואב לשבעה ילדים או יותר, he_f: ואם לשבעה ילדים או יותר}
+
+  - id: education
+    type: table
+    parents: [group, religiosity, sex, age_band, birth_region]
+    backoff: [religiosity]
+    label: {en: Highest diploma, he: התעודה הגבוהה ביותר}
+    file: cpts/education.csv
+    doc: docs/methodology/education.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - id: no_diploma
+        label: {en: no diploma, he: ללא תעודה}
+        attrs:
+          has: {en: no formal diploma, he: ללא תעודת סיום}
+      - id: primary
+        label: {en: elementary or middle school, he: בית ספר יסודי או חטיבת ביניים}
+        attrs:
+          has: {en: an elementary or middle-school certificate, he: בעל תעודת סיום של בית ספר יסודי או חטיבת ביניים, he_f: בעלת תעודת סיום של בית ספר יסודי או חטיבת ביניים}
+      - id: secondary
+        label: {en: high school without matriculation, he: תיכון ללא בגרות}
+        attrs:
+          has: {en: a high-school diploma without matriculation (bagrut), he: בעל תעודת סיום תיכון ללא בגרות, he_f: בעלת תעודת סיום תיכון ללא בגרות}
+      - id: bagrut
+        label: {en: matriculation (bagrut), he: תעודת בגרות}
+        attrs:
+          has: {en: a matriculation certificate (bagrut), he: בעל תעודת בגרות, he_f: בעלת תעודת בגרות}
+      - id: post_secondary
+        label: {en: post-secondary non-academic diploma, he: תעודה על-תיכונית לא אקדמית}
+        attrs:
+          has: {en: a post-secondary non-academic diploma, he: בעל תעודה על-תיכונית שאינה אקדמית, he_f: בעלת תעודה על-תיכונית שאינה אקדמית}
+      - id: ba
+        label: {en: bachelor's degree, he: תואר ראשון}
+        attrs:
+          has: {en: a bachelor's degree, he: בעל תואר ראשון, he_f: בעלת תואר ראשון}
+      - id: ma
+        label: {en: master's degree, he: תואר שני}
+        attrs:
+          has: {en: a master's degree, he: בעל תואר שני, he_f: בעלת תואר שני}
+      - id: phd
+        label: {en: doctorate, he: תואר שלישי}
+        attrs:
+          has: {en: a doctorate, he: בעל תואר שלישי (דוקטורט), he_f: בעלת תואר שלישי (דוקטורט)}
+      - id: other_diploma
+        label: {en: other diploma, he: תעודה אחרת}
+        attrs:
+          has: {en: another kind of diploma, he: בעל תעודה אחרת, he_f: בעלת תעודה אחרת}
+
+  - id: military_service
+    type: table
+    parents: [group, religiosity, sex, age_band, birth_region]
+    backoff: [religiosity]
+    label: {en: Military or national service, he: שירות צבאי או לאומי}
+    file: cpts/military_service.csv
+    doc: docs/methodology/military_service.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - id: idf
+        label: {en: served in the IDF, he: 'שירת בצה"ל', he_f: 'שירתה בצה"ל'}
+      - id: national_service
+        label: {en: did national or civic service, he: עשה שירות לאומי-אזרחי, he_f: עשתה שירות לאומי-אזרחי}
+      - id: none
+        label: {en: did not serve, he: לא שירת, he_f: לא שירתה}
+
+  - id: in_service
+    type: table
+    parents: [age, sex, military_service]
+    backoff: [age, sex, military_service]
+    hidden: true
+    label: {en: Currently in compulsory service, he: בשירות חובה כעת}
+    file: cpts/in_service.csv
+    doc: docs/methodology/military_service.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: "no", label: {en: "no", he: לא}}
+      - {id: idf, label: {en: serving in the IDF, he: 'משרת בצה"ל', he_f: 'משרתת בצה"ל'}}
+      - {id: national_service, label: {en: in national service, he: בשירות לאומי}}
+
+  - id: labour_status
+    type: table
+    parents: [in_service, group, religiosity, sex, age_band, education]
+    backoff: [religiosity, education, group, sex, age_band]
+    label: {en: Labour-force status, he: מצב בכוח העבודה}
+    file: cpts/labour_status.csv
+    doc: docs/methodology/labour_status.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: employed, label: {en: employed, he: מועסק, he_f: מועסקת}}
+      - {id: unemployed, label: {en: unemployed (looking for work), he: מובטל (מחפש עבודה), he_f: מובטלת (מחפשת עבודה)}}
+      - {id: not_in_labour_force, label: {en: not working and not looking for work, he: אינו עובד ואינו מחפש עבודה, he_f: אינה עובדת ואינה מחפשת עבודה}}
+      - {id: retired, label: {en: retired, he: פנסיונר, he_f: פנסיונרית}}
+      - {id: compulsory_service, label: {en: in compulsory military or national service, he: בשירות חובה צבאי או לאומי}}
+
+  - id: occupation
+    type: table
+    parents: [labour_status, group, religiosity, sex, education]
+    backoff: [religiosity, education, sex, group, labour_status]
+    label:
+      en: Occupation (current, or last one for retirees)
+      he: משלח יד (נוכחי, או האחרון לפנסיונרים)
+    file: cpts/occupation.csv
+    doc: docs/methodology/occupation.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - id: managers
+        label: {en: manager, he: מנהל, he_f: מנהלת}
+        attrs:
+          as: {en: as a manager, he: כמנהל, he_f: כמנהלת}
+      - id: professionals
+        label: {en: academic professional, he: בעל משלח יד אקדמי, he_f: בעלת משלח יד אקדמי}
+        attrs:
+          as: {en: in an academic profession, he: במקצוע אקדמי}
+      - id: technicians
+        label:
+          en: technician or associate professional
+          he: הנדסאי, טכנאי או בעל מקצוע נלווה
+          he_f: הנדסאית, טכנאית או בעלת מקצוע נלווה
+        attrs:
+          as:
+            en: as a technician or associate professional
+            he: כהנדסאי, טכנאי או בעל מקצוע נלווה
+            he_f: כהנדסאית, טכנאית או בעלת מקצוע נלווה
+      - id: clerical
+        label: {en: clerical worker, he: פקיד או עובד משרד, he_f: פקידה או עובדת משרד}
+        attrs:
+          as: {en: as a clerical worker, he: כפקיד, he_f: כפקידה}
+      - id: sales_services
+        label: {en: sales or service worker, he: עובד מכירות ושירותים, he_f: עובדת מכירות ושירותים}
+        attrs:
+          as: {en: in sales or services, he: במכירות ובשירותים}
+      - id: skilled_workers
+        label:
+          en: skilled worker (industry, construction, agriculture)
+          he: עובד מקצועי בתעשייה, בבינוי או בחקלאות
+          he_f: עובדת מקצועית בתעשייה, בבינוי או בחקלאות
+        attrs:
+          as: {en: as a skilled worker, he: כבעל מקצוע, he_f: כבעלת מקצוע}
+      - id: unskilled
+        label: {en: unskilled worker, he: עובד לא מקצועי, he_f: עובדת לא מקצועית}
+        attrs:
+          as: {en: as an unskilled worker, he: כפועל, he_f: כפועלת}
+      - id: none
+        label: {en: none, he: אין}
+        attrs:
+          as: {en: "", he: ""}
+
+  - id: industry
+    type: table
+    parents: [occupation, sex, group]
+    backoff: [group, sex]
+    label:
+      en: Industry (current, or last one for retirees)
+      he: ענף כלכלי (נוכחי, או האחרון לפנסיונרים)
+    file: cpts/industry.csv
+    doc: docs/methodology/occupation.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - id: agriculture
+        label: {en: agriculture, he: חקלאות}
+        attrs:
+          in: {en: in agriculture, he: בחקלאות}
+      - id: manufacturing
+        label: {en: manufacturing and mining, he: תעשייה וכרייה}
+        attrs:
+          in: {en: in manufacturing, he: בתעשייה}
+      - id: utilities
+        label: {en: electricity and water utilities, he: אספקת חשמל ומים}
+        attrs:
+          in: {en: in the electricity or water utilities, he: באספקת חשמל או מים}
+      - id: construction
+        label: {en: construction, he: בינוי}
+        attrs:
+          in: {en: in construction, he: בבינוי}
+      - id: trade
+        label: {en: wholesale and retail trade, he: מסחר סיטוני וקמעוני}
+        attrs:
+          in: {en: in trade, he: במסחר}
+      - id: transport
+        label: {en: transport and storage, he: תחבורה ואחסנה}
+        attrs:
+          in: {en: in transport and storage, he: בתחבורה ובאחסנה}
+      - id: hospitality
+        label: {en: accommodation and food services, he: שירותי אירוח ואוכל}
+        attrs:
+          in: {en: in hospitality and food services, he: באירוח ובהסעדה}
+      - id: ict
+        label: {en: information and communication, he: מידע ותקשורת}
+        attrs:
+          in: {en: in information and communication, he: במידע ובתקשורת}
+      - id: finance
+        label: {en: finance and insurance, he: פיננסים וביטוח}
+        attrs:
+          in: {en: in finance and insurance, he: בפיננסים ובביטוח}
+      - id: real_estate
+        label: {en: real estate, he: 'נדל"ן'}
+        attrs:
+          in: {en: in real estate, he: 'בנדל"ן'}
+      - id: professional
+        label: {en: "professional, scientific and technical services", he: "שירותים מקצועיים, מדעיים וטכניים"}
+        attrs:
+          in: {en: "in professional, scientific or technical services", he: "בשירותים מקצועיים, מדעיים או טכניים"}
+      - id: admin_support
+        label: {en: administrative and support services, he: שירותי ניהול ותמיכה}
+        attrs:
+          in: {en: in administrative and support services, he: בשירותי ניהול ותמיכה}
+      - id: public_admin
+        label: {en: public administration and defence, he: מינהל ציבורי וביטחון}
+        attrs:
+          in: {en: in public administration or defence, he: במינהל הציבורי או בביטחון}
+      - id: education
+        label: {en: education, he: חינוך}
+        attrs:
+          in: {en: in education, he: בחינוך}
+      - id: health_welfare
+        label: {en: health and welfare, he: בריאות ורווחה}
+        attrs:
+          in: {en: in health or welfare, he: בבריאות או ברווחה}
+      - id: arts_other
+        label: {en: "arts, entertainment and other services", he: "אמנות, בידור ושירותים אחרים"}
+        attrs:
+          in: {en: "in arts, entertainment or other services", he: "באמנות, בבידור או בשירותים אחרים"}
+      - id: households
+        label: {en: private households as employers, he: משקי בית כמעסיקים}
+        attrs:
+          in: {en: for a private household, he: במשק בית פרטי}
+      - id: extraterritorial
+        label: {en: international organisations, he: ארגונים בין-לאומיים}
+        attrs:
+          in: {en: for an international organisation, he: בארגון בין-לאומי}
+      - id: none
+        label: {en: none, he: אין}
+        attrs:
+          in: {en: "", he: ""}
+
+  - id: work_status
+    type: table
+    parents: [labour_status, occupation, sex, group]
+    backoff: [occupation, sex, group, labour_status]
+    label: {en: Status at work, he: מעמד בעבודה}
+    file: cpts/work_status.csv
+    doc: docs/methodology/occupation.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: employee, label: {en: employee, he: שכיר, he_f: שכירה}}
+      - {id: self_employed, label: {en: self-employed, he: עצמאי, he_f: עצמאית}}
+      - {id: company_owner, label: {en: owner-manager of a company, he: מנהל חברה בבעלותו, he_f: מנהלת חברה בבעלותה}}
+      - {id: unpaid_family, label: {en: unpaid worker in a family business, he: עובד ללא שכר בעסק משפחתי, he_f: עובדת ללא שכר בעסק משפחתי}}
+      - {id: none, label: {en: not applicable, he: לא רלוונטי}}
+
+  - id: income
+    type: table
+    parents: [labour_status, group, occupation, sex, age_band]
+    backoff: [occupation, sex, group, age_band]
+    label: {en: Gross monthly earnings from work (bracket), he: הכנסה חודשית ברוטו מעבודה (מדרגה)}
+    file: cpts/income.csv
+    doc: docs/methodology/income.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: not_employed, label: {en: not employed, he: לא מועסק, he_f: לא מועסקת}}
+      - {id: b01, label: {en: "up to ₪2,000", he: "עד 2,000 ₪"}}
+      - {id: b02, label: {en: "₪2,001–3,000", he: "2,001–3,000 ₪"}}
+      - {id: b03, label: {en: "₪3,001–4,000", he: "3,001–4,000 ₪"}}
+      - {id: b04, label: {en: "₪4,001–5,000", he: "4,001–5,000 ₪"}}
+      - {id: b05, label: {en: "₪5,001–6,000", he: "5,001–6,000 ₪"}}
+      - {id: b06, label: {en: "₪6,001–7,500", he: "6,001–7,500 ₪"}}
+      - {id: b07, label: {en: "₪7,501–10,000", he: "7,501–10,000 ₪"}}
+      - {id: b08, label: {en: "₪10,001–14,000", he: "10,001–14,000 ₪"}}
+      - {id: b09, label: {en: "₪14,001–21,000", he: "14,001–21,000 ₪"}}
+      - {id: b10, label: {en: "over ₪21,000", he: "מעל 21,000 ₪"}}
+
+  - id: household_income
+    type: table
+    parents: [labour_status, group, marital_status, income, age_band]
+    label: {en: Household gross monthly income, he: הכנסה חודשית ברוטו של משק הבית}
+    file: cpts/household_income.csv
+    doc: docs/methodology/household_income.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: none, label: {en: no income, he: אין הכנסה}}
+      - {id: h01, label: {en: "up to ₪2,500", he: "עד 2,500 ₪"}}
+      - {id: h02, label: {en: "₪2,501–4,000", he: "2,501–4,000 ₪"}}
+      - {id: h03, label: {en: "₪4,001–5,000", he: "4,001–5,000 ₪"}}
+      - {id: h04, label: {en: "₪5,001–6,500", he: "5,001–6,500 ₪"}}
+      - {id: h05, label: {en: "₪6,501–8,000", he: "6,501–8,000 ₪"}}
+      - {id: h06, label: {en: "₪8,001–10,000", he: "8,001–10,000 ₪"}}
+      - {id: h07, label: {en: "₪10,001–13,000", he: "10,001–13,000 ₪"}}
+      - {id: h08, label: {en: "₪13,001–17,000", he: "13,001–17,000 ₪"}}
+      - {id: h09, label: {en: "₪17,001–24,000", he: "17,001–24,000 ₪"}}
+      - {id: h10, label: {en: "over ₪24,000", he: "מעל 24,000 ₪"}}
+
+  - id: income_amount
+    type: interval
+    parent: income
+    label: {en: Gross monthly earnings from work (₪), he: 'הכנסה חודשית ברוטו מעבודה (ש"ח)'}
+    file: cpts/income_amount.csv
+    doc: docs/methodology/income.md
+    sources: [cbs_social_survey_2024]
+    scale: log
+    round: 100
+    # open top bracket: Pareto tail above ₪21,000 (see docs/methodology/income.md)
+    tail_alpha: 3
+    tail_u_max: 0.999
+    # earnings cannot exceed the household's income bracket
+    cap_by: household_income
+
+  - id: income_percentile
+    type: percentile
+    parent: income_amount
+    label: {en: Earnings percentile among employed citizens, he: אחוזון ההכנסה מעבודה בקרב המועסקים}
+    file: cpts/income_percentile.csv
+    doc: docs/methodology/income.md
+    sources: [cbs_social_survey_2024]
+
+  - id: household_income_amount
+    type: interval
+    parent: household_income
+    label: {en: Household gross monthly income (₪), he: 'הכנסה חודשית ברוטו של משק הבית (ש"ח)'}
+    file: cpts/household_income_amount.csv
+    doc: docs/methodology/household_income.md
+    sources: [cbs_social_survey_2024]
+    scale: log
+    round: 100
+    # open top bracket: Pareto tail above ₪24,000 (see docs/methodology/household_income.md)
+    tail_alpha: 2.5
+    tail_u_max: 0.999
+    # household income is at least the person's own earnings
+    floor_by: income_amount
+
+  - id: household_income_percentile
+    type: percentile
+    parent: household_income_amount
+    label: {en: Household income percentile among adult citizens, he: אחוזון הכנסת משק הבית בקרב האזרחים הבוגרים}
+    file: cpts/household_income_percentile.csv
+    doc: docs/methodology/household_income.md
+    sources: [cbs_social_survey_2024]
+
+  - id: home_ownership
+    type: table
+    parents: [group, household_income, age_band, marital_status]
+    label: {en: Home ownership (household), he: בעלות על הדירה (משק הבית)}
+    file: cpts/home_ownership.csv
+    doc: docs/methodology/household_income.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: "yes", label: {en: owns its home, he: הדירה בבעלות משק הבית}}
+      - {id: "no", label: {en: does not own its home, he: הדירה אינה בבעלות משק הבית}}
+
+  - id: health
+    type: table
+    parents: [group, religiosity, sex, age_band, education]
+    backoff: [religiosity]
+    label: {en: Self-rated health, he: מצב בריאות (הערכה עצמית)}
+    file: cpts/health.csv
+    doc: docs/methodology/health.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: very_good, label: {en: very good, he: טוב מאוד}}
+      - {id: good, label: {en: good, he: טוב}}
+      - {id: not_so_good, label: {en: not so good, he: לא כל כך טוב}}
+      - {id: not_good, label: {en: poor, he: לא טוב בכלל}}
+
+  - id: chronic
+    type: table
+    parents: [group, religiosity, sex, age_band, health]
+    backoff: [religiosity]
+    label: {en: Chronic illness or health problem, he: מחלה או בעיה בריאותית כרונית}
+    file: cpts/chronic.csv
+    doc: docs/methodology/health.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: "yes", label: {en: "yes", he: כן}}
+      - {id: "no", label: {en: "no", he: לא}}
+
+  - id: disability
+    type: table
+    parents: [group, religiosity, sex, age_band, health, chronic]
+    backoff: [religiosity]
+    label: {en: Severe functional disability, he: מוגבלות תפקודית חמורה}
+    file: cpts/disability.csv
+    doc: docs/methodology/health.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: "yes", label: {en: "yes", he: כן}}
+      - {id: "no", label: {en: "no", he: לא}}
+
+  - id: vote_age
+    type: lookup
+    parent: age
+    hidden: true
+    label: {en: Age group in November 2022, he: קבוצת גיל בנובמבר 2022}
+    file: lookups/vote_age.csv
+    doc: docs/methodology/vote.md
+    sources: [ines_2022]
+    values:
+      - {id: too_young, label: {en: under 18, he: מתחת ל-18}}
+      - {id: y, label: {en: 18-29, he: 18-29}}
+      - {id: m, label: {en: 30-49, he: 30-49}}
+      - {id: o, label: {en: 50+, he: 50+}}
+
+  - id: vote_education
+    type: lookup
+    parent: education
+    hidden: true
+    label: {en: Education (3 levels), he: השכלה (3 רמות)}
+    file: lookups/vote_education.csv
+    doc: docs/methodology/vote.md
+    sources: [ines_2022]
+    values:
+      - {id: low, label: {en: no matriculation, he: ללא בגרות}}
+      - {id: mid, label: {en: matriculation or post-secondary, he: בגרות או על-תיכונית}}
+      - {id: academic, label: {en: academic degree, he: תואר אקדמי}}
+
+  - id: vote_origin
+    type: table
+    parents: [origin, ancestry]
+    backoff: [ancestry]
+    hidden: true
+    label: {en: Origin group, he: קבוצת מוצא}
+    file: cpts/vote_origin.csv
+    doc: docs/methodology/vote.md
+    sources: [ines_2022]
+    values:
+      - {id: AA, label: {en: Asia-Africa, he: אסיה-אפריקה}}
+      - {id: EA, label: {en: Europe-America, he: אירופה-אמריקה}}
+      - {id: FSU, label: {en: former USSR, he: ברית המועצות לשעבר}}
+      - {id: IL3_ashkenazi, label: {en: "third generation, Ashkenazi", he: "דור שלישי, אשכנזי"}}
+      - {id: IL3_mizrahi, label: {en: "third generation, Mizrahi", he: "דור שלישי, מזרחי"}}
+      - {id: IL3_other, label: {en: "third generation, other", he: "דור שלישי, אחר"}}
+      - {id: native, label: {en: Arab or Druze, he: ערבי או דרוזי}}
+
+  - id: vote_area
+    type: table
+    parents: [group, locality]
+    hidden: true
+    label: {en: Electoral area, he: אזור בחירה}
+    file: cpts/vote_area.csv
+    domain_file: domains/vote_area.csv
+    doc: docs/methodology/vote.md
+    sources: [cec_knesset25]
+
+  - id: vote_2022
+    type: table
+    parents: [vote_area, religiosity, vote_age, vote_education, vote_origin]
+    backoff: [religiosity, vote_education, vote_origin, vote_area]
+    label: {en: Vote in the 2022 Knesset election, he: הצבעה בבחירות לכנסת 2022}
+    file: cpts/vote_2022.csv
+    doc: docs/methodology/vote.md
+    sources: [ines_2022, cec_knesset25]
+    values:
+      - id: likud
+        label: {en: 'Likud', he: 'הליכוד'}
+        attrs:
+          for: {en: 'Likud', he: 'לליכוד'}
+          bloc: coalition
+      - id: yesh_atid
+        label: {en: 'Yesh Atid', he: 'יש עתיד'}
+        attrs:
+          for: {en: 'Yesh Atid', he: 'ליש עתיד'}
+          bloc: opposition
+      - id: religious_zionism
+        label: {en: 'Religious Zionism (Smotrich - Ben Gvir)', he: 'הציונות הדתית'}
+        attrs:
+          for: {en: 'Religious Zionism (Smotrich - Ben Gvir)', he: 'לציונות הדתית'}
+          bloc: coalition
+      - id: national_unity
+        label: {en: 'National Unity (Gantz)', he: 'המחנה הממלכתי'}
+        attrs:
+          for: {en: 'National Unity (Gantz)', he: 'למחנה הממלכתי'}
+          bloc: opposition
+      - id: shas
+        label: {en: 'Shas', he: 'ש"ס'}
+        attrs:
+          for: {en: 'Shas', he: 'לש"ס'}
+          bloc: coalition
+      - id: utj
+        label: {en: 'United Torah Judaism', he: 'יהדות התורה'}
+        attrs:
+          for: {en: 'United Torah Judaism', he: 'ליהדות התורה'}
+          bloc: coalition
+      - id: yisrael_beiteinu
+        label: {en: 'Yisrael Beiteinu', he: 'ישראל ביתנו'}
+        attrs:
+          for: {en: 'Yisrael Beiteinu', he: 'לישראל ביתנו'}
+          bloc: opposition
+      - id: labor
+        label: {en: 'Labor', he: 'העבודה'}
+        attrs:
+          for: {en: 'Labor', he: 'לעבודה'}
+          bloc: opposition
+      - id: meretz
+        label: {en: 'Meretz', he: 'מרצ'}
+        attrs:
+          for: {en: 'Meretz', he: 'למרצ'}
+          bloc: opposition
+      - id: jewish_home
+        label: {en: 'Jewish Home (Shaked)', he: 'הבית היהודי'}
+        attrs:
+          for: {en: 'Jewish Home (Shaked)', he: 'לבית היהודי'}
+          bloc: other
+      - id: raam
+        label: {en: 'Ra''am (United Arab List)', he: 'רע"ם'}
+        attrs:
+          for: {en: 'Ra''am (United Arab List)', he: 'לרע"מ'}
+          bloc: opposition
+      - id: hadash_taal
+        label: {en: 'Hadash-Ta''al', he: 'חד"ש-תע"ל'}
+        attrs:
+          for: {en: 'Hadash-Ta''al', he: 'לחד"ש-תע"ל'}
+          bloc: opposition
+      - id: balad
+        label: {en: 'Balad', he: 'בל"ד'}
+        attrs:
+          for: {en: 'Balad', he: 'לבל"ד'}
+          bloc: opposition
+      - id: other_party
+        label: {en: 'another party', he: 'מפלגה אחרת'}
+        attrs:
+          for: {en: 'another party', he: 'למפלגה אחרת'}
+          bloc: other
+      - id: did_not_vote
+        label: {en: did not vote, he: לא הצביע, he_f: לא הצביעה}
+        attrs: {bloc: did_not_vote}
+      - id: too_young
+        label: {en: too young to vote in 2022, he: צעיר מדי להצביע ב-2022, he_f: צעירה מדי להצביע ב-2022}
+        attrs: {bloc: too_young}
+
+  - id: online
+    type: table
+    parents: [group, religiosity, sex, age_band]
+    backoff: [religiosity]
+    label: {en: Internet and social networks, he: אינטרנט ורשתות חברתיות}
+    file: cpts/online.csv
+    doc: docs/methodology/media.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: social, label: {en: uses the internet and social networks, he: משתמש באינטרנט וברשתות חברתיות, he_f: משתמשת באינטרנט וברשתות חברתיות}}
+      - {id: internet_only, label: {en: uses the internet but not social networks, he: משתמש באינטרנט אך לא ברשתות חברתיות, he_f: משתמשת באינטרנט אך לא ברשתות חברתיות}}
+      - {id: offline, label: {en: does not use the internet, he: אינו משתמש באינטרנט, he_f: אינה משתמשת באינטרנט}}
+
+  - id: vote_bloc
+    type: lookup
+    parent: vote_2022
+    hidden: true
+    label: {en: 2022 vote bloc, he: גוש הצבעה ב-2022}
+    file: lookups/vote_bloc.csv
+    doc: docs/methodology/media.md
+    sources: [cec_knesset25]
+    values:
+      - {id: coalition, label: {en: coalition parties, he: מפלגות הקואליציה}}
+      - {id: opposition, label: {en: Jewish opposition parties, he: מפלגות האופוזיציה היהודיות}}
+      - {id: arab, label: {en: Arab parties, he: מפלגות ערביות}}
+      - {id: other, label: {en: other parties, he: מפלגות אחרות}}
+      - {id: did_not_vote, label: {en: did not vote, he: לא הצביע, he_f: לא הצביעה}}
+      - {id: too_young, label: {en: too young to vote, he: צעיר מדי להצביע, he_f: צעירה מדי להצביע}}
+
+  - id: news_frequency
+    type: table
+    parents: [religiosity, vote_age, vote_education, vote_bloc]
+    label: {en: Follows political news, he: מעקב אחר חדשות ומידע פוליטי}
+    file: cpts/news_frequency.csv
+    doc: docs/methodology/media.md
+    sources: [ines_2022]
+    values:
+      - {id: several_daily, label: {en: more than once a day, he: יותר מפעם ביום}}
+      - {id: daily, label: {en: almost every day, he: כמעט כל יום}}
+      - {id: few_times_week, label: {en: two or three times a week, he: פעמיים-שלוש בשבוע}}
+      - {id: weekly, label: {en: about once a week, he: בערך פעם בשבוע}}
+      - {id: never, label: {en: hardly ever, he: כמעט אף פעם}}
+
+  - id: social_news
+    type: table
+    parents: [online, news_frequency, vote_age]
+    backoff: [news_frequency, vote_age]
+    label: {en: Political news on social networks, he: חדשות ומידע פוליטי ברשתות החברתיות}
+    file: cpts/social_news.csv
+    doc: docs/methodology/media.md
+    sources: [ines_2022, cbs_social_survey_2024]
+    values:
+      - {id: several_daily, label: {en: more than once a day, he: יותר מפעם ביום}}
+      - {id: daily, label: {en: almost every day, he: כמעט כל יום}}
+      - {id: few_times_week, label: {en: two or three times a week, he: פעמיים-שלוש בשבוע}}
+      - {id: weekly, label: {en: about once a week, he: בערך פעם בשבוע}}
+      - {id: never, label: {en: hardly ever, he: כמעט אף פעם}}
+      - {id: no_social_media, label: {en: does not use social networks, he: אינו משתמש ברשתות חברתיות, he_f: אינה משתמשת ברשתות חברתיות}}
+
+  - id: favorite_news
+    type: table
+    parents: [group, vote_bloc]
+    backoff: [vote_bloc, group]
+    label: {en: Favourite TV news broadcast, he: מהדורת החדשות האהובה}
+    file: cpts/favorite_news.csv
+    doc: docs/methodology/media.md
+    sources: [agam_media_index_2024]
+    values:
+      - {id: news12, label: {en: Channel 12 News, he: חדשות 12}}
+      - {id: channel14, label: {en: Channel 14, he: עכשיו 14}}
+      - {id: kan11, label: {en: Kan 11 News, he: כאן חדשות}}
+      - {id: news13, label: {en: Channel 13 News, he: חדשות 13}}
+      - {id: i24, label: {en: i24NEWS, he: i24NEWS}}
+      - {id: channel9, label: {en: Channel 9, he: ערוץ 9}}
+      - {id: other, label: {en: another broadcast, he: מהדורה אחרת}}
+      - {id: none, label: {en: none, he: אף אחת}}
+      - {id: not_measured, label: {en: not measured (Arabic-language media were not surveyed), he: לא נמדד (התקשורת בערבית לא נסקרה)}}
+
+  - id: literacy_level
+    type: table
+    parents: [group, religiosity, sex, age_band, education]
+    backoff: [religiosity]
+    label: {en: Literacy proficiency (modelled; OECD adult-skills scale), he: מיומנות קריאה (משוערת; סולם מיומנויות הבוגרים של ה-OECD)}
+    file: cpts/literacy_level.csv
+    doc: docs/methodology/skills.md
+    sources: [oecd_piaac_2023_tables, boi_piaac_note_2024]
+    values:
+      - id: below1
+        label: {en: below level 1, he: מתחת לרמה 1}
+        attrs:
+          at: {en: below level 1, he: מתחת לרמה 1}
+      - id: level1
+        label: {en: level 1, he: רמה 1}
+        attrs:
+          at: {en: at level 1, he: ברמה 1}
+      - id: level2
+        label: {en: level 2, he: רמה 2}
+        attrs:
+          at: {en: at level 2, he: ברמה 2}
+      - id: level3
+        label: {en: level 3, he: רמה 3}
+        attrs:
+          at: {en: at level 3, he: ברמה 3}
+      - id: level4_5
+        label: {en: level 4 or 5, he: רמה 4 או 5}
+        attrs:
+          at: {en: at level 4 or 5, he: ברמה 4 או 5}
+
+  - id: literacy_score
+    type: interval
+    parent: literacy_level
+    label: {en: Literacy score (modelled; 0-500 scale), he: ציון אוריינות קריאה (משוער; סולם 0-500)}
+    file: cpts/literacy_score.csv
+    doc: docs/methodology/skills.md
+    sources: [oecd_piaac_2023_tables]
+    scale: linear
+    round: 1
+
+  - id: literacy_percentile
+    type: percentile
+    parent: literacy_score
+    label: {en: Literacy percentile among adult citizens (modelled), he: אחוזון מיומנות הקריאה בקרב האזרחים הבוגרים (משוער)}
+    file: cpts/literacy_percentile.csv
+    doc: docs/methodology/skills.md
+    sources: [oecd_piaac_2023_tables]

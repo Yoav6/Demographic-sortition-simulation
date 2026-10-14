@@ -1,0 +1,31 @@
+{
+ "description": "gross monthly income (employed persons) by occupation, sex and age - Arabs outside the Jerusalem district",
+ "rows": [
+  4124,
+  571,
+  577
+ ],
+ "cols": [
+  3115
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    2
+   ]
+  },
+  {
+   "var": 6702,
+   "values": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  }
+ ],
+ "year": 2024
+}

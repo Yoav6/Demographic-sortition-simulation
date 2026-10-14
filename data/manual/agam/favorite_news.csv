@@ -1,0 +1,23 @@
+population,outlet,percent,page,how_read
+all,news12,42.0,11,labelled
+all,channel14,22.7,11,labelled
+all,none,16.0,11,labelled
+all,kan11,10.6,11,labelled
+all,news13,7.2,11,labelled
+all,other,1.5,11,remainder to 100% (outlets not shown)
+coalition,channel14,52.6,12,labelled
+coalition,none,20.4,12,labelled
+coalition,news12,17.6,12,labelled
+coalition,kan11,5.6,12,labelled
+coalition,news13,2.8,12,labelled
+coalition,i24,1.5,12,unlabelled bar - estimated from the axis
+coalition,channel9,1.2,12,unlabelled bar - estimated from the axis
+coalition,other,0.3,12,unlabelled bar - estimated from the axis
+opposition,channel14,3.1,12,labelled
+opposition,none,8.1,12,labelled
+opposition,news12,61.2,12,labelled
+opposition,kan11,15.7,12,labelled
+opposition,news13,10.5,12,labelled
+opposition,i24,0.8,12,unlabelled bar - estimated from the axis
+opposition,channel9,0.7,12,unlabelled bar - estimated from the axis
+opposition,other,0.5,12,unlabelled bar - estimated from the axis
