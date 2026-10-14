@@ -54,6 +54,7 @@ STEPS: list[tuple[str, str, str]] = [
     ("newspaper", "popsim.estimate.media", "build_newspaper"),
     ("preferred_source", "popsim.estimate.media", "build_preferred_source"),
     ("literacy", "popsim.estimate.skills", "build"),
+    ("marginals", "popsim.estimate.marginals", "build"),
 ]
 
 

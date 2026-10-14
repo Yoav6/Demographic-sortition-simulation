@@ -259,6 +259,7 @@ nodes:
     type: table
     parents: [origin, religiosity]
     backoff: [religiosity, origin]
+    not_applicable: [not_applicable]  # means "does not apply"; the "How unusual?" score skips it
     label: {en: "Ancestry (self-identified, third generation)", he: "מוצא עדתי (הגדרה עצמית, דור שלישי)"}
     file: cpts/ancestry.csv
     doc: docs/methodology/origin.md
@@ -302,6 +303,7 @@ nodes:
     type: table
     parents: [group, religiosity, sex, age_band, marital_status]
     backoff: [religiosity]
+    ordered: true  # values run from lowest to highest; "How unusual?" says whether a surprise is below or above usual
     label: {en: Number of children, he: מספר ילדים}
     file: cpts/children.csv
     doc: docs/methodology/children.md
@@ -344,6 +346,8 @@ nodes:
     type: table
     parents: [group, religiosity, sex, age_band, birth_region]
     backoff: [religiosity]
+    ordered: true  # lowest to highest diploma; "How unusual?" says whether a surprise is below or above usual
+    off_scale: [other_diploma]  # not a level: no direction is given for it, and it is left out of "usual"
     label: {en: Highest diploma, he: התעודה הגבוהה ביותר}
     file: cpts/education.csv
     doc: docs/methodology/education.md
@@ -407,6 +411,7 @@ nodes:
     parents: [age, sex, military_service]
     backoff: [age, sex, military_service]
     hidden: true
+    shown_as: military_service  # the visible variable this helper stands for in "How unusual?" explanations
     label: {en: Currently in compulsory service, he: בשירות חובה כעת}
     file: cpts/in_service.csv
     doc: docs/methodology/military_service.md
@@ -451,6 +456,7 @@ nodes:
     type: table
     parents: [labour_status, group, religiosity, sex, education]
     backoff: [religiosity, education, sex, group, labour_status]
+    not_applicable: [none]  # means "does not apply"; the "How unusual?" score skips it
     label:
       en: Occupation (current, or last one for retirees)
       he: משלח יד (נוכחי, או האחרון לפנסיונרים)
@@ -535,6 +541,7 @@ nodes:
     type: table
     parents: [education, sex, occupation, media_age, media_sector]
     backoff: [media_sector, media_age, occupation, sex]
+    not_applicable: [none]  # means "does not apply"; the "How unusual?" score skips it
     label: {en: Field of the highest academic degree, he: תחום הלימוד של התואר האקדמי הגבוה ביותר}
     file: cpts/degree_field.csv
     doc: docs/methodology/fields.md
@@ -558,6 +565,7 @@ nodes:
     type: table
     parents: [studying, sex, degree_field]
     backoff: [degree_field, sex]
+    not_applicable: [none]  # means "does not apply"; the "How unusual?" score skips it
     label: {en: Field of current academic studies, he: תחום הלימודים האקדמיים כיום}
     file: cpts/study_field.csv
     doc: docs/methodology/fields.md
@@ -581,6 +589,7 @@ nodes:
     type: table
     parents: [occupation, sex, group]
     backoff: [group, sex]
+    not_applicable: [none]  # means "does not apply"; the "How unusual?" score skips it
     label:
       en: Industry (current, or last one for retirees)
       he: ענף כלכלי (נוכחי, או האחרון לפנסיונרים)
@@ -669,6 +678,7 @@ nodes:
     type: table
     parents: [labour_status, occupation, sex, group]
     backoff: [occupation, sex, group, labour_status]
+    not_applicable: [none]  # means "does not apply"; the "How unusual?" score skips it
     label: {en: Status at work, he: מעמד בעבודה}
     file: cpts/work_status.csv
     doc: docs/methodology/occupation.md
@@ -684,6 +694,8 @@ nodes:
     type: table
     parents: [labour_status, group, occupation, sex, age_band]
     backoff: [occupation, sex, group, age_band]
+    not_applicable: [not_employed]  # means "does not apply"; the "How unusual?" score skips it
+    ordered: true  # values run from lowest to highest; "How unusual?" says whether a surprise is below or above usual
     label: {en: Gross monthly earnings from work (bracket), he: הכנסה חודשית ברוטו מעבודה (מדרגה)}
     file: cpts/income.csv
     doc: docs/methodology/income.md
@@ -704,6 +716,7 @@ nodes:
   - id: household_income
     type: table
     parents: [labour_status, group, marital_status, income, age_band]
+    ordered: true  # values run from lowest to highest; "How unusual?" says whether a surprise is below or above usual
     label: {en: Household gross monthly income, he: הכנסה חודשית ברוטו של משק הבית}
     file: cpts/household_income.csv
     doc: docs/methodology/household_income.md
@@ -782,6 +795,8 @@ nodes:
     type: table
     parents: [group, religiosity, sex, age_band, education]
     backoff: [religiosity]
+    ordered: true  # values run from best to worst health; "How unusual?" says better or worse than usual
+    quality_scale: true
     label: {en: Self-rated health, he: מצב בריאות (הערכה עצמית)}
     file: cpts/health.csv
     doc: docs/methodology/health.md
@@ -848,6 +863,7 @@ nodes:
     parents: [origin, ancestry]
     backoff: [ancestry]
     hidden: true
+    shown_as: origin  # the visible variable this helper stands for in "How unusual?" explanations
     label: {en: Origin group, he: קבוצת מוצא}
     file: cpts/vote_origin.csv
     doc: docs/methodology/vote.md
@@ -865,6 +881,7 @@ nodes:
     type: table
     parents: [group, locality]
     hidden: true
+    shown_as: locality  # the visible variable this helper stands for in "How unusual?" explanations
     label: {en: Electoral area, he: אזור בחירה}
     file: cpts/vote_area.csv
     domain_file: domains/vote_area.csv
@@ -948,7 +965,7 @@ nodes:
       - id: other_party
         label: {en: 'another party', he: 'מפלגה אחרת'}
         attrs:
-          for: {en: 'another party', he: 'למפלגה אחרת'}
+          for: {en: 'a party that did not win a seat in the Knesset', he: 'לרשימה שלא עברה את אחוז החסימה'}
           bloc: other
       - id: did_not_vote
         label: {en: did not vote, he: לא הצביע, he_f: לא הצביעה}
@@ -1175,6 +1192,7 @@ nodes:
     type: table
     parents: [news_print, media_sector, media_age, vote_bloc]
     backoff: [vote_bloc, media_age, media_sector]
+    not_applicable: [none]  # means "does not apply"; the "How unusual?" score skips it
     label: {en: Main printed newspaper, he: העיתון המודפס העיקרי}
     file: cpts/newspaper.csv
     doc: docs/methodology/media.md
@@ -1218,6 +1236,7 @@ nodes:
     type: table
     parents: [group, religiosity, sex, age_band, education]
     backoff: [religiosity]
+    ordered: true  # values run from lowest to highest; "How unusual?" says whether a surprise is below or above usual
     label: {en: Literacy proficiency (modelled; OECD adult-skills scale), he: מיומנות קריאה (משוערת; סולם מיומנויות הבוגרים של ה-OECD)}
     file: cpts/literacy_level.csv
     doc: docs/methodology/skills.md

@@ -161,4 +161,9 @@ def _check_order(spec: ModelSpec) -> None:
             outer = spec.node(n.raw["subset_of"])
             if n.type != "multi" or outer.type != "multi" or outer.value_ids() != n.value_ids():
                 raise ValueError(f"{n.id}: subset_of needs two multi nodes with the same items, in the same order")
+        if n.raw.get("shown_as") and n.raw["shown_as"] not in seen:
+            raise ValueError(f"{n.id}: shown_as {n.raw['shown_as']} must be a variable defined earlier")
+        bad = [v for v in n.raw.get("not_applicable", []) + n.raw.get("off_scale", []) if v not in n.value_ids()]
+        if bad:
+            raise ValueError(f"{n.id}: not_applicable lists unknown values {bad}")
         seen.update(v.id for v in n.vars) if n.type == "frame" else seen.add(n.id)

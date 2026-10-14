@@ -5,7 +5,7 @@
  * defaults of the dataviz guide (see web/src/app.css for the light/dark tokens).
  */
 
-import type { PresentedPerson } from "@popsim/sampler";
+import { TIERS, type PresentedPerson } from "@popsim/sampler";
 import type { Lang } from "./i18n.ts";
 
 export interface Group {
@@ -25,11 +25,17 @@ export interface ColorOption {
   /** population shares when they are known exactly (e.g. percentile quartiles), instead of
    * summing the variable's categorical marginal */
   expected?: Record<string, number>;
+  /** reads the value from the person instead of `values[variable]` (e.g. the unusualness tier) */
+  read?: (p: PresentedPerson) => string | number;
 }
 
 export function groupOf(option: ColorOption, p: PresentedPerson): string {
-  return option.mapValue(p.values[option.variable] as string | number);
+  return option.mapValue(option.read ? option.read(p) : (p.values[option.variable] as string | number));
 }
+
+// "How unusual?" tiers; the two smallest (4% + 1%) share the darkest step of the four-step ramp
+const UNUSUAL_GROUP: Record<string, string> = { typical: "typical", somewhat: "somewhat", unusual: "unusual", very: "very", exceptional: "very" };
+const tierShare = (id: string) => TIERS.filter((x) => UNUSUAL_GROUP[x.id] === id).reduce((a, x) => a + x.share, 0);
 
 const g = (key: string, he: string, en: string): Group => ({ key, label: { he, en } });
 
@@ -301,6 +307,21 @@ COLOR_OPTIONS.push(
     variable: "household_income_percentile",
     mapValue: (v) => quartile(Number(v)),
     expected: { q1: 0.25, q2: 0.25, q3: 0.25, q4: 0.25 },
+  },
+  {
+    id: "unusual",
+    label: { he: "עד כמה יוצאי דופן", en: "How unusual" },
+    kind: "ordinal",
+    groups: [
+      g("typical", "שגרתיים", "Typical"),
+      g("somewhat", "קצת יוצאי דופן", "Somewhat unusual"),
+      g("unusual", "יוצאי דופן", "Unusual"),
+      g("very", "יוצאי דופן מאוד או חריגים במיוחד", "Very unusual or exceptional"),
+    ],
+    variable: "unusual",
+    read: (p) => p.unusual?.tier ?? "typical",
+    mapValue: (v) => UNUSUAL_GROUP[String(v)] ?? "typical",
+    expected: { typical: tierShare("typical"), somewhat: tierShare("somewhat"), unusual: tierShare("unusual"), very: tierShare("very") },
   },
 );
 

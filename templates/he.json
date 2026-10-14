@@ -164,7 +164,7 @@
           "none"
         ]
       },
-      "text": "הכנסת משק הבית {gender, select, female {שלה} other {שלו}} עומדת על כ-{household_income_amount, number} ₪ ברוטו בחודש, יותר משל {household_income_percentile, number, ::precision-integer}% מהאזרחים הבוגרים, {home_ownership__id, select, yes {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}} other {והדירה שבה הם גרים בבעלותם}}} other {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}} other {והדירה שבה הם גרים אינה בבעלותם}}}}."
+      "text": "הכנסת משק הבית {gender, select, female {שלה} other {שלו}} עומדת על כ-{household_income_amount, number} ₪ ברוטו בחודש, יותר משל {household_income_percentile, number, ::precision-integer}% מהאזרחים הבוגרים, {home_ownership__id, select, yes {{marital_status__id, select, married {והדירה שבה הם גרים בבעלותם} other {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}}}} other {{marital_status__id, select, married {והדירה שבה הם גרים אינה בבעלותם} other {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}}}}}."
     },
     {
       "id": "household_none",
@@ -173,7 +173,7 @@
           "none"
         ]
       },
-      "text": "משק הבית {gender, select, female {שלה} other {שלו}} מדווח שאין לו הכנסה, {home_ownership__id, select, yes {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}} other {והדירה שבה הם גרים בבעלותם}}} other {{marital_status__id, select, widowed {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}} other {והדירה שבה הם גרים אינה בבעלותם}}}}."
+      "text": "משק הבית {gender, select, female {שלה} other {שלו}} מדווח שאין לו הכנסה, {home_ownership__id, select, yes {{marital_status__id, select, married {והדירה שבה הם גרים בבעלותם} other {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}}}} other {{marital_status__id, select, married {והדירה שבה הם גרים אינה בבעלותם} other {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}}}}}."
     },
     {
       "id": "health",
@@ -320,6 +320,137 @@
         "rarely": "לעיתים רחוקות {list}"
       },
       "separate": "never"
+    }
+  },
+  "unusual": {
+    "title": "כמה {gender, select, female {יוצאת} other {יוצא}} דופן {name}?",
+    "name_note": "השם {name}: {cond} בקרב אנשים {gender, select, female {כמוה} other {כמוהו}}; {base} מכלל האזרחים. השם מוצג להמחשה ואינו נספר בציון.",
+    "tiers": {
+      "typical": "{gender, select, female {שגרתית} other {שגרתי}}",
+      "somewhat": "קצת {gender, select, female {יוצאת} other {יוצא}} דופן",
+      "unusual": "{gender, select, female {יוצאת} other {יוצא}} דופן",
+      "very": "{gender, select, female {יוצאת} other {יוצא}} דופן מאוד",
+      "exceptional": "{gender, select, female {חריגה במיוחד} other {חריג במיוחד}}"
+    },
+    "more": "{gender, select, female {יוצאת} other {יוצא}} דופן יותר מ-{x}% מהאזרחים",
+    "less": "פחות {gender, select, female {יוצאת} other {יוצא}} דופן מ-{x}% מהאזרחים",
+    "none": "אין חריגות: כל {gender, select, female {מאפייניה} other {מאפייניו}} שכיחים בקרב אנשים {gender, select, female {כמוה} other {כמוהו}}.",
+    "levels": {
+      "major": "משמעותית",
+      "notable": "בולטת",
+      "minor": "קלה"
+    },
+    "levels_plural": {
+      "major": "משמעותיות",
+      "notable": "בולטות",
+      "minor": "קלות"
+    },
+    "level_titles": {
+      "major": "חריגות משמעותיות",
+      "notable": "חריגות בולטות",
+      "minor": "חריגות קלות"
+    },
+    "summary_part": "{level}: {x}",
+    "summary": "{n} חריגות מהרגיל: {parts}.",
+    "reason": "{label}: {value} — לא שכיח בהינתן {causes}. בקרב אנשים {gender, select, female {כמוה} other {כמוהו}}: {cond}; בכלל האזרחים: {base}.",
+    "reason_plain": "{label}: {value} — לא שכיח בקרב אנשים {gender, select, female {כמוה} other {כמוהו}}: {cond}; בכלל האזרחים: {base}.",
+    "reason_ordered": "{label}: {value} — {dir} בהינתן {causes}. הטיפוסי בקרב אנשים {gender, select, female {כמוה} other {כמוהו}}: {usual}; {x}% מ{gender, select, female {הן} other {הם}} {beyond}.",
+    "reason_ordered_plain": "{label}: {value} — {dir} בקרב אנשים {gender, select, female {כמוה} other {כמוהו}}. הטיפוסי: {usual}; {x}% מ{gender, select, female {הן} other {הם}} {beyond}.",
+    "directions": {
+      "lower": {
+        "dir": "מתחת לרגיל",
+        "beyond": "מעל לזה"
+      },
+      "higher": {
+        "dir": "מעל לרגיל",
+        "beyond": "מתחת לזה"
+      },
+      "better": {
+        "dir": "טוב מהרגיל",
+        "beyond": "במצב גרוע יותר מזה"
+      },
+      "worse": {
+        "dir": "גרוע מהרגיל",
+        "beyond": "במצב טוב יותר מזה"
+      }
+    },
+    "absent": "בלי {item}",
+    "one_in": "1 מכל {n}",
+    "percent": "{p}%",
+    "names": {
+      "group": "קבוצת אוכלוסייה",
+      "age_band": "קבוצת גיל",
+      "sector": "מגזר",
+      "religiosity": "מידת דתיות",
+      "first_name": "שם פרטי",
+      "origin": "מוצא",
+      "ancestry": "מוצא עדתי",
+      "marital_status": "מצב משפחתי",
+      "children": "ילדים",
+      "education": "התעודה הגבוהה ביותר",
+      "military_service": "שירות",
+      "labour_status": "תעסוקה",
+      "studying": "לימודים",
+      "occupation": "משלח יד",
+      "degree_field": "תחום התואר",
+      "study_field": "תחום הלימודים כיום",
+      "industry": "ענף",
+      "work_status": "מעמד בעבודה",
+      "income": "הכנסה מעבודה",
+      "household_income": "הכנסת משק הבית",
+      "home_ownership": "בעלות על דירה",
+      "health": "מצב בריאות",
+      "chronic": "מחלה כרונית",
+      "disability": "מוגבלות חמורה",
+      "vote_2022": "הצבעה ב-2022",
+      "online": "שימוש באינטרנט",
+      "news_frequency": "מעקב אחר חדשות פוליטיות",
+      "news_tv": "חדשות בטלוויזיה",
+      "news_radio": "חדשות ברדיו",
+      "news_print": "עיתונים מודפסים",
+      "news_sites": "אתרי חדשות",
+      "news_social": "חדשות ברשתות החברתיות",
+      "news_search": "חדשות דרך מנועי חיפוש",
+      "news_podcasts": "פודקאסטים",
+      "social_networks": "רשתות בשימוש",
+      "news_networks": "רשתות למעקב חדשות",
+      "tv_channels": "ערוצי חדשות",
+      "news_websites": "אתרי חדשות (ביקור שבועי)",
+      "newspaper": "עיתון עיקרי",
+      "preferred_source": "מקור החדשות המועדף",
+      "literacy_level": "מיומנות קריאה (משוערת)"
+    },
+    "causes": {
+      "locality": "{gender, select, female {מקום מגוריה} other {מקום מגוריו}}",
+      "group": "קבוצת האוכלוסייה {gender, select, female {שלה} other {שלו}}",
+      "sex": "{gender, select, female {מינה} other {מינו}}",
+      "age_band": "{gender, select, female {גילה} other {גילו}}",
+      "age": "{gender, select, female {גילה} other {גילו}}",
+      "religiosity": "מידת הדתיות {gender, select, female {שלה} other {שלו}}",
+      "origin": "{gender, select, female {מוצאה} other {מוצאו}}",
+      "ancestry": "המוצא העדתי {gender, select, female {שלה} other {שלו}}",
+      "marital_status": "{gender, select, female {מצבה} other {מצבו}} המשפחתי",
+      "children": "מספר הילדים {gender, select, female {שלה} other {שלו}}",
+      "education": "{gender, select, female {השכלתה} other {השכלתו}}",
+      "military_service": "{gender, select, female {שירותה} other {שירותו}} הצבאי או הלאומי",
+      "labour_status": "מצב התעסוקה {gender, select, female {שלה} other {שלו}}",
+      "studying": "{gender, select, female {לימודיה} other {לימודיו}} כיום",
+      "occupation": "משלח {gender, select, female {ידה} other {ידו}}",
+      "degree_field": "תחום התואר {gender, select, female {שלה} other {שלו}}",
+      "income": "{gender, select, female {הכנסתה} other {הכנסתו}} מעבודה",
+      "household_income": "הכנסת משק הבית {gender, select, female {שלה} other {שלו}}",
+      "health": "מצב {gender, select, female {בריאותה} other {בריאותו}}",
+      "chronic": "{gender, select, female {מצבה} other {מצבו}} ביחס למחלה כרונית",
+      "vote_2022": "{gender, select, female {הצבעתה} other {הצבעתו}} ב-2022",
+      "online": "השימוש {gender, select, female {שלה} other {שלו}} באינטרנט",
+      "news_frequency": "כמה {gender, select, female {היא עוקבת} other {הוא עוקב}} אחר חדשות פוליטיות",
+      "news_tv": "כמה {gender, select, female {היא צופה} other {הוא צופה}} בחדשות בטלוויזיה",
+      "news_radio": "כמה {gender, select, female {היא מאזינה} other {הוא מאזין}} לחדשות ברדיו",
+      "news_print": "כמה {gender, select, female {היא קוראת} other {הוא קורא}} עיתונים מודפסים",
+      "news_sites": "כמה {gender, select, female {היא גולשת} other {הוא גולש}} באתרי חדשות",
+      "news_social": "כמה {gender, select, female {היא מתעדכנת} other {הוא מתעדכן}} ברשתות החברתיות",
+      "news_search": "כמה {gender, select, female {היא מחפשת} other {הוא מחפש}} חדשות במנועי חיפוש",
+      "news_podcasts": "כמה {gender, select, female {היא מאזינה} other {הוא מאזין}} לפודקאסטים"
     }
   }
 }

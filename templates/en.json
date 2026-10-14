@@ -321,5 +321,136 @@
       },
       "separate": "never"
     }
+  },
+  "unusual": {
+    "title": "How unusual is {name}?",
+    "name_note": "The name {name}: {cond} among people like {gender, select, female {her} other {him}}; {base} of all citizens. Names are shown for flavour and not counted in the score.",
+    "tiers": {
+      "typical": "Typical",
+      "somewhat": "Somewhat unusual",
+      "unusual": "Unusual",
+      "very": "Very unusual",
+      "exceptional": "Exceptional"
+    },
+    "more": "more unusual than {x}% of citizens",
+    "less": "less unusual than {x}% of citizens",
+    "none": "Nothing deviates: each of {gender, select, female {her} other {his}} traits is common among people like {gender, select, female {her} other {him}}.",
+    "levels": {
+      "major": "Major",
+      "notable": "Notable",
+      "minor": "Minor"
+    },
+    "levels_plural": {
+      "major": "major",
+      "notable": "notable",
+      "minor": "minor"
+    },
+    "level_titles": {
+      "major": "Major deviations",
+      "notable": "Notable deviations",
+      "minor": "Minor deviations"
+    },
+    "summary_part": "{x} {level}",
+    "summary": "{n} deviations from what is usual: {parts}.",
+    "reason": "{label}: {value} — unusual given {causes}. People like {gender, select, female {her} other {him}}: {cond}; all citizens: {base}.",
+    "reason_plain": "{label}: {value} — unusual for people like {gender, select, female {her} other {him}}: {cond}; all citizens: {base}.",
+    "reason_ordered": "{label}: {value} — {dir} what is usual given {causes}. Typical for people like {gender, select, female {her} other {him}}: {usual}; {x}% of them are {beyond} this.",
+    "reason_ordered_plain": "{label}: {value} — {dir} what is usual for people like {gender, select, female {her} other {him}}. Typical: {usual}; {x}% of them are {beyond} this.",
+    "directions": {
+      "lower": {
+        "dir": "below",
+        "beyond": "above"
+      },
+      "higher": {
+        "dir": "above",
+        "beyond": "below"
+      },
+      "better": {
+        "dir": "better than",
+        "beyond": "worse than"
+      },
+      "worse": {
+        "dir": "worse than",
+        "beyond": "better than"
+      }
+    },
+    "absent": "no {item}",
+    "one_in": "1 in {n}",
+    "percent": "{p}%",
+    "names": {
+      "group": "Population group",
+      "age_band": "Age group",
+      "sector": "Sector",
+      "religiosity": "Religiosity",
+      "first_name": "First name",
+      "origin": "Origin",
+      "ancestry": "Ancestry",
+      "marital_status": "Marital status",
+      "children": "Children",
+      "education": "Highest diploma",
+      "military_service": "Service",
+      "labour_status": "Employment",
+      "studying": "Studies",
+      "occupation": "Occupation",
+      "degree_field": "Degree field",
+      "study_field": "Field of current studies",
+      "industry": "Industry",
+      "work_status": "Status at work",
+      "income": "Earnings",
+      "household_income": "Household income",
+      "home_ownership": "Home ownership",
+      "health": "Self-rated health",
+      "chronic": "Chronic illness",
+      "disability": "Severe disability",
+      "vote_2022": "2022 vote",
+      "online": "Internet use",
+      "news_frequency": "Follows political news",
+      "news_tv": "TV news",
+      "news_radio": "Radio news",
+      "news_print": "Printed newspapers",
+      "news_sites": "News websites",
+      "news_social": "News on social media",
+      "news_search": "News via search engines",
+      "news_podcasts": "News podcasts",
+      "social_networks": "Networks used",
+      "news_networks": "News followed on",
+      "tv_channels": "TV news channels",
+      "news_websites": "News sites visited",
+      "newspaper": "Main newspaper",
+      "preferred_source": "Preferred news source",
+      "literacy_level": "Literacy (modelled)"
+    },
+    "causes": {
+      "locality": "where {gender, select, female {she} other {he}} lives",
+      "group": "{gender, select, female {her population group} other {his population group}}",
+      "sex": "{gender, select, female {her sex} other {his sex}}",
+      "age_band": "{gender, select, female {her age} other {his age}}",
+      "age": "{gender, select, female {her age} other {his age}}",
+      "religiosity": "{gender, select, female {her religiosity} other {his religiosity}}",
+      "origin": "{gender, select, female {her origin} other {his origin}}",
+      "ancestry": "{gender, select, female {her ancestry} other {his ancestry}}",
+      "marital_status": "{gender, select, female {her marital status} other {his marital status}}",
+      "children": "{gender, select, female {her number of children} other {his number of children}}",
+      "education": "{gender, select, female {her education} other {his education}}",
+      "military_service": "{gender, select, female {her military or national service} other {his military or national service}}",
+      "labour_status": "{gender, select, female {her employment status} other {his employment status}}",
+      "studying": "{gender, select, female {her current studies} other {his current studies}}",
+      "occupation": "{gender, select, female {her occupation} other {his occupation}}",
+      "degree_field": "{gender, select, female {her field of study} other {his field of study}}",
+      "income": "{gender, select, female {her earnings} other {his earnings}}",
+      "household_income": "{gender, select, female {her household income} other {his household income}}",
+      "health": "{gender, select, female {her health} other {his health}}",
+      "chronic": "{gender, select, female {her} other {his}} chronic-illness status",
+      "vote_2022": "{gender, select, female {her vote} other {his vote}}",
+      "online": "{gender, select, female {her internet use} other {his internet use}}",
+      "news_frequency": "how closely {gender, select, female {she follows} other {he follows}} political news",
+      "news_tv": "how often {gender, select, female {she watches} other {he watches}} TV news",
+      "news_radio": "how often {gender, select, female {she listens} other {he listens}} to radio news",
+      "news_print": "how often {gender, select, female {she reads} other {he reads}} printed newspapers",
+      "news_sites": "how often {gender, select, female {she uses} other {he uses}} news websites",
+      "news_social": "how often {gender, select, female {she gets} other {he gets}} news on social media",
+      "news_search": "how often {gender, select, female {she looks} other {he looks}} up news on search engines",
+      "news_podcasts": "how often {gender, select, female {she listens} other {he listens}} to news podcasts"
+    }
   }
 }

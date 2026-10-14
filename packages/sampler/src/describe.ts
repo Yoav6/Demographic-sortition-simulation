@@ -16,6 +16,7 @@
 import { IntlMessageFormat } from "intl-messageformat";
 import type { CompiledModel, Label } from "./model.ts";
 import type { PersonValues } from "./sample.ts";
+import { nameSurprise, unusual, type Level, type Ordinal, type Tier } from "./unusual.ts";
 
 export type Lang = "he" | "en";
 
@@ -44,6 +45,48 @@ export interface Templates {
   lang: Lang;
   sentences: Sentence[];
   lists?: Record<string, ListSpec>;
+  unusual?: UnusualTemplates;
+}
+
+/** Wording of the "How unusual?" section (ICU messages; {gender} is available in all). */
+export interface UnusualTemplates {
+  /** the question above the score: {name}, gender */
+  title: string;
+  /** tooltip at the name: {name}, {cond}, {base} (the name is not part of the score) */
+  name_note: string;
+  tiers: Record<Tier, string>;
+  /** headline above / below the median: {x} = percent of citizens */
+  more: string;
+  less: string;
+  /** when nothing deviates */
+  none: string;
+  /** level names, and the count of deviations per level ({n}, {major}, {notable}, {minor}), shown
+   * from two deviations on */
+  levels: Record<Level, string>;
+  /** level names as used in the summary's list of counts ("2 notable"); {n}, {parts} */
+  levels_plural: Record<Level, string>;
+  /** headings of the lists of deviations per level */
+  level_titles: Record<Level, string>;
+  summary_part: string;
+  summary: string;
+  /** one reason: {label}, {value}, {causes}, {cond}, {base} */
+  reason: string;
+  /** a reason without a named cause */
+  reason_plain: string;
+  /** reasons for ordered variables (income, ...): also {dir} (below/above usual), {usual} (the
+   * usual value for people like them) and {x}, {beyond}: percent of them on the far side */
+  reason_ordered: string;
+  reason_ordered_plain: string;
+  directions: Record<Ordinal["direction"], { dir: string; beyond: string }>;
+  /** value phrase for a set item the person does not have: {item} */
+  absent: string;
+  /** frequencies: {n} in "1 in n", or {p} percent */
+  one_in: string;
+  percent: string;
+  /** short variable names for reasons (default: the variable's label) */
+  names: Record<string, string>;
+  /** "given ..." phrases per variable (default: the variable's label) */
+  causes: Record<string, string>;
 }
 
 export function labelFor(label: Label, lang: Lang, female: boolean): string {
@@ -123,12 +166,23 @@ export function visibleVars(model: CompiledModel): VarMeta[] {
   return model.vars.filter((v) => !v.hidden).map((v) => ({ id: v.id, label: v.label, doc: v.node.doc }));
 }
 
+/** The "How unusual?" score of a presented person, with its wording in both languages. */
+export interface PresentedUnusual {
+  /** raw score (sum of bits beyond the hinge) and its percentile among citizens (0-100) */
+  score: number;
+  percentile: number;
+  tier: Tier;
+  reasons: { variable: string; value: string; present?: boolean; pCond: number; pBase: number; causes: string[]; level: Level; bits: number; ordinal?: Ordinal }[];
+  text: Record<Lang, { title: string; name_note: string; tier: string; headline: string; summary: string; levels: Record<Level, string>; level_titles: Record<Level, string>; reasons: string[] }>;
+}
+
 /** Display-ready form of a person: value ids, gendered labels and prose in both languages. */
 export interface PresentedPerson {
   index: number;
   values: Record<string, string | number | string[] | null>;
   labels: { he: Record<string, string>; en: Record<string, string> };
   text: { he: string[]; en: string[] };
+  unusual?: PresentedUnusual;
 }
 
 export function presentPerson(
@@ -161,11 +215,100 @@ export function presentPerson(
       }
     }
   });
-  return {
+  const out: PresentedPerson = {
     index,
     values: ids,
     labels,
     text: { he: describe(model, values, templates.he), en: describe(model, values, templates.en) },
+  };
+  if (templates.he.unusual && templates.en.unusual) out.unusual = presentUnusual(model, values, female, templates);
+  return out;
+}
+
+const sig = (x: number, digits: number) => Number(x.toPrecision(digits));
+
+/** "1 in 80" when both shares are small, else percentages. */
+function frequencies(t: UnusualTemplates, lang: Lang, pCond: number, pBase: number): [string, string] {
+  const nf = new Intl.NumberFormat(lang === "he" ? "he-IL" : "en-US", { maximumSignificantDigits: 2 });
+  const one = (p: number) => format(lang, t.one_in, { n: nf.format(Math.max(2, sig(1 / p, 2))) });
+  const pct = (p: number) => format(lang, t.percent, { p: nf.format(p * 100) });
+  return Math.max(pCond, pBase) <= 0.2 ? [one(pCond), one(pBase)] : [pct(pCond), pct(pBase)];
+}
+
+export function presentUnusual(
+  model: CompiledModel,
+  values: PersonValues,
+  female: boolean,
+  templates: { he: Templates; en: Templates },
+): PresentedUnusual {
+  const u = unusual(model, values);
+  const text = {} as PresentedUnusual["text"];
+  for (const lang of ["he", "en"] as const) {
+    const t = templates[lang].unusual!;
+    const g = { gender: female ? "female" : "male" };
+    const and = new Intl.ListFormat(lang, { style: "long", type: "conjunction" });
+    const pct = Math.round(u.percentile);
+    const counts = { major: 0, notable: 0, minor: 0 };
+    for (const r of u.reasons) counts[r.level]++;
+    const nm = nameSurprise(model, values);
+    const first = model.vars[model.varIndex.get("first_name")!];
+    const name = nm ? labelFor(first.values!.find((x) => x.id === nm.value)!.label, lang, female) : "";
+    const [nameCond, nameBase] = nm ? frequencies(t, lang, nm.pCond, nm.pBase) : ["", ""];
+    const reasons = u.reasons.map((r) => {
+      const info = model.vars[model.varIndex.get(r.variable)!];
+      const v = info.values!.find((x) => x.id === r.value)!;
+      const name = labelFor(v.label, lang, female);
+      const value = r.present === false ? format(lang, t.absent, { ...g, item: name }) : name;
+      const [cond, base] = frequencies(t, lang, r.pCond, r.pBase);
+      const causes = r.causes.map((c) =>
+        t.causes[c] ? format(lang, t.causes[c], g) : labelFor(model.vars[model.varIndex.get(c)!].label, lang, female),
+      );
+      const label = t.names[r.variable] ?? labelFor(info.label, lang, female);
+      const o = r.ordinal;
+      if (o) {
+        const usual = labelFor(info.values!.find((x) => x.id === o.usual)!.label, lang, female);
+        const d = t.directions[o.direction];
+        const x = Math.min(99, Math.max(1, Math.round(o.beyond * 100)));
+        const msg = causes.length ? t.reason_ordered : t.reason_ordered_plain;
+        return format(lang, msg, { ...g, label, value, causes: and.format(causes), cond, base, dir: d.dir, beyond: d.beyond, usual, x });
+      }
+      const msg = causes.length ? t.reason : t.reason_plain;
+      return format(lang, msg, { ...g, label, value, causes: and.format(causes), cond, base });
+    });
+    text[lang] = {
+      title: format(lang, t.title, { ...g, name }),
+      name_note: nm ? format(lang, t.name_note, { ...g, name, cond: nameCond, base: nameBase }) : "",
+      tier: format(lang, t.tiers[u.tier], g),
+      headline: format(lang, pct >= 50 ? t.more : t.less, { ...g, x: pct >= 50 ? pct : 100 - pct }),
+      summary:
+        u.reasons.length >= 2
+          ? format(lang, t.summary, {
+              ...g,
+              n: u.reasons.length,
+              parts: (["major", "notable", "minor"] as const).filter((l) => counts[l]).map((l) => format(lang, t.summary_part, { x: counts[l], level: t.levels_plural[l] })).join(lang === "he" ? ", " : ", "),
+            })
+          : "",
+      levels: t.levels,
+      level_titles: t.level_titles,
+      reasons: reasons.length ? reasons : [format(lang, t.none, g)],
+    };
+  }
+  return {
+    score: sig(u.score, 4),
+    percentile: u.percentile,
+    tier: u.tier,
+    reasons: u.reasons.map((r) => ({
+      variable: r.variable,
+      value: r.value,
+      ...(r.present === undefined ? {} : { present: r.present }),
+      pCond: sig(r.pCond, 4),
+      pBase: sig(r.pBase, 4),
+      causes: r.causes,
+      level: r.level,
+      bits: sig(r.bits, 3),
+      ...(r.ordinal ? { ordinal: r.ordinal } : {}),
+    })),
+    text,
   };
 }
 

@@ -1,7 +1,7 @@
 # Methodology
 
 <!-- he-summary -->
-**בקצרה:** המודל הוא רשת בייסיאנית — שרשרת של טבלאות הסתברות מותנית. בבסיס עומדת "מסגרת אוכלוסייה": מספר האזרחים בני 18+ המתגוררים בישראל, לפי יישוב, קבוצת אוכלוסייה, מין וקבוצת גיל (על בסיס נתוני הלמ"ס לסוף 2024, בניכוי תושבי קבע שאינם אזרחים במזרח ירושלים ובגולן). כל מאפיין נוסף (דתיות, שם, השכלה, הצבעה...) נדגם מטבלה המותנית במאפיינים שכבר נקבעו. כל טבלה נבנית מנתונים מפורסמים (הלמ"ס, ועדת הבחירות, הסקר הלאומי של הבחירות ועוד), מכוילת לסיכומים הרשמיים ומתועדת בנפרד. הדגימה דטרמיניסטית: אותו זרע מפיק תמיד את אותם אנשים.
+**בקצרה:** המודל הוא רשת בייסיאנית — שרשרת של טבלאות הסתברות מותנית. בבסיס עומדת "מסגרת אוכלוסייה": מספר האזרחים בני 18+ המתגוררים בישראל, לפי יישוב, קבוצת אוכלוסייה, מין וקבוצת גיל (על בסיס נתוני הלמ"ס לסוף 2024, בניכוי תושבי קבע שאינם אזרחים במזרח ירושלים ובגולן). כל מאפיין נוסף (דתיות, שם, השכלה, הצבעה...) נדגם מטבלה המותנית במאפיינים שכבר נקבעו. כל טבלה נבנית מנתונים מפורסמים (הלמ"ס, ועדת הבחירות, הסקר הלאומי של הבחירות ועוד), מכוילת לסיכומים הרשמיים ומתועדת בנפרד. הדגימה דטרמיניסטית: אותו סיד מפיק תמיד את אותם אנשים.
 <!-- /he-summary -->
 
 This page explains how the model turns public statistics into 150 synthetic members of a
@@ -180,7 +180,17 @@ page shows the checks that cover it.
 The pipeline's unit tests check the RNG, IPF, the bundle's structure and that the published
 assembly is reproduced exactly from its seed.
 
-## 7. What this model is not
+## 7. How unusual is each member?
+
+Every member also gets a **"How unusual?"** score: how much their traits clash with each
+other, not how rare they are. At each step of the draw, the probability of what the person
+got, given their other traits, is compared with its national share (Das & Schneider's
+r-value). Steps more than twice less likely than average add their surprise in bits (capped at
+6). The total is shown as a percentile among all citizens, in five tiers, with every
+deviation listed by significance and the traits behind it. Details, examples and limitations:
+[docs/methodology/unusual.md](docs/methodology/unusual.md).
+
+## 8. What this model is not
 
 It is a model of the *distribution* of attributes in the eligible population, built from
 aggregates. Combinations that no source measures jointly are filled in by the assumptions of

@@ -28,6 +28,22 @@ interface NodeCommon {
   sources?: string[];
   /** Hidden nodes are technical helpers (e.g. coarse groupings) not shown to users. */
   hidden?: boolean;
+  /** For a hidden helper: the visible variable it stands for in explanations. */
+  shown_as?: string;
+  /** Values run from lowest to highest (income brackets, number of children, ...). */
+  ordered?: boolean;
+  /** Ordered nodes: values that are not a level (e.g. "other diploma"); they get no direction. */
+  off_scale?: string[];
+  /** Ordered nodes whose values run from best to worst: surprises are "better" or "worse" than usual. */
+  quality_scale?: boolean;
+}
+
+/** National shares, for the "How unusual?" score (unusual.ts). */
+interface Shares {
+  /** Share of the population per value (sets: per item, the share including it). */
+  marginal?: number[];
+  /** Value ids that mean "does not apply" (e.g. occupation of people not employed). */
+  not_applicable?: string[];
 }
 
 export interface FrameVar {
@@ -54,7 +70,7 @@ export interface LookupNode extends NodeCommon {
 }
 
 /** Conditional probability table. Keys are parent value indices joined by "|" ("*" = any). */
-export interface TableNode extends NodeCommon {
+export interface TableNode extends NodeCommon, Shares {
   type: "table";
   parents: string[];
   values: ValueDef[];
@@ -65,7 +81,7 @@ export interface TableNode extends NodeCommon {
 }
 
 /** Multinomial logit with main effects: score_k = intercept_k + sum_p coef[p][value_p][k]. */
-export interface LogitNode extends NodeCommon {
+export interface LogitNode extends NodeCommon, Shares {
   type: "logit";
   parents: string[];
   values: ValueDef[];
@@ -102,7 +118,7 @@ export interface PercentileNode extends NodeCommon {
 /** Set-valued node: each item is included independently with a probability (x 1e9). With
  *  subset_of, an item can only be chosen if the person has it in that earlier multi node (same
  *  items), and its probability is conditional on having it. */
-export interface MultiNode extends NodeCommon {
+export interface MultiNode extends NodeCommon, Shares {
   type: "multi";
   parents: string[];
   items: ValueDef[];

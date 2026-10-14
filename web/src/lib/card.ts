@@ -12,6 +12,9 @@ type L = { he: string; en: string };
 export interface Line {
   /** variable whose label (unless `label` is given) and methodology page the line uses */
   doc: string;
+  /** all variables the line shows (default: [doc]); a "How unusual?" reason about any of them
+   * marks the line */
+  vars?: string[];
   label?: L;
   /** the value text, or null to leave the line out */
   value: (p: PresentedPerson, lang: Lang) => string | null;
@@ -44,6 +47,7 @@ const w = (k: string, lang: Lang, x = "") => words[k][lang].replace("{x}", x);
 function medium(freq: string, detail?: string, mainly = false): Line {
   return {
     doc: freq,
+    vars: detail ? [freq, detail] : [freq],
     value: (p, lang) => {
       const f = lab(p, lang, freq);
       if (!detail || val(p, freq) === "never") return f;
@@ -61,15 +65,18 @@ export const SECTIONS: Section[] = [
     lines: [
       {
         doc: "locality",
+        vars: ["locality", "locality_type", "district"],
         value: (p, lang) => `${lab(p, lang, "locality")} (${lab(p, lang, "locality_type")}), ${lab(p, lang, "district")}`,
       },
       {
         doc: "age",
+        vars: ["age", "age_band", "sex"],
         label: { he: "מין וגיל", en: "Sex and age" },
         value: (p, lang) => `${lab(p, lang, "sex")}, ${lab(p, lang, "age")}`,
       },
       {
         doc: "sector",
+        vars: ["sector", "group"],
         label: { he: "מגזר (דת רשומה)", en: "Sector (registered religion)" },
         value: (p, lang) => {
           const s = lab(p, lang, "sector");
@@ -80,17 +87,20 @@ export const SECTIONS: Section[] = [
       plain("religiosity"),
       {
         doc: "origin",
+        vars: ["origin", "ancestry"],
         value: (p, lang) =>
           val(p, "ancestry") && val(p, "ancestry") !== "not_applicable" ? `${lab(p, lang, "origin")}; ${lab(p, lang, "ancestry")}` : lab(p, lang, "origin"),
       },
       {
         doc: "marital_status",
+        vars: ["marital_status", "children"],
         label: { he: "משפחה", en: "Family" },
         value: (p, lang) => `${lab(p, lang, "marital_status")}; ${w("children", lang)}: ${lab(p, lang, "children")}`,
       },
       plain("military_service"),
       {
         doc: "health",
+        vars: ["health", "chronic", "disability"],
         value: (p, lang) =>
           [lab(p, lang, "health"), val(p, "chronic") === "yes" ? w("chronic", lang) : null, val(p, "disability") === "yes" ? w("disability", lang) : null]
             .filter(Boolean)
@@ -105,10 +115,12 @@ export const SECTIONS: Section[] = [
     lines: [
       {
         doc: "education",
+        vars: ["education", "degree_field"],
         value: (p, lang) => (val(p, "degree_field") && val(p, "degree_field") !== "none" ? `${lab(p, lang, "education")} — ${lab(p, lang, "degree_field")}` : lab(p, lang, "education")),
       },
       {
         doc: "studying",
+        vars: ["studying", "study_field"],
         value: (p, lang) => (val(p, "study_field") && val(p, "study_field") !== "none" ? `${lab(p, lang, "studying")} — ${lab(p, lang, "study_field")}` : lab(p, lang, "studying")),
       },
       {
@@ -125,21 +137,25 @@ export const SECTIONS: Section[] = [
     lines: [
       {
         doc: "labour_status",
+        vars: ["labour_status", "occupation"],
         value: (p, lang) => (val(p, "occupation") === "none" ? lab(p, lang, "labour_status") : `${lab(p, lang, "labour_status")} — ${lab(p, lang, "occupation")}`),
       },
       {
         doc: "industry",
+        vars: ["industry", "work_status"],
         value: (p, lang) =>
           val(p, "industry") === "none" ? null : val(p, "work_status") === "none" ? lab(p, lang, "industry") : `${lab(p, lang, "industry")} (${lab(p, lang, "work_status")})`,
       },
       {
         doc: "income_amount",
+        vars: ["income", "income_amount"],
         label: { he: "הכנסה חודשית ברוטו מעבודה", en: "Gross monthly earnings" },
         value: (p, lang) =>
           val(p, "income_amount") === null ? null : `₪${lab(p, lang, "income_amount")} (${w("higher_employed", lang, pct(p, "income_percentile"))})`,
       },
       {
         doc: "household_income_amount",
+        vars: ["household_income", "household_income_amount"],
         label: { he: "הכנסת משק הבית (ברוטו, חודשית)", en: "Household gross monthly income" },
         value: (p, lang) =>
           `₪${lab(p, lang, "household_income_amount")} (${w("higher_adults", lang, pct(p, "household_income_percentile"))})`,
@@ -151,7 +167,7 @@ export const SECTIONS: Section[] = [
     id: "media",
     label: { he: "תקשורת", en: "Media" },
     lines: [
-      plain("online"),
+      { ...plain("online"), vars: ["online", "social_networks"] },
       plain("news_frequency"),
       plain("preferred_source"),
       medium("news_tv", "tv_channels"),

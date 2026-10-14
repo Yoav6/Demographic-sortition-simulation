@@ -9,6 +9,8 @@ File formats the estimators write (all value columns hold value *ids*):
   interval  CSV  <parent>, lo, hi
   percentile CSV percentile, value              (percentile 0..100)
 Probabilities become integer weights scaled to 1e9 so sampling is exact in every language.
+Tables, sets and logits also carry their national shares (`marginal`, from
+model/marginals.json) for the "How unusual?" score.
 """
 
 from __future__ import annotations
@@ -39,7 +41,7 @@ def _vals(values: list[Value]) -> list[dict]:
 
 def _common(n: Node) -> dict:
     d = {"id": n.id, "label": n.label}
-    for k in ("doc", "sources", "hidden"):
+    for k in ("doc", "sources", "hidden", "shown_as", "ordered", "off_scale", "quality_scale"):
         if k in n.raw:
             d[k] = n.raw[k]
     return d
@@ -228,9 +230,27 @@ BUILDERS = {
 }
 
 
+def _add_marginals(spec: ModelSpec, nodes: list[dict]) -> None:
+    """National shares per value (per item for sets), aligned with the node's domain."""
+    from ..estimate.marginals import OUT, targets
+
+    if not OUT.exists():
+        raise FileNotFoundError(f"{OUT.relative_to(paths.ROOT)} is missing (run `popsim build --steps marginals`)")
+    marginals = json.loads(OUT.read_text(encoding="utf-8"))
+    by_id = {d["id"]: d for d in nodes}
+    for n in targets(spec):
+        m = marginals.get(n.id)
+        if m is None or set(m) != set(n.value_ids()):
+            raise ValueError(f"{n.id}: model/marginals.json is out of date (run `popsim build --steps marginals`)")
+        by_id[n.id]["marginal"] = [m[v] for v in n.value_ids()]
+        if n.raw.get("not_applicable"):
+            by_id[n.id]["not_applicable"] = list(n.raw["not_applicable"])
+
+
 def build_bundle(spec: ModelSpec | None = None) -> dict:
     spec = spec or load_spec()
     nodes = [BUILDERS[n.type](spec, n) for n in spec.nodes]
+    _add_marginals(spec, nodes)
     frame = nodes[0]
     srcs = load_sources()
     used = sorted({s for n in nodes for s in n.get("sources", [])})

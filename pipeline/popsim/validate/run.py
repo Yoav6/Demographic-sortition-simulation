@@ -614,6 +614,43 @@ def sampler_check(sample: pd.DataFrame, min_n: int = 2000, combos: int = 25) -> 
     return c
 
 
+def marginals_check(sample: pd.DataFrame) -> Check:
+    """The national shares in model/marginals.json (used by the "How unusual?" score) against
+    the sample: a chi-square test per table and logit node, and a binomial one per item of a
+    set (within the enclosing set for subset_of nodes). Passes when the smallest p-value,
+    Bonferroni-adjusted, is above 0.001."""
+    from ..estimate.marginals import OUT, targets
+
+    spec = load_spec()
+    marg = json.loads(OUT.read_text(encoding="utf-8"))
+    n = len(sample)
+    c = Check(f"National shares used by the unusualness score match the sample (n = {n:,}; tolerance: adjusted p-value)", [], "model", 0.001)
+    tests: list[tuple[float, float, str]] = []
+    for node in targets(spec):
+        m = pd.Series(marg[node.id])
+        if node.type == "multi":
+            chosen = sample[node.id].str.split(";")
+            outer = sample[node.raw["subset_of"]].str.split(";") if node.raw.get("subset_of") else None
+            for item, p in m.items():
+                within = outer.apply(lambda x, it=item: it in x).to_numpy() if outer is not None else np.ones(n, dtype=bool)
+                cnt = int(within.sum())
+                if cnt == 0:
+                    continue
+                k = int((chosen.apply(lambda x, it=item: it in x).to_numpy() & within).sum())
+                tests.append((_chi2_p(np.array([k, cnt - k], dtype=float), np.array([p, 1 - p]) * cnt), abs(k / cnt - p), f"{node.id}: {item}"))
+        else:
+            obs = sample[node.id].value_counts().reindex(m.index).fillna(0.0)
+            tests.append((_chi2_p(obs.to_numpy(), m.to_numpy() / m.sum() * n), float((obs / n - m).abs().max()), node.id))
+        c.nodes.append(node.id)
+    tests.sort()
+    adjusted = min(1.0, tests[0][0] * len(tests))
+    c.max_abs_error = max(t[1] for t in tests)
+    c.detail = [{"tests": len(tests), "smallest_adjusted_p": round(adjusted, 4)}] + [
+        {"node": nid, "p_value": round(pv, 6), "max_abs_diff": round(d, 5)} for pv, d, nid in tests[:5]]
+    c.passed = adjusted >= c.tolerance
+    return c
+
+
 def percentile_checks(sample: pd.DataFrame) -> list[Check]:
     """A percentile must be uniform over the people it applies to: each tenth of the 0-100 scale
     should hold 10% of them. (Decile shares rather than a Kolmogorov-Smirnov distance, because
@@ -674,6 +711,7 @@ def validate(n: int = 200_000, seed: int = 1, log=print) -> bool:
     sample = draw_sample(n, seed)
     checks += media_checks(sample)
     checks.append(sampler_check(sample))
+    checks.append(marginals_check(sample))
     checks += percentile_checks(sample)
     checks += constraint_checks(sample)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
