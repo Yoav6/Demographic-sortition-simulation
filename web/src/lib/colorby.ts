@@ -256,6 +256,19 @@ COLOR_OPTIONS.push(
     mapValue: (v) => String(v),
   },
   {
+    id: "living_arrangement",
+    label: { he: "הסדר מגורים", en: "Living arrangement" },
+    kind: "categorical",
+    groups: [
+      g("partner", "עם בן או בת זוג", "With a spouse or partner"),
+      g("parents", "עם ההורים", "With parents"),
+      g("family", "עם הילדים או קרובים אחרים", "With children or other relatives"),
+      g("independent", "באופן עצמאי", "Independently"),
+    ],
+    variable: "living_arrangement",
+    mapValue: (v) => (v === "own_children" || v === "relatives" ? "family" : String(v)),
+  },
+  {
     id: "education",
     label: { he: "השכלה", en: "Education" },
     kind: "ordinal",

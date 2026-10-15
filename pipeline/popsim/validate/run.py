@@ -29,7 +29,7 @@ import yaml
 
 from .. import paths
 from ..estimate.joint import joint
-from ..estimate.socioeconomic import ARAB_RELIGION, service_table
+from ..estimate.socioeconomic import ARAB_RELIGION, load_living, service_table
 from ..estimate.survey import AGE_BAND_TO_SURVEY, load
 from ..model_spec import load_spec
 
@@ -216,6 +216,10 @@ def survey_checks() -> list[Check]:
         ("Marital status of Arabs by religion and sex (20+)", ["marital_status"], "marital_arabs", "marital_status", "marital", "arabs", ["religion", "sex"], 0.03, {}),
         ("Children of Jews by religiosity and sex (20+)", ["children"], "children_jews", "children", "children", "jews", ["religiosity", "sex"], 0.03, {}),
         ("Children of Arabs by religion and sex (20+)", ["children"], "children_arabs", "children", "children", "arabs", ["religion", "sex"], 0.04, {}),
+        ("Living arrangement of Jews by religiosity and sex (20+)", ["living_arrangement"], "living_jews", "living_arrangement", "arrangement", "jews", ["religiosity", "sex"], 0.03, {"loader": load_living}),
+        ("Living arrangement of Jews by marital status and sex (20+)", ["living_arrangement"], "living_jews", "living_arrangement", "arrangement", "jews", ["marital", "sex"], 0.03,
+         {"loader": load_living, "extra": {"marital_status": "marital"}}),
+        ("Living arrangement of Arabs by religion and sex (20+)", ["living_arrangement"], "living_arabs", "living_arrangement", "arrangement", "arabs", ["religion", "sex"], 0.04, {"loader": load_living}),
         ("Highest diploma of Jews by religiosity and sex (20+)", ["education"], "diploma_jews", "education", "diploma", "jews", ["religiosity", "sex"], 0.03, {}),
         ("Highest diploma of Arabs by religion and sex (20+)", ["education"], "diploma_arabs", "education", "diploma", "arabs", ["religion", "sex"], 0.04, {}),
         ("Military/national service of Jews by religiosity and sex (20+)", ["military_service"], "service_jews", "military_service", "service", "jews", ["religiosity", "sex"], 0.03, {"loader": service_table}),
@@ -283,7 +287,7 @@ def survey_checks() -> list[Check]:
             m = m.rename(columns=dict(zip(by_model, by_survey)))
             if "employment" in by_survey:
                 m = _labour_to_survey(m, "employment")
-            t = load(f"{table}_{suffix}")
+            t = (load_living if table.startswith(("household_income", "home_ownership")) else load)(f"{table}_{suffix}")
             c.max_abs_error, c.max_excess, c.detail = compare(m, t, by_survey, svar)
             c.passed = c.max_excess <= c.tolerance
             out.append(c)

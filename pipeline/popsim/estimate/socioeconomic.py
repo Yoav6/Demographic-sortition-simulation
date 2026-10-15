@@ -1,6 +1,7 @@
 """Family, education, service, work and income nodes from CBS Social Survey 2024 tables.
 
-Nodes: birth_region (lookup), marital_status, children, education, military_service,
+Nodes: birth_region (lookup), marital_status, children, has_children (lookup),
+living_arrangement, education, military_service,
 in_service, labour_status, occupation, industry, work_status, income, income_amount,
 income_percentile, household_income, home_ownership. Each has a methodology page in
 docs/methodology/.
@@ -27,7 +28,7 @@ import pandas as pd
 from .. import paths
 from ..model_spec import load_spec
 from ..sources import load_sources
-from .common import AGE_BAND_IDS, combine
+from .common import AGE_BAND_IDS, combine, normalize_rows
 from .joint import joint
 from .survey import AGE_BAND_TO_SURVEY, load, main_effects
 
@@ -252,7 +253,73 @@ def build_children(log=print) -> None:
     one = df[young & (df["value"] == "1")].reset_index().merge(moved, on=keys, how="left").set_index("index")
     df.loc[one.index, "p"] += one["moved"].fillna(0.0)
     write_cpt(df[["group", "religiosity", "sex", "age_band", "marital_status", "value", "p"]], "children")
-    log("  children")
+    pd.DataFrame({"children": CHILDREN, "value": ["no"] + ["yes"] * (len(CHILDREN) - 1)}).to_csv(paths.MODEL / "lookups" / "has_children.csv", index=False)
+    log("  children, has_children")
+
+
+# ---------------------------------------------------------------------------
+# living arrangement
+
+LIVING = ["partner", "parents", "own_children", "relatives", "independent"]
+OLD_SURVEY_AGES = ["65-74", "75+"]
+
+
+def arrangement(df: pd.DataFrame) -> pd.Series:
+    """Living arrangement of a Social Survey respondent, from the household type, whether the
+    partner lives in the household, whether the respondent has had children, and age.
+
+    A CBS household shares a dwelling and a food budget, so flatmates who buy food separately
+    are one-person households: "independent" is a one-person or non-family household. A CBS
+    family is a couple, a parent and child, or siblings without partners or children: a
+    respondent without a partner in a family household lives with their own children if they
+    have had any, otherwise with their family of origin - parents before 65, other relatives
+    (mostly siblings) from 65 on.
+    """
+    old = df["age_s"].isin(OLD_SURVEY_AGES)
+    return pd.Series(
+        np.select(
+            [df["with_partner"] == "yes", df["hh_type"].isin(["one_person", "non_family"]), df["had_children"] == "yes", old],
+            ["partner", "independent", "own_children", "relatives"],
+            "parents",
+        ),
+        index=df.index,
+    )
+
+
+def load_living(name: str) -> pd.DataFrame:
+    """<name>_children and <name>_childless (tables filtered on whether the respondent has had
+    children), with the respondent's living arrangement."""
+    parts = [load(f"{name}_{k}").assign(had_children=v) for k, v in (("children", "yes"), ("childless", "no"))]
+    df = pd.concat(parts, ignore_index=True)
+    return df.assign(arrangement=arrangement(df)).rename(columns={"had_children": "has_children"})
+
+
+def impossible_living(df: pd.DataFrame, age: str) -> np.ndarray:
+    """Arrangements ruled out by definition: own children without having had any; parents
+    from 65 on; other relatives before 65."""
+    old = df[age].isin(OLD_SURVEY_AGES if age == "age_s" else OLD_BANDS)
+    v = df["value"] if "value" in df else df["arrangement"]
+    return (((v == "own_children") & (df["has_children"] == "no")) | ((v == "parents") & old) | ((v == "relatives") & ~old)).to_numpy()
+
+
+def build_living(log=print) -> None:
+    """Living arrangement given marital status and whether the person has had children, by
+    religiosity (Jews) or religion (Arabs), sex and age. 18-19-year-olds use the 20-24 pattern.
+
+    Each (marital status, children) slice is fitted on its own, so that a row without
+    respondents (never-married Haredi women aged 30-34) borrows from people in the same
+    family situation - among whom few live with a partner - not from the married."""
+    tables = {pop: load_living(f"living_{pop}") for pop in ("jews", "others", "arabs")}
+    parts = []
+    for (marital, kids), _ in tables["jews"].groupby(["marital", "has_children"]):
+        sl = {pop: t[(t["marital"] == marital) & (t["has_children"] == kids)] for pop, t in tables.items()}
+        cond = by_population("living", "arrangement", LIVING, loader=lambda name: sl[name.removeprefix("living_")])
+        parts.append(expand(cond, "arrangement").assign(marital_status=marital, has_children=kids))
+    df = pd.concat(parts, ignore_index=True)
+    df.loc[impossible_living(df, "age_band"), "p"] = 0.0
+    df = normalize_rows(df, ["group", "religiosity", "sex", "age_band", "marital_status", "has_children"])
+    write_cpt(df[["group", "religiosity", "sex", "age_band", "marital_status", "has_children", "value", "p"]], "living_arrangement")
+    log("  living_arrangement")
 
 
 # ---------------------------------------------------------------------------
@@ -430,6 +497,12 @@ def _per_popgroup(name: str) -> dict[str, pd.DataFrame]:
     return {"jews_and_others": load(f"{name}_jo"), "arabs": load(f"{name}_arabs")}
 
 
+def _per_popgroup_living(name: str) -> dict[str, pd.DataFrame]:
+    """_per_popgroup() for tables that also give the household type and partner, queried
+    separately for people who have and have not had children (see load_living)."""
+    return {"jews_and_others": load_living(f"{name}_jo"), "arabs": load_living(f"{name}_arabs")}
+
+
 def _to_groups(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
     """Copy each population-group table to the model groups it covers."""
     return pd.concat([tables[pg].assign(group=g) for g, pg in POPGROUP.items()], ignore_index=True)
@@ -537,26 +610,27 @@ def build_income_percentile(log=print) -> None:
 
 
 def build_household(log=print) -> None:
-    """Household gross monthly income bracket.
+    """Household gross monthly income bracket, and home ownership.
 
-    Employed: given marital status, own earnings bracket and age. Not employed: given labour-
-    force status, age and marital status (retirees = outside the labour force at 65+;
-    compulsory service = outside the labour force at their age). Separately for
-    Jews-and-others and for Arabs.
+    Employed: given living arrangement, own earnings bracket and age. Not employed: given
+    labour-force status, age and living arrangement (retirees = outside the labour force at
+    65+; compulsory service = outside the labour force at their age). Home ownership: given
+    household income, age and living arrangement. Separately for Jews-and-others and for Arabs.
+    Someone living with their parents reports their parents' household.
     """
     rows = []
-    for pg, t in _per_popgroup("household_income_employed").items():
-        h = main_effects(t, "hh_income", ["income", "age_s"], ["marital"], HH_INCOME, STRENGTH)
+    for pg, t in _per_popgroup_living("household_income_employed").items():
+        h = main_effects(t, "hh_income", ["income", "age_s"], ["arrangement"], HH_INCOME, STRENGTH)
         h = h.merge(BANDS, on="age_s").assign(labour_status="employed")
         # a household's income is at least its member's earnings: rule out brackets entirely below
         # them (survey answers occasionally conflict, e.g. household net vs personal gross)
         hh_top = h["hh_income"].map(lambda k: np.inf if HH_BOUNDS[k][1] is None else HH_BOUNDS[k][1])
         own_low = h["income"].map(lambda k: INCOME_BOUNDS[k][0])
         h.loc[(hh_top <= own_low).to_numpy(), "p"] = 0.0
-        h["p"] = h["p"] / h.groupby(["marital", "income", "age_band"])["p"].transform("sum")
+        h["p"] = h["p"] / h.groupby(["arrangement", "income", "age_band"])["p"].transform("sum")
         rows += [h.assign(group=g) for g, p in POPGROUP.items() if p == pg]
-    for pg, t in _per_popgroup("household_income_by_status").items():
-        h = main_effects(t, "hh_income", ["employment", "age_s"], ["marital"], HH_INCOME, STRENGTH)
+    for pg, t in _per_popgroup_living("household_income_by_status").items():
+        h = main_effects(t, "hh_income", ["employment", "age_s"], ["arrangement"], HH_INCOME, STRENGTH)
         h = smooth_ages(h, "hh_income").merge(BANDS, on="age_s")
         parts = [
             h[h["employment"] == "unemployed"].assign(labour_status="unemployed"),
@@ -566,14 +640,14 @@ def build_household(log=print) -> None:
         ]
         h = pd.concat(parts, ignore_index=True).assign(income="not_employed")
         rows += [h.assign(group=g) for g, p in POPGROUP.items() if p == pg]
-    df = pd.concat(rows, ignore_index=True).rename(columns={"marital": "marital_status", "hh_income": "value"})
-    write_cpt(df[["labour_status", "group", "marital_status", "income", "age_band", "value", "p"]], "household_income")
+    df = pd.concat(rows, ignore_index=True).rename(columns={"arrangement": "living_arrangement", "hh_income": "value"})
+    write_cpt(df[["labour_status", "group", "living_arrangement", "income", "age_band", "value", "p"]], "household_income")
     _write_bounds(HH_BOUNDS, "household_income", "household_income_amount")
 
-    ho = {pg: main_effects(t, "owns_home", ["hh_income", "age_s"], ["marital"], ["yes", "no"], STRENGTH)
-          for pg, t in _per_popgroup("home_ownership").items()}
-    df = _to_groups(ho).merge(BANDS, on="age_s").rename(columns={"hh_income": "household_income", "marital": "marital_status", "owns_home": "value"})
-    write_cpt(df[["group", "household_income", "age_band", "marital_status", "value", "p"]], "home_ownership")
+    ho = {pg: main_effects(t, "owns_home", ["hh_income", "age_s"], ["arrangement"], ["yes", "no"], STRENGTH)
+          for pg, t in _per_popgroup_living("home_ownership").items()}
+    df = _to_groups(ho).merge(BANDS, on="age_s").rename(columns={"hh_income": "household_income", "arrangement": "living_arrangement", "owns_home": "value"})
+    write_cpt(df[["group", "household_income", "age_band", "living_arrangement", "value", "p"]], "home_ownership")
     log("  household_income, household_income_amount, home_ownership")
 
 

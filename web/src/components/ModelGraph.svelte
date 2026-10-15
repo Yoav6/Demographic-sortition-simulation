@@ -8,6 +8,13 @@
   const BOX_H = 30;
   const W = 1100;
   let hover = $state<string | null>(null);
+  let fig = $state<HTMLElement>();
+  let full = $state(false);
+
+  const toggleFull = () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else fig?.requestFullscreen?.();
+  };
 
   // depth = longest chain of dependencies from the frame; rows are depths
   const layout = $derived.by(() => {
@@ -63,11 +70,23 @@
     const cut = l.replace(/\s*\(.*\)$/, "");
     return cut.length > 22 ? cut.slice(0, 21) + "…" : cut;
   };
+  const frameTip = {
+    he: "מסגרת האוכלוסייה: נקודת המוצא של כל אדם — יישוב מגורים, קבוצת אוכלוסייה, מין וקבוצת גיל. נבנית מנתוני הלמ\"ס ופנקס הבוחרים ומכילה כ-6.45 מיליון אזרחים בני 18+ ב-1,239 יישובים. כל שאר המאפיינים נדגמים בהינתן חלק ממנה.",
+    en: "Population frame: the starting point of every person — place of residence, population group, sex and age band. Built from CBS and voter-register data, it covers about 6.45 million citizens aged 18+ in 1,239 localities. All other attributes are drawn conditional on parts of it.",
+  };
+  const tip = (n: GraphNode) => (n.type === "frame" ? frameTip[lang] : n.label[lang]);
   const href = (n: GraphNode) => (n.doc ? `#/method/${n.doc.replace(/^.*\//, "").replace(/\.md$/, "")}` : "#/method");
   const sx = (x: number) => (lang === "he" ? W - x : x) * (layout.width / W);
 </script>
 
-<figure class="graph">
+<svelte:document onfullscreenchange={() => (full = document.fullscreenElement === fig)} />
+
+<figure class="graph" class:full bind:this={fig}>
+  {#if document.fullscreenEnabled}
+    <button type="button" class="fs" onclick={toggleFull}>
+      {full ? (lang === "he" ? "יציאה ממסך מלא" : "Exit fullscreen") : lang === "he" ? "מסך מלא" : "Fullscreen"}
+    </button>
+  {/if}
   <div class="scroll">
     <svg viewBox={`0 0 ${layout.width} ${layout.height}`} width="100%" role="img"
          aria-label={lang === "he" ? "מבנה המודל: כל מאפיין והמאפיינים שהוא תלוי בהם" : "Model structure: each attribute and the attributes it depends on"}>
@@ -87,7 +106,7 @@
           <g class="node" class:hidden-node={n.hidden} class:frame={n.type === "frame"} class:off={linked && !linked.has(n.id)}>
             <rect x={sx(p.x) - 68} y={p.y - BOX_H / 2} width="136" height={BOX_H} rx="8" />
             <text x={sx(p.x)} y={p.y + 4} text-anchor="middle">{short(n)}</text>
-            <title>{n.label[lang]}{n.hidden ? (lang === "he" ? " (משתנה עזר)" : " (helper variable)") : ""}</title>
+            <title>{tip(n)}{n.hidden ? (lang === "he" ? " (משתנה עזר)" : " (helper variable)") : ""}</title>
           </g>
         </a>
       {/each}
@@ -103,6 +122,22 @@
 <style>
   .graph {
     margin: 0;
+  }
+  .graph.full {
+    background: var(--bg, var(--surface-1));
+    padding: 1rem;
+    overflow: auto;
+  }
+  .fs {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    font: inherit;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    background: var(--surface-1);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
   }
   .scroll {
     overflow-x: auto;

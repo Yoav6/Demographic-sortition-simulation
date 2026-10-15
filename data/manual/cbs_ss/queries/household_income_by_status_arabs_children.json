@@ -1,0 +1,39 @@
+{
+ "description": "household gross income, household type and partner in the household by labour-force status, age and marital status - Arabs outside the Jerusalem district who have had children",
+ "rows": [
+  6808,
+  577,
+  101
+ ],
+ "cols": [
+  3177,
+  519,
+  491
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    2
+   ]
+  },
+  {
+   "var": 6702,
+   "values": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "var": 1567,
+   "values": [
+    1
+   ]
+  }
+ ],
+ "year": 2024
+}

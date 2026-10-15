@@ -1,0 +1,39 @@
+{
+ "description": "home ownership, household type and partner in the household by household gross income, age and marital status - Arabs outside the Jerusalem district who have had children",
+ "rows": [
+  3177,
+  577,
+  101
+ ],
+ "cols": [
+  6876,
+  519,
+  491
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    2
+   ]
+  },
+  {
+   "var": 6702,
+   "values": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "var": 1567,
+   "values": [
+    1
+   ]
+  }
+ ],
+ "year": 2024
+}

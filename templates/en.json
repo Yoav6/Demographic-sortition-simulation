@@ -48,11 +48,11 @@
     },
     {
       "id": "residence",
-      "text": "{gender, select, female {She} other {He}} lives in {locality}."
+      "text": "{gender, select, female {She} other {He}} lives{living_arrangement__id, select, independent { independently} other {}} in {locality}{living_arrangement__id, select, parents { with {gender, select, female {her} other {his}} parents} own_children { with {gender, select, female {her} other {his}} {children__id, select, 1 {child} other {children}}} relatives { with relatives} partner {{marital_status__id, select, married {} other { with {gender, select, female {her} other {his}} partner}}} other {}}."
     },
     {
       "id": "family",
-      "text": "{gender, select, female {She} other {He}} is {marital_status} and has {children__family}."
+      "text": "{gender, select, female {She} other {He}} is {living_arrangement__id, select, partner {{marital_status__id, select, never_married {unmarried} other {{marital_status}}}} other {{marital_status}}} and has {children__family}."
     },
     {
       "id": "education",
@@ -164,7 +164,7 @@
           "none"
         ]
       },
-      "text": "{gender, select, female {Her} other {His}} household's gross income is about ₪{household_income_amount, number} a month, higher than that of {household_income_percentile, number, ::precision-integer}% of adult citizens, and the household {home_ownership__id, select, yes {owns} other {does not own}} its home."
+      "text": "{living_arrangement__id, select, parents {{gender, select, female {Her} other {His}} parents' household} other {{gender, select, female {Her} other {His}} household}} has a gross income of about ₪{household_income_amount, number} a month, higher than that of {household_income_percentile, number, ::precision-integer}% of adult citizens, and {home_ownership__id, select, yes {owns} other {does not own}} its home."
     },
     {
       "id": "household_none",
@@ -173,7 +173,7 @@
           "none"
         ]
       },
-      "text": "{gender, select, female {Her} other {His}} household reports no income, and it {home_ownership__id, select, yes {owns} other {does not own}} its home."
+      "text": "{living_arrangement__id, select, parents {{gender, select, female {Her} other {His}} parents' household} other {{gender, select, female {Her} other {His}} household}} reports no income, and {home_ownership__id, select, yes {owns} other {does not own}} its home."
     },
     {
       "id": "health",
@@ -387,6 +387,7 @@
       "ancestry": "Ancestry",
       "marital_status": "Marital status",
       "children": "Children",
+      "living_arrangement": "Living arrangement",
       "education": "Highest diploma",
       "military_service": "Service",
       "labour_status": "Employment",
@@ -431,6 +432,8 @@
       "ancestry": "{gender, select, female {her ancestry} other {his ancestry}}",
       "marital_status": "{gender, select, female {her marital status} other {his marital status}}",
       "children": "{gender, select, female {her number of children} other {his number of children}}",
+      "has_children": "whether {gender, select, female {she has had} other {he has had}} children",
+      "living_arrangement": "who {gender, select, female {she lives} other {he lives}} with",
       "education": "{gender, select, female {her education} other {his education}}",
       "military_service": "{gender, select, female {her military or national service} other {his military or national service}}",
       "labour_status": "{gender, select, female {her employment status} other {his employment status}}",

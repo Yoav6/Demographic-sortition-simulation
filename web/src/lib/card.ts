@@ -40,6 +40,7 @@ const words: Record<string, L> = {
   children: { he: "ילדים", en: "children" },
   chronic: { he: "מחלה כרונית", en: "chronic illness" },
   disability: { he: "מוגבלות חמורה", en: "severe disability" },
+  parents_household: { he: "משק הבית של ההורים", en: "parents' household" },
 };
 const w = (k: string, lang: Lang, x = "") => words[k][lang].replace("{x}", x);
 
@@ -97,6 +98,7 @@ export const SECTIONS: Section[] = [
         label: { he: "משפחה", en: "Family" },
         value: (p, lang) => `${lab(p, lang, "marital_status")}; ${w("children", lang)}: ${lab(p, lang, "children")}`,
       },
+      plain("living_arrangement"),
       plain("military_service"),
       {
         doc: "health",
@@ -158,7 +160,8 @@ export const SECTIONS: Section[] = [
         vars: ["household_income", "household_income_amount"],
         label: { he: "הכנסת משק הבית (ברוטו, חודשית)", en: "Household gross monthly income" },
         value: (p, lang) =>
-          `₪${lab(p, lang, "household_income_amount")} (${w("higher_adults", lang, pct(p, "household_income_percentile"))})`,
+          `₪${lab(p, lang, "household_income_amount")} (${w("higher_adults", lang, pct(p, "household_income_percentile"))})` +
+          (val(p, "living_arrangement") === "parents" ? ` — ${w("parents_household", lang)}` : ""),
       },
       plain("home_ownership"),
     ],

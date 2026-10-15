@@ -315,7 +315,7 @@ Figure 2b gives mean scores of non-Haredi Jews, Arabs and Haredim (computed by t
 - **page:** <https://boardsgenerator.cbs.gov.il/pages/Seker/wizardpage.aspx>
 - **data as of:** 2024
 - **terms:** CBS publication (online table generator); reuse with attribution
-- **used by:** `religiosity`, `marital_status`, `children`, `education`, `military_service`, `in_service`, `labour_status`, `studying`, `occupation`, `degree_field`, `industry`, `work_status`, `income`, `household_income`, `income_amount`, `income_percentile`, `household_income_amount`, `household_income_percentile`, `home_ownership`, `health`, `chronic`, `disability`, `online`
+- **used by:** `religiosity`, `marital_status`, `children`, `has_children`, `living_arrangement`, `education`, `military_service`, `in_service`, `labour_status`, `studying`, `occupation`, `degree_field`, `industry`, `work_status`, `income`, `household_income`, `income_amount`, `income_percentile`, `household_income_amount`, `household_income_percentile`, `home_ownership`, `health`, `chronic`, `disability`, `online`
 - **planned for:** `internet`
 - manual data: `data/manual/cbs_ss/`
 

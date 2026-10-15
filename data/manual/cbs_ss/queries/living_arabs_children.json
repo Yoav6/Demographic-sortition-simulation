@@ -1,0 +1,39 @@
+{
+ "description": "household type and partner in the household by marital status, religion, sex and age - Arabs outside the Jerusalem district who have had children",
+ "year": 2024,
+ "rows": [
+  1629,
+  571,
+  577
+ ],
+ "cols": [
+  101,
+  519,
+  491
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    2
+   ]
+  },
+  {
+   "var": 6702,
+   "values": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "var": 1567,
+   "values": [
+    1
+   ]
+  }
+ ]
+}

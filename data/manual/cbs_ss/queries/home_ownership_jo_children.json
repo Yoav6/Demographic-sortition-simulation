@@ -1,0 +1,28 @@
+{
+ "description": "home ownership, household type and partner in the household by household gross income, age and marital status - Jews and others who have had children",
+ "rows": [
+  3177,
+  577,
+  101
+ ],
+ "cols": [
+  6876,
+  519,
+  491
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  },
+  {
+   "var": 1567,
+   "values": [
+    1
+   ]
+  }
+ ],
+ "year": 2024
+}

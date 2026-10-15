@@ -48,11 +48,11 @@
     },
     {
       "id": "residence",
-      "text": "{gender, select, female {היא גרה} other {הוא גר}} ב{locality}."
+      "text": "{gender, select, female {היא גרה} other {הוא גר}}{living_arrangement__id, select, independent { באופן עצמאי} other {}} ב{locality}{living_arrangement__id, select, parents { {gender, select, female {עם הוריה} other {עם הוריו}}} own_children { {children__id, select, 1 {{gender, select, female {עם הילד שלה} other {עם הילד שלו}}} other {{gender, select, female {עם ילדיה} other {עם ילדיו}}}}} relatives { עם קרובי משפחה} partner {{marital_status__id, select, married {} other { {gender, select, female {עם בן/בת זוגה} other {עם בן/בת זוגו}}}}} other {}}."
     },
     {
       "id": "family",
-      "text": "{gender, select, female {היא} other {הוא}} {marital_status} {children__family}."
+      "text": "{gender, select, female {היא} other {הוא}} {living_arrangement__id, select, partner {{marital_status__id, select, never_married {{gender, select, female {לא נשואה} other {לא נשוי}}} other {{marital_status}}}} other {{marital_status}}} {children__family}."
     },
     {
       "id": "education",
@@ -164,7 +164,7 @@
           "none"
         ]
       },
-      "text": "הכנסת משק הבית {gender, select, female {שלה} other {שלו}} עומדת על כ-{household_income_amount, number} ₪ ברוטו בחודש, יותר משל {household_income_percentile, number, ::precision-integer}% מהאזרחים הבוגרים, {home_ownership__id, select, yes {{marital_status__id, select, married {והדירה שבה הם גרים בבעלותם} other {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}}}} other {{marital_status__id, select, married {והדירה שבה הם גרים אינה בבעלותם} other {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}}}}}."
+      "text": "הכנסת משק הבית {living_arrangement__id, select, parents {{gender, select, female {של הוריה} other {של הוריו}}} other {{gender, select, female {שלה} other {שלו}}}} עומדת על כ-{household_income_amount, number} ₪ ברוטו בחודש, יותר משל {household_income_percentile, number, ::precision-integer}% מהאזרחים הבוגרים, {home_ownership__id, select, yes {{living_arrangement__id, select, independent {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}} other {והדירה שבה הם גרים בבעלותם}}} other {{living_arrangement__id, select, independent {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}} other {והדירה שבה הם גרים אינה בבעלותם}}}}."
     },
     {
       "id": "household_none",
@@ -173,7 +173,7 @@
           "none"
         ]
       },
-      "text": "משק הבית {gender, select, female {שלה} other {שלו}} מדווח שאין לו הכנסה, {home_ownership__id, select, yes {{marital_status__id, select, married {והדירה שבה הם גרים בבעלותם} other {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}}}} other {{marital_status__id, select, married {והדירה שבה הם גרים אינה בבעלותם} other {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}}}}}."
+      "text": "משק הבית {living_arrangement__id, select, parents {{gender, select, female {של הוריה} other {של הוריו}}} other {{gender, select, female {שלה} other {שלו}}}} מדווח שאין לו הכנסה, {home_ownership__id, select, yes {{living_arrangement__id, select, independent {{gender, select, female {והדירה שבה היא גרה בבעלותה} other {והדירה שבה הוא גר בבעלותו}}} other {והדירה שבה הם גרים בבעלותם}}} other {{living_arrangement__id, select, independent {{gender, select, female {והדירה שבה היא גרה אינה בבעלותה} other {והדירה שבה הוא גר אינה בבעלותו}}} other {והדירה שבה הם גרים אינה בבעלותם}}}}."
     },
     {
       "id": "health",
@@ -387,6 +387,7 @@
       "ancestry": "מוצא עדתי",
       "marital_status": "מצב משפחתי",
       "children": "ילדים",
+      "living_arrangement": "הסדר מגורים",
       "education": "התעודה הגבוהה ביותר",
       "military_service": "שירות",
       "labour_status": "תעסוקה",
@@ -431,6 +432,8 @@
       "ancestry": "המוצא העדתי {gender, select, female {שלה} other {שלו}}",
       "marital_status": "{gender, select, female {מצבה} other {מצבו}} המשפחתי",
       "children": "מספר הילדים {gender, select, female {שלה} other {שלו}}",
+      "has_children": "{gender, select, female {האם נולדו לה} other {האם נולדו לו}} ילדים",
+      "living_arrangement": "{gender, select, female {עם מי היא גרה} other {עם מי הוא גר}}",
       "education": "{gender, select, female {השכלתה} other {השכלתו}}",
       "military_service": "{gender, select, female {שירותה} other {שירותו}} הצבאי או הלאומי",
       "labour_status": "מצב התעסוקה {gender, select, female {שלה} other {שלו}}",

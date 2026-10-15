@@ -93,6 +93,7 @@ Validation:
 | Self-rated health of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0126 | 0.0000 | 0.03 | ✅ pass |
 | Self-rated health of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0123 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
@@ -117,6 +118,7 @@ Validation:
 | Chronic illness of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0061 | 0.0000 | 0.03 | ✅ pass |
 | Chronic illness of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0065 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
@@ -141,6 +143,7 @@ Validation:
 | Severe disability of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0043 | 0.0000 | 0.03 | ✅ pass |
 | Severe disability of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0125 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 

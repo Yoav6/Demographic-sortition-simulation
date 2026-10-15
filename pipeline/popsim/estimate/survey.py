@@ -35,6 +35,9 @@ VARS = {
     1649: "religiosity_a",
     101: "marital",
     1599: "children",
+    1567: "had_children",
+    519: "hh_type",
+    491: "with_partner",
     1881: "diploma",
     2031: "idf",
     2054: "national_service",
@@ -65,6 +68,11 @@ CODES = {
     "religiosity_a": {"1": "very_religious", "2": "religious", "3": "not_so_religious", "4": "not_religious"},
     "marital": {"1": "married", "2": "married", "3": "divorced", "4": "widowed", "5": "never_married"},
     "children": {str(i): str(i) for i in range(8)},
+    "had_children": {"1": "yes", "2": "no"},
+    # household = people sharing a dwelling and a food budget (flatmates who buy food separately
+    # are separate one-person households)
+    "hh_type": {"1": "one_person", "2": "non_family", "3": "one_family", "4": "family_and_others"},
+    "with_partner": {"1": "yes", "2": "no"},
     "diploma": {"0": "no_diploma", "9": "no_diploma", "1": "primary", "2": "secondary", "3": "bagrut", "4": "post_secondary", "5": "ba", "6": "ma", "7": "phd", "8": "other_diploma"},
     "idf": {"1": "yes", "2": "no"},
     "national_service": {"1": "yes", "2": "no"},

@@ -216,6 +216,165 @@
    "max_excess": 0.0
   },
   {
+   "name": "Living arrangement of Jews by religiosity and sex (20+)",
+   "nodes": [
+    "living_arrangement"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.00893,
+   "passed": true,
+   "detail": [
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "arrangement": "independent",
+     "model": 0.0909,
+     "survey": 0.0939,
+     "respondents": 281
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "arrangement": "own_children",
+     "model": 0.0485,
+     "survey": 0.0516,
+     "respondents": 281
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "arrangement": "parents",
+     "model": 0.1097,
+     "survey": 0.1128,
+     "respondents": 281
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "arrangement": "partner",
+     "model": 0.7505,
+     "survey": 0.7416,
+     "respondents": 281
+    },
+    {
+     "religiosity": "dati",
+     "sex": "female",
+     "arrangement": "relatives",
+     "model": 0.0003,
+     "survey": 0.0,
+     "respondents": 281
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Living arrangement of Jews by marital status and sex (20+)",
+   "nodes": [
+    "living_arrangement"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.03,
+   "max_abs_error": 0.07415,
+   "passed": true,
+   "detail": [
+    {
+     "marital": "divorced",
+     "sex": "female",
+     "arrangement": "independent",
+     "model": 0.3823,
+     "survey": 0.3643,
+     "respondents": 266
+    },
+    {
+     "marital": "divorced",
+     "sex": "female",
+     "arrangement": "own_children",
+     "model": 0.484,
+     "survey": 0.5038,
+     "respondents": 266
+    },
+    {
+     "marital": "divorced",
+     "sex": "female",
+     "arrangement": "parents",
+     "model": 0.0114,
+     "survey": 0.0123,
+     "respondents": 266
+    },
+    {
+     "marital": "divorced",
+     "sex": "female",
+     "arrangement": "partner",
+     "model": 0.1191,
+     "survey": 0.1161,
+     "respondents": 266
+    },
+    {
+     "marital": "divorced",
+     "sex": "female",
+     "arrangement": "relatives",
+     "model": 0.0032,
+     "survey": 0.0036,
+     "respondents": 266
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
+   "name": "Living arrangement of Arabs by religion and sex (20+)",
+   "nodes": [
+    "living_arrangement"
+   ],
+   "source": "cbs_social_survey_2024",
+   "tolerance": 0.04,
+   "max_abs_error": 0.05677,
+   "passed": true,
+   "detail": [
+    {
+     "religion": "christian",
+     "sex": "female",
+     "arrangement": "independent",
+     "model": 0.081,
+     "survey": 0.0888,
+     "respondents": 34
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "arrangement": "own_children",
+     "model": 0.051,
+     "survey": 0.0311,
+     "respondents": 34
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "arrangement": "parents",
+     "model": 0.1207,
+     "survey": 0.1087,
+     "respondents": 34
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "arrangement": "partner",
+     "model": 0.7389,
+     "survey": 0.7555,
+     "respondents": 34
+    },
+    {
+     "religion": "christian",
+     "sex": "female",
+     "arrangement": "relatives",
+     "model": 0.0084,
+     "survey": 0.0159,
+     "respondents": 34
+    }
+   ],
+   "max_excess": 0.0
+  },
+  {
    "name": "Highest diploma of Jews by religiosity and sex (20+)",
    "nodes": [
     "education"
@@ -1392,46 +1551,46 @@
    ],
    "source": "cbs_social_survey_2024",
    "tolerance": 0.03,
-   "max_abs_error": 0.0332,
+   "max_abs_error": 0.05297,
    "passed": true,
    "detail": [
     {
      "employment": "employed",
      "hh_income": "none",
      "model": 0.0,
-     "survey": 0.0077,
-     "respondents": 2794
+     "survey": 0.0074,
+     "respondents": 2575
     },
     {
      "employment": "employed",
      "hh_income": "h01",
      "model": 0.0025,
      "survey": 0.0051,
-     "respondents": 2794
+     "respondents": 2575
     },
     {
      "employment": "employed",
      "hh_income": "h02",
-     "model": 0.0046,
+     "model": 0.0049,
      "survey": 0.0059,
-     "respondents": 2794
+     "respondents": 2575
     },
     {
      "employment": "employed",
      "hh_income": "h04",
-     "model": 0.0151,
+     "model": 0.0124,
      "survey": 0.0167,
-     "respondents": 2794
+     "respondents": 2575
     },
     {
      "employment": "employed",
      "hh_income": "h03",
-     "model": 0.0067,
+     "model": 0.0062,
      "survey": 0.0086,
-     "respondents": 2794
+     "respondents": 2575
     }
    ],
-   "max_excess": 0.00576
+   "max_excess": 0.00543
   },
   {
    "name": "Household income bracket by labour-force status (20+) - Arabs",
@@ -1440,7 +1599,7 @@
    ],
    "source": "cbs_social_survey_2024",
    "tolerance": 0.04,
-   "max_abs_error": 0.02966,
+   "max_abs_error": 0.02977,
    "passed": true,
    "detail": [
     {
@@ -1448,38 +1607,38 @@
      "hh_income": "none",
      "model": 0.0,
      "survey": 0.0147,
-     "respondents": 365
+     "respondents": 332
     },
     {
      "employment": "employed",
      "hh_income": "h03",
-     "model": 0.0136,
+     "model": 0.0133,
      "survey": 0.0274,
-     "respondents": 365
+     "respondents": 332
     },
     {
      "employment": "employed",
      "hh_income": "h01",
-     "model": 0.0053,
+     "model": 0.0059,
      "survey": 0.0061,
-     "respondents": 365
+     "respondents": 332
     },
     {
      "employment": "employed",
      "hh_income": "h04",
-     "model": 0.0403,
+     "model": 0.0404,
      "survey": 0.0507,
-     "respondents": 365
+     "respondents": 332
     },
     {
      "employment": "employed",
      "hh_income": "h02",
-     "model": 0.0166,
+     "model": 0.015,
      "survey": 0.0217,
-     "respondents": 365
+     "respondents": 332
     }
    ],
-   "max_excess": 0.00944
+   "max_excess": 0.00919
   },
   {
    "name": "Home ownership by household income bracket (20+) - Jews and others",
@@ -1488,43 +1647,43 @@
    ],
    "source": "cbs_social_survey_2024",
    "tolerance": 0.03,
-   "max_abs_error": 0.04416,
+   "max_abs_error": 0.06053,
    "passed": true,
    "detail": [
     {
      "hh_income": "h01",
      "owns_home": "no",
-     "model": 0.4871,
-     "survey": 0.5486,
-     "respondents": 24
+     "model": 0.4913,
+     "survey": 0.5485,
+     "respondents": 15
     },
     {
      "hh_income": "h01",
      "owns_home": "yes",
-     "model": 0.5129,
-     "survey": 0.4514,
-     "respondents": 24
+     "model": 0.5087,
+     "survey": 0.4515,
+     "respondents": 15
     },
     {
      "hh_income": "h02",
      "owns_home": "no",
-     "model": 0.4055,
+     "model": 0.4063,
      "survey": 0.4497,
-     "respondents": 49
+     "respondents": 43
     },
     {
      "hh_income": "h02",
      "owns_home": "yes",
-     "model": 0.5945,
+     "model": 0.5937,
      "survey": 0.5503,
-     "respondents": 49
+     "respondents": 43
     },
     {
      "hh_income": "h03",
      "owns_home": "no",
-     "model": 0.4385,
+     "model": 0.4502,
      "survey": 0.4586,
-     "respondents": 95
+     "respondents": 79
     }
    ],
    "max_excess": 0.0
@@ -1536,43 +1695,43 @@
    ],
    "source": "cbs_social_survey_2024",
    "tolerance": 0.04,
-   "max_abs_error": 0.01578,
+   "max_abs_error": 0.02579,
    "passed": true,
    "detail": [
     {
      "hh_income": "h01",
      "owns_home": "no",
-     "model": 0.2778,
+     "model": 0.2681,
      "survey": 0.3019,
-     "respondents": 17
+     "respondents": 15
     },
     {
      "hh_income": "h01",
      "owns_home": "yes",
-     "model": 0.7222,
+     "model": 0.7319,
      "survey": 0.6981,
-     "respondents": 17
+     "respondents": 15
     },
     {
      "hh_income": "h02",
      "owns_home": "no",
-     "model": 0.2207,
+     "model": 0.2169,
      "survey": 0.2232,
-     "respondents": 27
+     "respondents": 19
     },
     {
      "hh_income": "h02",
      "owns_home": "yes",
-     "model": 0.7793,
+     "model": 0.7831,
      "survey": 0.7768,
-     "respondents": 27
+     "respondents": 19
     },
     {
      "hh_income": "h03",
      "owns_home": "no",
-     "model": 0.1575,
+     "model": 0.1736,
      "survey": 0.1718,
-     "respondents": 24
+     "respondents": 16
     }
    ],
    "max_excess": 0.0
@@ -2257,6 +2416,8 @@
     "birth_region",
     "marital_status",
     "children",
+    "has_children",
+    "living_arrangement",
     "education",
     "military_service",
     "in_service",
@@ -2303,8 +2464,14 @@
    "passed": true,
    "detail": [
     {
-     "tests": 1841,
-     "smallest_adjusted_p": 0.9581
+     "tests": 1867,
+     "smallest_adjusted_p": 0.3794
+    },
+    {
+     "node": "home_ownership",
+     "parents": "jewish / h10 / 30-34 / partner",
+     "p_value": 0.000203,
+     "max_abs_diff": 0.01334
     },
     {
      "node": "news_networks",
@@ -2329,12 +2496,89 @@
      "parents": "jewish / hiloni / female / 40-44 / ma",
      "p_value": 0.001012,
      "max_abs_diff": 0.01471
+    }
+   ]
+  },
+  {
+   "name": "National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value)",
+   "nodes": [
+    "sector",
+    "religiosity",
+    "first_name",
+    "origin",
+    "ancestry",
+    "marital_status",
+    "children",
+    "living_arrangement",
+    "education",
+    "military_service",
+    "in_service",
+    "labour_status",
+    "studying",
+    "occupation",
+    "degree_field",
+    "study_field",
+    "industry",
+    "work_status",
+    "income",
+    "household_income",
+    "home_ownership",
+    "health",
+    "chronic",
+    "disability",
+    "vote_origin",
+    "vote_area",
+    "vote_2022",
+    "online",
+    "news_frequency",
+    "news_tv",
+    "news_radio",
+    "news_print",
+    "news_sites",
+    "news_social",
+    "news_search",
+    "news_podcasts",
+    "social_networks",
+    "news_networks",
+    "tv_channels",
+    "news_websites",
+    "newspaper",
+    "preferred_source",
+    "literacy_level"
+   ],
+   "source": "model",
+   "tolerance": 0.001,
+   "max_abs_error": 0.00126,
+   "passed": true,
+   "detail": [
+    {
+     "tests": 75,
+     "smallest_adjusted_p": 1.0
     },
     {
-     "node": "social_networks",
-     "parents": "social / 18_24 / arab / male / mid : youtube",
-     "p_value": 0.001173,
-     "max_abs_diff": 0.01728
+     "node": "news_sites",
+     "p_value": 0.021841,
+     "max_abs_diff": 0.00081
+    },
+    {
+     "node": "news_search",
+     "p_value": 0.044151,
+     "max_abs_diff": 0.00099
+    },
+    {
+     "node": "origin",
+     "p_value": 0.070969,
+     "max_abs_diff": 0.00044
+    },
+    {
+     "node": "social_networks: snapchat",
+     "p_value": 0.078553,
+     "max_abs_diff": 0.00033
+    },
+    {
+     "node": "news_podcasts",
+     "p_value": 0.125894,
+     "max_abs_diff": 0.00075
     }
    ]
   },
@@ -2345,7 +2589,7 @@
    ],
    "source": "model",
    "tolerance": 0.01,
-   "max_abs_error": 0.00608,
+   "max_abs_error": 0.00612,
    "passed": true,
    "detail": [
     {
@@ -2355,10 +2599,10 @@
       0.0952,
       0.1061,
       0.1001,
-      0.0969,
-      0.1014,
-      0.1008,
+      0.0971,
       0.1009,
+      0.1009,
+      0.101,
       0.1005
      ]
     }
@@ -2371,21 +2615,21 @@
    ],
    "source": "model",
    "tolerance": 0.01,
-   "max_abs_error": 0.00354,
+   "max_abs_error": 0.00126,
    "passed": true,
    "detail": [
     {
      "decile_shares": [
-      0.0989,
+      0.0992,
+      0.1003,
+      0.1008,
+      0.0991,
+      0.0987,
+      0.101,
       0.0999,
-      0.1016,
-      0.0965,
-      0.1019,
-      0.1001,
       0.1,
-      0.1001,
-      0.0999,
-      0.1011
+      0.1002,
+      0.1007
      ]
     }
    ]

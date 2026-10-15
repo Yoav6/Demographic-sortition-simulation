@@ -26,6 +26,7 @@ STEPS: list[tuple[str, str, str]] = [
     ("birth_region", "popsim.estimate.socioeconomic", "build_birth_region"),
     ("marital_status", "popsim.estimate.socioeconomic", "build_marital"),
     ("children", "popsim.estimate.socioeconomic", "build_children"),
+    ("living_arrangement", "popsim.estimate.socioeconomic", "build_living"),
     ("education", "popsim.estimate.socioeconomic", "build_education"),
     ("military_service", "popsim.estimate.socioeconomic", "build_military"),
     ("labour_status", "popsim.estimate.socioeconomic", "build_labour"),

@@ -138,6 +138,7 @@ Validation:
 | Currently studying, Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0108 | 0.0000 | 0.04 | ✅ pass |
 | Students by kind of study, age, sex and population group vs published counts (relative difference) | `cbs_abstract_education` | 0.1023 | — | 0.12 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people in compulsory service are not counted as students | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: graduate students already hold an academic degree | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: yeshiva, kollel and midrasha students are Jewish | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |

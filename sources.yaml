@@ -440,7 +440,7 @@ sources:
     url: https://boardsgenerator.cbs.gov.il/pages/Seker/wizardpage.aspx
     license: CBS publication (online table generator); reuse with attribution
     as_of: 2024
-    used_by: [marital_status, children, education, military_service, labour_status, occupation, industry, work_status, income, household_income, home_ownership, health, disability, internet]
+    used_by: [marital_status, children, living_arrangement, education, military_service, labour_status, occupation, industry, work_status, income, household_income, home_ownership, health, disability, internet]
     manual: [cbs_ss/]
     notes: >
       Weighted frequencies (persons) with relative standard errors, queried through the generator's

@@ -8,7 +8,7 @@
       heading: "על הפרויקט",
       intro: [
         "איך תיראה אספה אזרחית שבה 150 החברות והחברים מוגרלים מכלל אזרחי ישראל? הפרויקט בונה על בסיס נתונים פומביים מודל סטטיסטי של האוכלוסייה הזכאית – אזרחים ישראלים בני 18 ומעלה שחיים בישראל (6.45 מיליון איש) – מגריל ממנו 150 חברים פיקטיבים, ומתאר כל אחד מהם בפירוט.",
-        "לכל חבר יש 53 מאפיינים: מקום מגורים, קבוצת אוכלוסייה, מין, גיל, דתיות, שם פרטי, מוצא, מצב משפחתי וילדים, השכלה ולימודים נוכחיים (עם תחומי לימוד), שירות צבאי או לאומי, עבודה (מצב תעסוקתי, מקצוע, ענף), הכנסה והכנסת משק בית (עם עשירונים), בעלות על דירה, בריאות, מוגבלות, ההצבעה ב-2022, הרגלי צריכת חדשות (באיזו תדירות הם מקבלים חדשות מטלוויזיה, רדיו, עיתונים מודפסים, אתרי חדשות, רשתות חברתיות, מנועי חיפוש ופודקאסטים; באילו רשתות חברתיות הם משתמשים וקוראים בהן חדשות; אילו ערוצי טלוויזיה ואתרי חדשות הם עוקבים אחריהם; מהו העיתון העיקרי שלהם; מהו מקור החדשות המועדף עליהם) וציון אוריינות.",
+        "לכל חבר יש 54 מאפיינים: מקום מגורים, קבוצת אוכלוסייה, מין, גיל, דתיות, שם פרטי, מוצא, מצב משפחתי וילדים, עם מי גרים, השכלה ולימודים נוכחיים (עם תחומי לימוד), שירות צבאי או לאומי, עבודה (מצב תעסוקתי, מקצוע, ענף), הכנסה והכנסת משק בית (עם עשירונים), בעלות על דירה, בריאות, מוגבלות, ההצבעה ב-2022, הרגלי צריכת חדשות (באיזו תדירות הם מקבלים חדשות מטלוויזיה, רדיו, עיתונים מודפסים, אתרי חדשות, רשתות חברתיות, מנועי חיפוש ופודקאסטים; באילו רשתות חברתיות הם משתמשים וקוראים בהן חדשות; אילו ערוצי טלוויזיה ואתרי חדשות הם עוקבים אחריהם; מהו העיתון העיקרי שלהם; מהו מקור החדשות המועדף עליהם) וציון אוריינות.",
       ],
       howHeading: "איך זה עובד",
       how: [
@@ -25,7 +25,7 @@
       heading: "About this project",
       intro: [
         "What would a citizens' assembly look like if its 150 members were drawn by lot from all Israeli citizens? This project builds a statistical model of the eligible population — Israeli citizens aged 18 and over living in Israel (6.45 million people) — from public data, draws 150 synthetic members from it, and describes each of them in detail.",
-        "Every member has 53 attributes: place of residence, population group, sex, age, religiosity, first name, origin and ancestry, marital status and children, education and current studies (with fields of study), military or national service, work (status, occupation, industry), earnings and household income (with percentiles), home ownership, health, disability, the 2022 vote, media habits (how often they get news from TV, radio, printed newspapers, news sites, social media, search engines and podcasts; the social networks they use and read news on; the TV channels and news websites they follow; their main newspaper; their preferred news source), and a literacy score.",
+        "Every member has 54 attributes: place of residence, population group, sex, age, religiosity, first name, origin and ancestry, marital status and children, whom they live with, education and current studies (with fields of study), military or national service, work (status, occupation, industry), earnings and household income (with percentiles), home ownership, health, disability, the 2022 vote, media habits (how often they get news from TV, radio, printed newspapers, news sites, social media, search engines and podcasts; the social networks they use and read news on; the TV channels and news websites they follow; their main newspaper; their preferred news source), and a literacy score.",
       ],
       howHeading: "How it works",
       how: [

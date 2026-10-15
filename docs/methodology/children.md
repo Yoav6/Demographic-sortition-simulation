@@ -52,8 +52,8 @@ is in the generated table below.
 
 ## Limitations
 
-* Children ever born, not the household's current composition: the model does not know who
-  lives with whom.
+* Children ever born, not the household's current composition. Whether the person lives with
+  their children is on the [living-arrangement page](living_arrangement.md).
 * Arab rows depend on religion, not religiosity.
 * The cap at one child for 18–19-year-olds is a simplification.
 
@@ -92,6 +92,7 @@ Validation:
 | Children of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0065 | 0.0000 | 0.03 | ✅ pass |
 | Children of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0307 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: at most one child at 18-19 | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).

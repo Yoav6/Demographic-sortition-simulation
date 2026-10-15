@@ -315,6 +315,7 @@ Validation:
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: people who use the internet but not social networks use at most WhatsApp and Telegram and get no news from social media | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: people who do not use the internet use no network or messaging app | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -367,6 +368,7 @@ Validation:
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
@@ -391,6 +393,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who never watch TV news watch no channel regularly | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
@@ -416,6 +419,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
@@ -440,6 +444,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: no main newspaper for people who never read printed newspapers | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: people who read printed newspapers have a main newspaper | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
@@ -467,6 +472,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
@@ -493,6 +499,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: people who use the internet but not social networks use at most WhatsApp and Telegram and get no news from social media | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
@@ -520,6 +527,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
@@ -546,6 +554,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
@@ -578,6 +587,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: social networks used, by population group and age (social-network users) | `isoc_media_survey_2024` | 0.1390 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who use the internet but not social networks use at most WhatsApp and Telegram and get no news from social media | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: people who do not use the internet use no network or messaging app | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
@@ -610,6 +620,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: news on each network among its users, by population group | `isoc_media_survey_2024` | 0.0370 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
@@ -638,6 +649,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: TV news channels watched regularly, by 2022 vote bloc (Jewish and other viewers) and for Arab viewers | `ines_2025` | 0.0512 | 0.0000 | 0.05 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who never watch TV news watch no channel regularly | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
@@ -669,6 +681,7 @@ Validation:
 |---|---|---|---|---|---|
 | Media: news websites visited at least weekly by internet users, nationally and by camp | `agam_media_index_2024` | 0.0150 | — | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
@@ -705,6 +718,7 @@ Validation:
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: no main newspaper for people who never read printed newspapers | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: people who read printed newspapers have a main newspaper | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 
@@ -734,6 +748,7 @@ Validation:
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
 | Media: preferred news source, by population group and by age (respondents who use a medium often) | `isoc_media_survey_2024` | 0.0124 | 0.0000 | 0.03 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 

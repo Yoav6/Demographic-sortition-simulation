@@ -109,6 +109,7 @@ Validation:
 | Highest diploma of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0163 | 0.0000 | 0.04 | ✅ pass |
 | Highest diploma of Jews by continent of birth and sex (20+) | `cbs_social_survey_2024` | 0.0208 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
+| National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: no academic or post-secondary diploma at 18-19 | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: graduate students already hold an academic degree | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
 | Constraint: a field of degree exactly for holders of an academic degree | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |

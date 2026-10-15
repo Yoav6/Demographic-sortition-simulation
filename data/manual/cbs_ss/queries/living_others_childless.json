@@ -1,0 +1,35 @@
+{
+ "description": "household type and partner in the household by marital status, sex and age - non-Arab non-Jews who have not had children",
+ "year": 2024,
+ "rows": [
+  571,
+  577
+ ],
+ "cols": [
+  101,
+  519,
+  491
+ ],
+ "filters": [
+  {
+   "var": 6752,
+   "values": [
+    1
+   ]
+  },
+  {
+   "var": 1629,
+   "values": [
+    3,
+    5,
+    6
+   ]
+  },
+  {
+   "var": 1567,
+   "values": [
+    2
+   ]
+  }
+ ]
+}

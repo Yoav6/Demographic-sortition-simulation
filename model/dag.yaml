@@ -342,6 +342,33 @@ nodes:
         attrs:
           family: {en: seven or more children, he: ואב לשבעה ילדים או יותר, he_f: ואם לשבעה ילדים או יותר}
 
+  - id: has_children
+    type: lookup
+    parent: children
+    hidden: true
+    label: {en: Has had children, he: נולדו ילדים}
+    file: lookups/has_children.csv
+    doc: docs/methodology/living_arrangement.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: "yes", label: {en: "yes", he: כן}}
+      - {id: "no", label: {en: "no", he: לא}}
+
+  - id: living_arrangement
+    type: table
+    parents: [group, religiosity, sex, age_band, marital_status, has_children]
+    backoff: [religiosity]
+    label: {en: Living arrangement, he: הסדר מגורים}
+    file: cpts/living_arrangement.csv
+    doc: docs/methodology/living_arrangement.md
+    sources: [cbs_social_survey_2024]
+    values:
+      - {id: partner, label: {en: with spouse or partner, he: עם בן או בת זוג}}
+      - {id: parents, label: {en: with parents, he: עם ההורים}}
+      - {id: own_children, label: {en: with own children, he: עם הילדים}}
+      - {id: relatives, label: {en: with other relatives, he: עם קרובי משפחה אחרים}}
+      - {id: independent, label: {en: independently, he: באופן עצמאי}}
+
   - id: education
     type: table
     parents: [group, religiosity, sex, age_band, birth_region]
@@ -715,7 +742,7 @@ nodes:
 
   - id: household_income
     type: table
-    parents: [labour_status, group, marital_status, income, age_band]
+    parents: [labour_status, group, living_arrangement, income, age_band]
     ordered: true  # values run from lowest to highest; "How unusual?" says whether a surprise is below or above usual
     label: {en: Household gross monthly income, he: הכנסה חודשית ברוטו של משק הבית}
     file: cpts/household_income.csv
@@ -782,7 +809,7 @@ nodes:
 
   - id: home_ownership
     type: table
-    parents: [group, household_income, age_band, marital_status]
+    parents: [group, household_income, age_band, living_arrangement]
     label: {en: Home ownership (household), he: בעלות על הדירה (משק הבית)}
     file: cpts/home_ownership.csv
     doc: docs/methodology/household_income.md
