@@ -8,6 +8,7 @@ import {
   presentPerson,
   query,
   samplePerson,
+  setCalibration,
   visibleVars,
   type Bundle,
   type CompiledModel,
@@ -20,8 +21,15 @@ let templates: { he: Templates; en: Templates } | null = null;
 
 async function ensure(base: string) {
   if (!model) {
-    const bundle = (await (await fetch(new URL("model.json", base))).json()) as Bundle;
+    const [bundle, cal] = await Promise.all([
+      fetch(new URL("model.json", base)).then((r) => r.json() as Promise<Bundle>),
+      // the ready-made "how unusual?" scale; without it, it is computed on the first person
+      fetch(new URL("calibration.json", base))
+        .then((r) => (r.ok ? (r.json() as Promise<{ model_version: string; breakpoints: number[] }>) : null))
+        .catch(() => null),
+    ]);
     model = compile(bundle);
+    if (cal && cal.model_version === bundle.version) setCalibration(model, cal.breakpoints);
   }
   if (!templates) {
     const [he, en] = await Promise.all([
@@ -37,7 +45,8 @@ export type Request =
   | { type: "assembly"; seed: number; size: number }
   | { type: "person"; seed: number; index: number }
   | { type: "query"; evidence: Evidence; samples: number; seed: number }
-  | { type: "info" };
+  | { type: "info" }
+  | { type: "warm" };
 
 self.onmessage = async (e: MessageEvent<{ id: number; base: string; req: Request }>) => {
   const { id, base, req } = e.data;
@@ -57,6 +66,9 @@ self.onmessage = async (e: MessageEvent<{ id: number; base: string; req: Request
         break;
       case "query":
         result = query(m, req.evidence, req.samples, req.seed);
+        break;
+      case "warm":
+        result = null;
         break;
       case "info":
         result = {

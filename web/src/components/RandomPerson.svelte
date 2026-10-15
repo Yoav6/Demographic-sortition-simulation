@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import type { PresentedPerson, VarMeta } from "@popsim/sampler";
-  import { drawPerson, randomSeed } from "../lib/worker-client.ts";
+  import { drawPerson, randomSeed, warmModel } from "../lib/worker-client.ts";
   import { t, type Lang } from "../lib/i18n.ts";
   import PersonCard from "./PersonCard.svelte";
 
@@ -11,6 +12,7 @@
   let seed = $state<number | null>(null);
   let loading = $state(false);
   let copied = $state(false);
+  let error = $state<string | null>(null);
 
   async function draw(s: number) {
     loading = true;
@@ -19,15 +21,22 @@
       person = r.person;
       vars = r.vars;
       seed = s;
+      error = null;
       history.replaceState(null, "", `${location.pathname}${location.search}#/random?seed=${s}`);
+    } catch (e) {
+      error = `${t("draw_failed", lang)} ${e instanceof Error ? e.message : e} (${t("seed", lang)} ${s})`;
     } finally {
       loading = false;
     }
   }
 
+  warmModel();
+
   $effect(() => {
     const s = params.get("seed");
-    if (s && /^\d+$/.test(s) && Number(s) !== seed) void draw(Number(s));
+    // react to the URL only: reading `seed` here would redraw the URL's person after each click
+    // (the URL's seed is replaced without a route change, so `params` keeps the old one)
+    if (s && /^\d+$/.test(s) && Number(s) !== untrack(() => seed)) void draw(Number(s));
   });
 
   async function copyLink() {
@@ -48,6 +57,9 @@
       <button onclick={copyLink}>{copied ? t("copied", lang) : t("copy_link", lang)}</button>
     {/if}
   </div>
+  {#if error}
+    <p class="error" role="alert">{error}</p>
+  {/if}
   {#if person}
     <PersonCard {person} {vars} {lang} />
   {/if}
@@ -59,6 +71,9 @@
   }
   .intro {
     margin-top: 0;
+  }
+  .error {
+    color: var(--series-8);
   }
   .row {
     display: flex;

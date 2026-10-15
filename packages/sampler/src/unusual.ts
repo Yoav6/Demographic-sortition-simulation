@@ -657,6 +657,13 @@ export function calibration(model: CompiledModel): number[] {
   return prep.breakpoints;
 }
 
+/** Use breakpoints computed ahead of time by `calibration` (for this same model), sparing the
+ * sampling on first use. */
+export function setCalibration(model: CompiledModel, breakpoints: number[]): void {
+  if (breakpoints.length !== 101) throw new Error(`calibration has ${breakpoints.length} breakpoints, expected 101`);
+  prepared(model).breakpoints = breakpoints;
+}
+
 export function unusual(model: CompiledModel, values: PersonValues): UnusualResult {
   const score = unusualScore(model, values);
   const percentile = percentileValue({ breakpoints: calibration(model) } as PercentileNode, score);

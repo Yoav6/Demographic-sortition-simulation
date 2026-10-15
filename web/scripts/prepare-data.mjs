@@ -1,5 +1,6 @@
-// Copies the published model artefacts into public/data so the static site can load them.
-import { copyFileSync, existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
+// Copies the published model artefacts into public/data so the static site can load them, and
+// precomputes what the site would otherwise compute on first use.
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -16,6 +17,15 @@ copy(join(root, "assemblies", "default.json"), "assembly.json");
 copy(join(root, "model", "build", "sources.json"), "sources.json");
 copy(join(root, "templates", "he.json"), "templates.he.json");
 copy(join(root, "templates", "en.json"), "templates.en.json");
+
+// the "how unusual?" percentile scale: scoring its calibration sample takes a second or two, so
+// the site loads it ready-made instead of computing it on the first person drawn
+{
+  const { compile, calibration } = await import("@popsim/sampler");
+  const bundle = JSON.parse(readFileSync(join(out, "model.json"), "utf8"));
+  const breakpoints = calibration(compile(bundle));
+  writeFileSync(join(out, "calibration.json"), JSON.stringify({ model_version: bundle.version, breakpoints }));
+}
 
 // methodology docs (markdown), bundled as one JSON file
 const docsDir = join(root, "docs", "methodology");

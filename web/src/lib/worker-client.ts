@@ -58,6 +58,8 @@ export const drawAssembly = (seed: number, size = 150) =>
 export const drawPerson = (seed: number, index = 0) => call<{ person: PresentedPerson; vars: VarMeta[] }>({ type: "person", seed, index });
 export const runQuery = (evidence: Evidence, samples = 100_000, seed = 1) => call<QueryResult>({ type: "query", evidence, samples, seed });
 export const modelInfo = () => call<ModelInfo>({ type: "info" });
+/** Loads the model in the background, so the first request is answered at once. */
+export const warmModel = () => void call<null>({ type: "warm" }).catch(() => {});
 
 /** A random non-negative integer seed below 2^32 (shown to the user, so it stays short). */
 export function randomSeed(): number {

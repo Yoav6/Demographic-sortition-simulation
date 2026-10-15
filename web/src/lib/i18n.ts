@@ -36,6 +36,7 @@ const strings = {
   },
   draw_person: { he: "הגרלת אדם", en: "Draw a person" },
   loading_model: { he: "טוען את המודל…", en: "Loading the model…" },
+  draw_failed: { he: "ההגרלה נכשלה:", en: "Drawing failed:" },
   copy_link: { he: "העתקת קישור", en: "Copy link" },
   copied: { he: "הועתק", en: "Copied" },
   sources_intro: {
