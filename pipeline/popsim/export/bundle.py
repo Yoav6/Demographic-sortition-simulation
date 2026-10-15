@@ -232,19 +232,35 @@ BUILDERS = {
 
 def _add_marginals(spec: ModelSpec, nodes: list[dict]) -> None:
     """National shares per value (per item for sets), aligned with the node's domain."""
-    from ..estimate.marginals import OUT, targets
+    from ..estimate.marginals import OUT, WEIGHTS, explained, targets
 
     if not OUT.exists():
-        raise FileNotFoundError(f"{OUT.relative_to(paths.ROOT)} is missing (run `popsim build --steps marginals`)")
+        raise FileNotFoundError(f"{OUT.relative_to(paths.ROOT)} is missing (run `popsim build marginals`)")
     marginals = json.loads(OUT.read_text(encoding="utf-8"))
     by_id = {d["id"]: d for d in nodes}
     for n in targets(spec):
         m = marginals.get(n.id)
         if m is None or set(m) != set(n.value_ids()):
-            raise ValueError(f"{n.id}: model/marginals.json is out of date (run `popsim build --steps marginals`)")
+            raise ValueError(f"{n.id}: model/marginals.json is out of date (run `popsim build marginals`)")
         by_id[n.id]["marginal"] = [m[v] for v in n.value_ids()]
         if n.raw.get("not_applicable"):
             by_id[n.id]["not_applicable"] = list(n.raw["not_applicable"])
+    # people per parent combination: flattened parent value indices (in `parents` order) and weights
+    for n in explained(spec):
+        f = WEIGHTS / f"{n.id}.csv"
+        if not f.exists():
+            raise FileNotFoundError(f"{f.relative_to(paths.ROOT)} is missing (run `popsim build marginals`)")
+        df = pd.read_csv(f, dtype=str, keep_default_na=False)
+        if list(df.columns) != list(n.parents) + ["w"]:
+            raise ValueError(f"{n.id}: {f.name} is out of date (run `popsim build marginals`)")
+        flat: list[int] = []
+        for p in n.parents:
+            idx = _domain_index(spec, p)
+            df[p] = df[p].map(idx)
+            if df[p].isna().any():
+                raise ValueError(f"{n.id}: {f.name} has unknown {p} values (run `popsim build marginals`)")
+        flat = df[n.parents].astype(int).to_numpy().ravel().tolist()
+        by_id[n.id]["parent_weights"] = {"v": flat, "w": [float(x) for x in df["w"]]}
 
 
 def build_bundle(spec: ModelSpec | None = None) -> dict:

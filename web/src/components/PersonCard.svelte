@@ -19,7 +19,13 @@
   type Level = (typeof LEVELS)[number];
   // the person's deviations with their wording, in order, and grouped by significance
   const items = $derived(
-    (unusual?.reasons ?? []).map((r, i) => ({ variable: r.variable, level: r.level as Level, bits: r.bits, text: unusualText!.reasons[i] })),
+    (unusual?.reasons ?? []).map((r, i) => ({
+      variable: r.variable,
+      level: r.level as Level,
+      bits: r.bits,
+      text: unusualText!.reasons[i],
+      detail: unusualText!.details?.[i] ?? "",
+    })),
   );
   const byLevel = $derived(LEVELS.map((l) => ({ level: l, items: items.filter((x) => x.level === l) })).filter((g) => g.items.length));
   // marker on the rows a deviation concerns: the strongest level among them, all their texts as tooltip
@@ -27,7 +33,7 @@
     const hits = items.filter((x) => vars.includes(x.variable));
     if (!hits.length) return null;
     const level = LEVELS.find((l) => hits.some((h) => h.level === l))!;
-    return { level, title: hits.map((h) => `${unusualText!.levels[h.level]}: ${h.text}`).join("\n") };
+    return { level, title: hits.map((h) => `${unusualText!.levels[h.level]}: ${h.text}\n${h.detail}`).join("\n\n") };
   }
   const sections = $derived(
     SECTIONS.map((s) => ({
@@ -73,7 +79,10 @@
             <h4 class={g.level}>{unusualText.level_titles[g.level]}</h4>
             <ul>
               {#each g.items as r}
-                <li>{r.text}</li>
+                <li>
+                  {r.text}
+                  {#if r.detail}<div class="detail">{r.detail}</div>{/if}
+                </li>
               {/each}
             </ul>
           </div>
@@ -168,6 +177,10 @@
   }
   .unusual li + li {
     margin-top: 0.25rem;
+  }
+  .detail {
+    font-size: 0.85rem;
+    color: var(--text-muted);
   }
   .unusual h4 {
     margin: 0.75rem 0 0.2rem;

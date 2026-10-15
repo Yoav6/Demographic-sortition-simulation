@@ -30,6 +30,9 @@ from ..model_spec import ModelSpec, Node, load_spec
 from .joint import _read_table, joint, resolve
 
 OUT = paths.MODEL / "marginals.json"
+# population per combination of a scored node's parents (<node>.csv: parents..., w), so the
+# score's explanations can compare a value's probability across realistic reference groups
+WEIGHTS = paths.MODEL / "parent_weights"
 
 # the shared base of the media nodes (plus vote_2022 and news_frequency, whose own marginals
 # are read off it)
@@ -195,6 +198,35 @@ def compute(spec: ModelSpec | None = None, log=print) -> dict[str, dict[str, flo
     return out
 
 
+def explained(spec: ModelSpec) -> list[Node]:
+    """Nodes whose surprises are explained with reference groups: the scored tables and sets.
+    (The preferred-source logit has too many parent combinations; the first name is not scored.)"""
+    return [n for n in targets(spec) if not n.raw.get("hidden") and n.type != "logit" and n.id != "first_name"]
+
+
+def parent_weights(spec: ModelSpec | None = None, log=print) -> dict[str, pd.DataFrame]:
+    """People per combination of each explained node's parents (combinations with nobody are
+    left out)."""
+    spec = spec or load_spec()
+    base = _with_lookups(spec, joint(BASE, spec=spec))
+    out = {}
+    for n in explained(spec):
+        df = _on_base(spec, base, list(n.parents))
+        if df is None:
+            df = joint(list(n.parents), spec=spec)
+        df = df[df["w"] > 0].sort_values(list(n.parents)).reset_index(drop=True)
+        out[n.id] = df[list(n.parents) + ["w"]]
+        log(f"  weights {n.id}: {len(df)} combinations")
+    return out
+
+
 def build(log=print) -> None:
     out = {k: {v: float(f"{x:.6g}") for v, x in d.items()} for k, d in compute(log=log).items()}
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    WEIGHTS.mkdir(exist_ok=True)
+    for old in WEIGHTS.glob("*.csv"):
+        old.unlink()
+    for node_id, df in parent_weights(log=log).items():
+        df = df.copy()
+        df["w"] = df["w"].map(lambda x: f"{x:.4g}")
+        df.to_csv(WEIGHTS / f"{node_id}.csv", index=False)

@@ -142,11 +142,46 @@ breakpoints:
 
 ## Explanations
 
-A reason names the **traits that made the value unlikely**. For each parent of the junction,
-the probability of the person's value is recomputed with that parent replaced by its national
-distribution: Σᵥ P(parent = v) · P(x | parents, with that one set to v). The parents whose
-removal makes the value at least twice as likely are named, the most decisive first, at most
-two. If none reaches that, the strongest one is named.
+Each deviation is explained on two lines. Example (a religious woman of 24 who did not serve):
+
+> Service: did not serve — unusual given her religiosity.
+> All citizens: 43% → + Religious (Dati): 30% → people like her: 17%. Most common among
+> people like her: did national or civic service (59%).
+
+**Reference groups.** For every node, `popsim build marginals` also writes the number of people
+in each combination of its parents (`model/parent_weights/<node>.csv`; exact, from the same joint
+distributions as the national shares). From these, the probability of the person's value is
+known in *any* reference group defined by some of their traits: e.g. among all religious people,
+or among women aged 20–24, each group in its real composition (a group defined by age keeps the
+religiosity mix people of that age actually have).
+
+**Who gets the blame.** The surprise, log₂ P(value | people like them) − log₂ P(value | all
+citizens), is split among the traits by **Shapley values**: a trait's share is its average effect
+on log₂ P(value | group) when it is added to a group defined by the other traits, over every
+order of adding them. Parents that stand for the same visible trait (e.g. the age groupings of
+the vote and media nodes) count as one. The shares add up exactly to the surprise, and they can
+have either sign:
+
+* the trait that makes the value **less** usual the most is named as its cause, together with
+  any other trait pulling the same way at least half as hard, at most three ("unusual given her
+  religiosity, her age and her population group");
+* traits that make it **more** usual by at least half as much as the strongest cause are named
+  in a separate sentence ("Given her religiosity, it is actually more common"), at most three.
+
+A relative rule rather than a fixed number of bits: a surprise is often spread over several
+traits, and a fixed bar would name only the one that happens to clear it.
+
+This replaced an earlier shortcut that replaced one trait at a time by its national
+distribution, ignoring how traits go together. That named her age for the example above, because
+not serving was common among older religious women, and never said what made the value more usual.
+
+**The ladder** on the second line shows the share among all citizens, then among the group
+narrowed by each named trait in turn (causes first, then easing traits), then among people like
+them (all the node's parents). For unordered variables it ends with the most common value among
+people like them, when it is not theirs.
+
+The preferred-news-source logit has nine parents and too many parent combinations to ship;
+its deviations keep the shortcut and have no ladder.
 
 For **ordered** variables (earnings and household income brackets, number of children, literacy
 level, highest diploma and self-rated health, where "other diploma" is off the scale and gets no direction, and health is "better" or "worse" than usual rather than below or above; flagged `ordered: true` in dag.yaml) the reason also says whether the value is *below*
@@ -165,7 +200,7 @@ Hidden helpers are named by the visible trait they stand for:
 * origin group and continent of birth → origin;
 * current service → military or national service.
 
-Frequencies are shown as "1 in N" when both are below 20%, and as percentages otherwise.
+Shares on one line are shown as "1 in N" when all are at most 20%, and as percentages otherwise.
 
 ### Worked example
 

@@ -44,6 +44,9 @@ interface Shares {
   marginal?: number[];
   /** Value ids that mean "does not apply" (e.g. occupation of people not employed). */
   not_applicable?: string[];
+  /** People per combination of the node's parents: `v` holds the combinations' parent value
+   * indices, flattened in `parents` order; `w` their weights. */
+  parent_weights?: { v: number[]; w: number[] };
 }
 
 export interface FrameVar {

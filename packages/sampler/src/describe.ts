@@ -16,7 +16,7 @@
 import { IntlMessageFormat } from "intl-messageformat";
 import type { CompiledModel, Label } from "./model.ts";
 import type { PersonValues } from "./sample.ts";
-import { nameSurprise, unusual, type Level, type Ordinal, type Tier } from "./unusual.ts";
+import { nameSurprise, unusual, type LadderStep, type Level, type Ordinal, type Tier } from "./unusual.ts";
 
 export type Lang = "he" | "en";
 
@@ -69,14 +69,27 @@ export interface UnusualTemplates {
   level_titles: Record<Level, string>;
   summary_part: string;
   summary: string;
-  /** one reason: {label}, {value}, {causes}, {cond}, {base} */
+  /** one reason: {label}, {value}, {causes}, {eases} (the "eases" phrase, or empty) */
   reason: string;
   /** a reason without a named cause */
   reason_plain: string;
-  /** reasons for ordered variables (income, ...): also {dir} (below/above usual), {usual} (the
-   * usual value for people like them) and {x}, {beyond}: percent of them on the far side */
+  /** reasons for ordered variables (income, ...): also {dir} (below/above usual) */
   reason_ordered: string;
   reason_ordered_plain: string;
+  /** appended to a reason when traits make the value more usual: {list} */
+  eases: string;
+  /** the reference-group ladder: first and last steps ({p}), and the steps adding a trait ({trait}, {p}) */
+  ladder_all: string;
+  ladder_add: string;
+  ladder_like: string;
+  /** between ladder steps (an arrow in the reading direction) */
+  ladder_sep: string;
+  /** a trait in the ladder: "{name} {value}"; per variable, the word(s) before the value
+   * ("" = the value alone), default: the short name */
+  ladder_names: Record<string, string>;
+  /** unordered: {value}, {p}; ordered: {usual}, {x}, {beyond} (percent of them on the far side) */
+  common: string;
+  typical: string;
   directions: Record<Ordinal["direction"], { dir: string; beyond: string }>;
   /** value phrase for a set item the person does not have: {item} */
   absent: string;
@@ -172,8 +185,8 @@ export interface PresentedUnusual {
   score: number;
   percentile: number;
   tier: Tier;
-  reasons: { variable: string; value: string; present?: boolean; pCond: number; pBase: number; causes: string[]; level: Level; bits: number; ordinal?: Ordinal }[];
-  text: Record<Lang, { title: string; name_note: string; tier: string; headline: string; summary: string; levels: Record<Level, string>; level_titles: Record<Level, string>; reasons: string[] }>;
+  reasons: { variable: string; value: string; present?: boolean; pCond: number; pBase: number; causes: string[]; eases: string[]; level: Level; bits: number; ladder?: LadderStep[]; ordinal?: Ordinal }[];
+  text: Record<Lang, { title: string; name_note: string; tier: string; headline: string; summary: string; levels: Record<Level, string>; level_titles: Record<Level, string>; reasons: string[]; details: string[] }>;
 }
 
 /** Display-ready form of a person: value ids, gendered labels and prose in both languages. */
@@ -235,6 +248,14 @@ function frequencies(t: UnusualTemplates, lang: Lang, pCond: number, pBase: numb
   return Math.max(pCond, pBase) <= 0.2 ? [one(pCond), one(pBase)] : [pct(pCond), pct(pBase)];
 }
 
+/** Shares in one format: "1 in N" when all are at most 20%, else percentages. */
+function shares(t: UnusualTemplates, lang: Lang, ps: number[]): string[] {
+  const nf = new Intl.NumberFormat(lang === "he" ? "he-IL" : "en-US", { maximumSignificantDigits: 2 });
+  return Math.max(...ps) <= 0.2
+    ? ps.map((p) => format(lang, t.one_in, { n: nf.format(Math.max(2, sig(1 / p, 2))) }))
+    : ps.map((p) => format(lang, t.percent, { p: nf.format(p * 100) }));
+}
+
 export function presentUnusual(
   model: CompiledModel,
   values: PersonValues,
@@ -254,27 +275,47 @@ export function presentUnusual(
     const first = model.vars[model.varIndex.get("first_name")!];
     const name = nm ? labelFor(first.values!.find((x) => x.id === nm.value)!.label, lang, female) : "";
     const [nameCond, nameBase] = nm ? frequencies(t, lang, nm.pCond, nm.pBase) : ["", ""];
-    const reasons = u.reasons.map((r) => {
+    const valueLabel = (id: string, vals: PersonValues) => {
+      // the person's value of a visible variable, as text (age: the age group)
+      const k = model.varIndex.get(id === "age" ? "age_band" : id)!;
+      const info = model.vars[k];
+      return info.values ? labelFor(info.values[vals[k]].label, lang, female) : String(vals[k]);
+    };
+    const phrase = (c: string) => (t.causes[c] ? format(lang, t.causes[c], g) : labelFor(model.vars[model.varIndex.get(c)!].label, lang, female));
+    const reasons: string[] = [];
+    const details: string[] = [];
+    for (const r of u.reasons) {
       const info = model.vars[model.varIndex.get(r.variable)!];
       const v = info.values!.find((x) => x.id === r.value)!;
       const name = labelFor(v.label, lang, female);
       const value = r.present === false ? format(lang, t.absent, { ...g, item: name }) : name;
-      const [cond, base] = frequencies(t, lang, r.pCond, r.pBase);
-      const causes = r.causes.map((c) =>
-        t.causes[c] ? format(lang, t.causes[c], g) : labelFor(model.vars[model.varIndex.get(c)!].label, lang, female),
-      );
+      const causes = and.format(r.causes.map(phrase));
+      const eases = r.eases.length ? format(lang, t.eases, { ...g, list: and.format(r.eases.map(phrase)) }) : "";
       const label = t.names[r.variable] ?? labelFor(info.label, lang, female);
       const o = r.ordinal;
+      const msg = o ? (r.causes.length ? t.reason_ordered : t.reason_ordered_plain) : r.causes.length ? t.reason : t.reason_plain;
+      reasons.push(format(lang, msg, { ...g, label, value, causes, eases, dir: o ? t.directions[o.direction].dir : "" }));
+      // second line: the ladder of reference groups, then what is usual among people like them
+      const ladder = r.ladder ?? [{ kind: "all", p: r.pBase }, { kind: "like", p: r.pCond }];
+      const fmt = shares(t, lang, ladder.map((x) => x.p));
+      const steps = ladder.map((x, i) => {
+        if (x.kind === "all") return format(lang, t.ladder_all, { ...g, p: fmt[i] });
+        if (x.kind === "like") return format(lang, t.ladder_like, { ...g, p: fmt[i] });
+        const lead = t.ladder_names[x.variable!] ?? t.names[x.variable!] ?? "";
+        const trait = [lead, valueLabel(x.variable!, values)].filter(Boolean).join(" ");
+        return format(lang, t.ladder_add, { ...g, trait, p: fmt[i] });
+      });
+      let after = "";
       if (o) {
         const usual = labelFor(info.values!.find((x) => x.id === o.usual)!.label, lang, female);
-        const d = t.directions[o.direction];
         const x = Math.min(99, Math.max(1, Math.round(o.beyond * 100)));
-        const msg = causes.length ? t.reason_ordered : t.reason_ordered_plain;
-        return format(lang, msg, { ...g, label, value, causes: and.format(causes), cond, base, dir: d.dir, beyond: d.beyond, usual, x });
+        after = format(lang, t.typical, { ...g, usual, x, beyond: t.directions[o.direction].beyond });
+      } else if (r.common) {
+        const cv = labelFor(info.values!.find((x) => x.id === r.common!.value)!.label, lang, female);
+        after = format(lang, t.common, { ...g, value: cv, p: shares(t, lang, [r.common.share, 1])[0] });
       }
-      const msg = causes.length ? t.reason : t.reason_plain;
-      return format(lang, msg, { ...g, label, value, causes: and.format(causes), cond, base });
-    });
+      details.push([steps.join(t.ladder_sep) + ".", after].filter(Boolean).join(" "));
+    }
     text[lang] = {
       title: format(lang, t.title, { ...g, name }),
       name_note: nm ? format(lang, t.name_note, { ...g, name, cond: nameCond, base: nameBase }) : "",
@@ -291,6 +332,7 @@ export function presentUnusual(
       levels: t.levels,
       level_titles: t.level_titles,
       reasons: reasons.length ? reasons : [format(lang, t.none, g)],
+      details,
     };
   }
   return {
@@ -304,9 +346,11 @@ export function presentUnusual(
       pCond: sig(r.pCond, 4),
       pBase: sig(r.pBase, 4),
       causes: r.causes,
+      eases: r.eases,
       level: r.level,
       bits: sig(r.bits, 3),
-      ...(r.ordinal ? { ordinal: r.ordinal } : {}),
+      ...(r.ladder ? { ladder: r.ladder.map((x) => ({ ...x, p: sig(x.p, 4) })) } : {}),
+      ...(r.ordinal ? { ordinal: { ...r.ordinal, beyond: sig(r.ordinal.beyond, 4) } } : {}),
     })),
     text,
   };

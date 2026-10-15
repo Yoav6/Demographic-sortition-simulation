@@ -45,6 +45,7 @@ const bundle: Bundle = {
       values: vals("haredi", "hiloni"),
       rows: { "0": [[0, 1], P(pHarediSecular, 1 - pHarediSecular)], "1": [[0, 1], P(pHarediTown, 1 - pHarediTown)] },
       marginal: [share(pHarediSecular, pHarediTown), 1 - share(pHarediSecular, pHarediTown)],
+      parent_weights: { v: [0, 1], w: [80, 20] },
     },
     {
       id: "job",
@@ -94,6 +95,9 @@ describe("How unusual? (toy model)", () => {
     expect(r.bits).toBeCloseTo(bits, 9);
     expect(r.score).toBeCloseTo(bits - UNUSUAL.hinge, 9);
     expect(r.causes).toEqual(["locality"]); // the hidden profile is explained by the visible locality
+    expect(r.ladder!.map((x) => x.kind)).toEqual(["all", "like"]);
+    expect(r.ladder![0].p).toBeCloseTo(share(pHarediSecular, pHarediTown), 12);
+    expect(r.ladder![1].p).toBeCloseTo(pHarediSecular, 12);
     expect(surprises(model, inTown).find((s) => s.variable === "religiosity")).toBeUndefined();
   });
 
@@ -186,6 +190,30 @@ describe.skipIf(!existsSync(bundlePath))("How unusual? (published model)", () =>
       }
     }
     expect(found).toBeGreaterThan(0);
+  });
+
+  it("splits a surprise among the traits, both those that make it less usual and those that ease it", () => {
+    // Na'ama in the published assembly: a religious woman of 24 who did not serve. Not serving is
+    // unusual because of her religiosity (most young religious women do national service).
+    const asm = JSON.parse(readFileSync(new URL("assemblies/default.json", root), "utf8"));
+    for (let i = 0; i < 400; i++) {
+      const p = samplePerson(model, asm.seed as number, i);
+      for (const r of surprises(model, p)) {
+        if (!r.ladder) continue;
+        expect(r.ladder[0].kind).toBe("all");
+        expect(r.ladder.at(-1)!.kind).toBe("like");
+        expect(r.ladder.at(-1)!.p).toBeCloseTo(r.pCond, 6);
+        if (!model.bundle.nodes.find((n) => n.id === r.variable && n.type === "multi" && n.subset_of)) {
+          expect(r.ladder[0].p).toBeCloseTo(r.pBase, 3);
+        }
+        for (const c of r.causes) expect(r.eases).not.toContain(c);
+      }
+    }
+    const naama = samplePerson(model, asm.seed as number, 70);
+    expect(id(naama, "religiosity")).toBe("dati");
+    const service = surprises(model, naama).find((s) => s.variable === "military_service")!;
+    expect(service.causes[0]).toBe("religiosity");
+    expect(service.common?.value).toBe("national_service");
   });
 
   it("leaves the first name out of the score but still describes it", () => {
