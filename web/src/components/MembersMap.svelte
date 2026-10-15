@@ -21,6 +21,7 @@
   const COS = Math.cos((31.5 * Math.PI) / 180);
   const H = 760;
   const PAD = 12;
+  const PLACEHOLDER_W = 286;
 
   const coords = $derived(
     new Map(
@@ -61,18 +62,28 @@
     return out;
   });
 
+  // read from the members' own labels, so the list shows before the model's localities load
   const top = $derived.by(() => {
-    const counts = new Map<string, number>();
-    for (const p of people) counts.set(String(p.values.locality), (counts.get(String(p.values.locality)) ?? 0) + 1);
-    return [...counts.entries()]
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 12)
-      .map(([id, n]) => ({ name: coords.get(id)?.l.label[lang] ?? id, n }));
+    const counts = new Map<string, { name: string; n: number }>();
+    for (const p of people) {
+      const id = String(p.values.locality);
+      const c = counts.get(id) ?? { name: p.labels[lang].locality ?? id, n: 0 };
+      c.n++;
+      counts.set(id, c);
+    }
+    return [...counts.values()].sort((a, b) => b.n - a.n).slice(0, 12);
   });
   const nLocalities = $derived(new Set(people.map((p) => String(p.values.locality))).size);
 </script>
 
 <div class="map-wrap">
+  {#if !coords.size}
+    <!-- the localities come with the model, which loads a few seconds after the assembly; this
+         keeps the map's place (its size at the time of writing) so nothing below it moves -->
+    <div class="placeholder muted" style:width={`${PLACEHOLDER_W}px`} style:aspect-ratio={`${PLACEHOLDER_W} / ${H}`}>
+      {lang === "he" ? "טוען את המפה…" : "Loading the map…"}
+    </div>
+  {:else}
   <svg viewBox={`0 0 ${bounds.W} ${H}`} width={bounds.W} height={H} role="img" aria-label={lang === "he" ? "מפת יישובי חברי האספה" : "Map of the members' localities"}>
     {#each [...coords.values()] as c (c.l.id)}
       {@const q = project(c.lat, c.lon)}
@@ -94,6 +105,7 @@
       </circle>
     {/each}
   </svg>
+  {/if}
   <div class="side">
     <p class="secondary">
       {lang === "he"
@@ -116,6 +128,15 @@
     gap: 1.5rem;
     align-items: flex-start;
     flex-wrap: wrap;
+  }
+  .placeholder {
+    max-width: 100%;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--surface-2);
+    font-size: 0.9rem;
   }
   svg {
     max-width: 100%;

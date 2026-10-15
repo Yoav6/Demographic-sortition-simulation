@@ -6,6 +6,7 @@
   import { t, type Lang } from "../lib/i18n.ts";
   import Hemicycle from "./Hemicycle.svelte";
   import MembersMap from "./MembersMap.svelte";
+  import MembersTable from "./MembersTable.svelte";
   import PersonCard from "./PersonCard.svelte";
 
   let { lang, params }: { lang: Lang; params: URLSearchParams } = $props();
@@ -38,14 +39,16 @@
     else custom = null;
   });
 
-  // Population shares for the legend, computed once in the worker from the model.
+  // Model info (the map's localities) first: the worker answers in order, and the population
+  // shares for the legend below take a few seconds to sample.
   $effect(() => {
     if (popShares) return;
-    Promise.all([runQuery({}, 60_000, 7), modelInfo()]).then(([res, mi]) => {
+    const mi = modelInfo();
+    mi.then((x) => (info = x));
+    Promise.all([runQuery({}, 60_000, 7), mi]).then(([res, x]) => {
       const out: Record<string, Record<string, number>> = {};
-      for (const o of COLOR_OPTIONS) out[o.id] = sharesFor(o, res.marginals[o.variable]?.probs ?? [], mi);
+      for (const o of COLOR_OPTIONS) out[o.id] = sharesFor(o, res.marginals[o.variable]?.probs ?? [], x);
       popShares = out;
-      info = mi;
     });
   });
 
@@ -175,12 +178,15 @@
     </aside>
   </section>
 
-  {#if localities.length}
-    <section class="card map-card">
-      <h3>{lang === "he" ? "היכן גרים חברי האספה" : "Where the members live"}</h3>
-      <MembersMap {people} {option} {localities} {lang} onselect={(p) => (selected = p)} />
-    </section>
-  {/if}
+  <section class="card map-card">
+    <h3>{lang === "he" ? "היכן גרים חברי האספה" : "Where the members live"}</h3>
+    <MembersMap {people} {option} {localities} {lang} onselect={(p) => (selected = p)} />
+  </section>
+
+  <section class="card members-card">
+    <h3>{t("members_list", lang)}</h3>
+    <MembersTable {people} {vars} {lang} onselect={(p) => (selected = p)} />
+  </section>
 
   {#if selected}
     <div class="overlay" role="presentation" onclick={(e) => e.target === e.currentTarget && (selected = null)}>
@@ -192,10 +198,12 @@
 {/if}
 
 <style>
-  .map-card {
+  .map-card,
+  .members-card {
     margin-top: 1rem;
   }
-  .map-card h3 {
+  .map-card h3,
+  .members-card h3 {
     margin-top: 0;
   }
   .layout {

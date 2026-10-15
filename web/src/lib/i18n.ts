@@ -65,6 +65,18 @@ const strings = {
   remove: { he: "הסרה", en: "Remove" },
   any: { he: "כלשהו", en: "any" },
   map: { he: "מפה", en: "Map" },
+  members_list: { he: "חברי האספה", en: "Assembly members" },
+  search_name: { he: "חיפוש לפי שם או יישוב", en: "Search by name or locality" },
+  add_filter: { he: "סינון לפי מאפיין", en: "Filter by attribute" },
+  filter_mode: { he: "סוג הסינון", en: "Filter mode" },
+  show_only: { he: "להציג רק", en: "Show only" },
+  exclude: { he: "להסתיר", en: "Exclude" },
+  not: { he: "לא", en: "not" },
+  make_exclude: { he: "לחצו כדי להסתיר את הקבוצה במקום להציג רק אותה", en: "Click to exclude this group instead" },
+  make_include: { he: "לחצו כדי להציג רק את הקבוצה במקום להסתיר אותה", en: "Click to show only this group instead" },
+  clear_filters: { he: "ניקוי הסינון", en: "Clear filters" },
+  showing_members: { he: "מוצגים {n} מתוך {total} חברי האספה", en: "Showing {n} of {total} members" },
+  no_members: { he: "אין חברים שעונים על הסינון.", en: "No members match." },
 } as const;
 
 export type Key = keyof typeof strings;
