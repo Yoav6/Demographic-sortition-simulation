@@ -2,6 +2,8 @@
   import type { PresentedPerson, VarMeta } from "@popsim/sampler";
   import { COLOR_OPTIONS, groupOf } from "../lib/colorby.ts";
   import { t, type Lang } from "../lib/i18n.ts";
+  import AttributeMenu, { type MenuAttr, type Pick } from "./AttributeMenu.svelte";
+  import FilterChips from "./FilterChips.svelte";
 
   let {
     people,
@@ -58,12 +60,6 @@
     exclude: boolean;
   }
   let filters = $state<Filter[]>([]);
-  let menuOpen = $state(false);
-  // whether values picked in the menu are added as exclusions
-  let excludeMode = $state(false);
-  // attribute whose values are showing in the submenu
-  let active = $state("");
-  let menu: HTMLDivElement;
 
   const collator = $derived(new Intl.Collator(lang === "he" ? "he" : "en", { numeric: true, sensitivity: "base" }));
 
@@ -126,31 +122,16 @@
 
   // each attribute with the values that occur in the assembly and are not filtered on yet, so
   // the menu never offers an empty or repeated choice
-  const filterable = $derived(
+  const menuAttrs = $derived<MenuAttr[]>(
     COLOR_OPTIONS.map((o) => {
       const present = new Set(people.map((p) => groupOf(o, p)));
       const used = new Set(filters.filter((f) => f.option === o.id).map((f) => f.group));
-      return { o, groups: o.groups.filter((g) => present.has(g.key) && !used.has(g.key)) };
-    }).filter((x) => x.groups.length),
+      const values = o.groups.filter((g) => present.has(g.key) && !used.has(g.key)).map((g) => ({ id: g.key, label: g.label[lang] }));
+      return { id: o.id, label: o.label[lang], values, excludable: true };
+    }).filter((a) => a.values.length),
   );
 
-  function addFilter(option: string, group: string) {
-    filters = [...filters, { option, group, exclude: excludeMode }];
-    closeMenu();
-  }
-
-  function toggleExclude(i: number) {
-    filters = filters.map((f, j) => (j === i ? { ...f, exclude: !f.exclude } : f));
-  }
-
-  function closeMenu() {
-    menuOpen = false;
-    active = "";
-  }
-
-  function onWindowClick(e: MouseEvent) {
-    if (menuOpen && !menu.contains(e.target as Node)) closeMenu();
-  }
+  const addFilter = (p: Pick) => (filters = [...filters, { option: p.attr, group: p.value!, exclude: p.exclude }]);
 
   const filterLabel = (f: Filter) => {
     const o = optionFor.get(f.option)!;
@@ -161,56 +142,18 @@
   const nf = $derived(new Intl.NumberFormat(lang === "he" ? "he-IL" : "en-US"));
 </script>
 
-<svelte:window onclick={onWindowClick} onkeydown={(e) => e.key === "Escape" && closeMenu()} />
-
 <div class="controls">
-  <div class="menu" bind:this={menu}>
-    <button class="menu-button" aria-haspopup="menu" aria-expanded={menuOpen} onclick={() => (menuOpen ? closeMenu() : (menuOpen = true))} disabled={!filterable.length}>
-      {t("add_filter", lang)} <span aria-hidden="true">▾</span>
-    </button>
-    {#if menuOpen}
-      <ul class="popup" role="menu">
-        <li class="mode" role="none">
-          <div role="radiogroup" aria-label={t("filter_mode", lang)}>
-            <button role="radio" aria-checked={!excludeMode} class:on={!excludeMode} onclick={() => (excludeMode = false)} onpointerenter={() => (active = "")}>
-              {t("show_only", lang)}
-            </button>
-            <button role="radio" aria-checked={excludeMode} class:on={excludeMode} onclick={() => (excludeMode = true)} onpointerenter={() => (active = "")}>
-              {t("exclude", lang)}
-            </button>
-          </div>
-        </li>
-        {#each filterable as { o, groups } (o.id)}
-          <li class="attr" class:open={active === o.id} role="none" onpointerenter={(e) => e.pointerType === "mouse" && (active = o.id)}>
-            <button role="menuitem" aria-haspopup="menu" aria-expanded={active === o.id} onclick={() => (active = o.id)}>
-              {o.label[lang]} <span class="chevron" aria-hidden="true">›</span>
-            </button>
-            {#if active === o.id}
-              <ul class="popup sub" role="menu" aria-label={o.label[lang]}>
-                {#each groups as g (g.key)}
-                  <li role="none"><button role="menuitem" onclick={() => addFilter(o.id, g.key)}>{g.label[lang]}</button></li>
-                {/each}
-              </ul>
-            {/if}
-          </li>
-        {/each}
-      </ul>
-    {/if}
-  </div>
+  <AttributeMenu attrs={menuAttrs} {lang} label={t("add_filter", lang)} withMode onpick={addFilter} />
   <input type="search" bind:value={query} placeholder={t("search_name", lang)} aria-label={t("search_name", lang)} />
 </div>
 
-{#if filters.length}
-  <div class="chips">
-    {#each filters as f, i}
-      <span class="chip" class:excluded={f.exclude}>
-        <button onclick={() => toggleExclude(i)} title={f.exclude ? t("make_include", lang) : t("make_exclude", lang)}>{filterLabel(f)}</button>
-        <button class="x" onclick={() => (filters = filters.filter((_, j) => j !== i))} aria-label={`${t("remove", lang)}: ${filterLabel(f)}`}>×</button>
-      </span>
-    {/each}
-    <button class="link" onclick={() => (filters = [])}>{t("clear_filters", lang)}</button>
-  </div>
-{/if}
+<FilterChips
+  items={filters.map((f) => ({ label: filterLabel(f), exclude: f.exclude, toggleable: true }))}
+  {lang}
+  ontoggle={(i) => (filters = filters.map((f, j) => (j === i ? { ...f, exclude: !f.exclude } : f)))}
+  onremove={(i) => (filters = filters.filter((_, j) => j !== i))}
+  onclear={() => (filters = [])}
+/>
 
 <p class="muted count tabular" aria-live="polite">
   {t("showing_members", lang).replace("{n}", nf.format(rows.length)).replace("{total}", nf.format(people.length))}
@@ -260,142 +203,6 @@
   .controls input {
     flex: 1 1 14rem;
     min-width: 0;
-  }
-  .menu {
-    position: relative;
-  }
-  .menu-button {
-    white-space: nowrap;
-  }
-  .popup {
-    position: absolute;
-    z-index: 10;
-    top: calc(100% + 4px);
-    inset-inline-start: 0;
-    margin: 0;
-    padding: 0.3rem 0;
-    list-style: none;
-    min-width: 13rem;
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-  }
-  .attr {
-    position: relative;
-  }
-  .popup button {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-    border: none;
-    border-radius: 0;
-    background: none;
-    text-align: start;
-    padding: 0.35rem 0.9rem;
-    white-space: nowrap;
-  }
-  .popup button:hover,
-  .popup button:focus-visible,
-  .attr.open > button {
-    background: var(--surface-2);
-  }
-  .chevron {
-    color: var(--text-muted);
-  }
-  :global([dir="rtl"]) .chevron {
-    transform: scaleX(-1);
-  }
-  /* the values open beside their attribute, in reading direction */
-  .sub {
-    top: -0.3rem;
-    inset-inline-start: 100%;
-  }
-  .mode {
-    padding: 0.2rem 0.6rem 0.4rem;
-    border-bottom: 1px solid var(--hairline);
-    margin-bottom: 0.2rem;
-  }
-  .mode div {
-    display: flex;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .popup .mode button {
-    justify-content: center;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.9rem;
-  }
-  .popup .mode button.on {
-    background: var(--text-primary);
-    color: var(--surface-1);
-  }
-  /* no room beside it on a phone: the menu spans the card and values open in place, under
-     the attribute */
-  @media (max-width: 640px) {
-    .menu {
-      flex: 1 1 100%;
-      position: static;
-    }
-    .controls {
-      position: relative;
-    }
-    .menu-button {
-      width: 100%;
-    }
-    .popup:not(.sub) {
-      inset-inline: 0;
-      max-height: 70vh;
-      overflow-y: auto;
-    }
-    .sub {
-      position: static;
-      box-shadow: none;
-      border: none;
-      border-radius: 0;
-      background: var(--surface-2);
-      min-width: 0;
-    }
-    .sub button {
-      padding-inline-start: 1.8rem;
-    }
-  }
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    align-items: center;
-    margin-bottom: 0.25rem;
-  }
-  .chip {
-    display: inline-flex;
-    border: 1px solid;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    overflow: hidden;
-  }
-  .chip button {
-    border: none;
-    border-radius: 0;
-    background: none;
-    padding: 0.15rem 0.3rem 0.15rem 0.7rem;
-  }
-  :global([dir="rtl"]) .chip button {
-    padding: 0.15rem 0.7rem 0.15rem 0.3rem;
-  }
-  .chip .x {
-    padding-inline: 0.3rem 0.6rem;
-  }
-  /* show-only filters are tinted with the accent, exclusions with red */
-  .chip {
-    --tone: var(--accent);
-    border-color: color-mix(in srgb, var(--tone) 55%, transparent);
-    background: color-mix(in srgb, var(--tone) 14%, var(--surface-1));
-  }
-  .chip.excluded {
-    --tone: var(--series-8);
   }
   .link {
     border: none;

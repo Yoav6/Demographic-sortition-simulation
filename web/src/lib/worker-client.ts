@@ -39,7 +39,17 @@ export interface GraphNode {
 export interface ModelInfo {
   version: string;
   population_total: number;
-  vars: { id: string; label: Label; values?: ValueDef[]; numeric: boolean; multi: boolean; hidden: boolean }[];
+  vars: {
+    id: string;
+    label: Label;
+    values?: ValueDef[];
+    numeric: boolean;
+    multi: boolean;
+    hidden: boolean;
+    /** values run along a scale (education, income band, ...); offScale ones are not on it */
+    ordered: boolean;
+    offScale?: string[];
+  }[];
   nodes: GraphNode[];
 }
 

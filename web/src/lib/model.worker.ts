@@ -62,7 +62,16 @@ self.onmessage = async (e: MessageEvent<{ id: number; base: string; req: Request
         result = {
           version: m.bundle.version,
           population_total: m.bundle.population_total,
-          vars: m.vars.map((v) => ({ id: v.id, label: v.label, values: v.values, numeric: v.numeric, multi: v.multi, hidden: v.hidden })),
+          vars: m.vars.map((v) => ({
+            id: v.id,
+            label: v.label,
+            values: v.values,
+            numeric: v.numeric,
+            multi: v.multi,
+            hidden: v.hidden,
+            ordered: v.node.type === "table" && !!v.node.ordered,
+            offScale: v.node.type === "table" ? v.node.off_scale : undefined,
+          })),
           // the network's structure, for the methodology diagram: each node and the variables it depends on
           nodes: m.bundle.nodes.map((n) => {
             const deps =

@@ -23,9 +23,9 @@ and a modelled literacy score.
 
 The website shows the assembly as a 150-seat hemicycle, coloured by an attribute of your choice
 and compared with the population, and as a map of the members' localities. It also draws random
-people. Its "What are the odds?" explorer gives the distribution of every other attribute for
+people. Its "How likely?" explorer gives the distribution of every other attribute for
 any combination you choose, the number of seats such people would expect in an assembly, and the
-members who match ("people like me"). The methodology pages include a clickable diagram of the
+members who match ("people like me"), followed by those who come closest, with a similarity score. The methodology pages include a clickable diagram of the
 model's structure.
 
 ## How it works
