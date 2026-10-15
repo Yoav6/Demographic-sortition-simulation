@@ -6,10 +6,11 @@
   import Explorer from "./components/Explorer.svelte";
   import Methodology from "./components/Methodology.svelte";
   import Sources from "./components/Sources.svelte";
+  import About from "./components/About.svelte";
 
-  type Page = "assembly" | "random" | "explore" | "method" | "sources";
-  const PAGES: Page[] = ["assembly", "random", "explore", "method", "sources"];
-  const NAV = { assembly: "nav_assembly", random: "nav_random", explore: "nav_explore", method: "nav_method", sources: "nav_sources" } as const;
+  type Page = "assembly" | "random" | "explore" | "method" | "sources" | "about";
+  const PAGES: Page[] = ["assembly", "random", "explore", "method", "sources", "about"];
+  const NAV = { assembly: "nav_assembly", random: "nav_random", explore: "nav_explore", method: "nav_method", sources: "nav_sources", about: "nav_about" } as const;
 
   function readLang(): Lang {
     return new URLSearchParams(location.search).get("lang") === "en" ? "en" : "he";
@@ -75,8 +76,10 @@
     <Explorer {lang} />
   {:else if route.page === "method"}
     <Methodology {lang} anchor={route.anchor} />
-  {:else}
+  {:else if route.page === "sources"}
     <Sources {lang} />
+  {:else}
+    <About {lang} />
   {/if}
 </main>
 
@@ -85,7 +88,12 @@
     {lang === "he"
       ? "סימולציה בלבד: כל אדם כאן הוא דמות סינתטית שהוגרלה ממודל סטטיסטי, לא אדם אמיתי."
       : "Simulation only: every person shown is a synthetic character drawn from a statistical model, not a real individual."}
-    <a href="#/method">{t("nav_method", lang)}</a> · <a href="#/sources">{t("nav_sources", lang)}</a>
+    <a href="#/method">{t("nav_method", lang)}</a> · <a href="#/sources">{t("nav_sources", lang)}</a> · <a href="#/about">{t("nav_about", lang)}</a> ·
+    <a href="https://github.com/Yoav6/popsim" target="_blank" rel="noreferrer">GitHub</a>
+  </p>
+  <p>
+    {lang === "he" ? "נוצר על ידי" : "Created by"}
+    <a href="https://yoavravid.com" target="_blank" rel="noreferrer">{lang === "he" ? "יואב רביד" : "Yoav Ravid"}</a>
   </p>
 </footer>
 

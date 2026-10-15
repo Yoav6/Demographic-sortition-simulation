@@ -11,6 +11,7 @@ const strings = {
   nav_explore: { he: "מה הסיכוי?", en: "What are the odds?" },
   nav_method: { he: "מתודולוגיה", en: "Methodology" },
   nav_sources: { he: "מקורות", en: "Sources" },
+  nav_about: { he: "אודות", en: "About" },
   color_by: { he: "צביעה לפי", en: "Colour seats by" },
   seed: { he: "סיד הגרלה", en: "Seed" },
   model_version: { he: "גרסת מודל", en: "Model version" },
