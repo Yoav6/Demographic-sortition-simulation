@@ -77,7 +77,7 @@
   {:else if route.page === "method"}
     <Methodology {lang} anchor={route.anchor} />
   {:else if route.page === "sources"}
-    <Sources {lang} />
+    <Sources {lang} anchor={route.anchor} />
   {:else}
     <About {lang} />
   {/if}

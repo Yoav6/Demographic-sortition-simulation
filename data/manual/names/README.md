@@ -1,7 +1,7 @@
 # Name transliteration overrides (manual)
 
 `english_overrides.csv` gives the conventional English spelling of common first names that
-Wikidata does not cover (or covers ambiguously) — mostly Hebrew names (Shira, Eyal, Matan) and
+Wikidata ([`src:wikidata_given_names`](../../../SOURCES.md#src-wikidata_given_names)) does not cover (or covers ambiguously) — mostly Hebrew names (Shira, Eyal, Matan) and
 Arabic names written in Hebrew script (Fatma, Khaled, Abir). The list was compiled for this
 project from the most frequent names without a Wikidata form; spellings follow the most
 common usage in English-language Israeli and Arab media. `en_f` (optional) is a different

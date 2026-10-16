@@ -18,12 +18,12 @@ reflect their cohort of origin. The CBS table is published exactly by these thre
 
 ## Sources
 
-* `src:cbs_names` — CBS release 391/2025, table 1: current first names of everyone born
+* [`src:cbs_names`](../../SOURCES.md#src-cbs_names) — CBS release 391/2025, table 1: current first names of everyone born
   1949–2024 (registry), by sex, population group (Jews, Muslims, Christian Arabs, Druze) and year
   of birth. It includes immigrants (e.g. 8,152 Jewish women named Svetlana).
-* `src:igra_registry_names` — Israel Genealogy Research Association's tables of registry first
+* [`src:igra_registry_names`](../../SOURCES.md#src-igra_registry_names) — Israel Genealogy Research Association's tables of registry first
   names for religion "Other" (Nov 2021), by sex, without birth years.
-* `src:wikidata_given_names` — English labels of Wikidata given-name items, for display.
+* [`src:wikidata_given_names`](../../SOURCES.md#src-wikidata_given_names) — English labels of Wikidata given-name items, for display.
 
 ## Preprocessing
 
@@ -110,7 +110,7 @@ Natalia, Elena, Olga, Tatiana, Yulia; "others" born 2004–06 — Daniel, Michae
 | `1999-2003` | 1999-2003 | 1999-2003 |  |
 | `2004-2006` | 2004-2006 | 2004-2006 |  |
 
-Sources: `cbs_names` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_names`](../../SOURCES.md#src-cbs_names) (Central Bureau of Statistics (CBS))
 
 Validation:
 
@@ -127,7 +127,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **distribution file:** `model/cpts/first_name.csv`
 - **categories:** 7101 (see the domain file)
 
-Sources: `cbs_names` (Central Bureau of Statistics (CBS)); `igra_registry_names` (Israel Genealogy Research Association (IGRA), compiled by Philip Trauring)
+Sources: [`cbs_names`](../../SOURCES.md#src-cbs_names) (Central Bureau of Statistics (CBS)); [`igra_registry_names`](../../SOURCES.md#src-igra_registry_names) (Israel Genealogy Research Association (IGRA), compiled by Philip Trauring)
 
 Validation:
 

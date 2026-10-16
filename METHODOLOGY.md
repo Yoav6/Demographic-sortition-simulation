@@ -14,7 +14,9 @@ known limitations. Every source is listed, with checksums, in [SOURCES.md](SOURC
 The assembly is drawn from **Israeli citizens aged 18 and over who live in Israel**,
 including residents of Israeli localities in the West Bank. Excluded:
 
-* citizens living abroad. They remain on the voter roll (roughly 0.5–0.6 million people), but
+* citizens living abroad. They remain on the voter roll (roughly 0.6 million people by our estimate —
+  no official count is published; see
+  [decision 0001](docs/decisions/0001-target-population.md)), but
   are not part of the CBS resident population and could not realistically attend an assembly;
 * permanent residents who are not citizens — most Palestinians of East Jerusalem
   (about 95%) and most Druze of the Golan Heights;
@@ -65,15 +67,15 @@ row per parent combination and value. The whole model compiles into a single JSO
 | Situation | Method |
 |---|---|
 | A published cross-tab with exactly the node's parents | used directly, normalised to conditional probabilities |
-| Several partial tables (e.g. religiosity by sex, and by age, and in total) | **iterative proportional fitting (IPF)**: start from a seed table and rescale alternately to each known margin until all match |
+| Several partial tables (e.g. religiosity by sex, and by age, and in total) | **iterative proportional fitting (IPF)** ([Deming & Stephan 1940](https://doi.org/10.1214/aoms/1177731829)): start from a seed table and rescale alternately to each known margin until all match |
 | Survey cross-tabs with thin cells (CBS Social Survey) | **shrinkage toward a main-effects fit**, with the number of respondents behind each cell taken from the published standard errors |
 | Two survey tables conditioning on different variables (employment by religiosity, and by education) | **combining over the model's own population**: IPF over the model's joint counts of the two conditioning variables |
-| Survey microdata (INES, ISOC-IL) | weighted logits with a ridge penalty, or cross-tabs with thin cells shrunk toward broader groups (pseudo-counts) |
+| Survey microdata (INES, ISOC-IL) | weighted logits with a ridge penalty ([Hoerl & Kennard 1970](https://doi.org/10.1080/00401706.1970.10488634)), or cross-tabs with thin cells shrunk toward broader groups (pseudo-counts) |
 | Two surveys that each measure part of what is needed (media use by demographics in one, its link to political news in the other) | **fusion by IPF**: in each cell, a table fitted to both surveys' margins, starting from the association the second survey shows |
-| A locality-level quantity with no direct source (religiosity mix) | **ecological inference** from election results (see the religiosity page) |
+| A locality-level quantity with no direct source (religiosity mix) | **ecological inference** from election results: a mixture model fitted by EM ([Dempster, Laird & Rubin 1977](https://doi.org/10.1111/j.2517-6161.1977.tb01600.x)); see the [religiosity page](docs/methodology/religiosity.md) |
 | Model output vs. official totals | **calibration**: CPTs are raked until the model's implied totals match the official ones |
 
-**IPF.** For a seed table *x* and margins *m₁…m_k*: repeat `x ← x · m_j / (sum of x over the
+**IPF** ([Deming & Stephan 1940](https://doi.org/10.1214/aoms/1177731829)). For a seed table *x* and margins *m₁…m_k*: repeat `x ← x · m_j / (sum of x over the
 axes not in m_j)` for each margin in turn until the largest relative change is below 10⁻⁹.
 Cells that are zero in the seed (structural zeros, e.g. a Haredi Muslim) stay zero.
 
@@ -114,7 +116,7 @@ political-news frequency and the media used for it. In each demographic cell, th
 political-news frequency × medium frequency is fitted by IPF to the model's distribution of
 political-news frequency and to the ISOC distribution of the medium, starting from INES's
 probability of using the medium at each political-news frequency. The cell keeps the ISOC
-distribution exactly and takes its association with politics from INES (see the media page).
+distribution exactly and takes its association with politics from INES (see the [media page](docs/methodology/media.md)).
 
 ## 4. Citizenship and other adjustments
 
@@ -137,7 +139,7 @@ distribution exactly and takes its association with politics from INES (see the 
   parents (ancestral sampling) by inverse-CDF on **integer weights** (probabilities × 10⁹), so
   cumulative sums are exact in every language.
 * Every random number is a pure function of *(seed, person number, node, draw number)*: a
-  counter-based hash (`lowbias32` chained over the inputs; `packages/sampler/src/rng.ts`, with
+  counter-based hash (`lowbias32`, from [Wellons 2018](https://nullprogram.com/blog/2018/07/31/), chained over the inputs; `packages/sampler/src/rng.ts`, with
   a Python twin checked against shared test vectors). Person #i is therefore identical whether
   1 or 150 people are drawn, and changing one node's table never reshuffles another node's
   random numbers.
@@ -152,7 +154,7 @@ distribution exactly and takes its association with politics from INES (see the 
   [docs/decisions/0004-default-assembly-seed.md](docs/decisions/0004-default-assembly-seed.md).
 * **Data acquisition is scripted.** `popsim fetch` downloads every source and pins its
   SHA-256 in `sources.lock.json`; a changed upstream file stops the build until accepted with
-  `--update`. Pages that need a browser are scripted with Playwright; values that exist only
+  `--update`. Pages that need a browser are scripted with [Playwright](https://playwright.dev); values that exist only
   as charts are transcribed into `data/manual/` with page references.
 
 ## 6. Validation
@@ -173,7 +175,7 @@ page shows the checks that cover it.
 2. **Sampler.** A sample of 1,000,000 people drawn by the TypeScript sampler — the code the
    website runs — must reproduce every table given its parents: a chi-square test for each node
    and each of its most common parent combinations (each item, for set-valued nodes), passing
-   when the smallest Bonferroni-adjusted p-value is above 0.001.
+   when the smallest Bonferroni-adjusted ([Dunn 1961](https://doi.org/10.1080/01621459.1961.10482090)) p-value is above 0.001.
 3. **Constraints.** The sample must contain no combination forbidden in
    [`model/constraints.yaml`](model/constraints.yaml) (no degree at 18–19, no retiree under 65,
    household income at least the person's own earnings, …).

@@ -19,7 +19,7 @@ become mothers).
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — children born by marital status, crossed with religiosity ×
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — children born by marital status, crossed with religiosity ×
   sex × age group for Jews (`children_jews`), sex × age for "others" (`children_others`) and
   religion × sex × age for Arabs outside the Jerusalem district (`children_arabs`). Ages 20+.
 
@@ -83,14 +83,14 @@ is in the generated table below.
 | `6` | 6 | 6 |  |
 | `7` | 7 or more | 7 ומעלה |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Children of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0065 | 0.0000 | 0.03 | ✅ pass |
-| Children of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0307 | 0.0000 | 0.04 | ✅ pass |
+| Children of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0065 | 0.0000 | 0.03 | ✅ pass |
+| Children of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0307 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: at most one child at 18-19 | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |

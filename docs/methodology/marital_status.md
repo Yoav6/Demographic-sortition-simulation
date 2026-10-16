@@ -18,13 +18,13 @@ strongest single factor). The Social Survey tabulates marital status against exa
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — table-generator cross-tabulations of marital status by
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — table-generator cross-tabulations of marital status by
   religiosity × sex × 5-year age group for Jews (`marital_jews`), by sex × age for "others"
   (`marital_others`), and by religion × sex × age for Arabs outside the Jerusalem district
   (`marital_arabs`). Persons aged 20+.
-* `src:cbs_abstract_2025_marriages` — persons marrying in 2023 by single year of age, sex and
+* [`src:cbs_abstract_2025_marriages`](../../SOURCES.md#src-cbs_abstract_2025_marriages) — persons marrying in 2023 by single year of age, sex and
   religion (table 2.24), for ages 18–19.
-* `src:cbs_abstract_2025_population` — population aged 18 and 19 by religion and sex.
+* [`src:cbs_abstract_2025_population`](../../SOURCES.md#src-cbs_abstract_2025_population) — population aged 18 and 19 by religion and sex.
 
 ## Preprocessing
 
@@ -104,14 +104,14 @@ women are widowed. Among Muslims, 65% of men and 66% of women are married.
 | `widowed` | widowed | אלמן | אלמנה |
 | `never_married` | single | רווק | רווקה |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey); `cbs_abstract_2025_marriages` (Central Bureau of Statistics (CBS)); `cbs_abstract_2025_population` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey); [`cbs_abstract_2025_marriages`](../../SOURCES.md#src-cbs_abstract_2025_marriages) (Central Bureau of Statistics (CBS)); [`cbs_abstract_2025_population`](../../SOURCES.md#src-cbs_abstract_2025_population) (Central Bureau of Statistics (CBS))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Marital status of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0058 | 0.0000 | 0.03 | ✅ pass |
-| Marital status of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0131 | 0.0000 | 0.03 | ✅ pass |
+| Marital status of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0058 | 0.0000 | 0.03 | ✅ pass |
+| Marital status of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0131 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: no widowed 18-19-year-olds | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |

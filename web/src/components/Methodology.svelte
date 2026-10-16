@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { marked } from "marked";
+  import { Marked } from "marked";
   import { loadMethodology } from "../lib/data.ts";
   import { t, type Lang } from "../lib/i18n.ts";
   import { modelInfo, type GraphNode } from "../lib/worker-client.ts";
@@ -21,6 +21,30 @@
 
   const order = $derived(docs ? Object.keys(docs).filter((k) => k !== "overview").sort() : []);
   const current = $derived(anchor && docs?.[anchor] ? anchor : "overview");
+
+  // The docs are written for GitHub, so their relative links point at repo files. Map them to the
+  // site's own pages where one exists (a cited source -> its entry on the Sources page), else to
+  // the file on GitHub.
+  const REPO = "https://github.com/Yoav6/popsim/blob/main/";
+  function siteHref(href: string, base: string): string {
+    if (/^([a-z][a-z0-9+.-]*:|#)/i.test(href)) return href;
+    const [path, frag = ""] = href.split("#");
+    const file = new URL(path, `https://repo/${base}`).pathname.slice(1);
+    if (file === "SOURCES.md") return frag ? `#/sources/${frag}` : "#/sources";
+    if (file === "METHODOLOGY.md") return "#/method";
+    const doc = file.match(/^docs\/methodology\/([^/]+)\.md$/);
+    if (doc) return `#/method/${doc[1]}`;
+    return REPO + file + (frag ? `#${frag}` : "");
+  }
+  const parser = (base: string) =>
+    new Marked({
+      walkTokens(token) {
+        if (token.type === "link") token.href = siteHref(token.href, base);
+      },
+    });
+  const rootDoc = parser("");
+  const nodeDoc = parser("docs/methodology/");
+  const render = (key: string, md: string) => (key === "overview" ? rootDoc : nodeDoc).parse(md) as string;
 
   function title(md: string): string {
     return md.match(/^#\s+(.+)$/m)?.[1] ?? "";
@@ -45,9 +69,9 @@
       {/if}
       <article class="card doc" dir="ltr" lang="en">
         {#if lang === "he" && split(docs[current]).he}
-          <div class="he-summary" dir="rtl" lang="he">{@html marked.parse(split(docs[current]).he)}</div>
+          <div class="he-summary" dir="rtl" lang="he">{@html render(current, split(docs[current]).he)}</div>
         {/if}
-        {@html marked.parse(split(docs[current]).body)}
+        {@html render(current, split(docs[current]).body)}
       </article>
     </div>
   {:else}

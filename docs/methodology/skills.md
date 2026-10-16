@@ -27,11 +27,11 @@ the Arab–Jewish gap (62 points) is the largest in the OECD data for Israel.
 
 ## Sources
 
-* `src:oecd_piaac_2023_tables` — OECD, Survey of Adult Skills 2023, annex tables for Israel (6,092
+* [`src:oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) — OECD, Survey of Adult Skills 2023, annex tables for Israel (6,092
   adults aged 16–65, tested in Hebrew or Arabic): mean literacy 243.6 and standard deviation 60.5
   (Table A.2.1), proficiency levels (A.2.2), means by age group (A.2.4), by education for ages 25–65
   (A.2.5) and by gender (A.2.7); and the share of low performers by each.
-* `src:boi_piaac_note_2024` — Bank of Israel policy note 2024.03, Figure 2b: mean literacy of
+* [`src:boi_piaac_note_2024`](../../SOURCES.md#src-boi_piaac_note_2024) — Bank of Israel policy note 2024.03, Figure 2b: mean literacy of
   non-Haredi Jews (261), Haredim (251) and Arabs (199), computed in the CBS research room
   (transcribed in `data/manual/piaac/`).
 
@@ -105,16 +105,16 @@ performers by age group, education and gender is within 2 points in every group 
 | `level3` | OECD level 3 | רמת OECD 3 |  |
 | `level4_5` | OECD level 4 or 5 | רמת OECD 4 או 5 |  |
 
-Sources: `oecd_piaac_2023_tables` (OECD); `boi_piaac_note_2024` (Bank of Israel (Sefi Bahar and Elad DeMalach))
+Sources: [`oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) (OECD); [`boi_piaac_note_2024`](../../SOURCES.md#src-boi_piaac_note_2024) (Bank of Israel (Sefi Bahar and Elad DeMalach))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Literacy: national distribution over proficiency levels (18-64) | `oecd_piaac_2023_tables` | 0.0270 | — | 0.04 | ✅ pass |
-| Literacy: share of low performers (level 1 or below) by age group | `oecd_piaac_2023_tables` | 0.0171 | — | 0.06 | ✅ pass |
-| Literacy: share of low performers (level 1 or below) by education (25-65) | `oecd_piaac_2023_tables` | 0.0159 | — | 0.06 | ✅ pass |
-| Literacy: share of low performers (level 1 or below) by gender | `oecd_piaac_2023_tables` | 0.0182 | — | 0.06 | ✅ pass |
+| Literacy: national distribution over proficiency levels (18-64) | [`oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) | 0.0270 | — | 0.04 | ✅ pass |
+| Literacy: share of low performers (level 1 or below) by age group | [`oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) | 0.0171 | — | 0.06 | ✅ pass |
+| Literacy: share of low performers (level 1 or below) by education (25-65) | [`oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) | 0.0159 | — | 0.06 | ✅ pass |
+| Literacy: share of low performers (level 1 or below) by gender | [`oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) | 0.0182 | — | 0.06 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
@@ -126,7 +126,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **parents:** `literacy_level`
 - **distribution file:** `model/cpts/literacy_score.csv`
 
-Sources: `oecd_piaac_2023_tables` (OECD)
+Sources: [`oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) (OECD)
 
 Validation:
 
@@ -138,7 +138,7 @@ _No automated validation checks cover this node yet._
 - **parents:** `literacy_score`
 - **distribution file:** `model/cpts/literacy_percentile.csv`
 
-Sources: `oecd_piaac_2023_tables` (OECD)
+Sources: [`oecd_piaac_2023_tables`](../../SOURCES.md#src-oecd_piaac_2023_tables) (OECD)
 
 Validation:
 

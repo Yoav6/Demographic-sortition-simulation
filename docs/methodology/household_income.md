@@ -31,7 +31,7 @@ households own their home, against 22% of people living independently.
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — household income by own earnings bracket × age for employed
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — household income by own earnings bracket × age for employed
   persons (`household_income_employed_*`); by labour-force status × age for everyone
   (`household_income_by_status_*`); home ownership by household income × age
   (`home_ownership_*`). Each is crossed with household type × partner in the household (from
@@ -108,14 +108,14 @@ Survey comparisons are in the generated table below.
 | `h09` | ₪17,001–24,000 | 17,001–24,000 ₪ |  |
 | `h10` | over ₪24,000 | מעל 24,000 ₪ |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Household income bracket by labour-force status (20+) - Jews and others | `cbs_social_survey_2024` | 0.0530 | 0.0054 | 0.03 | ✅ pass |
-| Household income bracket by labour-force status (20+) - Arabs | `cbs_social_survey_2024` | 0.0298 | 0.0092 | 0.04 | ✅ pass |
+| Household income bracket by labour-force status (20+) - Jews and others | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0530 | 0.0054 | 0.03 | ✅ pass |
+| Household income bracket by labour-force status (20+) - Arabs | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0298 | 0.0092 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
@@ -128,7 +128,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **floored by:** `income_amount`
 - **distribution file:** `model/cpts/household_income_amount.csv`
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
@@ -144,7 +144,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **parents:** `household_income_amount`
 - **distribution file:** `model/cpts/household_income_percentile.csv`
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
@@ -165,14 +165,14 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `yes` | owns its home | הדירה בבעלות משק הבית |  |
 | `no` | does not own its home | הדירה אינה בבעלות משק הבית |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Home ownership by household income bracket (20+) - Jews and others | `cbs_social_survey_2024` | 0.0605 | 0.0000 | 0.03 | ✅ pass |
-| Home ownership by household income bracket (20+) - Arabs | `cbs_social_survey_2024` | 0.0258 | 0.0000 | 0.04 | ✅ pass |
+| Home ownership by household income bracket (20+) - Jews and others | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0605 | 0.0000 | 0.03 | ✅ pass |
+| Home ownership by household income bracket (20+) - Arabs | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0258 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 

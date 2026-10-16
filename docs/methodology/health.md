@@ -21,7 +21,7 @@ who rates their health as poor will usually have a chronic condition.
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — self-rated health, chronic illness and severe disability by
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — self-rated health, chronic illness and severe disability by
   religiosity × sex × age for Jews (`health_jews`, `chronic_jews`, `disability_jews`), sex × age
   for "others", religion × sex × age for Arabs outside the Jerusalem district; self-rated health
   by diploma × sex × age (`health_by_diploma`), chronic illness by self-rated health × sex × age
@@ -84,14 +84,14 @@ Survey comparisons by religiosity (or religion) and sex are in the generated tab
 | `not_so_good` | not so good | לא כל כך טוב |  |
 | `not_good` | poor | לא טוב בכלל |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Self-rated health of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0126 | 0.0000 | 0.03 | ✅ pass |
-| Self-rated health of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0123 | 0.0000 | 0.04 | ✅ pass |
+| Self-rated health of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0126 | 0.0000 | 0.03 | ✅ pass |
+| Self-rated health of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0123 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
@@ -109,14 +109,14 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `yes` | yes | כן |  |
 | `no` | no | לא |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Chronic illness of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0061 | 0.0000 | 0.03 | ✅ pass |
-| Chronic illness of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0065 | 0.0000 | 0.04 | ✅ pass |
+| Chronic illness of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0061 | 0.0000 | 0.03 | ✅ pass |
+| Chronic illness of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0065 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
@@ -134,14 +134,14 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `yes` | yes | כן |  |
 | `no` | no | לא |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Severe disability of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0043 | 0.0000 | 0.03 | ✅ pass |
-| Severe disability of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0125 | 0.0000 | 0.04 | ✅ pass |
+| Severe disability of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0043 | 0.0000 | 0.03 | ✅ pass |
+| Severe disability of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0125 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 

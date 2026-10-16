@@ -23,7 +23,7 @@
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — income bracket by occupation × sex × age group, for
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — income bracket by occupation × sex × age group, for
   Jews-and-others (`income_by_occupation_jo`) and for Arabs outside the Jerusalem district
   (`income_by_occupation_arabs`). Employed persons aged 20+.
 
@@ -59,8 +59,8 @@ survey in the generated table below.
 ## Limitations
 
 * Brackets, not amounts, come from data; amounts inside a bracket are a modelling choice, and
-  the Pareto exponent of the top bracket (α = 3) is an assumption typical of wage distributions,
-  not estimated from Israeli data. Percentiles do not depend on these choices (within a bracket
+  the Pareto exponent of the top bracket (α = 3) is our own choice, neither estimated from
+  Israeli data nor taken from a published estimate. Percentiles do not depend on these choices (within a bracket
   the rank is uniform whatever the shape); displayed amounts do.
 * Self-reported income from a survey; no administrative (tax or National Insurance) data.
 * No income is modelled for people who are not employed: pensions, allowances and capital
@@ -96,14 +96,14 @@ survey in the generated table below.
 | `b09` | ₪14,001–21,000 | 14,001–21,000 ₪ |  |
 | `b10` | over ₪21,000 | מעל 21,000 ₪ |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Earnings bracket of the employed by occupation and sex (20+) - Jews and others | `cbs_social_survey_2024` | 0.0095 | 0.0000 | 0.03 | ✅ pass |
-| Earnings bracket of the employed by occupation and sex (20+) - Arabs | `cbs_social_survey_2024` | 0.0196 | 0.0000 | 0.04 | ✅ pass |
+| Earnings bracket of the employed by occupation and sex (20+) - Jews and others | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0095 | 0.0000 | 0.03 | ✅ pass |
+| Earnings bracket of the employed by occupation and sex (20+) - Arabs | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0196 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: earnings exactly for the employed | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -117,7 +117,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **capped by:** `household_income`
 - **distribution file:** `model/cpts/income_amount.csv`
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
@@ -133,7 +133,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **parents:** `income_amount`
 - **distribution file:** `model/cpts/income_percentile.csv`
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 

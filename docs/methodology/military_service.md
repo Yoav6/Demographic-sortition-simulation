@@ -22,7 +22,7 @@ national service instead); `sex`; `age_band` (service patterns changed across co
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — IDF service (`military_*`) and national service
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — IDF service (`military_*`) and national service
   (`national_service_*`) by religiosity × sex × age for Jews, sex × age for "others", religion ×
   sex × age for Arabs outside the Jerusalem district, and by continent of birth × sex × age for
   Jews (`*_by_birth_jews`). Ages 20+.
@@ -90,15 +90,15 @@ comparisons are in the generated table below.
 | `national_service` | did national or civic service | עשה שירות לאומי-אזרחי | עשתה שירות לאומי-אזרחי |
 | `none` | did not serve | לא שירת | לא שירתה |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Military/national service of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0161 | 0.0000 | 0.03 | ✅ pass |
-| Military/national service of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0451 | 0.0000 | 0.04 | ✅ pass |
-| Military/national service of Jews by continent of birth and sex (20+) | `cbs_social_survey_2024` | 0.0400 | 0.0000 | 0.03 | ✅ pass |
+| Military/national service of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0161 | 0.0000 | 0.03 | ✅ pass |
+| Military/national service of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0451 | 0.0000 | 0.04 | ✅ pass |
+| Military/national service of Jews by continent of birth and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0400 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people in service have the matching service history | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -118,7 +118,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `idf` | serving in the IDF | משרת בצה"ל | משרתת בצה"ל |
 | `national_service` | in national service | בשירות לאומי |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 

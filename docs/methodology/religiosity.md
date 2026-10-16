@@ -23,16 +23,16 @@ of localities with similar estimated religious composition, which keeps the tabl
 
 ## Sources
 
-* `src:cbs_abstract_2025_attitudes` — CBS Social Survey 2024 (persons 20+): religiosity of Jews
+* [`src:cbs_abstract_2025_attitudes`](../../SOURCES.md#src-cbs_abstract_2025_attitudes) — CBS Social Survey 2024 (persons 20+): religiosity of Jews
   by sex and by age group (20–44, 45–64, 65+) on a 4-category scale, the 5-category national
   split, and the share religious/not religious among members of other religions by sex and age.
-* `src:cbs_social_survey_2024` — the same survey through the CBS table generator: religiosity
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — the same survey through the CBS table generator: religiosity
   of Jews by sex and 5-year age group (n ≈ 5,500 Jewish respondents; summed over the
   marital-status table `marital_jews`).
-* `src:ines_2022` — Israel National Election Studies 2022 (n = 1,585, weighted): vote by
+* [`src:ines_2022`](../../SOURCES.md#src-ines_2022) — Israel National Election Studies 2022 (n = 1,585, weighted): vote by
   religiosity (for the ecological inference); religiosity of Arab respondents by religion;
   respondents of "other" religion.
-* `src:cec_knesset25` — 2022 results by locality and polling station.
+* [`src:cec_knesset25`](../../SOURCES.md#src-cec_knesset25) — 2022 results by locality and polling station.
 
 ## Preprocessing
 
@@ -156,7 +156,7 @@ checks appear below.
 | `h5d0s0` | h5d0s0 | h5d0s0 |  |
 | `national` | national | national |  |
 
-Sources: `cec_knesset25` (Central Elections Committee (CEC)); `ines_2022` (Israel National Election Studies, Tel Aviv University)
+Sources: [`cec_knesset25`](../../SOURCES.md#src-cec_knesset25) (Central Elections Committee (CEC)); [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
@@ -185,14 +185,14 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `not_so_religious` | Not so religious | לא כל כך דתי | לא כל כך דתייה |
 | `not_religious` | Not religious | לא דתי | לא דתייה |
 
-Sources: `cbs_abstract_2025_attitudes` (Central Bureau of Statistics (CBS) - Social Survey); `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey); `ines_2022` (Israel National Election Studies, Tel Aviv University); `cec_knesset25` (Central Elections Committee (CEC))
+Sources: [`cbs_abstract_2025_attitudes`](../../SOURCES.md#src-cbs_abstract_2025_attitudes) (Central Bureau of Statistics (CBS) - Social Survey); [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey); [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University); [`cec_knesset25`](../../SOURCES.md#src-cec_knesset25) (Central Elections Committee (CEC))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Age composition of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0188 | 0.0000 | 0.03 | ✅ pass |
-| Age composition of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0901 | 0.0075 | 0.03 | ✅ pass |
+| Age composition of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0188 | 0.0000 | 0.03 | ✅ pass |
+| Age composition of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0901 | 0.0075 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 

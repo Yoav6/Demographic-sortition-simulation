@@ -33,16 +33,16 @@ have very different age structures (the median Muslim citizen is much younger th
 
 ## Sources
 
-* `src:cbs_localities_2024` — population of every locality at the end of 2024, split into
+* [`src:cbs_localities_2024`](../../SOURCES.md#src-cbs_localities_2024) — population of every locality at the end of 2024, split into
   "Jews and others" and "Arabs" (foreign nationals excluded), with locality type, district,
   local authority and coordinates.
-* `src:cbs_local_authorities_2024` — for each of the 257 local authorities: the share of Jews
+* [`src:cbs_local_authorities_2024`](../../SOURCES.md#src-cbs_local_authorities_2024) — for each of the 257 local authorities: the share of Jews
   among "Jews and others"; the shares of Muslims, Christians and Druze among Arabs; the age
   distribution (0–4, 5–9, 10–14, 15–19, 20–29, 30–44, 45–59, 60–64, 65+); men and women; and
   the socio-economic and peripherality clusters.
-* `src:cbs_abstract_2025_population` — Statistical Abstract 2025, table 2.3: Israelis by
+* [`src:cbs_abstract_2025_population`](../../SOURCES.md#src-cbs_abstract_2025_population) — Statistical Abstract 2025, table 2.3: Israelis by
   population group and religion, sex and single year of age (2024 average).
-* `src:cec_knesset25` — 2022 voter roll by polling station, used for the citizenship
+* [`src:cec_knesset25`](../../SOURCES.md#src-cec_knesset25) — 2022 voter roll by polling station, used for the citizenship
   adjustments and the Bedouin tribe localities.
 
 ## Preprocessing
@@ -86,8 +86,9 @@ have very different age structures (the median Muslim citizen is much younger th
   in 2022, with the adult age-sex profile of Muslims in the Bedouin regional councils.
 
 The result: 6.45 million eligible citizens. As a cross-check, the 2022 roll (6.79 million,
-including citizens abroad) grown by ~3% to 2024 and minus 0.5–0.6 million citizens abroad gives
-6.4–6.5 million.
+including citizens abroad) grown by ~3% to 2024 and minus an assumed 0.5–0.6 million citizens
+abroad gives 6.4–6.5 million. No official count of citizens abroad is published, so this check
+is only indicative.
 
 ## Validation
 
@@ -124,14 +125,14 @@ removed); others 1.04. Automated checks appear below once `popsim validate` has 
 - **frame variable** `age_band` (Age group): 15 values
 - **distribution file:** `model/frame.csv`
 
-Sources: `cbs_localities_2024` (Central Bureau of Statistics (CBS)); `cbs_local_authorities_2024` (Central Bureau of Statistics (CBS)); `cbs_abstract_2025_population` (Central Bureau of Statistics (CBS)); `cec_knesset25` (Central Elections Committee (CEC))
+Sources: [`cbs_localities_2024`](../../SOURCES.md#src-cbs_localities_2024) (Central Bureau of Statistics (CBS)); [`cbs_local_authorities_2024`](../../SOURCES.md#src-cbs_local_authorities_2024) (Central Bureau of Statistics (CBS)); [`cbs_abstract_2025_population`](../../SOURCES.md#src-cbs_abstract_2025_population) (Central Bureau of Statistics (CBS)); [`cec_knesset25`](../../SOURCES.md#src-cec_knesset25) (Central Elections Committee (CEC))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Age composition of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0188 | 0.0000 | 0.03 | ✅ pass |
-| Age composition of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0901 | 0.0075 | 0.03 | ✅ pass |
+| Age composition of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0188 | 0.0000 | 0.03 | ✅ pass |
+| Age composition of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0901 | 0.0075 | 0.03 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).
 
@@ -151,7 +152,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `south` | Southern District | מחוז הדרום |  |
 | `judea_samaria` | Judea and Samaria (West Bank) | אזור יהודה ושומרון |  |
 
-Sources: `cbs_localities_2024` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_localities_2024`](../../SOURCES.md#src-cbs_localities_2024) (Central Bureau of Statistics (CBS))
 
 Validation:
 
@@ -181,7 +182,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rural_other` | other rural locality | יישוב כפרי אחר |  |
 | `other` | other | אחר |  |
 
-Sources: `cbs_localities_2024` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_localities_2024`](../../SOURCES.md#src-cbs_localities_2024) (Central Bureau of Statistics (CBS))
 
 Validation:
 
@@ -208,7 +209,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `druze` | Druze | דרוזי | דרוזית |
 | `other` | not registered as Jewish or Arab | לא רשום כיהודי או כערבי | לא רשומה כיהודייה או כערבייה |
 
-Sources: `cbs_localities_2024` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_localities_2024`](../../SOURCES.md#src-cbs_localities_2024) (Central Bureau of Statistics (CBS))
 
 Validation:
 
@@ -226,7 +227,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **distribution file:** `model/cpts/age.csv`
 - **categories:** 83 (see the domain file)
 
-Sources: `cbs_abstract_2025_population` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_abstract_2025_population`](../../SOURCES.md#src-cbs_abstract_2025_population) (Central Bureau of Statistics (CBS))
 
 Validation:
 

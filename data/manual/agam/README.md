@@ -1,6 +1,6 @@
 # Agam Institute Media Index (December 2024) — hand transcription
 
-Source: `agam_media_index_2024` in `sources.yaml` (the PDF is downloaded and checksummed by
+Source: [`src:agam_media_index_2024`](../../../SOURCES.md#src-agam_media_index_2024) (the PDF is downloaded and checksummed by
 `popsim fetch`). The report publishes its results only as charts, so the values used by the
 model are transcribed here by hand, with the page they come from.
 

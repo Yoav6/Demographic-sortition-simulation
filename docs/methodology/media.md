@@ -59,27 +59,27 @@ papers' own websites.
 
 ## Sources
 
-* `src:isoc_media_survey_2024` — the Israel Internet Association (ISOC-IL) and Technion
+* [`src:isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) — the Israel Internet Association (ISOC-IL) and Technion
   survey of news consumption and disinformation: respondent-level data of 1,005 internet users
   aged 18+ (805 Jewish, with Haredim over-sampled, and 200 Arab respondents; iPanel, October
   2024; no weights supplied). Used for the seven media, networks used and news on networks.
   Publication is permitted to cite with credit and a link:
   <https://www.isoc.org.il/sts-data/media-and-disinformation-survey-il>.
-* `src:ines_2025` — the Israel National Election Studies off-cycle survey (March–April 2025;
+* [`src:ines_2025`](../../SOURCES.md#src-ines_2025) — the Israel National Election Studies off-cycle survey (March–April 2025;
   1,588 citizens, 280 of them Arab, weighted): political news frequency (v612), the sources
   used for political news in the past week (v613: news websites, TV news, radio, daily
   newspapers, Facebook, Instagram, TikTok, WhatsApp groups, Telegram channels, X) and the TV
   channels watched regularly (v614).
-* `src:ines_2022` — political news frequency (1,569 respondents with answers; panel weights).
-* `src:cbs_social_survey_2024` — use of social networks, including "does not use the
+* [`src:ines_2022`](../../SOURCES.md#src-ines_2022) — political news frequency (1,569 respondents with answers; panel weights).
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — use of social networks, including "does not use the
   internet", by religiosity, sex and age (ages 20+).
-* `src:tgi_readership` — TGI average-issue readership by title: the general survey of Jewish
+* [`src:tgi_readership`](../../SOURCES.md#src-tgi_readership) — TGI average-issue readership by title: the general survey of Jewish
   adults (July 2025 – June 2026) and the Haredi TGI (2017, the latest release found online),
   as published in press reports; transcribed in `data/manual/tgi/` with the sentences quoted.
-* `src:knesset_rc_newspapers_2018` — the age profile of each title's readers (TGI, first
+* [`src:knesset_rc_newspapers_2018`](../../SOURCES.md#src-knesset_rc_newspapers_2018) — the age profile of each title's readers (TGI, first
   half of 2018), from a Knesset Research and Information Center document.
 
-* `src:agam_media_index_2024` — the Agam Institute media index (online panel of 1,201
+* [`src:agam_media_index_2024`](../../SOURCES.md#src-agam_media_index_2024) — the Agam Institute media index (online panel of 1,201
   citizens, November 2024): how often people visit nine news sites (page 14) and the mean
   frequency by camp — Jews, Arabs, right-wing and liberal voters (page 15), transcribed in
   `data/manual/agam/`. Only the news sites are used: TV channels come from INES 2025, which
@@ -261,7 +261,7 @@ several papers, while the model gives each reader one main paper.
 | `50_64` | 50-64 | 50-64 |  |
 | `65_plus` | 65+ | 65+ |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
 
 Validation:
 
@@ -285,7 +285,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `haredi` | Haredi | חרדי |  |
 | `arab` | Arab or Druze | ערבי או דרוזי |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
 
 Validation:
 
@@ -308,7 +308,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `internet_only` | uses the internet but not social networks | משתמש באינטרנט אך לא ברשתות חברתיות | משתמשת באינטרנט אך לא ברשתות חברתיות |
 | `offline` | does not use the internet | אינו משתמש באינטרנט | אינה משתמשת באינטרנט |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
@@ -337,7 +337,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `did_not_vote` | did not vote | לא הצביע | לא הצביעה |
 | `too_young` | too young to vote | צעיר מדי להצביע | צעירה מדי להצביע |
 
-Sources: `cec_knesset25` (Central Elections Committee (CEC))
+Sources: [`cec_knesset25`](../../SOURCES.md#src-cec_knesset25) (Central Elections Committee (CEC))
 
 Validation:
 
@@ -361,7 +361,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `weekly` | about once a week | בערך פעם בשבוע |  |
 | `never` | hardly ever | כמעט אף פעם |  |
 
-Sources: `ines_2022` (Israel National Election Studies, Tel Aviv University)
+Sources: [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
@@ -385,13 +385,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rarely` | rarely | לעיתים רחוקות |  |
 | `never` | never | אף פעם |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
+| Media: how often each medium is used, by population group and age (internet users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who never watch TV news watch no channel regularly | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -411,13 +411,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rarely` | rarely | לעיתים רחוקות |  |
 | `never` | never | אף פעם |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
+| Media: how often each medium is used, by population group and age (internet users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
@@ -436,13 +436,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rarely` | rarely | לעיתים רחוקות |  |
 | `never` | never | אף פעם |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
+| Media: how often each medium is used, by population group and age (internet users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: no main newspaper for people who never read printed newspapers | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -464,13 +464,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rarely` | rarely | לעיתים רחוקות |  |
 | `never` | never | אף פעם |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
+| Media: how often each medium is used, by population group and age (internet users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -491,13 +491,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rarely` | rarely | לעיתים רחוקות |  |
 | `never` | never | אף פעם |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
+| Media: how often each medium is used, by population group and age (internet users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -519,13 +519,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rarely` | rarely | לעיתים רחוקות |  |
 | `never` | never | אף פעם |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
+| Media: how often each medium is used, by population group and age (internet users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -546,13 +546,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `rarely` | rarely | לעיתים רחוקות |  |
 | `never` | never | אף פעם |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology); [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: how often each medium is used, by population group and age (internet users) | `isoc_media_survey_2024` | 0.1323 | 0.0000 | 0.03 | ✅ pass |
+| Media: how often each medium is used, by population group and age (internet users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1323 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who do not use the internet get no news from websites, social media, search engines or podcasts | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -579,13 +579,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `x` | X (Twitter) | X (טוויטר) |  |
 | `snapchat` | Snapchat | סנאפצ'ט |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: social networks used, by population group and age (social-network users) | `isoc_media_survey_2024` | 0.1390 | 0.0000 | 0.03 | ✅ pass |
+| Media: social networks used, by population group and age (social-network users) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.1390 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who use the internet but not social networks use at most WhatsApp and Telegram and get no news from social media | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -612,13 +612,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `x` | X (Twitter) | X (טוויטר) |  |
 | `snapchat` | Snapchat | סנאפצ'ט |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: news on each network among its users, by population group | `isoc_media_survey_2024` | 0.0370 | 0.0000 | 0.03 | ✅ pass |
+| Media: news on each network among its users, by population group | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.0370 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
@@ -641,13 +641,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `makan33` | Makan 33 | מכאן 33 |  |
 | `other` | another channel | ערוץ אחר |  |
 
-Sources: `ines_2025` (Israel National Election Studies, Tel Aviv University)
+Sources: [`ines_2025`](../../SOURCES.md#src-ines_2025) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: TV news channels watched regularly, by 2022 vote bloc (Jewish and other viewers) and for Arab viewers | `ines_2025` | 0.0512 | 0.0000 | 0.05 | ✅ pass |
+| Media: TV news channels watched regularly, by 2022 vote bloc (Jewish and other viewers) and for Arab viewers | [`ines_2025`](../../SOURCES.md#src-ines_2025) | 0.0512 | 0.0000 | 0.05 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people who never watch TV news watch no channel regularly | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -673,13 +673,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `kikar` | Kikar HaShabbat | כיכר השבת |  |
 | `bhol` | Behadrei Haredim | בחדרי חרדים |  |
 
-Sources: `agam_media_index_2024` (Agam Institute (Nimrod Nir, Dr. Gayil Talshir, Assa Shapira))
+Sources: [`agam_media_index_2024`](../../SOURCES.md#src-agam_media_index_2024) (Agam Institute (Nimrod Nir, Dr. Gayil Talshir, Assa Shapira))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: news websites visited at least weekly by internet users, nationally and by camp | `agam_media_index_2024` | 0.0150 | — | 0.03 | ✅ pass |
+| Media: news websites visited at least weekly by internet users, nationally and by camp | [`agam_media_index_2024`](../../SOURCES.md#src-agam_media_index_2024) | 0.0150 | — | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
@@ -711,7 +711,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `arabic` | an Arabic-language newspaper | עיתון בערבית |  |
 | `none` | none (does not read printed newspapers) | אין (אינו קורא עיתונים מודפסים) | אין (אינה קוראת עיתונים מודפסים) |
 
-Sources: `tgi_readership` (TGI Israel; figures reported by Arutz Sheva (22 July 2026) and ice.co.il (22 March 2018)); `knesset_rc_newspapers_2018` (Knesset Research and Information Center); `agam_media_index_2024` (Agam Institute (Nimrod Nir, Dr. Gayil Talshir, Assa Shapira))
+Sources: [`tgi_readership`](../../SOURCES.md#src-tgi_readership) (TGI Israel; figures reported by Arutz Sheva (22 July 2026) and ice.co.il (22 March 2018)); [`knesset_rc_newspapers_2018`](../../SOURCES.md#src-knesset_rc_newspapers_2018) (Knesset Research and Information Center); [`agam_media_index_2024`](../../SOURCES.md#src-agam_media_index_2024) (Agam Institute (Nimrod Nir, Dr. Gayil Talshir, Assa Shapira))
 
 Validation:
 
@@ -741,13 +741,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `podcasts` | podcasts | פודקאסטים |  |
 | `none` | none | אין |  |
 
-Sources: `isoc_media_survey_2024` (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
+Sources: [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) (Israel Internet Association (ISOC-IL) and the Technion - Israel Institute of Technology)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Media: preferred news source, by population group and by age (respondents who use a medium often) | `isoc_media_survey_2024` | 0.0124 | 0.0000 | 0.03 | ✅ pass |
+| Media: preferred news source, by population group and by age (respondents who use a medium often) | [`isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024) | 0.0124 | 0.0000 | 0.03 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).

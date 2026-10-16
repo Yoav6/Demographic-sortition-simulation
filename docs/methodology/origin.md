@@ -46,13 +46,13 @@ who immigrated in 1990 or later in its local authority (< 5%, 5–10, 10–20, 2
 
 ## Sources
 
-* `src:cbs_abstract_2021_origin` — Statistical Abstract 2021, table 2.8: Jews by country of
+* [`src:cbs_abstract_2021_origin`](../../SOURCES.md#src-cbs_abstract_2021_origin) — Statistical Abstract 2021, table 2.8: Jews by country of
   origin, generation and age group (2020 average). The last edition with the country-level
   breakdown.
-* `src:cbs_abstract_2025_population` — the frame's Jewish adults by sex and age.
-* `src:ines_2022` — Israel National Election Studies 2022: own and father's birthplace by
+* [`src:cbs_abstract_2025_population`](../../SOURCES.md#src-cbs_abstract_2025_population) — the frame's Jewish adults by sex and age.
+* [`src:ines_2022`](../../SOURCES.md#src-ines_2022) — Israel National Election Studies 2022: own and father's birthplace by
   religiosity; third-generation respondents' ethnic self-identification.
-* `src:cbs_local_authorities_2024` — share of 1990+ immigrants by local authority.
+* [`src:cbs_local_authorities_2024`](../../SOURCES.md#src-cbs_local_authorities_2024) — share of 1990+ immigrants by local authority.
 
 ## Preprocessing
 
@@ -136,7 +136,7 @@ Social Survey (see those pages).
 | `imm_20_30` | imm_20_30 | imm_20_30 |  |
 | `imm_30plus` | imm_30plus | imm_30plus |  |
 
-Sources: `cbs_local_authorities_2024` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_local_authorities_2024`](../../SOURCES.md#src-cbs_local_authorities_2024) (Central Bureau of Statistics (CBS))
 
 Validation:
 
@@ -154,7 +154,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **distribution file:** `model/cpts/origin.csv`
 - **categories:** 52 (see the domain file)
 
-Sources: `cbs_abstract_2021_origin` (Central Bureau of Statistics (CBS)); `cbs_abstract_2025_population` (Central Bureau of Statistics (CBS)); `ines_2022` (Israel National Election Studies, Tel Aviv University); `cbs_local_authorities_2024` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_abstract_2021_origin`](../../SOURCES.md#src-cbs_abstract_2021_origin) (Central Bureau of Statistics (CBS)); [`cbs_abstract_2025_population`](../../SOURCES.md#src-cbs_abstract_2025_population) (Central Bureau of Statistics (CBS)); [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University); [`cbs_local_authorities_2024`](../../SOURCES.md#src-cbs_local_authorities_2024) (Central Bureau of Statistics (CBS))
 
 Validation:
 
@@ -178,7 +178,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `third_gen` | Third generation or more | דור שלישי ומעלה בישראל |  |
 | `native` | Native (Arab or Druze citizen) | ילידי (אזרח ערבי או דרוזי) | ילידית (אזרחית ערבייה או דרוזית) |
 
-Sources: `cbs_abstract_2021_origin` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_abstract_2021_origin`](../../SOURCES.md#src-cbs_abstract_2021_origin) (Central Bureau of Statistics (CBS))
 
 Validation:
 
@@ -203,7 +203,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `israeli_only` | identifying simply as Israeli | המגדיר את עצמו פשוט ישראלי | המגדירה את עצמה פשוט ישראלית |
 | `not_applicable` | not applicable | לא רלוונטי |  |
 
-Sources: `ines_2022` (Israel National Election Studies, Tel Aviv University)
+Sources: [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
@@ -227,14 +227,14 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `asia` | Asia | אסיה |  |
 | `africa` | Africa | אפריקה |  |
 
-Sources: `cbs_abstract_2021_origin` (Central Bureau of Statistics (CBS))
+Sources: [`cbs_abstract_2021_origin`](../../SOURCES.md#src-cbs_abstract_2021_origin) (Central Bureau of Statistics (CBS))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Highest diploma of Jews by continent of birth and sex (20+) | `cbs_social_survey_2024` | 0.0208 | 0.0000 | 0.03 | ✅ pass |
-| Military/national service of Jews by continent of birth and sex (20+) | `cbs_social_survey_2024` | 0.0400 | 0.0000 | 0.03 | ✅ pass |
+| Highest diploma of Jews by continent of birth and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0208 | 0.0000 | 0.03 | ✅ pass |
+| Military/national service of Jews by continent of birth and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0400 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 
 Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: largest deviation of a tenth of the scale from 10% of people; constraints: share of people violating it; sampler: largest difference between sampled and table shares (it passes on its Bonferroni-adjusted chi-square p-value). ² Largest difference beyond two standard errors of the survey share (survey checks pass on this column).

@@ -36,10 +36,10 @@ official locality results describe it directly.
 
 ## Sources
 
-* `src:ines_2022` — Israel National Election Studies 2022 pre/post-election panel: reported vote
+* [`src:ines_2022`](../../SOURCES.md#src-ines_2022) — Israel National Election Studies 2022 pre/post-election panel: reported vote
   or abstention, religiosity, age, education, own and father's birthplace, ethnic
   self-identification (1,062 Jewish and "other" respondents with a usable answer, panel weights).
-* `src:cec_knesset25` — official results by polling station and locality, eligible voters, and
+* [`src:cec_knesset25`](../../SOURCES.md#src-cec_knesset25) — official results by polling station and locality, eligible voters, and
   the national total including double-envelope votes.
 
 ## Preprocessing
@@ -126,7 +126,7 @@ Unity 32%, Yisrael Beiteinu 16%, Meretz 15%, Likud 13% — as in the Druze-major
 | `m` | 30-49 | 30-49 |  |
 | `o` | 50+ | 50+ |  |
 
-Sources: `ines_2022` (Israel National Election Studies, Tel Aviv University)
+Sources: [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
@@ -148,7 +148,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `mid` | matriculation or post-secondary | בגרות או על-תיכונית |  |
 | `academic` | academic degree | תואר אקדמי |  |
 
-Sources: `ines_2022` (Israel National Election Studies, Tel Aviv University)
+Sources: [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
@@ -175,7 +175,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `IL3_other` | third generation, other | דור שלישי, אחר |  |
 | `native` | Arab or Druze | ערבי או דרוזי |  |
 
-Sources: `ines_2022` (Israel National Election Studies, Tel Aviv University)
+Sources: [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University)
 
 Validation:
 
@@ -193,7 +193,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 - **distribution file:** `model/cpts/vote_area.csv`
 - **categories:** 190 (see the domain file)
 
-Sources: `cec_knesset25` (Central Elections Committee (CEC))
+Sources: [`cec_knesset25`](../../SOURCES.md#src-cec_knesset25) (Central Elections Committee (CEC))
 
 Validation:
 
@@ -230,13 +230,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `did_not_vote` | did not vote | לא הצביע | לא הצביעה |
 | `too_young` | too young to vote in 2022 | צעיר מדי להצביע ב-2022 | צעירה מדי להצביע ב-2022 |
 
-Sources: `ines_2022` (Israel National Election Studies, Tel Aviv University); `cec_knesset25` (Central Elections Committee (CEC))
+Sources: [`ines_2022`](../../SOURCES.md#src-ines_2022) (Israel National Election Studies, Tel Aviv University); [`cec_knesset25`](../../SOURCES.md#src-cec_knesset25) (Central Elections Committee (CEC))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| 2022 election: national vote shares | `cec_knesset25` | 0.0006 | — | 0.005 | ✅ pass |
+| 2022 election: national vote shares | [`cec_knesset25`](../../SOURCES.md#src-cec_knesset25) | 0.0006 | — | 0.005 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people under 18 in November 2022 did not vote then | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |

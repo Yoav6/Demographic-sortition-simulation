@@ -38,7 +38,7 @@ women, who usually leave on marriage).
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — household type (one person; non-family; one family; family
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — household type (one person; non-family; one family; family
   with others) × lives with partner in the household × marital status, by religiosity × sex ×
   age group for Jews (`living_jews_*`), sex × age for "others" (`living_others_*`) and
   religion × sex × age for Arabs outside the Jerusalem district (`living_arabs_*`). Each table
@@ -128,7 +128,7 @@ The survey comparisons are in the generated table below.
 | `yes` | yes | כן |  |
 | `no` | no | לא |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
@@ -153,15 +153,15 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `relatives` | with other relatives | עם קרובי משפחה אחרים |  |
 | `independent` | independently | באופן עצמאי |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Living arrangement of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0089 | 0.0000 | 0.03 | ✅ pass |
-| Living arrangement of Jews by marital status and sex (20+) | `cbs_social_survey_2024` | 0.0741 | 0.0000 | 0.03 | ✅ pass |
-| Living arrangement of Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0568 | 0.0000 | 0.04 | ✅ pass |
+| Living arrangement of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0089 | 0.0000 | 0.03 | ✅ pass |
+| Living arrangement of Jews by marital status and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0741 | 0.0000 | 0.03 | ✅ pass |
+| Living arrangement of Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0568 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 

@@ -29,11 +29,11 @@ field is tied to the field of the degree they already hold.
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — field of the highest academic degree (variable 1905, asked of
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — field of the highest academic degree (variable 1905, asked of
   holders of a bachelor's, master's or doctoral degree) by occupation (including "not employed")
   and sex, by highest diploma and age group, by religiosity and sex for Jews, by religion and sex
   for Arabs and by sex for "others" (`field_*`). Ages 20+.
-* `src:che_fields_2024` — CHE table 14: students by field, degree, type of institution and sex,
+* [`src:che_fields_2024`](../../SOURCES.md#src-che_fields_2024) — CHE table 14: students by field, degree, type of institution and sex,
   2023/24 (universities and academic colleges, not the Open University).
 
 ## Preprocessing
@@ -115,14 +115,14 @@ studied mathematics, statistics or computer science, against 2% of those aged 65
 | `engineering` | engineering and architecture | הנדסה ואדריכלות |  |
 | `none` | none | אין |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Field of the highest degree by occupation and sex (20+) | `cbs_social_survey_2024` | 0.0096 | 0.0000 | 0.03 | ✅ pass |
-| Field of the highest degree of Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.1155 | 0.0000 | 0.03 | ✅ pass |
+| Field of the highest degree by occupation and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0096 | 0.0000 | 0.03 | ✅ pass |
+| Field of the highest degree of Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.1155 | 0.0000 | 0.03 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: a field of degree exactly for holders of an academic degree | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -152,13 +152,13 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `engineering` | engineering and architecture | הנדסה ואדריכלות |  |
 | `none` | none | אין |  |
 
-Sources: `che_fields_2024` (Council for Higher Education (CHE), Planning and Budgeting Committee)
+Sources: [`che_fields_2024`](../../SOURCES.md#src-che_fields_2024) (Council for Higher Education (CHE), Planning and Budgeting Committee)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Field of current studies by degree and sex vs the Council for Higher Education | `che_fields_2024` | 0.0000 | — | 0.01 | ✅ pass |
+| Field of current studies by degree and sex vs the Council for Higher Education | [`che_fields_2024`](../../SOURCES.md#src-che_fields_2024) | 0.0000 | — | 0.01 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: a field of current studies exactly for students of an academic degree | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |

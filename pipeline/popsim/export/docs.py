@@ -6,11 +6,15 @@
   rewritten by `popsim docs` so the numbers never drift from the model.
 * `popsim docs --check` fails if a node lacks a doc, a required section is missing or
   empty, a doc cites an unknown source, or a generated block is out of date.
+* Citations are hyperlinks: a bare `src:<id>` in a methodology doc, decision record or
+  data/manual README is rewritten to a link to that source's anchor in SOURCES.md (the site
+  maps the same link to its Sources page).
 """
 
 from __future__ import annotations
 
 import json
+import os
 import re
 from pathlib import Path
 
@@ -43,6 +47,23 @@ def doc_path(node: Node) -> Path:
     return paths.ROOT / node.raw.get("doc", f"docs/methodology/{node.id}.md")
 
 
+# a citation not yet linked: `src:id` not already the text of a [...](...) link
+BARE_CITATION = re.compile(r"(?<!\[)`src:([a-z0-9_]+)`(?!\]\()")
+
+
+def source_anchor(sid: str) -> str:
+    return f"src-{sid}"
+
+
+def source_href(sid: str, doc: Path) -> str:
+    rel = Path(os.path.relpath(paths.ROOT / "SOURCES.md", doc.parent)).as_posix()
+    return f"{rel}#{source_anchor(sid)}"
+
+
+def link_citations(text: str, doc: Path) -> str:
+    return BARE_CITATION.sub(lambda m: f"[`src:{m.group(1)}`]({source_href(m.group(1), doc)})", text)
+
+
 def used_by(spec: ModelSpec | None = None) -> dict[str, list[str]]:
     """Source id -> the model nodes that cite it in dag.yaml."""
     spec = spec or load_spec()
@@ -66,7 +87,7 @@ def sources_md() -> str:
         "",
     ]
     for s in srcs.values():
-        lines += [f"## {s.title_en}", "", f"*{s.title_he}*", ""]
+        lines += [f'<a id="{source_anchor(s.id)}"></a>', "", f"## {s.title_en}", "", f"*{s.title_he}*", ""]
         lines.append(f"- **id:** `{s.id}` · **tier:** {s.tier} · **publisher:** {s.publisher}")
         if s.url:
             lines.append(f"- **page:** <{s.url}>")
@@ -90,7 +111,7 @@ def sources_md() -> str:
     return "\n".join(lines)
 
 
-def _validation_block(node_id: str) -> str:
+def _validation_block(node_id: str, doc: Path) -> str:
     report = paths.REPORTS / "validation.json"
     if not report.exists():
         return "_No validation run recorded yet (`make validate`)._"
@@ -102,7 +123,7 @@ def _validation_block(node_id: str) -> str:
     for c in checks:
         status = "✅ pass" if c["passed"] else "❌ FAIL"
         excess = f"{c['max_excess']:.4f}" if "max_excess" in c else "—"
-        rows.append(f"| {c['name']} | `{c['source']}` | {c['max_abs_error']:.4f} | {excess} | {c['tolerance']} | {status} |")
+        rows.append(f"| {c['name']} | {_cite(c['source'], doc)} | {c['max_abs_error']:.4f} | {excess} | {c['tolerance']} | {status} |")
     rows.append("")
     rows.append(f"Sample: {data.get('sample_size', '?'):,} people, seed {data.get('seed', '?')}, model {data.get('model_version', '?')}. "
                 "¹ Survey checks: largest difference in a share, over cells with 30+ respondents; percentile checks: "
@@ -112,7 +133,12 @@ def _validation_block(node_id: str) -> str:
     return "\n".join(rows)
 
 
-def _node_summary(spec: ModelSpec, node: Node) -> list[str]:
+def _cite(sid: str, doc: Path) -> str:
+    """A source id as a link to its SOURCES.md entry (validation targets may be other labels)."""
+    return f"[`{sid}`]({source_href(sid, doc)})" if sid in load_sources() else f"`{sid}`"
+
+
+def _node_summary(spec: ModelSpec, node: Node, doc: Path) -> list[str]:
     srcs = load_sources()
     lines = [f"#### `{node.id}` — {node.label['en']} / {node.label['he']}", ""]
     lines.append(f"- **type:** `{node.type}`" + (" · hidden helper" if node.raw.get("hidden") else ""))
@@ -137,16 +163,16 @@ def _node_summary(spec: ModelSpec, node: Node) -> list[str]:
         lines.append(f"- **categories:** {len(vals)} (see the domain file)")
     if node.raw.get("sources"):
         lines += ["", "Sources: " + "; ".join(
-            f"`{sid}` ({srcs[sid].publisher})" if sid in srcs else f"`{sid}` ⚠ unknown" for sid in node.raw["sources"])]
-    lines += ["", "Validation:", "", _validation_block(node.id), ""]
+            f"{_cite(sid, doc)} ({srcs[sid].publisher})" if sid in srcs else f"`{sid}` ⚠ unknown" for sid in node.raw["sources"])]
+    lines += ["", "Validation:", "", _validation_block(node.id, doc), ""]
     return lines
 
 
-def generated_block(spec: ModelSpec, nodes: list[Node]) -> str:
+def generated_block(spec: ModelSpec, nodes: list[Node], doc: Path) -> str:
     """The generated part of a methodology doc: a summary of every node documented in it."""
     lines = [BEGIN, "", "### Model summary (generated)", ""]
     for node in nodes:
-        lines += _node_summary(spec, node)
+        lines += _node_summary(spec, node, doc)
     lines.append(END)
     return "\n".join(lines)
 
@@ -184,14 +210,28 @@ def update_docs(check: bool = False) -> list[str]:
         for sid in re.findall(r"`src:([a-z0-9_]+)`", doc):
             if sid not in known:
                 problems.append(f"{p.name}: doc cites unknown source {sid}")
-        block = generated_block(spec, nodes)
-        if BEGIN in doc and END in doc:
-            new = doc[: doc.index(BEGIN)] + block + doc[doc.index(END) + len(END) :]
+        block = generated_block(spec, nodes, p)
+        doc_linked = link_citations(doc, p)
+        if BEGIN in doc_linked and END in doc_linked:
+            new = doc_linked[: doc_linked.index(BEGIN)] + block + doc_linked[doc_linked.index(END) + len(END) :]
         else:
-            new = doc.rstrip() + "\n\n" + block + "\n"
+            new = doc_linked.rstrip() + "\n\n" + block + "\n"
         if new != doc:
             if check:
-                problems.append(f"{p.name}: generated block out of date (run `popsim docs`)")
+                problems.append(f"{p.name}: generated block out of date or citations unlinked (run `popsim docs`)")
+            else:
+                p.write_text(new, encoding="utf-8")
+
+    # other hand-written docs that cite sources: decision records and manual-data notes
+    for p in sorted([*(paths.DOCS / "decisions").glob("*.md"), *(paths.ROOT / "data" / "manual").glob("*/README.md")]):
+        doc = p.read_text(encoding="utf-8")
+        for sid in re.findall(r"`src:([a-z0-9_]+)`", doc):
+            if sid not in known:
+                problems.append(f"{p.relative_to(paths.ROOT)}: cites unknown source {sid}")
+        new = link_citations(doc, p)
+        if new != doc:
+            if check:
+                problems.append(f"{p.relative_to(paths.ROOT)}: citations unlinked (run `popsim docs`)")
             else:
                 p.write_text(new, encoding="utf-8")
     return problems

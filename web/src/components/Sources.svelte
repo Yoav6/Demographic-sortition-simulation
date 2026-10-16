@@ -2,9 +2,14 @@
   import { loadSources, type SourceInfo } from "../lib/data.ts";
   import { t, type Lang } from "../lib/i18n.ts";
 
-  let { lang }: { lang: Lang } = $props();
+  let { lang, anchor = "" }: { lang: Lang; anchor?: string } = $props();
   let sources = $state<SourceInfo[] | null>(null);
   loadSources().then((s) => (sources = s));
+
+  // #/sources/src-<id> (a citation followed from a methodology doc) scrolls to that source
+  $effect(() => {
+    if (sources && anchor) document.getElementById(anchor)?.scrollIntoView({ block: "start" });
+  });
 
   const TIER: Record<string, { he: string; en: string }> = {
     A: { he: "הורדה בסקריפט", en: "scripted download" },
@@ -20,7 +25,7 @@
   {#if sources}
     <div class="list">
       {#each sources as s}
-        <article class="card source" id={`src-${s.id}`}>
+        <article class="card source" class:cited={anchor === `src-${s.id}`} id={`src-${s.id}`}>
           <h3>{lang === "he" ? s.title.he : s.title.en}</h3>
           <p class="muted small">
             <code>{s.id}</code> · {t("publisher", lang)}: {s.publisher} · {t("tier", lang)}: {s.tier} ({TIER[s.tier]?.[lang]})
@@ -51,6 +56,12 @@
   .list {
     display: grid;
     gap: 0.75rem;
+  }
+  .source {
+    scroll-margin-top: 1rem;
+  }
+  .cited {
+    outline: 2px solid var(--accent);
   }
   .source h3 {
     margin: 0 0 0.25rem;

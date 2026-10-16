@@ -4,10 +4,10 @@
 
 ## Context
 
-Media habits could be described from two INES 2022 questions (how often the person follows
+Media habits could be described from two INES 2022 ([`src:ines_2022`](../../SOURCES.md#src-ines_2022)) questions (how often the person follows
 political news, overall and on social networks) and the favourite TV news broadcast by
-political camp, hand-read from the charts of the Agam Institute's media index. The Israel
-Internet Association (ISOC-IL) and the Technion then published the
+political camp, hand-read from the charts of the Agam Institute's media index ([`src:agam_media_index_2024`](../../SOURCES.md#src-agam_media_index_2024)). The Israel
+Internet Association (ISOC-IL) and the Technion then published ([`src:isoc_media_survey_2024`](../../SOURCES.md#src-isoc_media_survey_2024)) the
 respondent-level data of a 2024 survey of news consumption: how often people get news from
 each of seven media, which social networks they use and on which they read news, for 1,005
 internet users including Haredi and Arab respondents. Publication is permitted with credit.
@@ -16,14 +16,14 @@ No single source covers everything:
 
 * ISOC-IL asks about media *types* only (no channel, newspaper or site names), covers
   internet users only, has no weights, and does not ask about politics.
-* INES 2025 asks how often people follow political news, which media they used for it in the
+* INES 2025 ([`src:ines_2025`](../../SOURCES.md#src-ines_2025)) asks how often people follow political news, which media they used for it in the
   past week, and which TV channels they watch regularly — including Al Jazeera and Makan 33 —
   with the 2022 vote, for all adult citizens, weighted.
 * Agam gives the favourite broadcast by camp, and named news websites, only as charts and
   without Arabic-language media.
 * No public source names the newspapers people read except TGI, the media industry's
   readership survey, whose headline figures (by title, and in 2018 by age) are reported in
-  the press.
+  the press ([`src:tgi_readership`](../../SOURCES.md#src-tgi_readership), [`src:knesset_rc_newspapers_2018`](../../SOURCES.md#src-knesset_rc_newspapers_2018)).
 
 ## Decision
 

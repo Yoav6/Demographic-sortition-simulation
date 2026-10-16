@@ -4,6 +4,8 @@ Generated from `sources.yaml` and `sources.lock.json` by `popsim docs`. Do not e
 
 Access tiers: **A** = scripted download, no login; **B** = scripted with a headless browser; results committed with their query spec; **C** = free registration required; optional enrichment; **M** = manual transcription committed to data/manual with page references; **R** = restricted microdata; only derived aggregates are committed.
 
+<a id="src-cbs_localities_2024"></a>
+
 ## CBS localities file 2024 ("bycode")
 
 *קובץ היישובים 2024 של הלמ"ס*
@@ -18,6 +20,8 @@ Access tiers: **A** = scripted download, no login; **B** = scripted with a headl
 
 One row per locality: CBS code, Hebrew/English name, district, sub-district, natural region, municipal status, religion of the locality, population (total, Jews and others, Jews, Arabs), coordinates.
 
+<a id="src-cbs_names"></a>
+
 ## CBS first names of people born 1949-2024, by sector, sex and year of birth
 
 *שמות פרטיים לפי שנת לידה, מגזר ומין (הלמ"ס, הודעה 391/2025)*
@@ -30,6 +34,8 @@ One row per locality: CBS code, Hebrew/English name, district, sub-district, nat
 - file `11_25_391t1.xlsx`: <https://www.cbs.gov.il/he/mediarelease/DocLib/2025/391/11_25_391t1.xlsx> — sha256 `37b9783487d5de49…`, retrieved 2026-10-13
 
 Based on the Population Registry. Names given to fewer than 5 babies in a year are suppressed. Covers people born in Israel 1949-2024 only.
+
+<a id="src-cec_knesset25"></a>
 
 ## Central Elections Committee - results of the 25th Knesset election (Nov 2022)
 
@@ -46,6 +52,8 @@ Based on the Population Registry. Names given to fewer than 5 babies in a year a
 
 expc = results by locality, expb = results by polling station. Columns: committee code, locality name, locality code, eligible voters (בזב), voters, invalid, valid, then one column per party ballot letter. Eligible voters include citizens living abroad.
 
+<a id="src-ines_2022"></a>
+
 ## Israel National Election Studies (INES) 2022 - pre/post election panel
 
 *הסקר הלאומי של הבחירות בישראל 2022*
@@ -60,6 +68,8 @@ expc = results by locality, expb = results by polling station. Columns: committe
 - file `2022_Questionnaire_Eng.pdf`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2023/06/2022_Questionnaire_Eng.pdf> — sha256 `47e28ba8933cd56c…`, retrieved 2026-10-13
 - file `2022_Appendix.pdf`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2023/06/2022_Appendix-1.pdf> — sha256 `ab7503cc93216c10…`, retrieved 2026-10-13
 
+<a id="src-ines_2025"></a>
+
 ## Israel National Election Studies (INES) 2025 off-cycle study
 
 *הסקר הלאומי של הבחירות בישראל 2025*
@@ -72,6 +82,8 @@ expc = results by locality, expb = results by polling station. Columns: committe
 - **planned for:** `vote_2026`
 - file `2025_SPSS.sav`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2025/09/2025_SPSS.sav> — sha256 `a29d1dc241f07708…`, retrieved 2026-10-13
 - file `2025_Questionnaire_Eng.pdf`: <https://socsci4.tau.ac.il/mu2/ines/wp-content/uploads/sites/4/2025/07/2025_Questionnaire_Eng.pdf> — sha256 `7ab3fd203212392e…`, retrieved 2026-10-13
+
+<a id="src-agam_media_index_2024"></a>
 
 ## Agam Institute - Media Index, news consumption in Israel (Dec 2024)
 
@@ -86,6 +98,8 @@ expc = results by locality, expb = results by polling station. Columns: committe
 - manual data: `data/manual/agam/`
 
 iPanel online sample, 1,201 citizens aged 18+ (325 Arab respondents), 15-20 Nov 2024, weighted by sector, sex, age, origin, region, religion, religiosity and 2022 turnout. Values exist only as charts; they are hand-transcribed into data/manual/agam/ with page numbers. Used for named news websites (pages 14-15) only; TV channels come from INES 2025 respondent data (docs/decisions/0006-media-sources.md).
+
+<a id="src-isoc_media_survey_2024"></a>
 
 ## Israel Internet Association (ISOC-IL) and the Technion - Media Consumption and Disinformation Survey (October 2024), respondent-level data
 
@@ -104,6 +118,8 @@ iPanel online sample, 1,201 citizens aged 18+ (325 Arab respondents), 15-20 Nov 
 
 Online panel (iPanel), October 2024: 1,005 internet users aged 18+, 805 Jewish (Haredim over-sampled) and 200 Arab respondents; no weights are supplied. The files are shared from the survey's Google Drive folder, linked from the page. The first data row of each CSV holds the question wording.
 
+<a id="src-tgi_readership"></a>
+
 ## TGI Israel - newspaper readership (average-issue exposure), as published in press reports
 
 *סקר TGI - שיעורי החשיפה לעיתונים, כפי שפורסמו בתקשורת*
@@ -116,6 +132,8 @@ Online panel (iPanel), October 2024: 1,005 internet users aged 18+, 805 Jewish (
 - manual data: `data/manual/tgi/`
 
 General TGI: representative sample of Jewish adults aged 18+ (about 5,000 respondents); weekday and weekend exposure by title, July 2025 - June 2026 (https://www.inn.co.il/news/702128). Haredi TGI (a separate, smaller survey of the Haredi sector), 2017, the latest release found online (https://www.ice.co.il/media/news/article/738702). Transcribed into data/manual/tgi/.
+
+<a id="src-knesset_rc_newspapers_2018"></a>
 
 ## Knesset Research and Information Center - change in advertising expenditure and the age distribution of newspaper readers (7 November 2018)
 
@@ -131,6 +149,8 @@ General TGI: representative sample of Jewish adults aged 18+ (about 5,000 respon
 
 Tables 2 and 4: weekday exposure to newspapers overall and to each title by age group (18-34, 35-54, 55+), from TGI for the first half of 2018; transcribed into data/manual/tgi/age_profile_2018.csv.
 
+<a id="src-igra_registry_names"></a>
+
 ## IGRA - given names in the Israel Population Registry, "Other" religion (Nov 2021 extract)
 
 *האגודה הישראלית לחקר שורשי משפחה - שמות פרטיים במרשם האוכלוסין, דת "אחר"*
@@ -144,6 +164,8 @@ Tables 2 and 4: weekday exposure to newspapers overall and to each title by age 
 - file `other-male.json`: <https://genealogy.org.il/pop/other-male/> — sha256 `bd10254b801bfbc0…`, retrieved 2026-10-13
 
 Counts of each given name among people registered with religion "Other" (not Jewish, Muslim, Christian or Druze) - mostly immigrants from the former USSR and their children. No birth-year breakdown; the CBS tables (which lack an "Other" sheet) supply age profiles.
+
+<a id="src-cbs_local_authorities_2024"></a>
 
 ## CBS Local Authorities in Israel 2024 - data file for processing (p_libud_24)
 
@@ -159,6 +181,8 @@ Counts of each given name among people registered with religion "Other" (not Jew
 
 One row per local authority (municipalities, local councils, regional councils): population by religion and age group, socio-economic cluster, education, wages and more.
 
+<a id="src-cbs_abstract_2025_population"></a>
+
 ## Statistical Abstract of Israel 2025, ch. 2 - population of Israelis by population group, religion, sex and age (table 2.3)
 
 *שנתון סטטיסטי לישראל 2025, פרק 2 - אוכלוסיית הישראלים לפי קבוצת אוכלוסייה, דת, מין וגיל (לוח 2.3)*
@@ -173,6 +197,8 @@ One row per local authority (municipalities, local councils, regional councils):
 - file `st02_06_2024.xlsx`: <https://www.cbs.gov.il/he/publications/doclib/2024/2.shnatonpopulation/st02_06.xlsx> — sha256 `77c8d2338e347b80…`, retrieved 2026-10-13
 
 Thousands, 2024 average. Single years of age by sex for Arabs and for Jews and others; 5-year groups by sex for Jews, Muslims, Christians, Arab Christians, Druze and those not classified by religion. st02_07 gives Jews and others by continent of origin and birth.
+
+<a id="src-cbs_abstract_education"></a>
 
 ## Statistical Abstract of Israel 2024 and 2025, ch. 4 - students in higher education, yeshivas and post-secondary education
 
@@ -191,6 +217,8 @@ Thousands, 2024 average. Single years of age by sex for Arabs and for Jews and o
 
 2024 tables 4.70 (students as a share of the population aged 18-39 by degree, sex, age and population group, 2022/23) and 4.73 (students by degree, sex, age, population group and district, 2022/23); 2025 tables 4.17 (yeshiva and kollel students by type, age and citizenship, 2023/24), 4.27 (post-secondary students by field, sex and age, 2023/24) and 4.31 (students by degree, to 2024/25).
 
+<a id="src-che_arab_students_2024"></a>
+
 ## Council for Higher Education - Arab students in institutions of higher education by degree, type of institution and sex, 2023/24 (table 15)
 
 *המועצה להשכלה גבוהה - סטודנטים ערבים במוסדות להשכלה גבוהה לפי תואר, סוג מוסד ומין, תשפ"ד (לוח 15)*
@@ -201,6 +229,8 @@ Thousands, 2024 average. Single years of age by sex for Arabs and for Jews and o
 - **terms:** Published statistical tables, cited with attribution
 - **used by:** `studying`
 - file `che_table15.xlsx`: <https://che.org.il/wp-content/uploads/2025/11/%D7%9C%D7%95%D7%97-15-%D7%AA%D7%A9%D7%A4%D7%94.xlsx> — sha256 `897bcf4d87e2557a…`, retrieved 2026-10-14
+
+<a id="src-che_fields_2024"></a>
 
 ## Council for Higher Education - students in institutions of higher education by field of study, degree, type of institution and sex, 2023/24 (table 14)
 
@@ -214,6 +244,8 @@ Thousands, 2024 average. Single years of age by sex for Arabs and for Jews and o
 - file `che_table14.xlsx`: <https://che.org.il/wp-content/uploads/2026/02/%D7%9C%D7%95%D7%97-14-%D7%AA%D7%A9%D7%A4%D7%94.xlsx> — sha256 `ca910ab87ff56b4b…`, retrieved 2026-10-14
 
 Universities, academic colleges and academic colleges of education (not the Open University); twelve field groups.
+
+<a id="src-idi_haredi_report_2025"></a>
 
 ## Israel Democracy Institute - Statistical Report on Ultra-Orthodox Society in Israel 2025 (executive summary)
 
@@ -229,6 +261,8 @@ Universities, academic colleges and academic colleges of education (not the Open
 
 Haredi students in higher education, 2024/25 (chart "Ultra-Orthodox students in higher education"): 15,812 bachelor's and 3,141 postgraduate; transcribed into data/manual/students/haredi_students.csv.
 
+<a id="src-cbs_abstract_2025_marriages"></a>
+
 ## Statistical Abstract of Israel 2025, ch. 2 - persons marrying, by sex, age, previous marital status and religion (table 2.24, 2023)
 
 *שנתון סטטיסטי לישראל 2025, פרק 2 - נישאים, לפי מין, גיל, מצב משפחתי קודם ודת (לוח 2.24, 2023)*
@@ -242,6 +276,8 @@ Haredi students in higher education, 2024/25 (chart "Ultra-Orthodox students in 
 
 Marriages registered in 2023 by single year of age (up to 24) for Jews, Muslims, Christians and Druze. Used only to estimate how many 18-19-year-olds are married, an age the Social Survey (20+) does not cover.
 
+<a id="src-cbs_abstract_2025_attitudes"></a>
+
 ## Statistical Abstract of Israel 2025, ch. 28 - public attitudes (Social Survey), persons aged 20+ by selected characteristics and by extent of religiosity
 
 *שנתון סטטיסטי לישראל 2025, פרק 28 - עמדות ותחושות הציבור (הסקר החברתי), בני 20 ומעלה לפי תכונות נבחרות ולפי מידת דתיות*
@@ -253,6 +289,8 @@ Marriages registered in 2023 by single year of age (up to 24) for Jews, Muslims,
 - **used by:** `religiosity`
 - file `st28_01x.xlsx`: <https://www.cbs.gov.il/he/publications/DocLib/2025/28.ShnatonPublicAttitudesandPerceptions/st28_01x.xlsx> — sha256 `572c3569bd902e44…`, retrieved 2026-10-13
 - file `st28_04x.xlsx`: <https://www.cbs.gov.il/he/publications/DocLib/2025/28.ShnatonPublicAttitudesandPerceptions/st28_04x.xlsx> — sha256 `66da1d4941592771…`, retrieved 2026-10-13
+
+<a id="src-wikidata_given_names"></a>
 
 ## Wikidata - given-name items with Hebrew labels (for English transliteration of names)
 
@@ -266,6 +304,8 @@ Marriages registered in 2023 by single year of age (up to 24) for Jews, Muslims,
 
 Used only to display names in English. Results of a live query can change over time; the pinned checksum records exactly which snapshot the model used.
 
+<a id="src-cbs_abstract_2021_origin"></a>
+
 ## Statistical Abstract of Israel 2021, table 2.8 - Jews by country of origin and age (2020 average)
 
 *שנתון סטטיסטי לישראל 2021, לוח 2.8 - יהודים לפי ארץ מוצא וגיל (ממוצע 2020)*
@@ -278,6 +318,8 @@ Used only to display names in English. Results of a live query can change over t
 - file `st02_08.xls`: <https://www.cbs.gov.il/he/publications/doclib/2021/2.shnatonpopulation/st02_08.xls> — sha256 `4fc804bd9605b054…`, retrieved 2026-10-13
 
 The last edition with the country-level breakdown. Origin = own country of birth for people born abroad, father's country of birth for people born in Israel; Israel-born of Israel-born fathers form their own category.
+
+<a id="src-oecd_piaac_2023_tables"></a>
 
 ## OECD Survey of Adult Skills (PIAAC) 2023 - annex tables of chapters 2 and 3 (all participating countries, including Israel)
 
@@ -293,6 +335,8 @@ The last edition with the country-level breakdown. Origin = own country of birth
 
 StatLink workbooks of "Do Adults Have the Skills They Need to Thrive in a Changing World? Survey of Adult Skills 2023". Israel's sample: 6,092 adults aged 16-65 (61% response rate), assessed in Hebrew or Arabic. Used: literacy mean, standard deviation and percentiles (A.2.1), proficiency levels (A.2.2), by age (A.2.4), education (A.2.5), gender (A.2.7), and education by age (A.3.11).
 
+<a id="src-boi_piaac_note_2024"></a>
+
 ## Bank of Israel Research Department, Skills of Israel's Population by International Comparison: Initial Findings of the 2022-2023 PIAAC Survey (Policy Analysis Note 2024.03)
 
 *בנק ישראל, חטיבת המחקר - מיומנויות האוכלוסייה בישראל בהשוואה בין-לאומית: ממצאים ראשונים מסקר PIAAC 2022-2023 (סקירה 2024.03)*
@@ -306,6 +350,8 @@ StatLink workbooks of "Do Adults Have the Skills They Need to Thrive in a Changi
 - manual data: `data/manual/piaac/`
 
 Figure 2b gives mean scores of non-Haredi Jews, Arabs and Haredim (computed by the authors in the CBS research room); transcribed into data/manual/piaac/boi_group_means.csv.
+
+<a id="src-cbs_social_survey_2024"></a>
 
 ## CBS Social Survey 2024 - custom cross-tabulations from the official table generator (persons aged 20+)
 

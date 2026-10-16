@@ -5,7 +5,7 @@
 ## Context
 
 The economic attributes requested were salary, wealth, and a population percentile. The CBS
-Social Survey's personal gross income question is asked **only of employed persons** (everyone
+Social Survey's ([`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024)) personal gross income question is asked **only of employed persons** (everyone
 else is "not relevant"), so it measures earnings from work; household gross income is asked of
 everyone; there is no individual wealth data in any open source.
 

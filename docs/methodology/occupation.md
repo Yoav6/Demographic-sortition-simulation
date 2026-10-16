@@ -27,7 +27,7 @@
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — occupation by religiosity × sex × diploma for Jews
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — occupation by religiosity × sex × diploma for Jews
   (`occupation_jews`), sex × diploma for "others", religion × sex × diploma for Arabs outside the
   Jerusalem district (`occupation_arabs`); industry and status at work by occupation × sex, for
   Jews-and-others and for Arabs (`industry_by_occupation_*`, `work_status_by_occupation_*`).
@@ -95,14 +95,14 @@ welfare, education, manufacturing, trade. Survey comparisons are in the generate
 | `unskilled` | unskilled worker | עובד לא מקצועי | עובדת לא מקצועית |
 | `none` | none | אין |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Occupation of employed Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0098 | 0.0000 | 0.03 | ✅ pass |
-| Occupation of employed Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0042 | 0.0000 | 0.04 | ✅ pass |
+| Occupation of employed Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0098 | 0.0000 | 0.03 | ✅ pass |
+| Occupation of employed Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0042 | 0.0000 | 0.04 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: an occupation only for the employed and retirees | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
@@ -140,7 +140,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `extraterritorial` | international organisations | ארגונים בין-לאומיים |  |
 | `none` | none | אין |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 
@@ -167,7 +167,7 @@ Sample: 1,000,000 people, seed 1, model 2026.10.0. ¹ Survey checks: largest dif
 | `unpaid_family` | unpaid worker in a family business | עובד ללא שכר בעסק משפחתי | עובדת ללא שכר בעסק משפחתי |
 | `none` | not applicable | לא רלוונטי |  |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey)
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey)
 
 Validation:
 

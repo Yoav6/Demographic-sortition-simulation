@@ -11,7 +11,7 @@ population.
 
 * `tgi_2025_26` — general TGI, July 2025 – June 2026: a representative sample of Jewish adults
   aged 18+ (about 5,000 respondents). Reported by Arutz Sheva on 22 July 2026,
-  <https://www.inn.co.il/news/702128> (`tgi_readership` in `sources.yaml`). `weekday` is an
+  <https://www.inn.co.il/news/702128> ([`src:tgi_readership`](../../../SOURCES.md#src-tgi_readership)). `weekday` is an
   average weekday issue (Globes: Monday–Thursday; Maariv: *Maariv HaBoker*); `weekend` is the
   Friday edition.
 * `tgi_haredi_2017` — the Haredi TGI, a separate survey of the Haredi sector, 2017 (the latest
@@ -24,6 +24,6 @@ Titles that the latest release does not report (Calcalist, TheMarker, Maariv's m
 ## age_profile_2018.csv
 
 Weekday exposure by age group, TGI first half of 2018, from tables 2 and 4 of a Knesset
-Research and Information Center document of 7 November 2018 (`knesset_rc_newspapers_2018`;
+Research and Information Center document of 7 November 2018 ([`src:knesset_rc_newspapers_2018`](../../../SOURCES.md#src-knesset_rc_newspapers_2018);
 the PDF is pinned by `popsim fetch`). The model uses only the *relative* age gradient of each
 title; the levels come from `titles.csv`.

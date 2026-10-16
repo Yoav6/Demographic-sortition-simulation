@@ -29,19 +29,19 @@ bachelor's, a bachelor's mostly after matriculation.
 
 ## Sources
 
-* `src:cbs_social_survey_2024` — "studied in the past / studies now, including vacations /
+* [`src:cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) — "studied in the past / studies now, including vacations /
   never studied" (variable 1831) by religiosity, sex, age group and labour-force status for
   Jews, by sex, age and labour-force status for "others", by religion, sex, age and labour-force
   status for Arabs outside the Jerusalem district; and by highest diploma, sex and age group for
   Jews and others and for Arabs (`studying_*`). Ages 20+.
-* `src:cbs_abstract_education` — Statistical Abstract tables: students by degree, 2024/25
+* [`src:cbs_abstract_education`](../../SOURCES.md#src-cbs_abstract_education) — Statistical Abstract tables: students by degree, 2024/25
   (4.31, 2025); their composition by age, sex and population group, 2022/23 (4.73, 2024);
   students as a share of the population aged 18–39 (4.70, 2024, for comparison); yeshiva and
   kollel students by type, age and citizenship, 2023/24 (4.17, 2025); post-secondary students
   by sex and age, 2023/24 (4.27, 2025).
-* `src:che_arab_students_2024` — Council for Higher Education table 15: Arab students by degree
+* [`src:che_arab_students_2024`](../../SOURCES.md#src-che_arab_students_2024) — Council for Higher Education table 15: Arab students by degree
   and sex, 2023/24.
-* `src:idi_haredi_report_2025` — Israel Democracy Institute: Haredi students in higher
+* [`src:idi_haredi_report_2025`](../../SOURCES.md#src-idi_haredi_report_2025) — Israel Democracy Institute: Haredi students in higher
   education, 2024/25 (15,812 bachelor's, 3,141 postgraduate), transcribed in
   `data/manual/students/`.
 
@@ -128,15 +128,15 @@ aged 20–34, 59% of Haredi men study in a yeshiva or kollel, and 12–16% of Je
 | `post_secondary` | studying at a post-secondary institution (such as practical engineering or a teachers' seminary) | לומד במוסד על-תיכוני (כגון הנדסאות או סמינר) | לומדת במוסד על-תיכוני (כגון הנדסאות או סמינר) |
 | `other` | taking other courses | לומד בקורסים או במסגרות אחרות | לומדת בקורסים או במסגרות אחרות |
 
-Sources: `cbs_social_survey_2024` (Central Bureau of Statistics (CBS) - Social Survey); `cbs_abstract_education` (Central Bureau of Statistics (CBS)); `che_arab_students_2024` (Council for Higher Education (CHE), Planning and Budgeting Committee); `idi_haredi_report_2025` (Israel Democracy Institute (Lee Cahaner, Gilad Malach))
+Sources: [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) (Central Bureau of Statistics (CBS) - Social Survey); [`cbs_abstract_education`](../../SOURCES.md#src-cbs_abstract_education) (Central Bureau of Statistics (CBS)); [`che_arab_students_2024`](../../SOURCES.md#src-che_arab_students_2024) (Council for Higher Education (CHE), Planning and Budgeting Committee); [`idi_haredi_report_2025`](../../SOURCES.md#src-idi_haredi_report_2025) (Israel Democracy Institute (Lee Cahaner, Gilad Malach))
 
 Validation:
 
 | Check | Target | Max abs. difference¹ | Beyond 2 s.e.² | Tolerance | Status |
 |---|---|---|---|---|---|
-| Currently studying, Jews by religiosity and sex (20+) | `cbs_social_survey_2024` | 0.0094 | 0.0000 | 0.03 | ✅ pass |
-| Currently studying, Arabs by religion and sex (20+) | `cbs_social_survey_2024` | 0.0108 | 0.0000 | 0.04 | ✅ pass |
-| Students by kind of study, age, sex and population group vs published counts (relative difference) | `cbs_abstract_education` | 0.1023 | — | 0.12 | ✅ pass |
+| Currently studying, Jews by religiosity and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0094 | 0.0000 | 0.03 | ✅ pass |
+| Currently studying, Arabs by religion and sex (20+) | [`cbs_social_survey_2024`](../../SOURCES.md#src-cbs_social_survey_2024) | 0.0108 | 0.0000 | 0.04 | ✅ pass |
+| Students by kind of study, age, sex and population group vs published counts (relative difference) | [`cbs_abstract_education`](../../SOURCES.md#src-cbs_abstract_education) | 0.1023 | — | 0.12 | ✅ pass |
 | Sampler reproduces every table given its parents (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0402 | — | 0.001 | ✅ pass |
 | National shares used by the unusualness score match the sample (n = 1,000,000; tolerance: adjusted p-value) | `model` | 0.0013 | — | 0.001 | ✅ pass |
 | Constraint: people in compulsory service are not counted as students | `model/constraints.yaml` | 0.0000 | — | 0.0 | ✅ pass |
